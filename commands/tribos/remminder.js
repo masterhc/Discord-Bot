@@ -7,43 +7,12 @@ const commando = require('discord.js-commando');
                 name: 'remminder',
                 group:'tribos',
                 memberName: 'remminder',
-                description: 'Em construção'
+                description: 'Este comando enviar-lhe-á um aviso quando faltarem 5 minutos para a hora pedida, outro exatamente na hora pedida. Pode escolher entre 3 tipos de aviso: 1 - "O seu ataque tem que ser enviado!" 2-"Aviso! Tem algo para fazer!" 3-"Considere-se relembrado." . Exemplo de uso !remminder 23:03:01 2 '
 
             })
         }
         async run(message, args){
-        args= message.content.split(/\s+/g);
-        
-        
-       function notification(params) {
-            
-            message.channel.send('Considere-se relembrado!');
-            
-        }
-         var i=1;
-         var k=1;
-         var d;
-         var hora;
-         var horaMarcada=args[1];
-         var minutosMarcados = args[2];
-
-         while(i!==0){
-             d = new Date();
-             hora = d.getHours();
-             if(hora==horaMarcada){
-                 
-                 while(k!==0){
-                    d= new Date();
-                    minuto=d.getMinutes();
-                    if(minuto=minutosMarcados){
-                        i = 0;
-                        k = 0;
-                        notification(1);
-                    }
-                 }
-             }
-        }
-    
+     
         
         }
 
