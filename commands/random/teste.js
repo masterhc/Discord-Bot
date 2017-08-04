@@ -12,9 +12,12 @@ const commando = require('discord.js-commando');
             })
         }
         async run(message, args){
-        args= message.content.split(/\s+/g);
-         message.channel.send(args[0]+' '+ args[1]+' '+args[2]+' '+args[3]);
+        args = message.content.split(/\s+/g);
+            function notifier(params) {
+                message.channel.send('You have been notified');
 
+            }
+        setTimeout(notifier, 5000);
         }
     }
     module.exports = testeCommand;
