@@ -12,7 +12,7 @@ const commando = require('discord.js-commando');
             })
         }
         async run(message, args){
-     
+            message.channel.send('coiso');
         
         }
 

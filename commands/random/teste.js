@@ -12,7 +12,7 @@ const commando = require('discord.js-commando');
             })
         }
         async run(message, args){
-            args = message.content.split(/:| /);
+        args = message.content.split(/:| /);
         var delay;
         var params = args[4];
         var d = new Date();
@@ -25,6 +25,8 @@ const commando = require('discord.js-commando');
         var horad = horaM-hora;
         var mintudod = minutoM-minuto;
         var segundod = segundoM-segundo;
+        
+   
         if(horad<0){
              message.channel.send('O Remminder funciona apenas com o tempo que ainda resta do dia atual.');
             if(minutosd<0){
@@ -34,38 +36,46 @@ const commando = require('discord.js-commando');
             }else if(segundos<0){
             message.channel.send('O Remminder funciona apenas com o tempo que ainda resta do dia atual.');
             }
-        }else if(params){
-
+        }else if(params==null){
+            message.channel.send('Por favor especifique o tipo de aviso que pertende.');
         }else{
-            delay=(horad*3600000)+((minutod-5)*60000)+(segundod*1000)
+            message.reply('yap');
+            delay=(horad*3600000)+(minutod)*60000+(segundod*1000)-300000;
         
             function notifier2(params) {
-               message.channel.send('Está na hora de executar o que pretendia.')
+               message.reply('Está na hora de executar o que pretendia.');
+            }
 
         
-          function notifier(params) {
-              switch (params) {
+             function notifier(params) {
+                switch (params) {
                   case 1:
-                      message.channel.send('O seu ataque tem que ser enviado!');
+                      message.reply('O seu ataque tem que ser enviado!');
 
                       break;
                   case 2:
-                      message.channel.send('Aviso! Tem algo para fazer!');    
+                      message.reply('Aviso! Tem algo para fazer!');    
                       break;
                   case 3:
-                      message.channel.send('Cosnidere-se relembrado!');
+                      message.reply('Cosnidere-se relembrado!');
                       break;
 
                   default:
 
                       break;
-              }
+                }
                  
                 setTimeout(notifier2, 300000);
             }
          setTimeout(notifier, delay);
-            }
+
+            
         }
-        }
+           
+    
+    
+    
+    
+    }
     }
     module.exports = testeCommand;
