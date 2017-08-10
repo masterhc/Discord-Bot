@@ -75,7 +75,7 @@ class PlannerCommand extends commando.Command {
                                    tempo = 0;
                                break;
                             }
-            if (tempo !== 0) {
+           if (tempo !== 0) {
 
             //calcular o tempo de viagem
             var horas = Math.floor(tempo / 60);
@@ -141,45 +141,53 @@ class PlannerCommand extends commando.Command {
             var diaABater=0;
             var diaDeEnvio=0;
             //Definir o dia de envio e o dia de chegada. 
-            if (dias=0){
+            if (dias==0){
                if(horas2<8&&horas2>0){
                    if(hora<8){
                        diaDeEnvio=dia;
                        diaABater=dia;
+                       
                    }else{
                        diaDeEnvio=dia+1;
                        diaABater=diaDeEnvio;
+                        
                    }
                 }else{
                     if(hora<(24-horas2)){
                         diaDeEnvio=dia;
                         diaABater=dia+1;
+                         
                     }else{
                         diaDeEnvio=dia+1;
                         diaAbater=dia+2;
+                          
                     }
                 }
             }else{
                 if(horas2<8&&horas2>0){
-                    if(horas<8){
+                    if(hora<8){
                       diaDeEnvio=dia;
                      diaABater=dia+dias;
+                     
                     }else if(horas2>8){
                      diaDeEnvio=dia+1;
                      diaABater= diaDeEnvio+dias;
+                    }
                 }else{
                     if(hora<(24-horas2)){
                         diaDeEnvio=dia;
                         diaABater=dia+dias;
+                        
 
                     }else{
                         diaDeEnvio=dia+1;
                         diaABater=diaDeEnvio+dias;
-                    }
+                        
+                    }   
                 }
-            }   
-    
-            //Acerto Horário
+              
+            }
+        //Acerto Horário
         if(segundos2+segundos>0&&segundos2+segundos<60){
             minutos2--;
         }else if(segundos2+segundos>60){
@@ -187,23 +195,19 @@ class PlannerCommand extends commando.Command {
            
         }
         if(minutos2+minutos>1){
-            horas2--;
+            horas2--; 
         }            
         //Apresentação das Horas
-       if(segundos2<10){
-              
+        
+        if(segundos2<10){ 
                 segundos2='0'+segundos2;
-        }else if(segundos2==0)
-            segundos2='00';
-           }
+        }
+        
         if(minutos2<10){
             minutos2='0'+minutos2;
-        }else if(minutos2==0){
-            mintuos2='00';
         }
-        if(horas2==0){
-            horas2='00';
-        }else if(horas2<10){
+       
+        if(horas2<10){
             horas2='0'+horas2;
         }
         
@@ -213,7 +217,7 @@ class PlannerCommand extends commando.Command {
             message.channel.send('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
 
 
-           } else {
+           }else {
             message.channel.send('Unidade especificada inexistente, use !help para ajuda.');
         }
          }else{

@@ -25,24 +25,25 @@ const commando = require('discord.js-commando');
         var horad = horaM-hora;
         var mintudod = minutoM-minuto;
         var segundod = segundoM-segundo;
-        
-   
-        if(horad<0){
-             message.channel.send('O Remminder funciona apenas com o tempo que ainda resta do dia atual.');
-            if(minutosd<0){
-                if(segundosd<0){
-                    message.channel.send('O Remminder funciona apenas com o tempo que ainda resta do dia atual.');
-                }
-            }else if(segundos<0){
-            message.channel.send('O Remminder funciona apenas com o tempo que ainda resta do dia atual.');
-            }
-        }else if(params==null){
-            message.channel.send('Por favor especifique o tipo de aviso que pertende.');
+        message.channel.send(args[1]);
+        message.channel.send(args[2]);
+        message.channel.send(args[3]);
+        var delayH;
+        //delay=(((horad*3600000)+(minutod*60000)+(segundod*1000))-300000);
+         delayH=((horad*3600000)+(minutosd*60000));
+        message.channel.send(delayH);
+        message.channel.send(delay);
+Ç
+        if(delay<0){
+            message.channel.send('O Remminder funciona apenas com o tempo restento do presente dia.')
         }else{
-            message.reply('yap');
-            delay=(horad*3600000)+(minutod)*60000+(segundod*1000)-300000;
-        
-            function notifier2(params) {
+             if(params==null){
+                        message.channel.send('Por favor especifique o tipo de aviso que pertende.');
+                 }else{
+                message.reply('yap');
+                 
+                    
+             function notifier2(params) {
                message.reply('Está na hora de executar o que pretendia.');
             }
 
@@ -57,7 +58,7 @@ const commando = require('discord.js-commando');
                       message.reply('Aviso! Tem algo para fazer!');    
                       break;
                   case 3:
-                      message.reply('Cosnidere-se relembrado!');
+                      message.reply('Considere-se relembrado!');
                       break;
 
                   default:
@@ -71,11 +72,10 @@ const commando = require('discord.js-commando');
 
             
         }
-           
+        
     
     
-    
-    
+        }
+     
     }
-    }
-    module.exports = testeCommand;
+}module.exports = testeCommand;
