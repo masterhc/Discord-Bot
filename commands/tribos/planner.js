@@ -20,6 +20,7 @@ class PlannerCommand extends commando.Command {
             description: 'Calcula o tempo que demora um determinada unidade a chegar à aldeia destino apartir da aldeia definida. As unidades são chamadas da seguinte forma: Lanceiros: lanceiro; Espadachins: espadachins; Vikings: vikings; Batedores: batedore; Cavalaria Leve: leve; Arqueiros a Cavalo: arqueiromontado; Cavalira Pesada: pesada; Arietes: ariete; Catapultas: catapulta; Nobre: nobre; Paladinho:paladino. Exemplo de uso:"!planner 100 200 300 400 nobre".'
 
         })
+        
     }
     async run(message, args) {
         args = message.content.split(/\s+/g);

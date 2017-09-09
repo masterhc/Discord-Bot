@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 
 
+
     class Teste2Command extends commando.Command{
         constructor(client){
             super(client, {
@@ -13,7 +14,10 @@ const commando = require('discord.js-commando');
         }
         async run(message, args){
            args=message.content.split(/ /);
-           
+          
+        
+            message.member.voiceChannel.join();
+
           
     }
     }
