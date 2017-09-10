@@ -1,6 +1,12 @@
 {
     "yt_api_key":"AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus",
-    "discord_token":"MzU0NjQ5MTI2NjIyOTg2MjQw.DJBz8A.3XiDfl_3igu7fNTR5tZ2af8eKbs",
+    "discord_token":"MzU2MTA0MDA4MzY2MDMwODYz.DJWh8w.qRJjK2e6cz4EGQ3ltc3psmTYQdU",
     "bot_controller":"345219758481997824",
-    "prefix":"!"
+    "prefix":"!",
+    "play":false,
+    "queue_content":[
+
+    ],
+    "skip":false,
+    "stop":false
 }
