@@ -7,7 +7,7 @@ class triggeredcommando extends commando.Command{
                 name: 'triggered',
                 group:'image',
                 memberName: 'triggered',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: TRIGGERED!'
 
             })
         }

@@ -7,7 +7,7 @@ class remcommando extends commando.Command{
                 name: 'rem',
                 group:'image',
                 memberName: 'rem',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Our only waifu REM.'
 
             })
         }

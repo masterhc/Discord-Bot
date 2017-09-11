@@ -7,7 +7,7 @@ class slapcommando extends commando.Command{
                 name: 'slap',
                 group:'image',
                 memberName: 'slap',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Chapada.'
 
             })
         }

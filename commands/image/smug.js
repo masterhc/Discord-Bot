@@ -7,7 +7,7 @@ class smugcommando extends commando.Command{
                 name: 'smug',
                 group:'image',
                 memberName: 'smug',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Presunção.'
 
             })
         }

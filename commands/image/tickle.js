@@ -7,7 +7,7 @@ class ticklecommando extends commando.Command{
                 name: 'tickle',
                 group:'image',
                 memberName: 'tickle',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Cocegas.'
 
             })
         }

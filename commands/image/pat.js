@@ -7,7 +7,7 @@ class patcommando extends commando.Command{
                 name: 'pat',
                 group:'image',
                 memberName: 'pat',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: pat.'
 
             })
         }

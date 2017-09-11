@@ -7,7 +7,7 @@ class kisscommando extends commando.Command{
                 name: 'kiss',
                 group:'image',
                 memberName: 'kiss',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Beijo.'
 
             })
         }

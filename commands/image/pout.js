@@ -7,7 +7,7 @@ class poutcommando extends commando.Command{
                 name: 'pout',
                 group:'image',
                 memberName: 'pout',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Beicinho.'
 
             })
         }

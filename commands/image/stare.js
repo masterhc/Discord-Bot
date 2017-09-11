@@ -7,7 +7,7 @@ class starecommando extends commando.Command{
                 name: 'stare',
                 group:'image',
                 memberName: 'stare',
-                description: 'Publica uma imagem do tema: Abraço.'
+                description: 'Publica uma imagem do tema: Olhar fixo.'
 
             })
         }

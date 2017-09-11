@@ -1,6 +1,5 @@
 const commando = require('discord.js-commando');
-const fs = require('fs');
-var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
+const music = require('discord.js-music-v11');
     class playCommando extends commando.Command{
         constructor(client){
             super(client, {
@@ -13,8 +12,20 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
         }
         async run(message, args){
              args=message.content.split(/\s+/g);
-             
-      
+              var playString;
+            var messageSplit = message.content.split(' ');
+        for(var i=1;i<messageSplit.length; i++){
+            if (i===1) {
+                  playString = args[1] ;
+            }else{
+                playString = playString + ' ' + args[i];
+            }
+           
+        };
+        playString= 'play '+playString;
+        
+             music(client, playString);
+            
          }
         }module.exports = playCommando;
    
