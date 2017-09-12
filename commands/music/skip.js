@@ -11,7 +11,9 @@ const music = require('discord.js-music-v11');
             })
         }
         async run(message, args){
-             args=message.content.split(/\s+/g);
+             let perms=!message.member.roles.has(345219758481997824);
+            if(perms== true){ 
+            args=message.content.split(/\s+/g);
               var skipString;
             var messageSplit = message.content.split(' ');
         for(var i=1;i<messageSplit.length; i++){
@@ -25,7 +27,9 @@ const music = require('discord.js-music-v11');
         skipString= 'skip '+skipString;
         
              music(client, skipString);
-            
+            }else{
+               return message.channel.send('Não tem permissão para realizar a ação pedida.');
+           }   
          }
         }module.exports = skipCommando;
    

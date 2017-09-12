@@ -7,7 +7,7 @@ const commando = require('discord.js-commando');
                 name: 'say',
                 group:'random',
                 memberName: 'say',
-                description: 'O bot dirá uma mensagem escrita por si.'
+                description: 'Rem-chan dirá uma mensagem escrita por si. (Usa /tts)'
 
             })
         }

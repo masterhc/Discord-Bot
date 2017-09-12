@@ -13,7 +13,6 @@ const commando = require('discord.js-commando');
         }
         async run(message, args){
            args = message.content.split(/:| /);
-           var usage;
            var horas = args[1];
            var minutos =args[2];
            if (args[1]==null){
@@ -26,10 +25,15 @@ const commando = require('discord.js-commando');
             if(args[3]>3||args[3]<1){
                 return message.channel.send('Por favor use um valor inteiro de 1 a 3');
             }
-           /* if(usage!= null){
-                return message.channel.send('Reminder já está em uso. Até que eu seja melhor programador... F...');
-
-            }*/
+            if(args[1]<0||args[1]>24){
+                return message.channel.send('Utilize um parametro horário de 0 a 24 para as horas.');
+            }
+            if(args[2]<0||args[2]>60){
+                return message.channel.send('Utilize um parametro horário de 0 a 60 para os minutos.');
+            }
+            if(args[3]<1||args[3]>3){
+                return message.channel.send('Utilize um parametro modificador de mensagem de 1 a 3.');
+            }
 
            var modifier = parseInt(args[3]);
             var d= new Date();
@@ -42,10 +46,18 @@ const commando = require('discord.js-commando');
                
                 return message.channel.send('Use o !reminder apenas para o dia de hoje.');
                 
-            }else if(minutos-minutosA<0){
+            }else if (horas==horasA){
+ 
+                if(minutos-minutosA<0){
                 console.log('diferença '+(minutos-minutosA));
                     return message.channel.send('Já passou a hora para o avisar.');
                 }
+            }else if(horas-horasA>24){
+                return message.channel.send('How have you done this?');
+
+            }
+            
+           
           
             var horasd= ((horas-horasA)*3600000);
                
@@ -64,7 +76,7 @@ const commando = require('discord.js-commando');
                 if(minutosd>300001){
               delay=((horasd+minutosd)-300000);   
             }else{
-                return message.reply('É impossivel avisar 5min antes da hora marcada.')
+                return message.reply('É impossivel avisar 5 minutos antes da hora marcada.')
             }
 
         }else{
@@ -84,10 +96,9 @@ const commando = require('discord.js-commando');
             }else{
                 timmer(delay, modifier);
             }
-            console.log(typeof (modifier));
-        console.log(d.getSeconds());
+           
         function mensagem(modifier){
-          console.log(modifier);
+          
             switch (modifier) {
                 case 1:
                 
