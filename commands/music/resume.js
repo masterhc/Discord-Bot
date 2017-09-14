@@ -13,14 +13,14 @@ const music = require('discord.js-music-v11');
         async run(message, args){
              args=message.content.split(/\s+/g);
               var resumeString;
-            let perms=!message.member.roles.has(345219758481997824);
-            if(perms== true){
+                if(!message.member.roles.find('bot_controller')){
+             return message.channel.send('Não tem permissões para usar este comando.')
+         };
+          
         resumeString= 'resume';
         
              music(client, resumeString);
-            }else{
-               return message.channel.send('Não tem permissão para realizar a ação pedida.');
-           }    
+           
          }
         }module.exports = resumeCommando;
    

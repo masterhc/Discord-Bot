@@ -11,8 +11,10 @@ const music = require('discord.js-music-v11');
             })
         }
         async run(message, args){
-             let perms=!message.member.roles.has(345219758481997824);
-            if(perms== true){
+               if(!message.member.roles.find('bot_controller')){
+             return message.channel.send('Não tem permissões para usar este comando.')
+         };
+          
              args=message.content.split(/\s+/g);
               var clearqueueString;
       
@@ -21,9 +23,7 @@ const music = require('discord.js-music-v11');
              music(client, clearqueueString);
             
          
-           }else{
-               return message.channel.send('Não tem permissão para realizar a ação pedida.');
-           }
+       
            }
         }module.exports = clearqueueCommando;
    

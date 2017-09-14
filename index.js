@@ -23,8 +23,10 @@ bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
 bot.on('ready', ()=>{
-    console.log('ready');
-     bot.user.setGame('!help for commands');
+    console.log('Rem is ready');
+     //bot.user.setGame('!help for commands');
+     bot.user.setPresence({status:{game:'!help for commands'}});
+
 });
 bot.on('ready',()=>{
  
@@ -54,7 +56,7 @@ bot.on('ready',()=>{
      var aldeia= "[Aldeia]("+villageUrl+")";   
         bot.channels.get('356084548003561474').send({embed:{
                 title: 'Aldeia Conquistada',
-                color:'3447003',
+                color: 0xef4815,
                 fields:[{
                     name:"Coquistador:",
                     value:jogador,
@@ -74,16 +76,15 @@ bot.on('ready',()=>{
             }
 
             })
-        
-        
-        console.log('jogador '+ jogador);
-        console.log('tribo ' +tribo)
         fs.writeFileSync('.conquistasaovivo.json', '{\n'+'"'+'atualizado'+'"'+':'+'false'+',\n'+'"'+'gameUrl'+'"'+':'+'"'+'urltochange'+'"'+',\n'+'"'+'jogador'+'"'+':'+'"'+'jogador'+'"'+',\n'+'"'+'tribo'+'"'+':'+'"'+'tribo'+'"'+'\n}' , 'utf-8');
         checker();
       }
 
 }); 
-music(bot);
+    
+
+
+  
  bot.login(discord_token);
 
 

@@ -30,6 +30,8 @@ const konachanFilter = [
             return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
         }
+        //Adicionar economy. Caso se tenha perms não se gasta para utilizar este comando.
+        //Caso contrario, gasta 1 ponto por utilização.
            
 
         

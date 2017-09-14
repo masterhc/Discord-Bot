@@ -11,25 +11,25 @@ const music = require('discord.js-music-v11');
             })
         }
         async run(message, args){
-             let perms=!message.member.roles.has(345219758481997824);
-            if(perms== true){ 
-            args=message.content.split(/\s+/g);
-              var playString;
-            var messageSplit = message.content.split(' ');
-        for(var i=1;i<messageSplit.length; i++){
-            if (i===1) {
-                  playString = args[1] ;
-            }else{
-                playString = playString + ' ' + args[i];
-            }
-           
-        };
-        playString= 'play '+playString;
-        
-             music(client, playString);
-            }else{
-               return message.channel.send('Não tem permissão para realizar a ação pedida.');
-           }   
-         }
-        }module.exports = playCommando;
+           args=message.content.split(/\s+/g);
+           let perms = message.member.roles.has('name', 'bot_controller');
+          // console.log( perms);
+         if(perms==undefined){
+                   return message.channel.send('Não tem permissões para usar este comando.');
+        }else{
+                 var playString;
+              var messageSplit = message.content.split(' ');
+            for(var i=1;i<messageSplit.length; i++){
+                 if (i===1) {
+                        playString ='play '+ args[1] ;
+                   }else{
+                          playString = playString + args[i];
+               }
+               
+            };
+            console.log(playString);
+           music(client, playString);
+        }
+}
+}module.exports = playCommando;
    

@@ -1,6 +1,11 @@
 const commando = require('discord.js-commando');
-const fs = require('fs')
-
+const mySQL = require('mysql');
+const con = mySQL.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'rem_bot'
+})
     class balanceCommand extends commando.Command{
         constructor(client){
             super(client, {
@@ -12,27 +17,48 @@ const fs = require('fs')
             })
         }
         async run(message, args){
-          let userData = JSON.parse(fs.readFileSync('userData.json', 'utf-8'));
-          let sender = message.author;
-          let msg = message.content.toUperCase();
+           con.connect(function(err) {
+            
+             if (err) {
+              return console.error('error connecting: ' + err.stack);;
+            } 
+            console.log('connected as id ' + con.threadId);
+            
+        });
+        var sender= message.author;
         
+        var userID=sender.id+message.guild.id;
+        var db_userID = con.query('SELECT userID FROM rem_bot.userdata where userID='+userID+';')
+        if(db_userID==undefined) return message.channel.send('Tem que primeiro se inscrever no sistema. Use o comando !money para esse efeito.');
+
+        
+        var money = con.query('SELECT money FROM rem_bot.userdata where userID='+userID+';');
+        
+        var items = con.query('SELECT items FROM rem_bot.userdata where userID='+userID+';');
+        mensagem(sender, money, items);
+        
+        
+    }
+}module.exports = balanceCommand;
+
+ function mensagem(sender, money, items){
             message.channel.send({embed:{
                 title: 'Banco',
-                color:'0xF1C40F',
+                color:0xf4ce42,
                 fields:[{
                     name:"Dono da conta",
-                    valor:message.author.username,
+                    value:sender,
                     inline:true
                 },
             {
                 name:'Balanço da conta',
-                value:userData[sender.id+message.guild.id].money,
+                value:money,
 
+            },{
+                name:"Items",
+                value:items
             }]
             }
 
             });
-
-     
-    }
-}module.exports = balanceCommand;
+ }
