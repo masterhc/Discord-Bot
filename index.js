@@ -22,10 +22,11 @@ bot.registry.registerGroup('economy', 'Economy');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
+music(bot);
 bot.on('ready', ()=>{
-    console.log('Rem is ready');
-     //bot.user.setGame('!help for commands');
-     bot.user.setPresence({status:{game:'!help for commands'}});
+    
+     bot.user.setGame('!help for commands');
+    console.log(`Rem is ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
 
 });
 bot.on('ready',()=>{

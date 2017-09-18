@@ -5,7 +5,8 @@ var con = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
-    database:'rem_bot'
+    database:'rem_bot',
+    socketpath:3306
 })
 
 
@@ -24,12 +25,7 @@ var con = mysql.createConnection({
         
         var userID=sender.id+message.guild.id;
         
-        var money;
-        
-        var items;
-        
-        var lastDaily;
-            // who knows... if(message.authors.getid()!=186540961650835456) return message.channel.send('Não pode utilizar este comando.');
+   // who knows... if(message.authors.getid()!=186540961650835456) return message.channel.send('Não pode utilizar este comando.');
      
   
     fetch(userID, sender);
@@ -40,20 +36,41 @@ var con = mysql.createConnection({
               return console.error('error connecting: ' + err.stack);;
             } 
             console.log('connected as id ' + con.threadId);
+             console.log('user ID '+userID);
+        var db_userID; //= con.query('SELECT userID FROM rem_bot.userdata where userID=186540961650835456352040304112697344;')
             
+
+            con.query({
+                 sql: 'SELECT userID FROM `rem_bot.userdata` WHERE `userID` = ?',
+                
+                    },
+                [userID],
+                    function (error, results, fields) {
+    // error will be an Error if one occurred during the query 
+    // results will contain the results of the query 
+    // fields will contain information about the returned results fields (if any)
+    console.log(error);
+    console.log(results);                    
+    console.log(fields);
+                 }
+            );
+
+
+
+        //console.log('db_userID '+db_userID);
+        con.destroy();
+
         });
-        console.log('user ID '+userID);
-        var db_userID = con.query('SELECT userID FROM rem_bot.userdata where userID='+userID+';')
-        console.log('db_userID '+db_userID);
-        var money = con.query('SELECT money FROM rem_bot.userdata where userID='+userID+';');
-        console.log('money '+money);
-        var items =con.query('SELECT items FROM rem_bot.userdata where userID='+userID+';') ;
-        console.log('items '+items)
-        var lastDaily =con.query('SELECT lastDaily FROM rem_bot.userdata where userID='+userID+';') ;
-        console.log('last Daily '+lastDaily)
        
-        con.close(); 
-        insertion(userID,db_userID, money, lastDaily, items, sender);
+       
+         
+        if(userID!=db_userID){return message.channel.send({embed:{
+                title:"Inscrição:",
+                color:0xef4815,
+                value:sender+'Já está inscrito no sistema de economia!'
+            }})
+    }else{   
+         insertion(userID,db_userID, money, lastDaily, items, sender);}
     }
 
     
@@ -65,8 +82,8 @@ var con = mysql.createConnection({
             } 
             console.log('connected as id ' + con.threadId);
             
-        }); 
-                console.log('user ID '+userID);
+      
+                
         if(db_userID=userID){
             db_userID=userID;
         };
@@ -77,16 +94,12 @@ var con = mysql.createConnection({
         
         if(items==null){
             items ='Nenhum'};
-        if(db_userID== userID&&money == 25&&lastdaily=='Não recolhido.'&&items =='Nenhum'){
+        if(db_userID== userID&&money == 25&&lastdaily==moment().format('L')&&items =='Nenhum'){
             con.query('INSERT INTO `rem_bot`.`userdata` (`userID`, `money`, `items`,`lastDaily`) VALUES ('+db_userID+', '+money+', '+items+', '+lastDaily+');');
             mensagem(sender,money);
-            con.close();
-        }else{
-            con.close();
-        return message.channel.send({ embed: { title:'Já está inscrito no sistema de economia', color: 0xf4ce42 } });
+            con.destroy();
         }
-        
-    }    
+    });
      
           
            
@@ -111,11 +124,15 @@ var con = mysql.createConnection({
                 }]
             }
             
+        
              });
         
+
+
+
         }
 
 
-
+    }
     }
 }module.exports = moneyCommand;

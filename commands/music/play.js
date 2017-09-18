@@ -13,7 +13,7 @@ const music = require('discord.js-music-v11');
         async run(message, args){
            args=message.content.split(/\s+/g);
            let perms = message.member.roles.has('name', 'bot_controller');
-          // console.log( perms);
+        console.log( 'has perms?'+perms);
          if(perms==undefined){
                    return message.channel.send('Não tem permissões para usar este comando.');
         }else{
