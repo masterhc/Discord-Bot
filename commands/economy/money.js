@@ -2,11 +2,10 @@ const commando = require('discord.js-commando');
 const mysql =require('mysql');
 const moment = require('moment');
 var con = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'rem_bot',
-    socketpath:3306
+    host:'eu-cdbr-west-01.cleardb.com',
+    user:'bbd94c36d1aea2',
+    password:'11207567',
+    database:'heroku_b9dfdc7d4733cdc'
 })
 
 

@@ -3,10 +3,10 @@ const commando = require('discord.js-commando');
 const mysql = require('mysql');
 const moment = require('moment');
 var con = mysql.createConnection({
-        host:'localhost',
-        user:'root',
-        password:'',
-        database:'rem_bot'
+    host:'eu-cdbr-west-01.cleardb.com',
+    user:'bbd94c36d1aea2',
+    password:'11207567',
+    database:'heroku_b9dfdc7d4733cdc'
 })
 
 
@@ -32,16 +32,16 @@ var con = mysql.createConnection({
             
         
         var sender =message.author;
-        var money = con.query('SELECT money FROM rem_bot.userdata where userID='+userID+';');
-        var lastDaily =con.query('SELECT lastDaily FROM rem_bot.userdata where userID='+userID+';') ;
+        var money = con.query('SELECT money FROM `heroku_b9dfdc7d4733cdc`.`userdata` where userID='+userID+';');
+        var lastDaily =con.query('SELECT lastDaily FROM `heroku_b9dfdc7d4733cdc`.`userdata` where userID='+userID+';') ;
 
            if(lastDaily!=moment().format('L')){
                 console.log(moment().formar('L'));
 
                 lastDaily = moment().format('L');
-                con.query('INSERT INTO `rem_bot`.`userdata` (`lastDaily`) VALUES ('+lastDaily+');');
+                con.query('INSERT INTO `heroku_b9dfdc7d4733cdc`.`userdata` (`lastDaily`) VALUES ('+lastDaily+');');
                 money = money + 25;
-                con.query('INSERT INTO `rem_bot`.`userdata` (`money`) VALUES ('+money+');');
+                con.query('INSERT INTO `heroku_b9dfdc7d4733cdc`.`userdata` (`money`) VALUES ('+money+');');
                 mensagem(1,sender);
            }else{
                mensagem(2,sender);

@@ -1,10 +1,10 @@
 const commando = require('discord.js-commando');
 const mySQL = require('mysql');
 const con = mySQL.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'rem_bot'
+    host:'eu-cdbr-west-01.cleardb.com',
+    user:'bbd94c36d1aea2',
+    password:'11207567',
+    database:'heroku_b9dfdc7d4733cdc'
 })
     class balanceCommand extends commando.Command{
         constructor(client){
@@ -28,13 +28,13 @@ const con = mySQL.createConnection({
         
         var sender= message.author;
         var userID=sender.id+message.guild.id;
-        var db_userID = con.query('SELECT userID FROM rem_bot.userdata where userID='+userID+';');
+        var db_userID = con.query('SELECT userID FROM `heroku_b9dfdc7d4733cdc`.`userdata` where userID='+userID+';');
         if(db_userID==undefined) return message.channel.send('Tem que primeiro se inscrever no sistema. Use o comando !money para esse efeito.');
 
         
-        var money = con.query('SELECT money FROM rem_bot.userdata where userID='+userID+';');
+        var money = con.query('SELECT money FROM `heroku_b9dfdc7d4733cdc`.`userdata` where userID='+userID+';');
         
-        var items = con.query('SELECT items FROM rem_bot.userdata where userID='+userID+';');
+        var items = con.query('SELECT items FROM `heroku_b9dfdc7d4733cdc`.`userdata` where userID='+userID+';');
        
         mensagem(sender, money, items);
             
