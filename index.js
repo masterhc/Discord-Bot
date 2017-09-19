@@ -86,6 +86,6 @@ bot.on('ready',()=>{
 
 
   
- bot.login(process.env.discord_token);
+ bot.login(discord_token);
 
 
