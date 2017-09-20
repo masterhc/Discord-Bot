@@ -8,8 +8,8 @@
   },
   "author": "MasterHc",
   "license": "ISC",
-  "engines":{
-  "node":"8.1.4"
+  "engines": {
+    "node": "8.1.4"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -32,6 +32,7 @@
     "opusscript": "0.0.3",
     "request": "^2.81.0",
     "site-crawler": "^1.0.4",
+    "snekfetch": "^3.3.0",
     "timer.js": "^1.0.4",
     "url-parse": "^1.1.9",
     "winston": "^2.3.1",

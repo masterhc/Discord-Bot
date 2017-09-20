@@ -4,6 +4,8 @@ const commando = require('discord.js-commando');
 const music = require('discord.js-music-v11');
 const fs = require('fs');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
+const snekfetch = require('snekfetch');
+const http = require('http');
 
 const discord_token = config.discord_token;
 
@@ -16,7 +18,7 @@ bot.registry.registerGroup('music','Music');
 bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 
-bot.registry.registerGroup('economy', 'Economy');
+
 
 
 bot.registry.registerDefaults();
@@ -31,8 +33,9 @@ bot.on('ready', ()=>{
 });
 bot.on('ready',()=>{
  
-  
-    
+ 
+   
+   
     checker();
     function checker(){
          var checking = JSON.parse(fs.readFileSync('.conquistasaovivo.json', 'utf-8'));  
