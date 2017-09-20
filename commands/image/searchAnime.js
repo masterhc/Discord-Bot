@@ -28,7 +28,7 @@ class searchAnimecommando extends commando.Command{
                }
                
             };
-          lmal.anime.searchAnime(searchString).then(res => console.log(res));
+          mal.anime.searchAnime(searchString).then(res => console.log(res));
           message.channel.send({embed:{
                 title: res.title,
                 color: 0x5bc5ff,
