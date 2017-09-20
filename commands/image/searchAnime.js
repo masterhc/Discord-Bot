@@ -11,7 +11,7 @@ class searchAnimecommando extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'searchAnime',
-                group:'pesquisa',
+                group:'image',
                 memberName: 'searchAnime',
                 description: 'Mostra informação de um anime que escolha.'
 
@@ -28,7 +28,8 @@ class searchAnimecommando extends commando.Command{
                }
                
             };
-          mal.anime.searchAnime(searchString).then(res => console.log(res));
+          mal.anime.searchAnime(searchString).then(res => 
+          console.log(res)
           message.channel.send({embed:{
                 title: res.title,
                 color: 0x5bc5ff,
@@ -61,7 +62,7 @@ class searchAnimecommando extends commando.Command{
                     }]
             
             }
-            
+            );
 
          }
         }module.exports = searchAnimecommando;
