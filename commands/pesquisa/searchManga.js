@@ -21,13 +21,15 @@ class searchMangacommando extends commando.Command{
           
           for(var i=1;i<messageSplit.length; i++){
                  if (i===1) {
-                        searchString ='play '+ args[1] ;
+                        searchString = args[1] ;
                    }else{
                           searchString = searchString + args[i];
                }
                
             };
-          mal.manga.searchManga(searchString).then(res => console.log(res));
+            mal.
+          mal.manga.searchManga(searchString).then(res => manhosa(res, message));
+          function manhosa(res, message){
           message.channel.send({embed:{
                 title: res.title,
                 color: 0x5bc5ff,
@@ -60,7 +62,7 @@ class searchMangacommando extends commando.Command{
                     }]
             
             }
-            
+        });};
 
          }
         }module.exports = searchMangacommando;

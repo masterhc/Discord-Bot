@@ -13,11 +13,14 @@ const http = require('http');
             })
         }
         async run(message, args){
-          //  var site = 'http://www.twstats.com/pt54/index.php?page=ennoblements&live=live'
+           var site = 'http://www.twstats.com/pt54/index.php?page=ennoblements&live=live'
             
-           // const html= await snekfetch.get('https://google.com').then(result => result.body);
-          //  console.log(html);
-message.channel.send({ embed: { title:'Coiso', color: 0xf4ce42 } });
+          const html= await snekfetch.get(site).then(result => result.body);
+          console.log(html);
+          fs.writeFile('../../page.html', html, (error) => error ? console.error(error) : null);
+        
+         
+          
 
         }
 }module.exports = testeCommand;

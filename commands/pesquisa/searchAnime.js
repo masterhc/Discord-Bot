@@ -2,6 +2,8 @@
 const commando = require('discord.js-commando');
 const axios = require('axios')
 const MAL = require('mal-api');
+let username='MasterHc12';
+let password='46060111';
 const mal = new MAL(username, password, debug);
 mal.account.verifyCredentials()
   .then(res => console.log(res))
@@ -22,14 +24,16 @@ class searchAnimecommando extends commando.Command{
           
           for(var i=1;i<messageSplit.length; i++){
                  if (i===1) {
-                        searchString ='play '+ args[1] ;
+                        searchString = args[1] ;
                    }else{
                           searchString = searchString + args[i];
                }
                
             };
-          mal.anime.searchAnime(searchString).then(res => 
-          console.log(res)
+            
+          mal.anime.searchAnime(searchString).then(res => manhosa(res, message));
+  function manhosa(res, message) {   
+      console.log(res);      
           message.channel.send({embed:{
                 title: res.title,
                 color: 0x5bc5ff,
@@ -62,7 +66,7 @@ class searchAnimecommando extends commando.Command{
                     }]
             
             }
-            );
-
+        
+          });}
          }
         }module.exports = searchAnimecommando;
