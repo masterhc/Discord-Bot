@@ -26,8 +26,10 @@ class imageBoardXXXcommando extends commando.Command{
                     searchOrig = searchOrig + ' ' + messageSplit[i];
                 }
             }
+               
             messageSearch = 'random: ' + searchOrig;
-            request.get('https://ibsearch.xxx/api/v1/images.json', {
+            message.channel.send(messageSearch);
+                request.get('https://ibsearch.xxx/api/v1/images.json', {
                 qs: {
                     limit: 100,
                     q: messageSearch
