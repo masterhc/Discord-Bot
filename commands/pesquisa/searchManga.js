@@ -38,11 +38,11 @@ class Mangacommando extends commando.Command{
             const embed = new Discord.RichEmbed()
             
             embed.setTitle(res[0].title)
-            embed.setAuthor("Rem-chan", "https://imgur.com/a/Pg3yY")
+            embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed.setColor(0xdb06db)
             embed.setDescription(res[0].synopsis)
            
-            embed.setFooter('Rem-chan em ', "https://imgur.com/a/Pg3yY")
+            embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
             
             embed.setImage(res[0].image)
           
