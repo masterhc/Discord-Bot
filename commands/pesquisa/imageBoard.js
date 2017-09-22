@@ -7,7 +7,7 @@ class imageBoardcommando extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'imageboard',
-                group:'image',
+                group:'pesquisa',
                 memberName: 'imageboard',
                 description: 'Mostra imagens sobre um tema a sua escolha.'
 
