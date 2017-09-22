@@ -40,9 +40,9 @@ const Discord = require('discord.js');
                      const Pornsearch = require('pornsearch').search(searchOrig);
                      
                      Pornsearch.videos()
-                     .then(videos => message.channel.send(videos)
+                     .then(videos => message.channel.send(videos[0])
                      .then(() => Pornsearch.gifs())
-                     .then(gifs => message.channel.send(gifs)));
+                     .then(gifs => message.channel.send(gifs[0])));
 
                     
 
