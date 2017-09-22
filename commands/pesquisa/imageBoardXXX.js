@@ -47,7 +47,7 @@ class imageBoardXXXcommando extends commando.Command{
                         let random = Math.floor(Math.random() * body.length);
                         let img = body[random];
                         const embed = new Discord.RichEmbed();
-                        embed.setImage(`https://${img.server}.ibsear.ch/${img.path}`);
+                        embed.setImage(`https://${img.server}.ibsearch.xxx/${img.path}`);
                         message.channel.send({embed});
                     } else {
                         message.channel.send('Erro')
