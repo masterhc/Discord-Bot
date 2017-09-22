@@ -32,9 +32,9 @@ class imageBoardXXXcommando extends commando.Command{
           
                 request.get('https://ibsearch.xxx/api/v1/images.json',{
                   qs: {
-                   limit: 200,
+                   limit: 100,
                        q: messageSearch
-                  }, headers: {'HX-lbSearch-Key': key}
+                  }, headers: {'X-lbSearch-Key': key}
                         }, (error, response, body) => {
                         console.log(response);
                     
