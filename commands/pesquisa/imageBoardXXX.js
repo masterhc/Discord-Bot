@@ -31,7 +31,7 @@ class imageBoardXXXcommando extends commando.Command{
            
           
                 request.get('https://ibsearch.xxx/api/v1/images.json?q=${messageSearch}&key=${key}',{
-                  qs: {
+                  q: {
                    limit: 100,
                        q: messageSearch
                   }, headers: {'-HX-lbSearch-Key': key}
