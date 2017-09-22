@@ -1,3 +1,5 @@
+working on it...
+
 const commando = require('discord.js-commando');
 const winston = require('winston');
 const request = require('request');
@@ -37,13 +39,21 @@ const Discord = require('discord.js');
               
 
 
-                     const Pornsearch = require('pornsearch').search(searchOrig);
+                    /* const Pornsearch = require('pornsearch').search(searchOrig);
                      
                      Pornsearch.videos()
                      .then(videos => message.channel.send(videos[0])
                      .then(() => Pornsearch.gifs())
-                     .then(gifs => message.channel.send(gifs[0])));
-
+                     .then(gifs => message.channel.send(gifs[0])));*/
+                    
+                     const Pornhub = require("pornhub-api")
+                     const Videos = new Pornhub.Videos()
+                      
+                     Videos.search({
+                         search: "Hard"
+                     }).then(videos => {
+                         console.log(videos)
+                     })
                     
 
 
