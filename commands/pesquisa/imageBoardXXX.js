@@ -30,7 +30,7 @@ class imageBoardXXXcommando extends commando.Command{
             messageSearch = 'random: ' + searchOrig;
            
           
-                request.get('https://ibsearch.xxx/api/v1/images.json?q=${messageSearch}&key=${key}',{
+                request.get('https://ibsearch.xxx/api/v1/images.json',{
                   qs: {
                    limit: 200,
                        q: messageSearch
@@ -41,7 +41,10 @@ class imageBoardXXXcommando extends commando.Command{
                 if (error) {
                     message.channel.send('Erro');
                 }
+                        message.channel.send(response.statusCode);
                 if (!error && response.statusCode == 200) {
+                        message.channel.send(response);
+                        
                     try {
                         body = JSON.parse(body);
                             message.channel.send(body);
