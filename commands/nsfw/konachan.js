@@ -30,12 +30,7 @@ const konachanFilter = [
              if (!message.channel.name.startsWith('nsfw')) {
             return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
-        }
-        //Adicionar economy. Caso se tenha perms não se gasta para utilizar este comando.
-        //Caso contrario, gasta 1 ponto por utilização.
-           
-
-        
+        }   
         var messageSplit = message.content.split(' ');
         var messageSearch = '';
         var searchOrig = '';

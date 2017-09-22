@@ -33,6 +33,7 @@
     "mysql": "^2.14.1",
     "opusscript": "0.0.3",
     "popura": "^1.2.5",
+    "pornsearch": "^2.0.2",
     "request": "^2.81.0",
     "site-crawler": "^1.0.4",
     "snekfetch": "^3.3.0",
