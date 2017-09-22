@@ -1,24 +1,13 @@
-
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-
-const MAL = require('mal-api');
-let username='MasterHc12';
-let password='H0eNZxoClnSE';
-let debug;
-const mal = new MAL(username, password, debug);
-mal.account.verifyCredentials()
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
-
   
-class Animecommando extends commando.Command{
+class imageBoardXXXcommando extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'anime',
+                name: 'imageboardxxx',
                 group:'image',
-                memberName: 'anime',
-                description: 'Mostra informação de um anime que escolha.'
+                memberName: 'imageboardxxx',
+                description: 'Mostra imagens nsfw sobre um tema a sua escolha.'
 
             })
         }
@@ -36,7 +25,7 @@ class Animecommando extends commando.Command{
                
             };
             
-         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).cach(err => console.error(err));
+      
             
          function mensagem(res, message){
             const embed = new Discord.RichEmbed()
@@ -60,4 +49,4 @@ class Animecommando extends commando.Command{
          }
         
          }
-        }module.exports = Animecommando;
+        }module.exports = imageBoardXXXcommando;
