@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 let winston = require('winston');
 let request = require('request');
-let key
+let key ='6518D3825CAC8BE5869B1A0E9DC82560ACC74EA6';
 class imageBoardcommando extends commando.Command{
         constructor(client){
             super(client, {
@@ -14,41 +14,52 @@ class imageBoardcommando extends commando.Command{
             })
         }
         async run(message, args){
-            args=message.content.split(/\s+/g);
-            var searchString;
-         
-          var messageSplit = message.content.split(' ');
-              for(var i=1;i<messageSplit.length; i++){
-                 if (i===1) {
-                        searchString = args[1] ;
-                   }else{
-                          searchString = searchString +' '+ args[i];
-               }
+        
+            let messageSplit = message.content.split(' ');
+            let messageSearch = '';
+            let searchOrig = '';
+            for (let i = 1; i < messageSplit.length; i++) {
+                if (i === 1) {
+                    searchOrig = messageSplit[i];
+                } else {
+                    searchOrig = searchOrig + ' ' + messageSplit[i];
+                }
+            }
+            messageSearch = 'random: ' + searchOrig;
+            request.get('https://ibsear.ch/api/v1/images.json', {
+                qs: {
+                    limit: 100,
+                    q: messageSearch
+                }, headers: {'X-lbSearch-Key': key}
+            }, (error, response, body) => {
+                if (error) {
+                    message.channel.send('Erro');
+                }
+                if (!error && response.statusCode == 200) {
+                    try {
+                        body = JSON.parse(body);
+                    } catch (e) {
+                        winston.info(e.getMessage());
+                    }
+                    if (typeof (body) !== 'undefined' && body.length > 0) {
+                        let random = Math.floor(Math.random() * body.length);
+                        let img = body[random];
+                        const embed = new Discord.RichEmbed();
+                        embed.setImage(`https://${img.server}.ibsear.ch/${img.path}`);
+                        message.channel.send({embed});
+                        
+                    } else {
+                        message.channel.send('Erro');
+                    }
+                } });
+                
+                
+            
+        
                
-            };
-            
+        
       
-            
-         function mensagem(res, message){
-            const embed = new Discord.RichEmbed()
-            
-            embed.setTitle(res[1].title)
-            embed.setAuthor("Rem-chan", "https://imgur.com/a/Pg3yY")
-            embed.setColor(0xdb06db)
-            embed.setDescription(res[1].synopsis)
-           
-            embed.setFooter('Rem-chan em ', "https://imgur.com/a/Pg3yY")
-            
-            embed.setImage(res[1].image)
-          
-            embed.setTimestamp()  
-            embed.addField("Estado", res[1].status)     
-            embed.addField("Episódios", res[1].episodes, true)
-            embed.addField("Score", res[1].score, true)
-      
-          
-            message.channel.send({embed});
-         }
+         
         
          }
         }module.exports = imageBoardcommando;
