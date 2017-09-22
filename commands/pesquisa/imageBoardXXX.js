@@ -5,7 +5,7 @@ class imageBoardXXXcommando extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'ibxxx',
-                group:'image',
+                group:'pesquisa',
                 memberName: 'ibxxx',
                 description: 'Mostra imagens nsfw sobre um tema a sua escolha.'
 
@@ -40,6 +40,7 @@ class imageBoardXXXcommando extends commando.Command{
                 if (!error && response.statusCode == 200) {
                     try {
                         body = JSON.parse(body);
+                            message.channel.send(body);
                     } catch (e) {
                         winston.info(e.getMessage());
                     }
