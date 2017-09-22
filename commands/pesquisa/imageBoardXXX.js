@@ -28,15 +28,16 @@ class imageBoardXXXcommando extends commando.Command{
             }
                
             messageSearch = 'random: ' + searchOrig;
-            message.channel.send(messageSearch);
+          
                 request.get('https://ibsearch.xxx/api/v1/images.json', {
                 qs: {
                     limit: 100,
                     q: messageSearch
                 }, headers: {'X-lbSearch-Key': key}
             }, (error, response, body) => {
-                console.log(response);
-                    message.channel.send(response);
+                message.channel.send('Response: '+response);
+                        console.log(response);
+                    
                 if (error) {
                     message.channel.send('Erro');
                 }
