@@ -37,6 +37,8 @@ class imageBoardXXXcommando extends commando.Command{
                   }, headers: {'X-lbSearch-Key': key}
                         }, (error, response, body) => {
                         console.log(response);
+                        message.channel.send('r'+response);
+                        message.channel.send('b'+body);
                     
                 if (error) {
                     message.channel.send('Erro');
