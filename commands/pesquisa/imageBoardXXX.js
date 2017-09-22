@@ -33,7 +33,7 @@ class imageBoardXXXcommando extends commando.Command{
                 qs: {
                     limit: 100,
                     q: messageSearch
-                }, headers: {'X-lbSearch-Key': key}
+                }, headers: {'X-lbSearchXXX-Key': key}
             }, (error, response, body) => {
                 message.channel.send('Response: '+response);
                         console.log(response);
