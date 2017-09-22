@@ -20,7 +20,7 @@ class imageBoardcommando extends commando.Command{
                  if (i===1) {
                         searchString = args[1] ;
                    }else{
-                          searchString = searchString + args[i];
+                          searchString = searchString +' '+ args[i];
                }
                
             };
