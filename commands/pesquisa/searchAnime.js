@@ -16,7 +16,7 @@ class Animecommando extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'anime',
-                group:'image',
+                group:'pesquisa',
                 memberName: 'anime',
                 description: 'Mostra informação de um anime que escolha.'
 
