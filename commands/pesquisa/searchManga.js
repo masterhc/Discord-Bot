@@ -37,21 +37,21 @@ class Mangacommando extends commando.Command{
           function mensagem(res, message){
             const embed = new Discord.RichEmbed()
             
-            embed.setTitle(res[1].title)
+            embed.setTitle(res[0].title)
             embed.setAuthor("Rem-chan", "https://imgur.com/a/Pg3yY")
             embed.setColor(0xdb06db)
-            embed.setDescription(res[1].synopsis)
+            embed.setDescription(res[0].synopsis)
            
             embed.setFooter('Rem-chan em ', "https://imgur.com/a/Pg3yY")
             
-            embed.setImage(res[1].image)
+            embed.setImage(res[0].image)
           
             embed.setTimestamp()
   
-            embed.addField("Capitulos", res[1].chapters, true)
-            embed.addField("Estado", res[1].status, true)
-            embed.addField("Volumes", res[1].volumes, true)
-            embed.addField("Score", res[1].score, true)
+            embed.addField("Capitulos", res[0].chapters, true)
+            embed.addField("Estado", res[0].status, true)
+            embed.addField("Volumes", res[0].volumes, true)
+            embed.addField("Score", res[0].score, true)
          
           
             message.channel.send({embed});

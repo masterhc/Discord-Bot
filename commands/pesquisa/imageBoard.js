@@ -1,6 +1,8 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-  
+let winston = require('winston');
+let request = require('request');
+let key
 class imageBoardcommando extends commando.Command{
         constructor(client){
             super(client, {

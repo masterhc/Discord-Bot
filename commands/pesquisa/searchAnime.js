@@ -31,29 +31,30 @@ class Animecommando extends commando.Command{
                  if (i===1) {
                         searchString = args[1] ;
                    }else{
-                          searchString = searchString + args[i];
+                          searchString = searchString + ' ' + args[i];
                }
                
             };
-            
+          console.log(searchString);  
          mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).cach(err => console.error(err));
             
          function mensagem(res, message){
+              
             const embed = new Discord.RichEmbed()
             
-            embed.setTitle(res[1].title)
+            embed.setTitle(res[0].title)
             embed.setAuthor("Rem-chan", "https://imgur.com/a/Pg3yY")
             embed.setColor(0xdb06db)
-            embed.setDescription(res[1].synopsis)
+            embed.setDescription(res[0].synopsis)
            
             embed.setFooter('Rem-chan em ', "https://imgur.com/a/Pg3yY")
             
-            embed.setImage(res[1].image)
+            embed.setImage(res[0].image)
           
             embed.setTimestamp()  
-            embed.addField("Estado", res[1].status)     
-            embed.addField("Episódios", res[1].episodes, true)
-            embed.addField("Score", res[1].score, true)
+            embed.addField("Estado", res[0].status)     
+            embed.addField("Episódios", res[0].episodes, true)
+            embed.addField("Score", res[0].score, true)
       
           
             message.channel.send({embed});
