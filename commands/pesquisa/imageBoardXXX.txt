@@ -1,3 +1,7 @@
+
+Yet for test only
+
+
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 let key = "051CCFFB7F58F0AC5815CCE607465F96398B299F"
@@ -16,6 +20,7 @@ class imageBoardXXXcommando extends commando.Command{
                 return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
     
             }*/
+            
             let messageSplit = message.content.split(' ');
             let messageSearch = '';
             let searchOrig = '';
@@ -28,36 +33,42 @@ class imageBoardXXXcommando extends commando.Command{
             }
                
             messageSearch = 'random: ' + searchOrig;
-           
-          
-                request.get('https://ibsearch.xxx/api/v1/images.json',{
+                      
+                      console.log(coiso)
+                request.get(`https://ibsearch.xxx/api/v1/images.json`,{
                   qs: {
-                   limit: 100,
-                       q: messageSearch
-                  }, headers: {'X-lbSearch-Key': key}
+                   
+                    q: messageSearch,
+                    limit: 100
+                  }, headers: {'X-ibSearch-Key': key}
                         }, (error, response, body) => {
-                        console.log(response);
-                        message.channel.send('r'+response);
-                        message.channel.send('b'+body);
-                    
+                      
+                       
+                       
                 if (error) {
                     message.channel.send('Erro');
                 }
-                        message.channel.send(response.statusCode);
+                       console.log(response); 
                 if (!error && response.statusCode == 200) {
-                        message.channel.send(response);
                         
                     try {
                         body = JSON.parse(body);
-                            message.channel.send(body);
+                            console.log(body);
                     } catch (e) {
                         winston.info(e.getMessage());
+                        console.log(e);
                     }
                     if (typeof (body) !== 'undefined' && body.length > 0) {
                         let random = Math.floor(Math.random() * body.length);
                         let img = body[random];
                         const embed = new Discord.RichEmbed();
-                        embed.setImage(`https://${img.server}.ibsearch.xxx/${img.path}`);
+                        embed.setColor(0xb50000);
+                        embed.setTitle('Imagem:')
+                        embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                        embed.setImage(`https://${img.server}.ibsear.ch/${img.path}`)   ;                        
+                        embed.setDescription('[Original]'+`(https://${img.server}.ibsear.ch/${img.path})`);
+                        embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                        embed.setTimestamp();
                         message.channel.send({embed});
                     } else {
                         message.channel.send('Erro')

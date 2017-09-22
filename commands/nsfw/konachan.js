@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const winston = require('winston');
 const request = require('request');
+const Discord = require('discord.js');
 const konachanFilter = [
     'loli', // loli, lolicon
     'shota', // shota, shotacon
@@ -85,7 +86,15 @@ const konachanFilter = [
                     if (body.length > 0) {
                         var random = Math.floor(Math.random() * body.length);
                         if (typeof(body[random]) !== 'undefined' && typeof (body[random].file_url) !== 'undefined') {
-                            message.channel.send(`http://${body[random].file_url.substring(2)}`);
+                            var embed = new Discord.RichEmbed;
+                            embed.setColor(0xb50000);
+                            embed.setTitle('Imagem:')
+                            embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                            embed.setImage(`http://${body[random].file_url.substring(2)}`)   ;                        
+                            embed.setDescription('[Original]'+`(http://${body[random].file_url.substring(2)})`);
+                            embed.setTimestamp();
+                            embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                            message.channel.send({embed});
                         } else {
                             message.channel.send('Erro 3');
                         }
@@ -100,3 +109,4 @@ const konachanFilter = [
     }
     }
     module.exports = konachan;
+   

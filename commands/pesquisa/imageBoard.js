@@ -45,7 +45,14 @@ class imageBoardcommando extends commando.Command{
                         let random = Math.floor(Math.random() * body.length);
                         let img = body[random];
                         const embed = new Discord.RichEmbed();
+                        embed.setColor(0x0abbd6);
+                        embed.setTitle('Imagem:')
+                        embed.setDescription('[Original]'+`(https://${img.server}.ibsear.ch/${img.path})`)
                         embed.setImage(`https://${img.server}.ibsear.ch/${img.path}`);
+                        embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                        embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png");
+                        embed.setTimestamp();
+                        
                         message.channel.send({embed});
                         
                     } else {
