@@ -15,10 +15,10 @@ const Discord = require('discord.js');
         }
         async run(message, args){
             
-         /*   if (!message.channel.name.startsWith('nsfw')) {
+          if (!message.channel.name.startsWith('nsfw')) {
     return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
-}   */
+}   
         args = message.content.split(/\s+/g);
 
             var messageSplit = message.content.split(' ');
