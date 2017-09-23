@@ -1,5 +1,3 @@
-working on it...
-
 const commando = require('discord.js-commando');
 const winston = require('winston');
 const request = require('request');
@@ -27,7 +25,7 @@ const Discord = require('discord.js');
             var messageSearch = '';
             var searchOrig = '';
    
-                if (args[1]==undefined){console.log('args1 null');searchOrig='random'}
+                if (args[1]==undefined){searchOrig='random'}
 
             for (var i = 1; i < messageSplit.length; i++) {
                        if (i === 1) {
@@ -36,26 +34,28 @@ const Discord = require('discord.js');
                                 searchOrig = searchOrig + ' ' + messageSplit[i];
                         }
                     }
-              
+                    let random = Math.floor(Math.random()*6)+1;
 
-
-                    /* const Pornsearch = require('pornsearch').search(searchOrig);
+                  
+                    const Pornsearch = require('pornsearch');
+                    const Searcher = new Pornsearch(searchOrig);
                      
-                     Pornsearch.videos()
-                     .then(videos => message.channel.send(videos[0])
-                     .then(() => Pornsearch.gifs())
-                     .then(gifs => message.channel.send(gifs[0])));*/
-                    
-                     const Pornhub = require("pornhub-api")
-                     const Videos = new Pornhub.Videos()
+                    Searcher.gifs()
+                      .then(gifs => mensagem(gifs[random], message));
                       
-                     Videos.search({
-                         search: "Hard"
-                     }).then(videos => {
-                         console.log(videos)
-                     })
+                   function mensagem(gifs, message){ 
+                      
+                      const embed = new Discord.RichEmbed();
+                      embed.setColor(0xb50000);
+                      embed.setTitle('Imagem:')
+                      embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                      embed.setImage(gifs.url)   ;                        
+                      embed.setDescription('[Original]'+`(${gifs.url})`);
+                      embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                      embed.setTimestamp();
+                      message.channel.send({embed});
+                   }
                     
-
 
 
 
