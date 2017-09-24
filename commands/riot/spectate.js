@@ -30,7 +30,8 @@ const Discord= require('discord.js');
     //Else return Jogador inexistente ou jogador não está em jogo.
 
      //Pesquisar o codigo de spectate
-     //Enviar mensagem com o codigo   
+     //Enviar mensagem com o codigo  
+      
            
         
 

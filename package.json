@@ -27,6 +27,7 @@
     "got": "^7.1.0",
     "http": "0.0.0",
     "humblebundle": "^1.0.5",
+    "leaguejs": "^1.5.0",
     "mal-api": "^1.0.0",
     "mathjs": "^3.14.2",
     "moment": "^2.18.1",
