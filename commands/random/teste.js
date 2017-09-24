@@ -13,13 +13,8 @@ const http = require('http');
             })
         }
         async run(message, args){
-           var site = 'http://www.twstats.com/pt54/index.php?page=ennoblements&live=live'
+           message.reply('Já querias fazer merda não era...')
             
-          const html= await snekfetch.get(site).then(result => result.body);
-          console.log(html);
-          fs.writeFile('../../page.html', html, (error) => error ? console.error(error) : null);
-        
-         
           
 
         }
