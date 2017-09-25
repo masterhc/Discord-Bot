@@ -1,3 +1,5 @@
+process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
+
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
 const league = require('leaguejs');
@@ -33,7 +35,8 @@ const api = new LeagueJs(process.env.LEAGUE_API_KEY);
 
      //Pesquisar o codigo de spectate
      //Enviar mensagem com o codigo  
-            api.Summoner
+          if(jogador==undifined)={return message.channel.send('Jogador não definido')} 
+          api.Summoner
     .gettingByName(jogador)
     .then(data => {
         'use strict';
