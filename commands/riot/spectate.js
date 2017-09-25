@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
-const league = require('leaguejs);
+const league = require('leaguejs');
 const api = new LeagueJs(process.env.LEAGUE_API_KEY);
                        
                        
