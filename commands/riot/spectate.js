@@ -1,4 +1,4 @@
- let LEAGUE_API_PLATFORM_ID = 'euw1'
+process.env.LEAGUE_API_PLATFORM_ID = 'euw1'
 
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
@@ -40,7 +40,8 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
     .gettingByName(jogador)
     .then(data => {
         'use strict';
-       message.channel.send(data);
+       message.channel.send(data.accountID);
+       message.channel.send(data.ID);
     })
     .catch(err => {
         'use strict';
