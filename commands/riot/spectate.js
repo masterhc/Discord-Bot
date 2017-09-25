@@ -1,6 +1,10 @@
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
-
+const fs = require('fs')
+var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
+var key = config.LeagueApiKey;
+const LeagueJs = require('LeagueJS.js');
+const league = new LeagueJs(key, {PLATFORM_ID:'euw1'});
 
     class  spectate extends commando.Command{
         constructor(client){
@@ -30,15 +34,27 @@ const Discord= require('discord.js');
     //Else return Jogador inexistente ou jogador não está em jogo.
 
      //Pesquisar o codigo de spectate
-     //Enviar mensagem com o codigo  
-      
+     //Enviar mensagem com o codigo 
+    
+    league.Summoner
+     .gettingByName(jogador)
+     .then(data => {
+         'use strict';
+         console.log(data);     //Tentar retirar daqui o ID do jogador se possivel o ID do jogo
+     })
+     .catch(err => {
+         'use strict';
+         console.log(err); // Se err = XXXX modifier X
+     });
+                                                                                    //enviarMensagem
+     league.Spectator.gettingByAccount(jogadorID, 'euw').then(data =>{'use strict';console.log(data)})
            
         
 
     }
     }
     module.exports = spectate;
-    function mensagem(message, modifier, jogador, ligação, dados){
+    function enviarMensagem(message, modifier, jogador, ligação, dados){
             //Colocar os dados de jogo em um array caso não venham já
     
         switch (modifier) {
