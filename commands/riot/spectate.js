@@ -30,6 +30,7 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
         };
         
          let jogador = mensagem;
+          var jogadorId;
     //Pesquisar pela pessoa e certificar que existe e está em jogo
     //Else return Jogador inexistente ou jogador não está em jogo.
 
@@ -40,17 +41,18 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
     .gettingByName(jogador)
     .then(data => {
         'use strict';
-       message.channel.send(data.accountId+'  '+data.id);
+       jogadorId=data.id;
        
     })
     .catch(err => {
         'use strict';
-        message.channel.send(err);
+        
+            if(err != null){mensagem(message, 1)}
     });
       
            
         
-
+if(err==404)
     }
     }
     module.exports = spectate;
