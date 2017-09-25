@@ -3,7 +3,7 @@
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
 const league = require('leaguejs');
-const api = new LeagueJs('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
+const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
                        
                        
     class  spectate extends commando.Command{
