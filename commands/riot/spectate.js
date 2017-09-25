@@ -40,8 +40,8 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
     .gettingByName(jogador)
     .then(data => {
         'use strict';
-       message.channel.send(data.accountID);
-       message.channel.send(data.ID);
+       message.channel.send(data.accountId+'  '+data.Id);
+       
     })
     .catch(err => {
         'use strict';
