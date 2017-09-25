@@ -1,7 +1,9 @@
 const commando = require('discord.js-commando');
 const Discord= require('discord.js');
-
-
+const league = require('leaguejs);
+const api = new LeagueJs(process.env.LEAGUE_API_KEY);
+                       
+                       
     class  spectate extends commando.Command{
         constructor(client){
             super(client, {
@@ -31,6 +33,16 @@ const Discord= require('discord.js');
 
      //Pesquisar o codigo de spectate
      //Enviar mensagem com o codigo  
+            api.Summoner
+    .gettingByName(jogador)
+    .then(data => {
+        'use strict';
+       message.channel.send(data);
+    })
+    .catch(err => {
+        'use strict';
+        message.channel.send(err);
+    });
       
            
         
