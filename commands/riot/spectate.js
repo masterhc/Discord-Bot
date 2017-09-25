@@ -35,7 +35,7 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
 
      //Pesquisar o codigo de spectate
      //Enviar mensagem com o codigo  
-          if(jogador== ''){return message.channel.send('Jogador não definido')} 
+          if(jogador== null){return message.channel.send('Jogador não definido')} 
           api.Summoner
     .gettingByName(jogador)
     .then(data => {
