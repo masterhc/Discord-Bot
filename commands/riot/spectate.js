@@ -28,7 +28,7 @@ const api = new league('RGAPI-e6d872a5-a104-4902-8feb-1c534cae3300');
             }
            
         };
-        message.channel.send('Em construção!');
+        
          let jogador = mensagem;
     //Pesquisar pela pessoa e certificar que existe e está em jogo
     //Else return Jogador inexistente ou jogador não está em jogo.
