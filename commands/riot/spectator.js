@@ -7,13 +7,14 @@ const  PLATFORM_ID='euw1';
 const   TeemoJS = require('teemojs');
 const league = new TeemoJS(key)
 
+
     class  spectate extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'summoner',
+                name: 'spectator',
                 group:'riot',
-                memberName: 'summoner',
-                description: 'Rem-chan dar-lhe-á informações do(a) jogador(a) que pesquisou.'
+                memberName: 'spectator',
+                description: 'Rem-chan dar-lhe-á informações sobre o jogo atual do(a) jogador(a) que pesquisou.'
 
             })
         }
@@ -35,10 +36,18 @@ const league = new TeemoJS(key)
     //Else return Jogador inexistente ou jogador não está em jogo.
 
      //Pesquisar o codigo de spectate
-    //Enviar mensagem com o codigo 
-        league.get(PLATFORM_ID, 'summoner.getBySummonerName', 'hc12')
-        .then(data => console.log(data));
-
+     //Enviar mensagem com o codigo 
+    
+    league.Summoner
+     .gettingByName(jogador)
+     .then(data => {
+         'use strict';
+         data.id;     //Tentar retirar daqui o ID do jogador se possivel o ID do jogo
+     })
+     .catch(err => {
+         'use strict';
+         mensagem(message, 1); // Se err = XXXX modifier X
+     });
                                                                                 
            
         
@@ -73,21 +82,13 @@ const league = new TeemoJS(key)
 
             embed.addField('Liga Solo/Duo:', sleague);
             embed.addField('Liga Flex:', fleague);
-            embed.addField('Liga 3v3', ttleague);
-           }else{
-               embed.addField('O nivel do(a) '+jogador+' não lhe permite estar nenhuma liga.')
-           }
-
-            
-            
-            
-            
+            embed.addField('Liga 3v3', ttleague);         
         
             embed.addField('Em jogo:', ingame);
             
            
             message.channel.send({embed})
-  
+           }
             break;
 
         
