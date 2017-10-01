@@ -40,6 +40,7 @@
     "pornsearch": "^2.0.2",
     "request": "^2.81.0",
     "resultados-futbol-api": "0.0.2",
+    "rimraf": "^2.6.2",
     "site-crawler": "^1.0.4",
     "snekfetch": "^3.3.0",
     "teemojs": "^1.0.4",
