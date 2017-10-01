@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 
-const snekfetch = require('snekfetch');
+const fs = require('fs');
 const http = require('http');
     class testeCommand extends commando.Command{
         constructor(client){
@@ -15,6 +15,20 @@ const http = require('http');
         async run(message, args){
            message.reply('Já querias fazer merda não era...')
             
+           var scrape = require('website-scraper');
+           var mundo = '54';
+            
+           scrape({
+             urls: [`http://www.twstats.com/pt${mundo}/index.php?page=ennoblements&live=live`],
+             directory: './scraps',
+             subdirectories: [
+              
+               {directory: 'html', extensions: ['.html']}
+             ]
+           }).then((result) => {
+           console.log(result);
+           fs.unlinkSync('\scraps');;
+        }).catch(console.log);            
           
 
         }

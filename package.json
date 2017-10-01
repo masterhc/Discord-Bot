@@ -45,6 +45,7 @@
     "teemojs": "^1.0.4",
     "timer.js": "^1.0.4",
     "url-parse": "^1.1.9",
+    "website-scraper": "^3.3.1",
     "winston": "^2.3.1",
     "xml2js": "^0.4.19",
     "youtube-info": "^1.1.1",
