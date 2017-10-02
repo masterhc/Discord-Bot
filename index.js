@@ -4,6 +4,7 @@ const commando = require('discord.js-commando');
 const music = require('discord.js-music-v11');
 const fs = require('fs');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
+var rimraf = require('rimraf');//Para eliminar a pasta.
 
 const http = require('http');
 
@@ -19,18 +20,19 @@ bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
 bot.registry.registerGroup('riot','RiotGames');
-bot.registry.registerGroup('futebol', 'Futebol');
 
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
 music(bot);
+//Start Up Log
 bot.on('ready', ()=>{
     
      bot.user.setGame('!help for commands');
     console.log(`Rem is ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
-
+  
 });
+//Conquistas em direto
 bot.on('ready',()=>{
  
  
