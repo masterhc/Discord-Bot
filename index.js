@@ -31,7 +31,7 @@ music(bot);
 bot.on('ready', ()=>{
     
      bot.user.setGame('!help for commands');
-    console.log(`Rem is ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
+    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
   
 });
 //Conquistas em direto
@@ -58,24 +58,37 @@ bot.on('ready',()=>{
         nomest.push(nomes);
         
         });
-        
-        
+         let coordX = processcoord(nomest[0])[0]
+         let coordY = processcoord(nomest[0])[1]        
+         console.log(checker(coordX, coordY))
+    
         console.log(nomest[0],nomest[1], nomest[2],nomest[3],nomest[4]);
-        if(checker(processcoord(nomest[0])[0],processcoord(nomest[0])[1])==false){
-            let coordX = processcoord(nomest[0])[0]
-            let coordY = processcoord(nomest[0])[1]
+        if(checker(coordX, coordY)==false){
+           
             let modifier = processdata(nomest, tablelink);
+           
+            console.log(modifier)
+            console.log('passou o check')
             if (modifier==false){ crawler()}
+        
             let laldeia = `https://${mundo}.tribalwars.com.pt/guest.php?screen=map&x=${coordX}&y=${coordY}&beacon#${coordX};${coordY}`
             mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY);
         }else{
             crawler()
+            console.log('ficou aqui')
+           
         }
         
-        console.log(tablelink[1], tablelink[2], tablelink[3], tablelink[4])
-        }else{console.log('erro')}
+             console.log(tablelink[1], tablelink[2], tablelink[3], tablelink[4])
+        
+      
+
+             console.log(new Date)
+        }else{
+            console.log('erro')
+        }
         });
-    }, 35000); 
+    }, 60000); 
    
 }
 
@@ -95,10 +108,13 @@ bot.on('ready',()=>{
     //Verificar se é a mesma aldeia
     function checker(coordX, coordY, /*dados para a mensagem*/){
          var checking = JSON.parse(fs.readFileSync('.conquistasaovivo.json', 'utf-8'));  
+         console.log(checking)
             if(coordX == checking.coordX && coordY == checking.coordY){
+                
                 return true;
             }else{
                 return false;
+               
             };
         
         
@@ -232,59 +248,84 @@ bot.on('ready',()=>{
  
     function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
       let embed = new Discord.RichEmbed;
-         
+         console.log('está a chegar aqui')
          ldono = `http://www.twstats.com/${mundo}/${ldono}`
          ltdono =`http://www.twstats.com/${mundo}/${ltdono}`
          lnovo =`http://www.twstats.com/${mundo}/${lnovo}`
          ltnovo =`http://www.twstats.com/${mundo}/${ltnovo}`
 
-         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
-         embed.setDescription('Aldeia conquistada!');
          
-           
-             /* Dados das aldeias */
-         embed.addField('Aldeia:'+naldeia,laldeia);
-        
-        
-         embed.setColor(0xecd7ac);        
-         embed.setTimestamp();
-         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
            
          switch (modifier) {
             case 1://BB conquistada por um jogador sem tribo
-                embed.addFiled('Novo dono'+ndono, ldono)
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Novo dono: '+ndono,'[Ligação]'+`(${ldono})`)
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
+                
                
                 break;
             case 2://BB conquistada por um jogador com tribo
-                embed.addField(ndono, ldono);
-                embed.addField(ntdono, ltdono);
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Novo dono: '+ndono,'[Ligação]'+`(${ldono})`);
+                embed.addField('Tribo do novo dono: '+ntdono, '[Ligação]'+`(${ltdono})`);
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
             case 3://Nenhum do jogadores tem tribo
-                embed.addField(ndono, ldono)
-                embed.addField(ntdono, ltdono)
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Dono anterior: '+ndono, '[Ligação]'+`(${ldono})`)
+                embed.addField('Novo dono: '+ntdono, '[Ligação]'+`(${ltdono})`)
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
             case 4://Conquistada a um jogado sem tribo
-                embed.addField(ndono, ldono)
-                embed.addField(ntdono, ltdono)
-                embed.addField(nnovo, lnovo)
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Dono anterior: '+ndono, '[Ligação]'+`(${ldono})`)
+                embed.addField('Novo dono: '+ntdono, '[Ligação]'+`(${ltdono})`)
+                embed.addField('Tribo do novo dono: '+nnovo,'[Ligação]'+`(${lnovo})`)
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break; 
             case 5://Conquistada por um jogador sem tribo
-                embed.addField(ndono, ldono);
-                embed.addField(ntdono, ltdono);
-                embed.addField(nnovo, lnovo);
-
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Dono anterior: '+ndono, '[Ligação]'+`(${ldono})`);
+                embed.addField('Tribo do dono anterior: '+ntdono, '[Ligação]'+`(${ltdono})`);
+                embed.addField('Novo dono: '+nnovo, '[Ligação]'+`(${lnovo})`);
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
               bot.channels.get('356084548003561474').send({embed}) 
                 break;
             case 6://Conquista normal
-                embed.addField(ndono, ldono)
-                embed.addField(ntdono, ltdono)
-                embed.addField(nnovo, lnovo)
-                embed.addField(ntnovo, ltnovo)
-                
+            embed.addField('Aldeia:'+naldeia,'[Ligação]'+`(${laldeia})`);
+                embed.addField('Dono anterior: '+ndono, '[Ligação]'+`(${ldono})`)
+                embed.addField('Tribo do dono anterior: '+ntdono, '[Ligação]'+`(${ltdono})`)
+                embed.addField('Novo dono: '+nnovo, '[Ligação]'+`(${lnovo})`)
+                embed.addField('Tribo do novo dono: '+ntnovo, '[Ligação]'+`(${ltnovo})`)
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
+                embed.setDescription('Aldeia conquistada!');
+                embed.setColor(0xecd7ac);        
+                embed.setTimestamp();
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 
 
                 bot.channels.get('356084548003561474').send({embed}) 
