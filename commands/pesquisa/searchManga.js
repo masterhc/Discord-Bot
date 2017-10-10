@@ -33,7 +33,7 @@ class Mangacommando extends commando.Command{
             };
             
           mal.manga.searchManga(searchString).then(res =>mensagem(res, message)).catch(err => falhou(err));
-          function falhou{
+          function falhou(err){
           let embed2 = new Discord.Richembed();
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
