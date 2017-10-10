@@ -40,10 +40,10 @@ bot.on('ready',()=>{
     crawler();
    function crawler(){
     setTimeout(()=>{
-   
-    request('http://pt.twstats.com/pt54/index.php?page=ennoblements&live=live', function(err, res, body){
-        var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'))
+    var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'))
         var mundo = world.mundo;
+    request(`http://pt.twstats.com/${mundo}/index.php?page=ennoblements&live=live`, function(err, res, body){
+       
         let tablelink = [];
         let nomest = [];
         if(!err){
