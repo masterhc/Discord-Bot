@@ -67,25 +67,28 @@ bot.on('ready',()=>{
            
             let modifier = processdata(nomest, tablelink);
            
-            console.log(modifier)
-            console.log('passou o check')
-            if (modifier==false){ crawler()}
-        
+            //console.log(modifier)
+            //console.log('passou o check')
+            if(modifier != 'err'){
             let laldeia = `https://${mundo}.tribalwars.com.pt/guest.php?screen=map&x=${coordX}&y=${coordY}&beacon#${coordX};${coordY}`
             mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY);
+            }else{
+                console.log('modifier err');
+                crawler();
+            }
         }else{
             crawler()
-            console.log('ficou aqui')
+            console.log('Falhou o check');
            
         }
         
-             console.log(tablelink[1], tablelink[2], tablelink[3], tablelink[4])
+            // console.log(tabelink[0],tablelink[1], tablelink[2], tablelink[3], tablelink[4])
         
       
 
              console.log(new Date)
         }else{
-            console.log('erro')
+            console.log('Erro do request')
         }
         });
     }, 60000); 
@@ -164,87 +167,85 @@ bot.on('ready',()=>{
           
             
         function processdata(nome, links){
-            //Numa situação ideal
-            let nomedaaldeia=nome[0] 
-            let split = nomedaaldeia.split(' ');
-            let k= split[split.length-1].split(/(|)/);
-            let kvalue = k[0]+k[2]+k[4]
+            
+           
+                
+            
+        let nomedaaldeia=nome[0]
+        let donoanterior = nome[1]
+        let tribodonoanterior = nome[2]
+        let novodono = nome[3]
+        let tribonovodono = nome[4]
+        let linkaldeia = links[0]
+        let linkdonoanterior = links[1]
+        let linktribodonoanterior = links[2]
+        let linknovodono = links[3]
+        let linktribonovodono = links[4];
+        let split = nomedaaldeia.split(' ');
+        // verificar o K com o filtro
+        let K0 = split[split.length -1];
+        let K = split[split.length-1].split(/(|)/)[0]; 
+        let kvalue = K[0]+K[2]+K[4]
             let parsed = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             let Kfilter = parsed.K;
             if (Kfilter.length>0){
-             for (var filter of Kfilter) {
-                if (kvalue.indexOf(filter)  < 1) {
-                    return false;
+                for (var filter of Kfilter) {
+                     if (kvalue.indexOf(filter)  < 1) {
+                        return false;
     
+                     }
                 }
+            }else{
+                console.log('No ative filters.')
             }
-       }
-            let donoanterior = nome[1]
-            let tribodonoanterior = nome[2]
-            let novodono = nome[3]
-            let tribonovodono = nome[4]
-            let linkaldeia = links[0]
-            let linkdonoanterior = links[1]
-            let linktribodonoanterior = links[2]
-            let linknovodono = links[3]
-            let linktribonovodono = links[4]
-           
-         let split1 = tribodonoanterior.split(' ');
-         let k1= split1[split1.length-1].split(/(|)/);
-            if(k1[0]=='K'){
-
-               console.log('BB conquistada por um jogador sem tribo');
-               return 1;
-            }
-        let split2 = linktribodonoanterior.split(/(|)/);
-        let t1 = split2[30]
-        let split3 = novodono.split(' ')
-        let k2 = split3[split3.length -1].split(/(|)/);
+        
+        //split nomes
+        let splitn1 = donoanterior.split(' ');
+        let splitn2 = tribodonoanterior.split(' ');
+        let splitn3 = novodono.split(' ');
+        let splitn4 = tribonovodono.split(' ');
+        // check for K
+        let K1 = splitn1[splitn1.length-1].split(/(|)/)[0];
+        let K2 = splitn2[splitn2.length-1].split(/(|)/)[0];
+        let K3 = splitn3[splitn3.length-1].split(/(|)/)[0];
+        let K4 = splitn4[splitn4.length-1].split(/(|)/)
+        //split links
+        let splitl1 = linkdonoanterior.split(/(|)/); 
+        let splitl2 = linktribodonoanterior.split(/(|)/); 
+        let splitl3 = linknovodono.split(/(|)/); 
+        let splitl4 = linktribonovodono.split(/(|)/);
+        //check for t or p
+        let tp1 = splitl1[30];
+        let tp2 = splitl2[30];
+        let tp3 = splitl3[30];
+        let tp4 = splitl4[30];
+        
+            if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='t' &&tp3=='p' &&tp4=='t'){
+                  return 6 //conquista normal
+            }else if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 == 'K'  && tp1=='p' &&tp2=='t' &&tp3=='p' &&tp4=='v'){
             
-    if(k2[0] == 'K'){
-        if(t1[0]=='t'){
-                console.log('Aldeia BB')
-                return 2;
-                }else{
-                console.log('Nenhum dos jogadores tem tribo.');
-                return 3;
+                  return 5 //conquistada por um jogador sem tribo
+            }else if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 == 'K'  && tp1=='p' &&tp2=='p' &&tp3=='t' &&tp4=='v'){
+                  return 4 //conquistada a um jogador sem tribo
+            }else if(K=='K' && K1!='K'&&K2!='K' && K3== 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='p' &&tp3=='v' &&tp4=='p'){
+                  return 3 //nenhum dos jogadores tem tribo
+            }else if(K=='K' && K1!='K'&&K2!='K' && K3== 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='t' &&tp3=='v' &&tp4=='p'){
+                  return 2 // Aldeia BB(novo dono tem tribo)
+            }else if(K=='K' && K1!='K'&&K2=='K' && K3!= 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='v' &&tp3=='p' &&tp4!=='a'){
+                 return 1 // BB conquistada por jogador sem tribo
+            }else{
+                 return 'err';
             }
+        
+        
+        
+        
         }
-        let split4 = linknovodono.split(/(|)/);
-        let tp= split4[30]
-        let split5 = novodono.split(' ');
-        let k3 = split5[split5.length-1].split(/(|)/);
-            if(k3[0]=='K'){
-                if(tp[0]=='t'){
-                console.log('Conquistada a um jogador sem tribo')
-                return 4;
-                 }else{
-                console.log('Conquistada por um jogador sem tribo')
-                return 5;
-            }
-            let split6 = linkaldeia.split(/(|)/);
-            let v= split6[30]
-            let split7 = linkdonoanterior.split(/(|)/);
-            let p1= split7[30]
-            let split8 = linktribodonoanterior.split(/(|)/);
-            let t2= split8[30]
-            let split9 = linknovodono.split(/(|)/);
-            let p2= split9[30]
-            let split10 = linktribonovodono.split(/(|)/);
-            let t3= split10[30]
-            
-            if(v=='v'&&p1=='p'&&t2=='t'&&p2=='p'&&t3=='t'){
-                return 6;
-            }
-            
-        }
+ 
+ 
+ 
+ 
     
-    }
- 
- 
- 
- 
- 
  
     function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
       let embed = new Discord.RichEmbed;
@@ -254,7 +255,7 @@ bot.on('ready',()=>{
          lnovo =`http://www.twstats.com/${mundo}/${lnovo}`
          ltnovo =`http://www.twstats.com/${mundo}/${ltnovo}`
 
-         
+         //console.log('modifier '+modifier);
            
          switch (modifier) {
             case 1://BB conquistada por um jogador sem tribo
@@ -335,15 +336,14 @@ bot.on('ready',()=>{
         }
       
              
-        fs.writeFileSync('.conquistasaovivo.json', '{\n'+'"'+'coordX'+'"'+':'+coordX+',\n'+'"'+'coordY'+'"'+':'+'"'+coordY+'"'+'\n}' , 'utf-8');
+        fs.writeFileSync('.conquistasaovivo.json', '{\n'+'"'+'coordX'+'"'+':'+'"'+coordX+'"'+',\n'+'"'+'coordY'+'"'+':'+'"'+coordY+'"'+'\n}' , 'utf-8');
         crawler();
       
-    }
-        }
-    ); 
-
     
+}      
 
+
+});
 
   
  bot.login(discord_token);
