@@ -1,39 +1,36 @@
+//Limpa o filtro por completo
 const commando = require('discord.js-commando');
 const dicord = require('discord.js')
 const fs = require('fs');
 
-    class setkfilterCommand extends commando.Command{
+    class clearfilterCommand extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'setkfilter',
+                name: 'clearfilter',
                 group:'tribos',
-                memberName: 'setkfilter',
-                description: 'Altera o continente do qual irá receber as notificações de conquista. Ex.: !setKfilter K34 '
+                memberName: 'clearfilter',
+                description: 'Limpa todos os filtros. '
 
             })
         }
         async run(message, args){
-        
-          
             args = message.content.split(/\s+/g);
+            
+            if(args[1]!= null){return message.channel.send('Verifique a forma como usou o comando.')}
             let file = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             let mundo = file.mundo
-            let K = args[1]
-            if(args[1]== null){return message.channel.send('Por favor defina um continente')}
-            if((typeof K)!== String ){ return message.channel.send('Verifique a forma como escreveu o continente que deseja.')}
-            let Kfilter = file.K;
-            kfilter.push(K);
-            console.log(kfilter);
-            function alterar(kfilter, mundo){
+            let kfilter = [
+
+            ];
             fs.writeFileSynd('coiso.json', '{\n'+'"'+'mundo'+'"'+':'+mundo+'\n'+'"'+'K'+'"'+':'+kfilter+'\n'+'\n}' , 'utf-8')
-        mensagem(K)    
-        }    
-            function mensagem(filtro){
+            mensagem()    
+        
+            function mensagem(){
                 let embed = new discord.RichEmbed
             
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
-                embed.setDescription('Filtro adicionado!');
-                embed.addField('Filtro '+filtro+' adicionado.');
+                embed.setDescription('Filtros removidos!');
+                embed.addField('Todos os filtros foram removidos.');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
@@ -44,6 +41,6 @@ const fs = require('fs');
 
  
 
-
         }
-}module.exports = setkfilterCommand;
+    }module.exports = clearfilterCommand;
+        
