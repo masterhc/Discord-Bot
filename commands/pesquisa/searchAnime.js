@@ -36,7 +36,7 @@ class Animecommando extends commando.Command{
                
             };
           console.log(searchString);  
-         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).cach(err => falhou(err));
+         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).catch(err => falhou(err));
           function falhou{
           let embed2 = new Discord.Richembed();
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
