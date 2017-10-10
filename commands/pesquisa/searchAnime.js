@@ -36,8 +36,19 @@ class Animecommando extends commando.Command{
                
             };
           console.log(searchString);  
-         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).cach(err => console.error(err));
+         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).cach(err => falhou(err));
+          function falhou{
+          let embed2 = new Discord.Richembed();
+            embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+            embed2.setColor(0xdb06db)
+            embed2.setDescription(err)
+            embed2.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+            embed2.setTimestamp()
             
+            message.channel.send({embed2})
+          }
+       
+          
          function mensagem(res, message){
               
             const embed = new Discord.RichEmbed()
