@@ -34,7 +34,7 @@ const Discord = require('discord.js');
                                 searchOrig = searchOrig + ' ' + messageSplit[i];
                         }
                     }
-                    let random = Math.floor(Math.random()*6)+1;
+                    let random = Math.floor(Math.random()*12)+1;
 
                   
                     const Pornsearch = require('pornsearch');

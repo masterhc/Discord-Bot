@@ -42,7 +42,7 @@ const fs = require('fs');
                 "hr",
                 "lt",
                 "bg",
-                "beta",
+                "be",
                 "th",
                 "us",
                 "il",
@@ -50,6 +50,8 @@ const fs = require('fs');
                 "ts",
                 "ch"
             ]
+            let split = mundo.split(/(|)/);
+            let server = split[0]+split[2];
             for (var filter of servers) {
                 if (mundo.indexOf(filter) <0) {
                     return message.channel.send('O servidor referido não existe.');
@@ -57,14 +59,17 @@ const fs = require('fs');
                 }
        }
           
-            let file = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+            let file = JSON.parse(fs.readFileSync('../../coiso.json', 'utf-8'));
+            
             let kfilter = file.k
             args = message.content.split(/\s+/g);
             let mundo = args[1]
             if(args[1]== null){return message.channel.send('Por favor defina um mundo')}
             if((typeof mundo)!== String ){ return message.channel.send('Verifique a forma como escreveu o mundo que deseja.')}
-            let split = mundo.split(/(|)/);
-            let server = split[0]+split[2];
+           
+            
+            
+            alterar(mundo, kfilter);
             
             function alterar(mundo, kfilter){
                 fs.writeFileSynd('coiso.json', '{\n'+'"'+'mundo'+'"'+':'+mundo+'\n'+'"'+'K'+'"'+':'+kfilter+'\n'+'\n}' , 'utf-8')

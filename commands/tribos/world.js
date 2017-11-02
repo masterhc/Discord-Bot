@@ -14,7 +14,8 @@ const fs = require('fs');
         }
         async run(message, args){
             
-            let worldvar = JSON.parse(fs.readFileSynd('coiso.json', 'utf-8'));
+            let worldvar = JSON.parse(fs.readFileSynd('../../coiso.json', 'utf-8'));
+            console.log('worldvar'+worldvar);
             message.channel.send('O mundo que está a ser utilizado é: '+worldvar.mundo);
             
 
