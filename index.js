@@ -260,7 +260,7 @@ bot.on('ready',()=>{
          switch (modifier) {
             case 1://BB conquistada por um jogador sem tribo
             embed.addField(`Aldeia:`,`[${naldeia}](${laldeia})`);
-                embed.addField(`[Novo dono: `,`[${ndono}](${ldono})`)
+                embed.addField(`Novo dono: `,`[${ndono}](${ldono})`)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
