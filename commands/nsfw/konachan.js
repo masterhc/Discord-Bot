@@ -84,9 +84,9 @@ const konachanFilter = [
                             var embed = new Discord.RichEmbed;
                             embed.setColor(0xb50000);
                             embed.setTitle('Imagem:')
-                            embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
-                            embed.setImage(`http://${body[random].file_url.substring(2)}`)   ;                        
-                            embed.setDescription('[Original]'+`(http://${body[random].file_url.substring(2)})`);
+                            embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
+                            embed.setImage(`${body[random].file_url}`);                        
+                            embed.setDescription('[Original]'+`(${body[random].file_url})`);
                             embed.setTimestamp();
                             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                             message.channel.send({embed});

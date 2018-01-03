@@ -51,6 +51,7 @@ const Discord = require('discord.js');
                       embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
                       embed.setImage(gifs.url)   ;                        
                       embed.setDescription('[Original]'+`(${gifs.url})`);
+                      
                       embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                       embed.setTimestamp();
                       message.channel.send({embed});

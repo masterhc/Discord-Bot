@@ -26,7 +26,7 @@ bot.registry.registerGroup('riot','RiotGames');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
-music(bot);
+//music(bot);
 //Start Up Log
 bot.on('ready', ()=>{
     
@@ -343,8 +343,51 @@ bot.on('ready',()=>{
 
 
 });
+bot.on('ready',()=>{
+     let defaulttime = 10000;
+/*    
+   n = 1 
+    loop(n);
+    function loop(n){
+        if(n==null){
+            n=defaulttime
+            //Sem que se chame o loop por outro metodo este voltarse-á a chamar ao fim de 10 segundos.
 
-  
+        }
+        setTimeout(()=>{
+            if(n==defaulttime){
+                loop(40000)
+            }else{
+                worker(i);
+            }
+
+            },n)
+    }
+    function worker(i){
+        if(i='err'){
+            loop(defaulttime)
+        }else{
+            var workeroutput;
+            
+            //work
+
+            checker2(workeroutput);
+        }
+    };
+
+    function checker2(workeroutput){
+        //Check workeroutput first
+
+        if(workeroutput==true){
+
+            loop(30000)
+        }else{
+            i = 'err'; 
+        }
+    }*/
+});
+
+
  bot.login(process.env.discord_token);
 
 
