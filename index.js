@@ -15,7 +15,7 @@ const music = new Music(bot, {
     youtubeKey: process.env.youtubeKey,
     disableLoop:true,
     ownerOverMember:true,
-    leaveCmd:'begone',
+   
     disableHelp:true,
 
     botAdmins:[
