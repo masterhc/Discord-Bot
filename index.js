@@ -2,11 +2,11 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const music = require('discord.js-music-v11');
+
 const fs = require('fs');
 const cheerio = require('cheerio');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
-const 
+
 
 const http = require('http');
 
@@ -16,7 +16,7 @@ const discord_token = config.discord_token;
 
 
 const bot = new commando.Client();
-music(bot); 
+
 
 bot.registry.registerGroup('random','Random');
 bot.registry.registerGroup('tribos', 'Tribos');
