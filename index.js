@@ -7,17 +7,17 @@ const fs = require('fs');
 const cheerio = require('cheerio');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 
-
+const bot = new commando.Client();
 const http = require('http');
 
 const discord_token = config.discord_token;
-const music = new Music(client, {
+const music = new Music(bot, {
     youtubeKey: process.env.youtubeKey
   });
 
 
 
-const bot = new commando.Client();
+
 
 
 bot.registry.registerGroup('random','Random');
