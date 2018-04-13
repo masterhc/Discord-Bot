@@ -12,7 +12,7 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey: process.env.youtubeKey,
+    youtubeKey:process.env.youtubeKey,
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -271,7 +271,7 @@ bot.on('ready',()=>{
  
     function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
       let embed = new Discord.RichEmbed;
-         console.log('está a chegar aqui')
+         
          ldono = `http://www.twstats.com/${mundo}/${ldono}`
          ltdono =`http://www.twstats.com/${mundo}/${ltdono}`
          lnovo =`http://www.twstats.com/${mundo}/${lnovo}`
