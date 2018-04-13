@@ -12,12 +12,16 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey: process.env.youtubeKey,
+    youtubeKey:'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus',
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
-    enableQeueStat:true,
-    botAdmins = ['186540961650835456', '278011316487192577'],
+    
+    enableQueueStat:true,
+    botAdmins:[
+        '186540961650835456', 
+        '278011316487192577'
+    ],
     disableHelp:true,
 
     
@@ -406,6 +410,6 @@ bot.on('ready',()=>{
 });
 
 
- bot.login(process.env.discord_token);
+ bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw');
 
 
