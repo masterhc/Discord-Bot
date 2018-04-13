@@ -19,7 +19,8 @@ const music = new Music(bot, {
     disableHelp:true,
 
     botAdmins:[
-        '186540961650835456'
+        '186540961650835456',
+        '278011316487192577'
     ],
     botOwner:'186540961650835456',
 
