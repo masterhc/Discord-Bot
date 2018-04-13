@@ -15,14 +15,16 @@ const music = new Music(bot, {
     youtubeKey: process.env.youtubeKey,
     disableLoop:true,
     ownerOverMember:true,
+    anyoneCanSkip:false,
+
    
     disableHelp:true,
 
     botAdmins:[
-        '186540961650835456',
-        '278011316487192577'
+        "186540961650835456",
+        "278011316487192577"
     ],
-    botOwner:'186540961650835456',
+    botOwner:"186540961650835456",
 
 
   });
