@@ -4,16 +4,19 @@ const commando = require('discord.js-commando');
 const request = require('request');
 const music = require('discord.js-music-v11');
 const fs = require('fs');
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
-
+const 
 
 const http = require('http');
 
 const discord_token = config.discord_token;
 
 
+
+
 const bot = new commando.Client();
+music(bot); 
 
 bot.registry.registerGroup('random','Random');
 bot.registry.registerGroup('tribos', 'Tribos');
@@ -22,6 +25,7 @@ bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
 bot.registry.registerGroup('riot','RiotGames');
+bot.registry.registerGroup('steam', 'Steam');
 
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
@@ -40,13 +44,13 @@ bot.on('ready',()=>{
     crawler();
    function crawler(){
     setTimeout(()=>{
-    var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'))
+   
         var mundo = world.mundo;
-    request(`http://pt.twstats.com/${mundo}/index.php?page=ennoblements&live=live`, function(err, res, body){
+            request(`http://pt.twstats.com/${mundo}/index.php?page=ennoblements&live=live`, function(err, res, body){
        
-        let tablelink = [];
-        let nomest = [];
-        if(!err){
+                let tablelink = [];
+                let nomest = [];
+                if(!err){
         
          cheerio('a', 'table.widget', body).each(function(){
           
