@@ -12,7 +12,7 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey:'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus',
+    youtubeKey: process.env.youtubeKey,
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -43,7 +43,7 @@ bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
 bot.registry.registerGroup('riot','RiotGames');
 bot.registry.registerGroup('steam', 'Steam');
-
+bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
@@ -410,6 +410,6 @@ bot.on('ready',()=>{
 });
 
 
- bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw');
+ bot.login(process.env.discord_token);
 
 
