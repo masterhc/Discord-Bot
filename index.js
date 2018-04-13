@@ -12,7 +12,7 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey: 'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus'
+    youtubeKey: process.env.youtubeKey
   });
 
 
@@ -46,7 +46,8 @@ bot.on('ready',()=>{
     crawler();
    function crawler(){
     setTimeout(()=>{
-   
+        var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+        
         var mundo = world.mundo;
             request(`http://pt.twstats.com/${mundo}/index.php?page=ennoblements&live=live`, function(err, res, body){
        
@@ -394,6 +395,6 @@ bot.on('ready',()=>{
 });
 
 
- bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw');
+ bot.login(process.env.discord_token);
 
 
