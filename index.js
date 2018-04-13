@@ -16,8 +16,8 @@ const music = new Music(bot, {
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
-
-   
+    enableQeueStat:true,
+    botAdmins = ['186540961650835456', '278011316487192577'],
     disableHelp:true,
 
     
