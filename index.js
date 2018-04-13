@@ -12,7 +12,7 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey: process.env.youtubeKey
+    youtubeKey: 'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus'
   });
 
 
@@ -394,6 +394,6 @@ bot.on('ready',()=>{
 });
 
 
- bot.login(process.env.discord_token);
+ bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw');
 
 

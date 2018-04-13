@@ -8,14 +8,14 @@ let steam = new steamspy();
 const cheerio = require('cheerio');
 
 
-const cheerio = require('cheerio')
-class imageBoardcommando extends commando.Command{
+
+class steamcommando extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'imageboard',
+                name: 'steam',
                 group:'pesquisa',
-                memberName: 'imageboard',
-                description: 'Mostra imagens sobre um tema a sua escolha.'
+                memberName: 'steam',
+                description: 'Steam.'
 
             })
         }
@@ -70,7 +70,7 @@ class imageBoardcommando extends commando.Command{
          
         
          }
-        }module.exports = imageBoardcommando;
+        }module.exports = steamcommando;
         
         function crawler(){
             setTimeout(()=>{
