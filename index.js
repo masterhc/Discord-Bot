@@ -12,7 +12,18 @@ const http = require('http');
 
 const discord_token = config.discord_token;
 const music = new Music(bot, {
-    youtubeKey: process.env.youtubeKey
+    youtubeKey: process.env.youtubeKey,
+    disableLoop:true,
+    ownerOverMember:true,
+    leaveCmd:'begone',
+    disableHelp:true,
+
+    botAdmins:[
+        '186540961650835456'
+    ],
+    botOwner:'186540961650835456',
+
+
   });
 
 
