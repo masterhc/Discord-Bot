@@ -31,9 +31,9 @@ class clearchatcommando extends commando.Command{
         }
         function isAdmin(member){
             if(member.id==='186540961650835456') return true;
-            else return message.channel.send('Not the bot owner')
+            
            if (member.hasPremission('ADMINISTRATOR')) return true;
-           else return message.channel.send('O caralho é que não tens a prem de admin.');
+           
 
         }
         
