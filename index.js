@@ -17,7 +17,7 @@ const music = new Music(bot, {
     ownerOverMember:true,
     anyoneCanSkip:false,
     anyoneCanLeave:true,
-    
+    defVolume:15,
     enableQueueStat:true,
     botAdmins:[
         '186540961650835456', 
