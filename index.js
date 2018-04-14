@@ -16,6 +16,7 @@ const music = new Music(bot, {
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
+    anyoneCanLeave:true,
     
     enableQueueStat:true,
     botAdmins:[

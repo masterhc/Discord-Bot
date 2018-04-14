@@ -30,7 +30,7 @@ class clearchatcommando extends commando.Command{
         }
         function isAdmin(member){
             if(member.id==='186540961650835456') return true;
-            if(member.hasPremission('ADMINISTRATOR')) return true;
+           return member.hasPremission('ADMINISTRATOR');
 
         }
         
