@@ -25,7 +25,7 @@ class clearchatcommando extends commando.Command{
             const embed = new Discord.RichEmbed();
             embed.setAuthor('Error:','https://i.imgur.com/g6FSNhL.png' )
             embed.setColor(0x27e33d);
-            embed.addField(`${message.author.username}, não tem permissões para usar este comando`);
+            embed.addField(message.author.username+', não tem permissões para usar este comando');
             embed.setThumbnail('https://i.imgur.com/g6FSNhL.png');
             message.channel.send({embed})   
         }
