@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-
+const Discord = require('discord.js');
 
 
 class clearchatcommando extends commando.Command{
@@ -22,6 +22,7 @@ class clearchatcommando extends commando.Command{
             }
             clear();
         }else{
+            const embed = new Discord.RichEmbed();
             embed.setAuthor('Error:','https://i.imgur.com/g6FSNhL.png' )
             embed.setColor(0x27e33d);
             embed.addField(`${message.author.username}, não tem permissões para usar este comando`);
