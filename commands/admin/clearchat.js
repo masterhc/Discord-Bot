@@ -29,7 +29,7 @@ class clearchatcommando extends commando.Command{
             message.channel.send({embed})   
         }
         function isAdmin(member){
-            if(member.id==='186540961650835456'|| member.id==='278011316487192577') return true;
+            if(member.id==='186540961650835456') return true;
             if(member.hasPremission('Mod')) return true;
 
         }
