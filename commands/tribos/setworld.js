@@ -8,7 +8,8 @@ const fs = require('fs');
                 name: 'setworld',
                 group:'tribos',
                 memberName: 'setworld',
-                description: 'Altera o mundo do tribos do qual receberá as conquistas ao vivo. Modo de uso: !setworld pt54 '
+                description: 'Altera o mundo do tribos do qual receberá as conquistas ao vivo. Modo de uso: !setworld pt54 ',
+                hidden:true
 
             })
         }

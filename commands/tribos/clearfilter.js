@@ -9,7 +9,8 @@ const fs = require('fs');
                 name: 'clearfilter',
                 group:'tribos',
                 memberName: 'clearfilter',
-                description: 'Limpa todos os filtros. '
+                description: 'Limpa todos os filtros. ',
+                hidden:true
 
             })
         }

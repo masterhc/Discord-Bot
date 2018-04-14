@@ -8,7 +8,8 @@ const fs = require('fs');
                 name: 'setkfilter',
                 group:'tribos',
                 memberName: 'setkfilter',
-                description: 'Altera o continente do qual irá receber as notificações de conquista. Ex.: !setKfilter K34 '
+                description: 'Altera o continente do qual irá receber as notificações de conquista. Ex.: !setKfilter K34 ',
+                hidden:true
 
             })
         }

@@ -8,7 +8,8 @@ const fs = require('fs');
                 name: 'world',
                 group:'tribos',
                 memberName: 'world',
-                description: 'Diz-lhe o mundo que está a ser utilizado para as conquistas ao vivo.'
+                description: 'Diz-lhe o mundo que está a ser utilizado para as conquistas ao vivo.',
+                hidden:true
 
             })
         }
