@@ -13,9 +13,7 @@ const cheerio = require('cheerio');
             })
         }
         async run(message, args){
-
-        
-
+            
 
         }
 }module.exports = testeCommand;

@@ -13,6 +13,7 @@ const http = require('http');
 const discord_token = config.discord_token;
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
+    
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -52,7 +53,9 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     
-     bot.user.setGame('!help for commands');
+     bot.user.setActivity('!help for commands', {type: 'PLAYING'})
+     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : '!help for commands'}`))
+     .catch(console.error);
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
   
 });
@@ -411,6 +414,4 @@ bot.on('ready',()=>{
 });
 
 
- bot.login(process.env.discord_token);
-
-
+bot.login(process.env.discord_token);
