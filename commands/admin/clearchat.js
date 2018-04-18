@@ -8,19 +8,36 @@ class clearchatcommando extends commando.Command{
             name: 'clearchat',
             group:'admin',
             memberName: 'clearchat',
-            description: 'Limpa o chat designado, este comando pode apenas ser usado por admins.'
+            description: 'Limpa o chat designado, caso pretenda pode adicionar o id de uma mensagem a qual não quer que seja apagada. Este comando pode apenas ser usado por admins.'
 
         })
     }
     async run(message, args){
       
         if(isAdmin(message.member)){
-           async function clear() {
-                message.delete();
-                const fetched = await message.channel.fetchMessages({limit: 99});
-                message.channel.bulkDelete(fetched);
+            if(bemvindo(message)){
+          
+                clearbemvindo();
+
+            }else{
+                if(hasArgs()){
+                    var messageSplit = message.content.split(' ');
+                    var messageSearch = '';
+                    var aroundarg = '';
+                    for (var i = 1; i < messageSplit.length; i++) {
+                        if (i === 1) {
+                            aroundarg = messageSplit[i];
+                        } else {
+                            aroundarg = searchOrig + ' ' + messageSplit[i];
+                        }
+                    }
+                cleararound(aroundarg);
+                }else{
+                    clearnormie();
+                }
             }
-            clear();
+            
+        
         }else{
             const embed = new Discord.RichEmbed();
             embed.setAuthor('Error:','https://i.imgur.com/g6FSNhL.png' )
@@ -36,10 +53,28 @@ class clearchatcommando extends commando.Command{
            
 
         }
-        
+        function bemvindo(message){
+            if(message.channel.id==='434713876836122626')return true;
 
         }
-
+        async function clearnormie() {
+            message.delete();
+            const fetched = await message.channel.fetchMessages({limit: 99});
+            message.channel.bulkDelete(fetched);
+        }
+        async function clearbemvindo() {
+            message.delete();
+            const fetched = await message.channel.fetchMessages({limit: 99, around:'435719696579428363'});
+            message.channel.bulkDelete(fetched);
+        }
+        async function cleararound(aroundarg) {
+            message.delete();
+            const fetched = await message.channel.fetchMessages({limit: 99, around:aroundarg});
+            message.channel.bulkDelete(fetched);
+        }
+        function hasArgs(){
+            if(message.content.split(' ')>1) return true;
+        }
 
     
-}module.exports = clearchatcommando;
+}}module.exports = clearchatcommando;
