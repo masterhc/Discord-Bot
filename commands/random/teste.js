@@ -1,7 +1,8 @@
+
+
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-const fs = require('fs');
-const cheerio = require('cheerio');
+
     class testeCommand extends commando.Command{
         constructor(client){
             super(client, {
@@ -14,6 +15,8 @@ const cheerio = require('cheerio');
         }
         async run(message, args){
             
+            message.member.voiceChannel.join().then(connection => console.log('Connected!')).catch(console.error);
+
 
         }
 }module.exports = testeCommand;

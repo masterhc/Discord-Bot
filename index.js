@@ -13,7 +13,7 @@ const http = require('http');
 const discord_token = config.discord_token;
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
-    
+   
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -217,7 +217,7 @@ bot.on('ready',()=>{
             if (Kfilter.length>0){
                 for (var filter of Kfilter) {
                      if (kvalue.indexOf(filter)  < 1) {
-                        return false;
+                        return crawler() ;
     
                      }
                 }
