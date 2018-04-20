@@ -10,7 +10,7 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 const bot = new commando.Client();
 const http = require('http');
 
-
+/*
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
    
@@ -30,7 +30,7 @@ const music = new Music(bot, {
     botOwner:'186540961650835456',
 
 
-  });
+  });*/
 
 
 
