@@ -10,7 +10,7 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 const bot = new commando.Client();
 const http = require('http');
 
-const discord_token = config.discord_token;
+
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
    
@@ -404,7 +404,7 @@ bot.on('ready',()=>{
     function checker2(workeroutput){
         //Check workeroutput first
 
-        if(workeroutput==true){
+        if(workeroutput()){
 
             loop(30000)
         }else{
