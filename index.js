@@ -10,7 +10,7 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 const bot = new commando.Client();
 const http = require('http');
 
-/*
+
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
    
@@ -30,7 +30,7 @@ const music = new Music(bot, {
     botOwner:'186540961650835456',
 
 
-  });*/
+  });
 
 
 
@@ -371,46 +371,8 @@ bot.on('ready',()=>{
 });
 bot.on('ready',()=>{
      let defaulttime = 10000;
-/*    
-   n = 1 
-    loop(n);
-    function loop(n){
-        if(n==null){
-            n=defaulttime
-            //Sem que se chame o loop por outro metodo este voltarse-á a chamar ao fim de 10 segundos.
 
-        }
-        setTimeout(()=>{
-            if(n==defaulttime){
-                loop(40000)
-            }else{
-                worker(i);
-            }
-
-            },n)
-    }
-    function worker(i){
-        if(i='err'){
-            loop(defaulttime)
-        }else{
-            var workeroutput;
-            
-            //work
-
-            checker2(workeroutput);
-        }
-    };
-
-    function checker2(workeroutput){
-        //Check workeroutput first
-
-        if(workeroutput()){
-
-            loop(30000)
-        }else{
-            i = 'err'; 
-        }
-    }*/
+    
 });
 
 
