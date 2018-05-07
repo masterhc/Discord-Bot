@@ -2,9 +2,9 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-var steamspy = require('steamspy');
+
 var request = require("request");
-let steam = new steamspy();
+
 const cheerio = require('cheerio');
 
 
