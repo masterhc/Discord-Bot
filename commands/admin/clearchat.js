@@ -16,10 +16,11 @@ class clearchatcommando extends commando.Command{
     }
     async run(message, args){
         //verificar admin
-        console.log(message.member)
+       
+    
         if(isAdmin(message)){
             //Verificar se está na sala bemvindo
-            console.log('É admin? '+isAdmin(message.member))
+        
             if(bemvindo(message.member)){
                 
                 
@@ -44,12 +45,12 @@ class clearchatcommando extends commando.Command{
             
         
         }else{
-            console.log('Não tem prems');
+            
            sendMessage(1)
         }
         //verificar se é admin
         function isAdmin(){
-            console.log('member '+member)
+         
           
             if(member.id==='186540961650835456') return true;
             
@@ -115,7 +116,7 @@ class clearchatcommando extends commando.Command{
             switch (arg) {
                 case 1:
                     embed.addField('Erro:',message.author.username+', não tem permissões para usar este comando');
-                    console.log('erro1')
+                    
                     message.channel.send({embed}); 
                     break;
                 case 2:

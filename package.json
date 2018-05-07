@@ -1,13 +1,13 @@
 {
   "name": "bots",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p align=\"center\">\r <img src=\"https://raw.githubusercontent.com/masterhc/Discord-Bot/master/img/legend.jpg\">\r </p>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "MasterHc",
-  "license": "ISC",
+  "license": "MIT",
   "engines": {
     "node": "8.1.4"
   },
@@ -55,5 +55,14 @@
     "xml2js": "^0.4.19",
     "youtube-info": "^1.2.0",
     "ytdl-core": "^0.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masterhc/Discord-Bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/masterhc/Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/masterhc/Discord-Bot#readme"
 }
