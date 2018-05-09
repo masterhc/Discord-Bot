@@ -60,7 +60,7 @@ bot.on('ready', ()=>{
   
 });
 //Conquistas em direto1
-/*
+
 bot.on('ready',()=>{
    
     crawler();
@@ -369,7 +369,7 @@ bot.on('ready',()=>{
 }      
 
 
-});*/
+});
 
 bot.on('ready',()=>{
     
