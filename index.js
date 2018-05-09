@@ -59,7 +59,8 @@ bot.on('ready', ()=>{
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
   
 });
-//Conquistas em direto
+//Conquistas em direto1
+/*
 bot.on('ready',()=>{
    
     crawler();
@@ -127,15 +128,15 @@ bot.on('ready',()=>{
         
         let coords = (coordj[coordj.length-2]).split(/(|)/);
         let coord =[]
-         /*coordx*/   coord[0]=coords[2]+coords[4]+coords[6]
-         /*coordy*/   coord[1] = coords[10]+coords[12]+coords[14]
+            coord[0]=coords[2]+coords[4]+coords[6]
+            coord[1] = coords[10]+coords[12]+coords[14]
         
         
         return coord;
         };
 
     //Verificar se é a mesma aldeia
-    function checker(coordX, coordY, /*dados para a mensagem*/){
+    function checker(coordX, coordY,){
          var checking = JSON.parse(fs.readFileSync('.conquistasaovivo.json', 'utf-8'));  
          console.log(checking)
             if(coordX == checking.coordX && coordY == checking.coordY){
@@ -368,7 +369,8 @@ bot.on('ready',()=>{
 }      
 
 
-});
+});*/
+
 bot.on('ready',()=>{
     
 
