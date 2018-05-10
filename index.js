@@ -12,8 +12,8 @@ const http = require('http');
 
 
 const music = new Music(bot, {
-    //youtubeKey:process.env.youtubeKey,
-    youtubeKey:'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus',
+    youtubeKey:process.env.youtubeKey,
+ 
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -378,5 +378,6 @@ bot.on('ready',()=>{
 });
 
 
-//bot.login(process.env.discord_token);
-bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw')
+
+
+bot.login(process.env.discord_token);
