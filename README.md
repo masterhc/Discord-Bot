@@ -1,6 +1,6 @@
 # Discord-Bot
 <p align="center">
-<img src="https://raw.githubusercontent.com/masterhc/Discord-Bot/master/img/rem-chan.jpg">
+<img src="https://raw.githubusercontent.com/masterhc/Discord-Bot/master/img/rem-chan.png">
 </p>
 
 
