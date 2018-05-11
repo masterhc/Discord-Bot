@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
-const axios = require('axios')
 
+const axios = require('axios')
 class crycommando extends commando.Command{
         constructor(client){
             super(client, {
