@@ -54,8 +54,7 @@
 <p>Estes comandos apenas podem ser utilizados em canais com a tag nsfw. Ou seja o seu nome deve sempre começar por nsfw.</p>
 <h2>!kona</h2>
 <p>Apresenta imagens do site Konachan. Este comando pode ser utilizado sem argumentos, apresentando assim imagens aleatórias.</p>
-<p>Para melhores resultados, é aconselhado usar os termos de pesquisa, estes devem ser escritos com "_" caso o termo seja apenas completo com " ".</p>
-<p>Pois o espaço é destinado a separação de termos.</p>
+<p>Para melhores resultados, é aconselhado usar os termos de pesquisa, estes devem ser escritos com "_" caso o termo seja apenas completo com " ", pois o espaço é destinado a separação de termos.</p>
 <h2>!phgifs</h2>
 <p>Apresenta gifs do site PornHub. Este comando pode ser utilizado sem argumentos, apresentando assim imagens aleatórias.</p>
 <p>Para melhores resultados, é aconselhado usar os termos de pesquisa.</p>
@@ -100,4 +99,4 @@
 <p>Mostra o filtro de continente que está a ser utilizado no canal conquistas ao vivo.</p>
 
 # Creditos
-<p>Todos os diretos de autor de cada parte de código pertece aos respetivos.</p>
+<h3>Todos os diretos de autor de cada parte de código pertece aos respetivos.</h3>
