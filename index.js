@@ -91,11 +91,14 @@ bot.on('ready',()=>{
          console.log(checker(coordX, coordY))
     
         console.log(nomest[0],nomest[1], nomest[2],nomest[3],nomest[4]);
+     
+           
+            console.log("Modifier 1s ver: "+processdata(nomest, tablelink));
         if(checker(coordX, coordY)==false){
            
             let modifier = processdata(nomest, tablelink);
            
-            console.log("Modifier 1s ver: "+modifier)
+          
             //console.log('passou o check')
             if(modifier != 'err'){
                 var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
@@ -220,17 +223,11 @@ bot.on('ready',()=>{
         let kvalue = K[0]+K[2]+K[4]
             let parsed = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             let Kfilter = parsed.K;
+            
             if (Kfilter.length>0){
                 for (var filter of Kfilter) {
-                     if (kvalue.indexOf(filter)  < 1) {
-                        return crawler() ;
-    
-                     }
-                }
-            }else{
-                console.log('No ative filters.')
-            }
-        
+                     if (kvalue.indexOf(filter)  > -1) {
+                  
         //split nomes
         let splitn1 = donoanterior.split(' ');
         let splitn2 = tribodonoanterior.split(' ');
@@ -268,6 +265,53 @@ bot.on('ready',()=>{
             }else{
                  return 'err';
             }
+                 
+    
+        }else{
+            return crawler();
+          }
+        }
+    }else{
+     //split nomes
+     let splitn1 = donoanterior.split(' ');
+     let splitn2 = tribodonoanterior.split(' ');
+     let splitn3 = novodono.split(' ');
+     let splitn4 = tribonovodono.split(' ');
+     // check for K
+     let K1 = splitn1[splitn1.length-1].split(/(|)/)[0];
+     let K2 = splitn2[splitn2.length-1].split(/(|)/)[0];
+     let K3 = splitn3[splitn3.length-1].split(/(|)/)[0];
+     let K4 = splitn4[splitn4.length-1].split(/(|)/)
+     //split links
+     let splitl1 = linkdonoanterior.split(/(|)/); 
+     let splitl2 = linktribodonoanterior.split(/(|)/); 
+     let splitl3 = linknovodono.split(/(|)/); 
+     let splitl4 = linktribonovodono.split(/(|)/);
+     //check for t or p
+     let tp1 = splitl1[30];
+     let tp2 = splitl2[30];
+     let tp3 = splitl3[30];
+     let tp4 = splitl4[30];
+     
+         if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='t' &&tp3=='p' &&tp4=='t'){
+               return 6 //conquista normal
+         }else if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 == 'K'  && tp1=='p' &&tp2=='t' &&tp3=='p' &&tp4=='v'){
+         
+               return 5 //conquistada por um jogador sem tribo
+         }else if(K=='K' && K1!='K'&&K2!='K' && K3!= 'K' &&K4 == 'K'  && tp1=='p' &&tp2=='p' &&tp3=='t' &&tp4=='v'){
+               return 4 //conquistada a um jogador sem tribo
+         }else if(K=='K' && K1!='K'&&K2!='K' && K3== 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='p' &&tp3=='v' &&tp4=='p'){
+               return 3 //nenhum dos jogadores tem tribo
+         }else if(K=='K' && K1!='K'&&K2!='K' && K3== 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='t' &&tp3=='v' &&tp4=='p'){
+               return 2 // Aldeia BB(novo dono tem tribo)
+         }else if(K=='K' && K1!='K'&&K2=='K' && K3!= 'K' &&K4 != 'K'  && tp1=='p' &&tp2=='v' &&tp3=='p' &&tp4!=='a'){
+              return 1 // BB conquistada por jogador sem tribo
+         }else{
+              return 'err';
+         }
+   console.log('No ative filters.')
+}
+
         
         
         
