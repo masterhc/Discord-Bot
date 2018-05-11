@@ -11,6 +11,7 @@ const bot = new commando.Client();
 const http = require('http');
 
 
+/*
 const music = new Music(bot, {
     //youtubeKey:process.env.youtubeKey,
     youtubeKey:'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus',
@@ -31,7 +32,7 @@ const music = new Music(bot, {
 
 
   });
-
+*/
 
 
 
