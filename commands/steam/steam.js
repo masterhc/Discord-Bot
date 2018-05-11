@@ -15,8 +15,8 @@ class steamcommando extends commando.Command{
                 name: 'steam',
                 group:'pesquisa',
                 memberName: 'steam',
-                description: 'Steam.'
-
+                description: 'Steam.',
+                hidden:true
             })
         }
         async run(message, args){
