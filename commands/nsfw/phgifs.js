@@ -25,7 +25,7 @@ const Discord = require('discord.js');
             var messageSearch = '';
             var searchOrig = '';
    
-                if (args[1]==undefined){searchOrig='random'}
+                if (args[1]==undefined){searchOrig='random'}else{
 
             for (var i = 1; i < messageSplit.length; i++) {
                        if (i === 1) {
@@ -34,6 +34,7 @@ const Discord = require('discord.js');
                                 searchOrig = searchOrig + ' ' + messageSplit[i];
                         }
                     }
+                }
                     let random = Math.floor(Math.random()*12)+1;
 
                   
