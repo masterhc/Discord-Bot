@@ -78,7 +78,7 @@
 <p>Este comando é apenas usado par o desenvolvimento de novos comandos. É aconselhado guardar uma cópia do estado original do comando no momento da sua alteração.</p>
 
 <h1>Tribos</h1>
-<p>Estes comandos são direcionados ao jogo de browser <a target="_blank" href= "www.tribos.com.pt">Tribos</a>.</p>
+<p>Estes comandos são direcionados ao jogo de browser www.tribos.com.pt .</p>
 <h2>!clearfilter</h2>
 <p>Limpa o filtro de continente.</p>
 <h2>!planner</h2>
