@@ -95,7 +95,7 @@ bot.on('ready',()=>{
            
             let modifier = processdata(nomest, tablelink);
            
-            //console.log(modifier)
+            console.log("Modifier 1s ver: "+modifier)
             //console.log('passou o check')
             if(modifier != 'err'){
                 var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
@@ -281,7 +281,9 @@ bot.on('ready',()=>{
  
     function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
       let embed = new Discord.RichEmbed;
-         
+        console.log("chegou aqui");
+        console.log("modifier "+modifier);
+
          ldono = `http://www.twstats.com/${mundo}/${ldono}`
          ltdono =`http://www.twstats.com/${mundo}/${ltdono}`
          lnovo =`http://www.twstats.com/${mundo}/${lnovo}`
@@ -291,6 +293,7 @@ bot.on('ready',()=>{
      
          switch (modifier) {
             case 1://BB conquistada por um jogador sem tribo
+            console.log("BB conquistada por um jogador sem tribo");
             embed.addField(`Aldeia:`,`[${naldeia}](${laldeia})`);
                 embed.addField(`Novo dono: `,`[${ndono}](${ldono})`)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
@@ -303,6 +306,7 @@ bot.on('ready',()=>{
                
                 break;
             case 2://BB conquistada por um jogador com tribo
+            console.log("BB conquistada por um jogador com tribo");
             embed.addField(`Aldeia:`,`[${naldeia}](${laldeia})`);
                 embed.addField(`Novo dono: `,`[${ndono}](${ldono})`);
                 embed.addField(`Tribo do novo dono:`,`[${ntdono}](${ltdono})`);
@@ -314,6 +318,7 @@ bot.on('ready',()=>{
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
             case 3://Nenhum do jogadores tem tribo
+            console.log("Dois jogadores sem tribo.");
             embed.addField(`Aldeia:`,`[${naldeia}]`+`(${laldeia})`);
                 embed.addField(`Dono anterior: ${ndono}]`+`(${ldono})`)
                 embed.addField(`Novo dono: `,`[${ntdono}]`+`(${ltdono})`);
@@ -324,7 +329,8 @@ bot.on('ready',()=>{
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
-            case 4://Conquistada a um jogado sem tribo
+            case 4://Conquistada a um jogado sem tribo~
+            console.log("Aldeia conquistada a um jogador sem tribo.");
             embed.addField(`Aldeia: `,`[${naldeia}]`+`(${laldeia})`);
                 embed.addField(`Dono anterior: `,`[${ndono}]`+`(${ldono})`)
                 embed.addField(`Novo dono: `,`[${ntdono}]`+`(${ltdono})`)
@@ -337,7 +343,8 @@ bot.on('ready',()=>{
                 bot.channels.get('356084548003561474').send({embed}) 
                 break; 
             case 5://Conquistada por um jogador sem tribo
-            embed.addField(`Aldeia: `,`[${naldeia}]`+`(${laldeia})`);
+            console.log("Conquistada por um jogador sem tribo.");
+                embed.addField(`Aldeia: `,`[${naldeia}]`+`(${laldeia})`);
                 embed.addField(`Dono anterior: `,`[${ndono}]`+`(${ldono})`);
                 embed.addField(`Tribo do dono anterior: `,`[${ntdono}]`+`(${ltdono})`);
                 embed.addField(`Novo dono: `,`[${nnovo}]`+`(${lnovo})`);
@@ -349,6 +356,7 @@ bot.on('ready',()=>{
               bot.channels.get('356084548003561474').send({embed}) 
                 break;
             case 6://Conquista normal
+            console.log("Conquista normal.");
             embed.addField(`Aldeia: `,`[${naldeia}]`+`(${laldeia})`);
                 embed.addField(`Dono anterior: `,`[${ndono}]`+`(${ldono})`)
                 embed.addField(`Tribo do dono anterior: `,`[${ntdono}]`+`(${ltdono})`)

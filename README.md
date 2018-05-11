@@ -9,8 +9,8 @@
 # Comandos
 <h1>Admin</h1>
 <h2>!clearchat</h2>
-<p>Apaga as ultmias 99 mensagens, apaga também a mensagem de chamada.</p>
-<p>Pode ser usado com argumentos, usando um id de mensagem, esta pode ser exculuida da seleção de mensagens a apagar.</p>
+<p>Apaga as últimas 99 mensagens, apaga também a mensagem de chamada.</p>
+<p>Pode ser usado com argumentos, usando um id de mensagem, esta pode ser excluída da seleção de mensagens a apagar.</p>
 <h1>Imagem</h1>
 <p>Apresentam imagens de anime sobre o tema referente.</p>
 <h2>!cry</h2>
@@ -29,9 +29,9 @@
 <h2>!tickle</h2>
 <h2>!triggered</h2>
 
-<h1>Musica</h1>
+<h1>Música</h1>
 <h2>!clearqueue</h2>
-<p>Limpa a lista de musicas.</p>
+<p>Limpa a lista de músicas.</p>
 <h2>!leave</h2>
 <p>O bot sai do canal.</p>
 <h2>!owner</h2>
@@ -39,13 +39,13 @@
 <h2>!pause</h2>
 <p>Coloca a reprodução em pausa.</p>
 <h2>!play</h2>
-<p>Coloca musicas na lista de reprodução.</p>
+<p>Coloca músicas na lista de reprodução.</p>
 <h2>!queue</h2>
 <p>Mostra todas as musicas na lista de reprodução.</p>
 <h2>!resume</h2>
-<p>Retoma a reprodução da musica pausada.</p>
+<p>Retoma a reprodução da música pausada.</p>
 <h2>!skip</h2>
-<p>Salta a musica em reprodução.</p>
+<p>Salta a música em reprodução.</p>
 <h2>!volume</h2>
 <p>Altera o volume.</p>
 
@@ -99,4 +99,4 @@
 <p>Mostra o filtro de continente que está a ser utilizado no canal conquistas ao vivo.</p>
 
 # Creditos
-<h3>Todos os diretos de autor de cada parte de código pertece aos respetivos.</h3>
+<h3>Todos os direitos de autor de cada parte de código pertence aos respetivos.</h3>
