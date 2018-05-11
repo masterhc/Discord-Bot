@@ -12,8 +12,8 @@ const http = require('http');
 
 
 const music = new Music(bot, {
-    youtubeKey:process.env.youtubeKey,
- 
+    //youtubeKey:process.env.youtubeKey,
+    youtubeKey:'AIzaSyBCfVOzEq3Ykgqfp00iefZhmPFv401wzus',
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -97,6 +97,9 @@ bot.on('ready',()=>{
             //console.log(modifier)
             //console.log('passou o check')
             if(modifier != 'err'){
+                var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+                let mundo = world.mundo;
+                console.log(mundo);
             let laldeia = `https://${mundo}.tribalwars.com.pt/guest.php?screen=map&x=${coordX}&y=${coordY}&beacon#${coordX};${coordY}`
             mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY);
             }else{
@@ -105,7 +108,7 @@ bot.on('ready',()=>{
             }
         }else{
             crawler()
-            console.log('Falhou o check');
+            console.log('Falhou o check(From crowler)');
            
         }
         
@@ -139,8 +142,9 @@ bot.on('ready',()=>{
     function checker(coordX, coordY,){
          var checking = JSON.parse(fs.readFileSync('.conquistasaovivo.json', 'utf-8'));  
          console.log(checking)
-            if(coordX == checking.coordX && coordY == checking.coordY){
-                
+         
+            if(coordX == checking.coordX || coordY == checking.coordY){
+                console.log("Falhou o check(from checker)");
                 return true;
             }else{
                 return false;
@@ -380,4 +384,5 @@ bot.on('ready',()=>{
 
 
 
-bot.login(process.env.discord_token);
+//bot.login(process.env.discord_token);
+bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw');
