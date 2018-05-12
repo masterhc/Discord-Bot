@@ -63,10 +63,10 @@ function mensagem(filtro){
     
 
     embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
-    embed.setDescription('Filtro adicionado!');
-    embed.addField('Filtro '+filtro+' adicionado.');
+    embed.setTitle('Filtro adicionado!');
+    embed.setDescription(filtro);
     embed.setColor(0xecd7ac);        
-    embed.setTimestamp();
+    embed.setTimestamp();   
     embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
     
     message.channel.send({embed}) 
