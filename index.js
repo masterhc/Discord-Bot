@@ -16,7 +16,7 @@ const music = new Music(bot, process.env.youtubeKey, {
     autoHandle: false, 
     autoLeaveTime: 30000 
 });
-client.on("message", message => {
+bot.on("message", message => {
     let args = message.content.split(" ");
     const command = args[0].slice(prefix.length);
     args = args.join(" ").slice(command.length + this.prefix.length).trim().split(" ");
