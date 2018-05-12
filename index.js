@@ -23,7 +23,7 @@ bot.on("message", message => {
     args = args.join(" ").slice(command.length + prefix.length).trim().split(" ");
     
     if (command === "play") {
-        music.play(client, message, args);
+        music.play(bot, message, args);
     }
   })
  
