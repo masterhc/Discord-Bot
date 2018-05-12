@@ -9,13 +9,14 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 
 const bot = new commando.Client();
 const http = require('http');
-
+let prefix="1";
 const music = new Music(bot, process.env.youtubeKey, { 
-    prefix: "!", 
+    prefix:prefix, 
     anyoneCanSkip: true, 
     autoHandle: false, 
     autoLeaveTime: 30000 
 });
+
 bot.on("message", message => {
     let args = message.content.split(" ");
     const command = args[0].slice(prefix.length);
