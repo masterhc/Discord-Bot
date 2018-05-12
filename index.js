@@ -10,7 +10,7 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 const bot = new commando.Client();
 const http = require('http');
 
-const music = new api(client, process.env.youtubeKey, { 
+const music = new Music(client, process.env.youtubeKey, { 
     prefix: "!", 
     anyoneCanSkip: true, 
     autoHandle: false, 
