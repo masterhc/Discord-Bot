@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const discord = require('discord.js')
+const Discord = require('discord.js')
 const fs = require('fs');
 
     class setworldCommand extends commando.Command{
@@ -14,6 +14,17 @@ const fs = require('fs');
             })
         }
         async run(message, args){
+            let file = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+            
+            let kfilter = file.K
+            args = message.content.split(/\s+/g);
+            
+            let mundo = args[1]
+            console.log("mundo "+mundo)
+            if(args[1]== null){return message.channel.send('Por favor defina um mundo')}
+            if((typeof mundo)!== "string" ){ return message.channel.send('Verifique a forma como escreveu o mundo que deseja.')}
+           
+            
             // Ver como filtrar coisas com um if
             // adicionar todo os servidores
             //Arranjar forma de verificar se os mundos existem mesmo
@@ -51,41 +62,52 @@ const fs = require('fs');
                 "ts",
                 "ch"
             ]
+            console.log(servers[5])
             let split = mundo.split(/(|)/);
+            console.log("split "+split)
             let server = split[0]+split[2];
-            for (var filter of servers) {
-                if (mundo.indexOf(filter) <0) {
-                    return message.channel.send('O servidor referido não existe.');
-    
-                }
-       }
-          
-            let file = JSON.parse(fs.readFileSync('../../coiso.json', 'utf-8'));
-            
-            let kfilter = file.k
-            args = message.content.split(/\s+/g);
-            let mundo = args[1]
-            if(args[1]== null){return message.channel.send('Por favor defina um mundo')}
-            if((typeof mundo)!== String ){ return message.channel.send('Verifique a forma como escreveu o mundo que deseja.')}
+            console.log("server "+server)
            
+            console.log("length "+ servers.length)
+            var count = 0;
             
+
+            for(var j=0; j<servers.length; j++){
+                
+                if (server==servers[j]){
+                    count++;
+                }
+            }
+            console.log("aqui "+count+" gvg "+j)
+           
+            if(count>0){   
+        
             
             alterar(mundo, kfilter);
+            }else{
+                message.channel.send("O servidor referido não existe.")
+            }
             
             function alterar(mundo, kfilter){
-                fs.writeFileSynd('coiso.json', '{\n'+'"'+'mundo'+'"'+':'+mundo+'\n'+'"'+'K'+'"'+':'+kfilter+'\n'+'\n}' , 'utf-8')
-            mensagem(mundo);
+                console.log(mundo);
+
+               if(kfilter.lenth>0){ fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'",'+':"'+mundo+'"\n'+'"'+'K'+'"'+':["'+kfilter+'"]\n'+'\n}' , 'utf-8')
+            }else {fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'"'+':"'+mundo+'",\n'+'"'+'K'+'"'+':['+kfilter+']\n'+'\n}' , 'utf-8')
+            }   
+                mensagem(mundo);
             }            
             function mensagem(mundo){
-                let embed = new discord.RichEmbed
-            
+                let embed = new Discord.RichEmbed
+                    
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
-                embed.setDescription('Mundo alterado!');
-                embed.addField('Mundo alterado para '+mundo);
+                embed.setTitle('Mundo alterado!');
+                embed.setDescription('Mundo alterado para '+mundo);
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                bot.channels.get('356084548003561474').send({embed}) 
+                
+                message.channel.send({embed}) 
+
 
             }
  

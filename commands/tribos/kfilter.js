@@ -2,12 +2,12 @@ const commando = require('discord.js-commando');
 const discord = require('discord.js')
 const fs = require('fs');
 
-    class worldCommand extends commando.Command{
+    class kfilterCommand extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'world',
+                name: 'kfilter',
                 group:'tribos',
-                memberName: 'world',
+                memberName: 'kfilter',
                 description: 'Diz-lhe o mundo que está a ser utilizado para as conquistas ao vivo.',
                 hidden:true
 
@@ -15,11 +15,11 @@ const fs = require('fs');
         }
         async run(message, args){
             
-            let worldvar = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
-            console.log('worldvar '+worldvar);
-            message.channel.send('O mundo que está a ser utilizado é: '+worldvar.mundo);
+            let kfiltervar = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+            console.log('kfiltervar '+kfiltervar);
+            message.channel.send('O mundo que está a ser utilizado é: '+kfiltervar.K);
             
 
 
         }
-}module.exports = worldCommand;
+}module.exports = kfilterCommand;

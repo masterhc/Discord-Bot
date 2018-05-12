@@ -46,7 +46,7 @@ const fs = require('fs');
 
 function alterar(k, mundo){
    
-fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'"'+':"'+mundo+'",\n'+'"'+ 'K'+'"'+':"'+ k+'"\n'+'}', 'utf-8');
+fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'"'+':"'+mundo+'",\n'+'"'+ 'K'+'"'+':["'+ k+'"]\n'+'}', 'utf-8');
 
 mensagem(k)    
 
