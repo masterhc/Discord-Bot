@@ -21,14 +21,14 @@ const fs = require('fs');
             let Kfilter = file.K;
             let mundo = file.mundo
             let K = args[1]
-          
+            
             if(args[1]== null){
                 return message.channel.send('Por favor defina um continente');
             }
             if(typeof K!== "string" ){ 
                 return message.channel.send('Verifique a forma como escreveu o continente que deseja.');
             }
-        
+            if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
             
                
             alterar(K,mundo);
@@ -53,7 +53,12 @@ mensagem(k)
 }  
 
 
+function hasK(){
+    let args = message.content.split(/\s+/g);
+    let K = args[1].split(/(|)/);
+    if(K[0]=="K"||K[0]=="k") return true;
 
+}
 
 
 
