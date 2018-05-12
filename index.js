@@ -20,7 +20,7 @@ const music = new Music(bot, process.env.youtubeKey, {
 bot.on("message", message => {
     let args = message.content.split(" ");
     const command = args[0].slice(prefix.length);
-    args = args.join(" ").slice(command.length + this.prefix.length).trim().split(" ");
+    args = args.join(" ").slice(command.length + prefix.length).trim().split(" ");
     
     if (command === "play") {
         music.play(client, message, args);
