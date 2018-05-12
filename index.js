@@ -2,7 +2,7 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const Music = require('discord.js-musicbot-addon')
+const Music = require('doyle-music')
 const fs = require('fs');
 const cheerio = require('cheerio');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
@@ -10,9 +10,24 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 const bot = new commando.Client();
 const http = require('http');
 
+const music = new api(client, process.env.youtubeKey, { 
+    prefix: "!", 
+    anyoneCanSkip: true, 
+    autoHandle: false, 
+    autoLeaveTime: 30000 
+});
+client.on("message", message => {
+    let args = message.content.split(" ");
+    const command = args[0].slice(prefix.length);
+    args = args.join(" ").slice(command.length + this.prefix.length).trim().split(" ");
+    
+    if (command === "play") {
+        music.play(client, message, args);
+    }
+  })
+ 
 
-
-const music = new Music(bot, {
+/*const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
  
     disableLoop:true,
@@ -31,7 +46,7 @@ const music = new Music(bot, {
     botOwner:'186540961650835456',
 
 
-  });
+  });*/
 
 
 
