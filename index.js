@@ -9,26 +9,11 @@ var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 
 const bot = new commando.Client();
 const http = require('http');
-let prefix="1";
-const music = new Music(bot, process.env.youtubeKey, { 
-    prefix:prefix, 
-    anyoneCanSkip: true, 
-    autoHandle: false, 
-    autoLeaveTime: 30000 
-});
 
-bot.on("message", message => {
-    let args = message.content.split(" ");
-    const command = args[0].slice(prefix.length);
-    args = args.join(" ").slice(command.length + prefix.length).trim().split(" ");
-    
-    if (command === "play") {
-        music.play(bot, message, args);
-    }
-  })
+
  
 
-/*const music = new Music(bot, {
+const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
  
     disableLoop:true,
@@ -47,7 +32,7 @@ bot.on("message", message => {
     botOwner:'186540961650835456',
 
 
-  });*/
+  });
 
 
 
