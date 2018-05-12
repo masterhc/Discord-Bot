@@ -2,7 +2,7 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const Music = require('doyle-music')
+const Music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
@@ -50,7 +50,7 @@ bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
-//music(bot);
+
 //Start Up Log
 bot.on('ready', ()=>{
     
@@ -60,7 +60,7 @@ bot.on('ready', ()=>{
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
   
 });
-//Conquistas em direto1
+//Conquistas em direto
 
 bot.on('ready',()=>{
    
