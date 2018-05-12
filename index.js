@@ -364,9 +364,9 @@ bot.on('ready',()=>{
             case 3://Nenhum do jogadores tem tribo
             console.log("Dois jogadores sem tribo.");
             embed.addField(`Aldeia:`,`[${naldeia}]`+`(${laldeia})`);
-                embed.addField(`Dono anterior: ${ndono}]`+`(${ldono})`)
+                embed.addField(`Dono anterior: [${ndono}]`+`(${ldono})`)
                 embed.addField(`Novo dono: `,`[${ntdono}]`+`(${ltdono})`);
-                embed.setAuthor('Rem-chan", "https://i.imgur.com/g6FSNhL.png"');
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
