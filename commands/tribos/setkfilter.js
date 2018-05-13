@@ -46,7 +46,7 @@ const fs = require('fs');
             if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
            
             var output = JSON.stringify(basemodel);
-               console.log("output "+ output);
+               console.log("output "+ JSON.stringify(basemodel));
 
 
             alterar(output);
