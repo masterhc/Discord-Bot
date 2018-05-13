@@ -15,10 +15,15 @@ const fs = require('fs');
         }
         async run(message, args){
             
-            let kfiltervar = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
-            console.log('kfiltervar '+kfiltervar);
-            message.channel.send('O mundo que está a ser utilizado é: '+kfiltervar.K);
-            
+            let kfilterfile = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+            console.log('kfiltervar '+kfilterfile);
+       
+            if(kfilterfile.K.length==1){
+            message.channel.send('O continente visualizado é: '+kfilterfile.K);
+            }else{
+                message.channel.send('Os continentes visualizados são: '+kfilterfile.K);
+
+            }
 
 
         }

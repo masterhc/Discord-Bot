@@ -19,9 +19,14 @@ const fs = require('fs');
             
             if(args[1]!= null){return message.channel.send('Verifique a forma como usou o comando.')}
             let file = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
-            let mundo = file.mundo
             
-            fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'"'+':"'+mundo+'",\n'+'"'+'K'+'"'+':[]\n'+'\n}' , 'utf-8')
+            let basemodel = {
+                "mundo":'"'+file.mundo+'"',
+                "K":[]
+                
+                }
+            var outout = JSON.stringify(basemodel);
+            fs.writeFileSync('coiso.json', basemodel , 'utf-8')
             mensagem()    
         
             function mensagem(){

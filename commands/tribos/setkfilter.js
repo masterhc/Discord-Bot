@@ -19,8 +19,19 @@ const fs = require('fs');
             args = message.content.split(/\s+/g);
             let file = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             let Kfilter = file.K;
+            
             let mundo = file.mundo
+            let basemodel =
+            {
+                "mundo":'"'+mundo+'"',
+                "K":[]
+                
+                }
+            basemodel.table.push(Kfilter);
+            
+            
             let K = args[1]
+            basemodel.table.push(K);
             
             if(args[1]== null){
                 return message.channel.send('Por favor defina um continente');
@@ -29,9 +40,9 @@ const fs = require('fs');
                 return message.channel.send('Verifique a forma como escreveu o continente que deseja.');
             }
             if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
-            
+            var output = JSON.stringify(basemodel);
                
-            alterar(K,mundo);
+            alterar(output);
                
 
             
@@ -44,9 +55,9 @@ const fs = require('fs');
 
 
 
-function alterar(k, mundo){
+function alterar(output){
    
-fs.writeFileSync('coiso.json', '{\n'+'"'+'mundo'+'"'+':"'+mundo+'",\n'+'"'+ 'K'+'"'+':["'+ k+'"]\n'+'}', 'utf-8');
+fs.writeFileSync('coiso.json', output, 'utf-8');
 
 mensagem(k)    
 
