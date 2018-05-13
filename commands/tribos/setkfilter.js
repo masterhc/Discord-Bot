@@ -34,7 +34,7 @@ const fs = require('fs');
 
 
             let K = args[1]
-            basemodel.table.push(K);
+            basemodel.K.push(K);
 
 
             if(args[1]== null){
