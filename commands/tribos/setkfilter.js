@@ -27,9 +27,9 @@ const fs = require('fs');
                 "K":[]
                 
                 }
-            basemodel.table.push(Kfilter);
+            basemodel.push(Kfilter);
             
-            
+
 
 
             let K = args[1]
