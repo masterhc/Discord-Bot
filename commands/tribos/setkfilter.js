@@ -27,9 +27,11 @@ const fs = require('fs');
                 "K":[]
                 
                 }
-            console.log("base model "+basemodel);
+            console.log("base model.mundo "+basemodel.mundo);
+            console.log("basemodel.K"+basemodel.K);
             basemodel.push(Kfilter);
             console.log("k "+ k);
+            console.log("2basemodel.K"+basemodel.K);
 
 
 
