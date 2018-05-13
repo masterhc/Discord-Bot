@@ -32,7 +32,7 @@ const fs = require('fs');
             
             let K = args[1]
             basemodel.table.push(K);
-            
+
             if(args[1]== null){
                 return message.channel.send('Por favor defina um continente');
             }
@@ -42,6 +42,8 @@ const fs = require('fs');
             if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
             var output = JSON.stringify(basemodel);
                
+
+            
             alterar(output);
                
 
