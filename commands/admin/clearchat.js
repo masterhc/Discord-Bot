@@ -74,8 +74,8 @@ class clearchatcommando extends commando.Command{
             console.log("normie")
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99});
-            console.log(fetched)
-            message.channel.bulkDelete(fetched);
+            
+            message.channel.bulkDelete(fetched, true);
            
         }
         async function clearbemvindo() {
@@ -84,12 +84,12 @@ class clearchatcommando extends commando.Command{
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99, after:'436122906565804032'});
             
-            message.channel.bulkDelete(fetched);
+            message.channel.bulkDelete(fetched, true);
         }
         async function cleararound(aroundarg) {
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99, around:aroundarg});
-            message.channel.bulkDelete(fetched);
+            message.channel.bulkDelete(fetched, true);
         }
         //verificar se tem argumentos
         function hasArgs(){
