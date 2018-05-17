@@ -32,7 +32,7 @@ class clearchatcommando extends commando.Command{
                     if(correctArgs()){
                    
                     var aroundarg = message.content.split(' ')[1];
-                        
+                        console.log(aroundarg);
                  //retirar o id da mensagem de chamada
           
                 cleararound(aroundarg);
@@ -52,9 +52,9 @@ class clearchatcommando extends commando.Command{
         function isAdmin(){
          
           
-            if(member.id==='186540961650835456') return true;
+            if(message.member.id==='186540961650835456') return true;
             
-           if (member.has('ADMINISTRATOR')) return true;
+           if (message.member.has('ADMINISTRATOR')) return true;
            return false;
 
         }
@@ -92,18 +92,23 @@ class clearchatcommando extends commando.Command{
         //verificar se os argumentos estão corretos
         function correctArgs(){
             
-            if(message.content.split(' ').length >2) sendMessage(3);
-             else{
+            if(message.content.split(' ').length >2) {
+                sendMessage(3);
+            }else{
                     var arg = parseInt(message.content.split(' ')[1], 10);
                     var arglenght = message.content.split(' ')[1].split('').length;
            
           
                 if(typeof arg == "number"){
                 
-                    if(arglenght == 18) return true;
-                     else sendMessage(2);
+                    if(arglenght == 18) {
+                        return true;
+                    }else{
+                         sendMessage(2);
+                    }
+                }else {
+                    sendMessage(2);
                 }
-                else sendMessage(2);
             }
         }
         //Mensagens de erro
