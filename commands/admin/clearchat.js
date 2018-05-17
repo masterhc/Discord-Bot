@@ -43,6 +43,7 @@ class clearchatcommando extends commando.Command{
                 }//Quais-quer eventuais problemas são tratados na função
             }else{
                     //caso normal, apenas apaga tudo.
+                    console.log("clear normie");
                     clearnormie();
                 }
             }
@@ -88,8 +89,7 @@ class clearchatcommando extends commando.Command{
         }
         //verificar se tem argumentos
         function hasArgs(){
-            console.log("split "+ message.content.split(' '))
-            console.log("split length "  + message.content.split(' ').length)
+      
             
             if(message.content.split(' ').length>1){
                 
