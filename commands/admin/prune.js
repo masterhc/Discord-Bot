@@ -16,10 +16,9 @@ const Discord = require('discord.js');
         async run(message, args){
             if(isAdmin){
 
-                console.log(message.channel.name);
-           /* message.channel.clone(true, true);
+                name = message.channel.name)
+            message.channel.clone(name, true, true);
                 message.channel.delete();
-*/
 
 
             }else{
