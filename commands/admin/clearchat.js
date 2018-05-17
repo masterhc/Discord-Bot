@@ -20,8 +20,8 @@ class clearchatcommando extends commando.Command{
     
         if(isAdmin(message)){
             //Verificar se está na sala bemvindo
-        console.log("verifica admin")
-            if(bemvindo(message.member)){
+            
+            if(bemvindo(message)){
             
                 
                 clearbemvindo();
@@ -64,6 +64,8 @@ class clearchatcommando extends commando.Command{
         }
         //verificar se é a sala bem vindo
         function bemvindo(message){
+            console.log("channel"+message.channel)
+            console.log("channel id "+message.channel.id)
             if(message.channel.id==='434713876836122626')return true;
 
         }
