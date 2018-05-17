@@ -28,7 +28,7 @@ class clearchatcommando extends commando.Command{
 
 
             }else{
-                console.log("verificou bem vindo")
+               
                 //verificar se tem argumentos
               
                 if(hasArgs()){
@@ -64,8 +64,7 @@ class clearchatcommando extends commando.Command{
         }
         //verificar se é a sala bem vindo
         function bemvindo(message){
-            console.log("channel"+message.channel)
-            console.log("channel id "+message.channel.id)
+           
             if(message.channel.id==='434713876836122626')return true;
 
         }
@@ -89,6 +88,8 @@ class clearchatcommando extends commando.Command{
         }
         //verificar se tem argumentos
         function hasArgs(){
+            console.log("split "+ message.content.split(' '))
+            console.log("split length "  + message.content.split(' ').length)
             
             if(message.content.split(' ').length>1){
                 
