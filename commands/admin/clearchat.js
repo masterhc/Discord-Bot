@@ -74,6 +74,7 @@ class clearchatcommando extends commando.Command{
             console.log("normie")
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99});
+            console.log(fetched)
             message.channel.bulkDelete(fetched);
            
         }
