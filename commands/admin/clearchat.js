@@ -81,9 +81,9 @@ class clearchatcommando extends commando.Command{
         }
         async function clearbemvindo() {
             
-            let protected = 436122906565804032;
+        
             message.delete();
-            const fetched = await message.channel.fetchMessages({limit: 99, after:protected});
+            const fetched = await message.channel.fetchMessages({limit: 99, after: '436122906565804032'});
  
             
             message.channel.bulkDelete(fetched, true);
