@@ -30,7 +30,7 @@ class clearchatcommando extends commando.Command{
             }else{
                
                 //verificar se tem argumentos
-              
+              console.log("coiso")
                 if(hasArgs()){
                     console.log("correctArgs");
                     if(correctArgs()){
