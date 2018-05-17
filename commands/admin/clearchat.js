@@ -71,12 +71,15 @@ class clearchatcommando extends commando.Command{
         }
 
         async function clearnormie() {
+            console.log("normie")
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99});
             message.channel.bulkDelete(fetched);
            
         }
         async function clearbemvindo() {
+            
+            
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99, after:'436122906565804032'});
             
