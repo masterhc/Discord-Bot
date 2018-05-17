@@ -26,9 +26,12 @@ class clearchatcommando extends commando.Command{
                 
                 clearbemvindo();
 
+
             }else{
                 //verificar se tem argumentos
+                console.log("verificação do bem vindo")
                 if(hasArgs()){
+                    console.log("correctArgs");
                     if(correctArgs()){
                    
                     var aroundarg = message.content.split(' ')[1];
