@@ -20,16 +20,17 @@ class clearchatcommando extends commando.Command{
     
         if(isAdmin(message)){
             //Verificar se está na sala bemvindo
-        
+        console.log("verifica admin")
             if(bemvindo(message.member)){
-                
+            
                 
                 clearbemvindo();
 
 
             }else{
+                console.log("verificou bem vindo")
                 //verificar se tem argumentos
-                console.log("verificação do bem vindo")
+              
                 if(hasArgs()){
                     console.log("correctArgs");
                     if(correctArgs()){
