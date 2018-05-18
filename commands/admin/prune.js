@@ -20,7 +20,7 @@ const Discord = require('discord.js');
                 console.log(name)
             message.channel.clone(name, true, true);
                 message.channel.delete();
-
+   
 
             }else{
                 sendMessage();
