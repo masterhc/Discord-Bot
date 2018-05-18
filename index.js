@@ -456,7 +456,7 @@ bot.on('ready',()=>{
     setTimeout(()=>{
      let fetchedCracks = getCracks()
      console.log('fetched cracks '+fetchedCracks)
-     if(checker()){
+    /* if(checker()){
      sendMessage(fetchedCracks)
 
      }
@@ -487,7 +487,7 @@ embed.setTimestamp()
 
 message.channels.get('446981613218430976').send({embed});
 
-}
+}*/
 
 
     
