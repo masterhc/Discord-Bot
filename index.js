@@ -5,6 +5,7 @@ const request = require('request');
 const Music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
+const {getGames, getCracks} = require('crackwatch');
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 
 const bot = new commando.Client();
@@ -53,12 +54,18 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 //Start Up Log
 bot.on('ready', ()=>{
+   /* setTimeout(()=>{*/
     
+
+
+
+    
+   
      bot.user.setActivity('!help for commands', {type: 'PLAYING'})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : '!help for commands'}`))
      .catch(console.error);
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
-  
+   /*}, 60000);*/
 });
 //Conquistas em direto
 
@@ -430,7 +437,61 @@ bot.on('ready',()=>{
 
 bot.on('ready',()=>{
     
+    
+    
+    setTimeout(()=>{
+    
 
+
+
+    
+    }, 60000);
+    
+});
+
+bot.on('ready',()=>{
+    
+    
+    
+    setTimeout(()=>{
+     let fetchedCracks = getCracks()
+     
+     if(checker()){
+     sendMessage(fetchedCracks)
+
+     }
+     fs.writeFileSync('coiso.json', fetchedCracks, 'utf-8');
+     function checker(){
+let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+if(fetchedCracks[0].title !=savedCracks[0].title)return true;
+else return false;
+     }
+
+
+function sendMessage(arg){
+const embed = new Discord.RichEmbed
+embed.setTitle(arg[0].title)
+embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+embed.setColor(0xd31f1f)
+embed.setDescription(arg[0].sceneGroup)
+embed.addField('Data do crack:',arg[0].date)
+
+embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+
+embed.setImage(arg[0].image)
+
+embed.setTimestamp()
+
+
+
+
+message.channels.get('446981613218430976').send({embed});
+
+}
+
+
+    
+    }, 60000);
     
 });
 
