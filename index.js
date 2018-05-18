@@ -454,9 +454,16 @@ bot.on('ready',()=>{
     
     
     setTimeout(()=>{
-     let fetchedCracks = getCracks()
-     console.log('fetched cracks '+fetchedCracks)
-    /* if(checker()){
+       var fetchedCracks;
+        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
+        fetchedCracks = body;
+         
+        
+  
+          });
+     console.log('fetched cracks '+fetchedCracks);
+   
+     /* if(checker()){
      sendMessage(fetchedCracks)
 
      }
@@ -488,6 +495,7 @@ embed.setTimestamp()
 message.channels.get('446981613218430976').send({embed});
 
 }*/
+
 
 
     
