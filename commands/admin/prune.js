@@ -17,9 +17,9 @@ const Discord = require('discord.js');
             if(isAdmin){
 
                 let name = message.channel.name;
-                let parent = message.channel.parentID
+                
                
-            message.channel.clone(name, true, true,false, parent);
+            message.channel.clone(name, true, true);
                 message.channel.delete();
    
 

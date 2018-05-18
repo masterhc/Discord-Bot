@@ -455,9 +455,9 @@ bot.on('ready',()=>{
     
     setTimeout(()=>{
      let fetchedCracks = getCracks()
-     console.log(fetchedCracks)
+     console.log('fetched cracks '+fetchedCracks)
      if(checker()){
-     sendMessage('Feteched cracks '+fetchedCracks)
+     sendMessage(fetchedCracks)
 
      }
      fs.writeFileSync('coiso.json', fetchedCracks, 'utf-8');
