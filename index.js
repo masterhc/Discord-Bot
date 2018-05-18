@@ -455,7 +455,7 @@ bot.on('ready',()=>{
     
     setTimeout(()=>{
      let fetchedCracks = getCracks()
-     
+     console.log(fetchedCracks)
      if(checker()){
      sendMessage(fetchedCracks)
 
