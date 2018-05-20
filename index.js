@@ -473,10 +473,20 @@ bot.on('ready',()=>{
     
     
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
-        fetchedCracks = body;
+        
          
-         console.log('fetched cracks '+fetchedCracks);
-  
+         
+            cheerio('pre', '', body).each(function(){
+          
+             
+             var data = cheerio(this).text();
+          
+             fetchedCracks.push(data);
+        
+             
+          
+          });
+                 console.log('fetched cracks '+fetchedCracks); 
           });
         
    // console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
