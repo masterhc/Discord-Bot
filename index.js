@@ -54,19 +54,44 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 //Start Up Log
 bot.on('ready', ()=>{
-   /* setTimeout(()=>{*/
+   
+   var i = 0
+   var tipo = [
+       'PLAYING',
+       'STREMING',
+       'LISTENING',
+       'WATCHING'
+   ]
+   var message =[
+       'with crazy people',//Playing message
+       'crappy content', //watching message
+       'sounds of my people', //listening message
+       'you lose yourself'//watching message
+   ]
+    setTimeout(()=>{
     
 
-
+        
 
     
    
-     bot.user.setActivity('!help for commands', {type: 'PLAYING'})
-     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : '!help for commands'}`))
+  
+ 
+ 
+     if(i!=3){
+    i++;
+ }else{
+     i=-1;
+        bot.user.setActivity('!help for commands', {type: 'LISTENING'})
+     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'to !help'}`))
      .catch(console.error);
-    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
-   /*}, 60000);*/
+ }
+   }, 60000);   
+   
+   console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
+ 
 });
+
 //Conquistas em direto
 
 bot.on('ready',()=>{
