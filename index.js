@@ -359,7 +359,7 @@ bot.on('ready',()=>{
  
     function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
       let embed = new Discord.RichEmbed;
-        console.log("chegou aqui");
+       
         console.log("modifier "+modifier);
 
          ldono = `http://www.twstats.com/${mundo}/${ldono}`
@@ -478,10 +478,12 @@ bot.on('ready',()=>{
             fetchedCracks = body;
            if(crackcheck()){
            
-            let output = JSON.stringify(fetchedCracks);
+            let output = JSON.stringify(fetchedCracks); 
+             console.log(output) 
+    
          fs.writeFileSync('crackwatch.json', output, 'utf-8');
-         console.log("file "+fs.readFileSync('crackwatch.json', 'utf-8') )
-             sendMessage(fetchedCracks)
+       
+         sendMessage(fetchedCracks)
      }
             
         });
