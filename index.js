@@ -80,7 +80,7 @@ bot.on('ready', ()=>{
      .catch(console.error);
  
  
-     if(i!=3){
+     if(i!=4){
     i++;
  }else{
      i=-1;
