@@ -451,7 +451,7 @@ bot.on('ready',()=>{
   
           });
         }
-    console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
+   // console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
 
    
      /* if(crackscheck()){
