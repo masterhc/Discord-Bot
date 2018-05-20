@@ -477,11 +477,11 @@ bot.on('ready',()=>{
          
             fetchedCracks = body;
            if(crackcheck()){
-            sendMessage(fetchedCracks)
+           
             let output = JSON.stringify(fetchedCracks);
          fs.writeFileSync('crackwatch.json', output, 'utf-8');
          console.log("file "+fs.readFileSync('crackwatch.json', 'utf-8') )
-     
+             sendMessage(fetchedCracks)
      }
             
         });
