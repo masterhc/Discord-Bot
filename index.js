@@ -476,7 +476,7 @@ bot.on('ready',()=>{
         
          
             fetchedCracks = body;
-           if(crackscheck()){
+           if(crackcheck()){
             sendMessage(fetchedCracks)
             let output = JSON.stringify(fetchedCracks);
          fs.writeFileSync('coiso.json', output, 'utf-8');
