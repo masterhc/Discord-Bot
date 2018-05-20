@@ -475,7 +475,7 @@ bot.on('ready',()=>{
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         
          
-         
+         console.log("body "+ body)
             cheerio('pre', '', body).each(function(){
           
              
