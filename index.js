@@ -475,11 +475,12 @@ bot.on('ready',()=>{
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         
          
-            fetchedCracks = body;
+            fetchedCracks = body; 
+            let output = JSON.stringify(fetchedCracks); 
+             console.log('output '+output) 
            if(crackcheck()){
            
-            let output = JSON.stringify(fetchedCracks); 
-             console.log(output) 
+           
     
          fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
