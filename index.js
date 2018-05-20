@@ -75,14 +75,16 @@ bot.on('ready', ()=>{
 
     
    
-  
+     bot.user.setActivity('!help for commands', {type: tipo[i]})
+     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : message[i]}`))
+     .catch(console.error);
  
  
      if(i!=3){
     i++;
  }else{
      i=-1;
-        bot.user.setActivity('!help for commands', {type: 'LISTENING'})
+     bot.user.setActivity('!help for commands', {type: 'LISTENING'})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'to !help'}`))
      .catch(console.error);
  }
