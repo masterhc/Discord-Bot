@@ -75,7 +75,7 @@ bot.on('ready', ()=>{
 
     
    
-     bot.user.setActivity('!help for commands', {type: tipo[i]})
+     bot.user.setActivity(message[i], {type: tipo[i]})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : message[i]}`))
      .catch(console.error);
  
