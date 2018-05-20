@@ -475,37 +475,27 @@ bot.on('ready',()=>{
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         
          
-            console.log("body "+ body)
-            cheerio('pre', '', body).each(function(){
-          
-             
-             var data = cheerio(this).text();
-          
-             fetchedCracks.push(data);
-                console.log("fetched cracks: "+ fetchedCracks)
-             
-          
-          });
-               
-          });
+            fetchedCracks = body;
+           if(crackscheck()){
+            sendMessage(fetchedCracks)
+            let output = JSON.stringify(fetchedCracks);
+         fs.writeFileSync('coiso.json', output, 'utf-8');
+     
+     }
+            
+        });
         
-   // console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
+  
+
 
    
-     /* if(crackscheck()){
-     sendMessage(fetchedCracks)
-
-     }
-     fs.writeFileSync('coiso.json', fetchedCracks, 'utf-8');
-     
      
      function crackcheck(){
-let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+/*let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
 if(fetchedCracks[0].title !=savedCracks[0].title)return true;
-else return false;
+else*/ return false;
      }
 
-*/
 function sendMessage(arg){
 const embed = new Discord.RichEmbed
 embed.setTitle(arg[0].title)
