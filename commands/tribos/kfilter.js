@@ -17,7 +17,8 @@ const fs = require('fs');
             
             let kfilterfile = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             console.log('kfiltervar '+kfilterfile);
-       
+        
+
             if(kfilterfile.K.length==1){
             message.channel.send('O continente visualizado é: '+kfilterfile.K);
             }else{

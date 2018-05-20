@@ -30,6 +30,7 @@
     "ffmpeg.js": "^3.1.9001",
     "fs": "0.0.1-security",
     "get-youtube-id": "^1.0.0",
+    "google": "^2.1.0",
     "got": "^7.1.0",
     "http": "0.0.0",
     "humblebundle": "^1.0.5",

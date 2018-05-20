@@ -435,19 +435,7 @@ bot.on('ready',()=>{
 
 });
 
-bot.on('ready',()=>{
-    
-    
-    
-    setTimeout(()=>{
-    
-
-
-
-    
-    }, 60000);
-    
-});
+ 
 
 bot.on('ready',()=>{
     
@@ -455,26 +443,31 @@ bot.on('ready',()=>{
     
     setTimeout(()=>{
        var fetchedCracks;
-        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
+       function requesting() {
+       request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         fetchedCracks = body;
          
          console.log('fetched cracks '+fetchedCracks);
   
           });
-    
+        }
+    console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
+
    
-     /* if(checker()){
+     /* if(crackscheck()){
      sendMessage(fetchedCracks)
 
      }
      fs.writeFileSync('coiso.json', fetchedCracks, 'utf-8');
-     function checker(){
+     
+     
+     function crackcheck(){
 let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
 if(fetchedCracks[0].title !=savedCracks[0].title)return true;
 else return false;
      }
 
-
+*/
 function sendMessage(arg){
 const embed = new Discord.RichEmbed
 embed.setTitle(arg[0].title)
@@ -494,7 +487,7 @@ embed.setTimestamp()
 
 message.channels.get('446981613218430976').send({embed});
 
-}*/
+}
 
 
 
