@@ -443,14 +443,15 @@ bot.on('ready',()=>{
     
     setTimeout(()=>{
        var fetchedCracks;
-       function requesting() {
+    
+    
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         fetchedCracks = body;
          
          console.log('fetched cracks '+fetchedCracks);
   
           });
-        }
+        
    // console.log('fetched cracks parsed ' +JSON.parse(fetchedCracks));
 
    
