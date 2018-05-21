@@ -479,8 +479,8 @@ bot.on('ready',()=>{
         
          
          fetchedCracks = body; 
-            let output = fetchedCracks.replace('/', ''); 
-             console.log('output '+output)  
+             let output = fetchedCracks.replace('/', ''); 
+             output = JSON.stringify(output);
            let parsed = JSON.parse(output);
            console.log("Parsed: "+parsed[0])
            if(crackcheck(parsed)){
