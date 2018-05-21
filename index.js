@@ -480,16 +480,18 @@ bot.on('ready',()=>{
          
          fetchedCracks = body; 
             let output = fetchedCracks.replace('/', ''); 
-             console.log('output '+output) 
-           if(crackcheck(fetchedCracks)){
+             console.log('output '+output)  
            let parsed = JSON.parse(output);
-      
+           console.log("Parsed: "+parsed)
+           if(crackcheck(parsed)){
+       
+        
     
          fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
          sendMessage(parsed)
          crackwatch();
-     }
+        }else{crackwatch()}
             
         });
       }, 60000);  
