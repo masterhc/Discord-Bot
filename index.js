@@ -68,13 +68,13 @@ bot.on('ready', ()=>{
        'sounds of my people', //listening message
        'you lose yourself'//watching message
    ]
+   timeout();
+   function timeout(){
     setTimeout(()=>{
-    
-
-        
-
-    
-   
+    changeActivity();
+    }, 60000);
+}
+  function changeActivity(){ 
      bot.user.setActivity(message[i], {type: tipo[i]})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : message[i]}`))
      .catch(console.error);
@@ -84,16 +84,15 @@ bot.on('ready', ()=>{
     i++;
  }else{
      i=-1;
-     bot.user.setActivity('!help for commands', {type: 'LISTENING'})
+     bot.user.setActivity('to !help', {type: 'LISTENING'})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'to !help'}`))
      .catch(console.error);
  }
-   }, 60000);   
+      
    
-   console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`)
- 
-});
-
+   console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
+    timeout()
+}
 //Conquistas em direto
 
 bot.on('ready',()=>{
