@@ -14,6 +14,7 @@ const http = require('http');
 
  
 bot.login(process.env.discord_token);
+
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
     
@@ -68,7 +69,7 @@ bot.on('ready', ()=>{
        'with crazy people',//Playing message
        'crappy content', //watching message
        'sounds of my people', //listening message
-       'you lose yourself'//watching message
+       'windoh'//watching message
    ]
    timeout();
    function timeout(){
