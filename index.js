@@ -83,7 +83,7 @@ bot.on('ready', ()=>{
      if(i!=4){
     i++;
  }else{
-     i=-1;
+     i=0;
      bot.user.setActivity('!help', {type: 'LISTENING'})
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'to !help'}`))
      .catch(console.error);
