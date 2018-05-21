@@ -13,10 +13,10 @@ const http = require('http');
 
 
  
-
+bot.login(process.env.discord_token);
 const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
- 
+    
     disableLoop:true,
     ownerOverMember:true,
     anyoneCanSkip:false,
@@ -50,6 +50,8 @@ bot.registry.registerGroup('steam', 'Steam');
 bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
+
+
 
 
 //Start Up Log
@@ -465,39 +467,41 @@ bot.on('ready',()=>{
 
 bot.on('ready',()=>{
     
-    
-    
+    crackwatch()
+
+    function crackwatch(){
     setTimeout(()=>{
-       var fetchedCracks;
+      var fetchedCracks;
     
     
        request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
         
          
-            fetchedCracks = body; 
+         fetchedCracks = body; 
             let output = JSON.stringify(fetchedCracks); 
              console.log('output '+output) 
-           if(crackcheck()){
+           if(crackcheck(fetchedCracks)){
            
            
     
-         fs.writeFileSync('crackwatch.json', output, 'utf-8');
+         fs.writeFileSync('crackwatch.json', fetchedCracks, 'utf-8');
        
          sendMessage(fetchedCracks)
+         crackwatch();
      }
             
         });
-        
-  
+      }, 60000);  
+  } 
 
 
    
      
-     function crackcheck(){
-/*let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-if(fetchedCracks[0].title !=savedCracks[0].title)return true;
-else*/ return false;
-     }
+     function crackcheck(fetchedCracks){
+      let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+        if(fetchedCracks[0].title !=savedCracks[0].title)return true;
+        else return false;
+    }
 
 function sendMessage(arg){
 const embed = new Discord.RichEmbed
@@ -515,19 +519,18 @@ embed.setTimestamp()
 
 
 
-
-message.channels.get('446981613218430976').send({embed});
+bot.channels.get('446981613218430976').send({embed});
 
 }
 
 
 
     
-    }, 60000);
     
-});
 
 
 
+}); // on Ready ending
 
-bot.login(process.env.discord_token);
+
+
