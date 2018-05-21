@@ -79,7 +79,7 @@ bot.on('ready', ()=>{
      .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : message[i]}`))
      .catch(console.error);
  
- 
+        console.log("I: "+ i);
      if(i!=4){
     i++;
  }else{
