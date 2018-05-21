@@ -479,15 +479,15 @@ bot.on('ready',()=>{
         
          
          fetchedCracks = body; 
-            let output = JSON.stringify(fetchedCracks).replace('/', ''); 
+            let output = fetchedCracks.replace('/', ''); 
              console.log('output '+output) 
            if(crackcheck(fetchedCracks)){
-           
+           let parsed = JSON.parse(output);
       
     
          fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
-         sendMessage(fetchedCracks)
+         sendMessage(parsed)
          crackwatch();
      }
             
