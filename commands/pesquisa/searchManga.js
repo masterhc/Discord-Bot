@@ -1,3 +1,4 @@
+/*
 const commando = require('discord.js-commando');
 const Discord = require('discord.js')
 const MAL = require('mal-api');
@@ -69,3 +70,4 @@ class Mangacommando extends commando.Command{
 
          }
         }module.exports = Mangacommando;
+*/

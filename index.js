@@ -5,7 +5,7 @@ const request = require('request');
 const Music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
-const {getGames, getCracks} = require('crackwatch');
+
 var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
 
 const bot = new commando.Client();
@@ -13,9 +13,9 @@ const http = require('http');
 
 
  
-bot.login(process.env.discord_token);
-
-const music = new Music(bot, {
+//bot.login(process.env.discord_token);
+bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw')
+/*const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
     
     disableLoop:true,
@@ -34,7 +34,7 @@ const music = new Music(bot, {
     botOwner:'186540961650835456',
 
 
-  });
+  });*/
 
 
 
@@ -124,12 +124,7 @@ bot.on('ready',()=>{
         });
          let coordX = processcoord(nomest[0])[0]
          let coordY = processcoord(nomest[0])[1]        
-         console.log(checker(coordX, coordY))
-    
-        console.log(nomest[0],nomest[1], nomest[2],nomest[3],nomest[4]);
-     
-           
-            console.log("Modifier 1s ver: "+processdata(nomest, tablelink));
+        
         if(checker(coordX, coordY)==false){
            
             let modifier = processdata(nomest, tablelink);
@@ -139,7 +134,7 @@ bot.on('ready',()=>{
             if(modifier != 'err'){
                 var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
                 let mundo = world.mundo;
-                console.log(mundo);
+               
             let laldeia = `https://${mundo}.tribalwars.com.pt/guest.php?screen=map&x=${coordX}&y=${coordY}&beacon#${coordX};${coordY}`
             mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY);
             }else{
@@ -152,7 +147,7 @@ bot.on('ready',()=>{
            
         }
         
-            // console.log(tabelink[0],tablelink[1], tablelink[2], tablelink[3], tablelink[4])
+           
         
       
 
@@ -259,7 +254,7 @@ bot.on('ready',()=>{
         let kvalue = K[0]+K[2]+K[4]
             let parsed = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
             let Kfilter = parsed.K;
-            
+           
             if (Kfilter.length>0){
                 for (var filter of Kfilter) {
                      if (kvalue.indexOf(filter)  > -1) {
@@ -271,9 +266,9 @@ bot.on('ready',()=>{
         let splitn4 = tribonovodono.split(' ');
         // check for K
         let K1 = splitn1[splitn1.length-1].split(/(|)/)[0];
-        let K2 = splitn2[splitn2.length-1].split(/(|)/)[0];
+         let K2 = splitn2[splitn2.length-1].split(/(|)/)[0];
         let K3 = splitn3[splitn3.length-1].split(/(|)/)[0];
-        let K4 = splitn4[splitn4.length-1].split(/(|)/)
+        let K4 = splitn4[splitn4.length-1].split(/(|)/);
         //split links
         let splitl1 = linkdonoanterior.split(/(|)/); 
         let splitl2 = linktribodonoanterior.split(/(|)/); 
@@ -469,30 +464,28 @@ bot.on('ready',()=>{
 bot.on('ready',()=>{
     
     crackwatch()
-
+    
     function crackwatch(){
     setTimeout(()=>{
-      var fetchedCracks;
+      
     
-    
-       request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
-        
+     request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
+       if(!err){ 
+             let fetchedCrack = JSON.parse(body);
+          let output = JSON.stringify(fetchedCrack);  
          
-         fetchedCracks = body; 
-             let output = fetchedCracks.replace('/', ''); 
-             output = JSON.stringify(output);
-           let parsed = JSON.parse(output);
-           console.log("Parsed: "+parsed[0])
-           if(crackcheck(parsed)){
-       
+            
+            
+        if(crackcheck(fetchedCrack)){
+            fs.writeFileSync('crackwatch.json', output, 'utf-8');
         
     
-         fs.writeFileSync('crackwatch.json', output, 'utf-8');
-       
-         sendMessage(parsed)
+        sendMessage(fetchedCrack);
          crackwatch();
         }else{crackwatch()}
-            
+    }else{
+        crackwatch();
+    }   
         });
       }, 60000);  
   } 
@@ -500,31 +493,38 @@ bot.on('ready',()=>{
 
    
      
-     function crackcheck(fetchedCracks){
-      let savedCracks=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-        if(fetchedCracks[0].title !=savedCracks[0].title)return true;
+     function crackcheck(fetchedCrack){
+      let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+        if(fetchedCrack[0].title !=savedCrack[0].title)return true;
         else return false;
     }
 
-function sendMessage(arg){
-const embed = new Discord.RichEmbed
-embed.setTitle(arg[0].title)
-embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
-embed.setColor(0xd31f1f)
-embed.setDescription(arg[0].sceneGroup)
-embed.addField('Data do crack:',arg[0].date)
+        function sendMessage(arg){
+                const embed = new Discord.RichEmbed
+                embed.setTitle(arg[0].title)
+                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+                embed.setColor(0xd31f1f)
+                embed.setDescription("Jogo crackeado por "+arg[0].sceneGroup)
+                embed.addField('Data do crack:',arg[0].date)
 
-embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
 
-embed.setImage(arg[0].image)
+                embed.setImage(arg[0].image)
 
-embed.setTimestamp()
+                embed.setTimestamp()
 
+                let channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
+                
+                for (var i=0; i<channels.channels.length; i++) {
+                    
+                    bot.channels.get(channels.channels[i]).send({embed});
+                    
+                    
+                    }
+                
+              
 
-
-bot.channels.get('446981613218430976').send({embed});
-
-}
+        }
 
 
 

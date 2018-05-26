@@ -1,7 +1,7 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-
+/*
 const MAL = require('mal-api');
 let username='MasterHc12';
 let password='H0eNZxoClnSE';
@@ -73,3 +73,4 @@ class Animecommando extends commando.Command{
         
          }
         }module.exports = Animecommando;
+*/
