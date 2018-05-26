@@ -15,7 +15,7 @@ const fs = require('fs');
             })
         }
         async run(message, args){
-            let args = message.content.split(/\s+/g); 
+            args = message.content.split(/\s+/g); 
             var basemodel = {
                 "channels":[
 
@@ -97,7 +97,7 @@ return false;
   message.channel.send({embed});
  }
  function hasArgs(){
-    let args = message.content.split(/\s+/g);
+
     if (args[1]!=null) return true
     return false
  }
