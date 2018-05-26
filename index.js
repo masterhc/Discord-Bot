@@ -13,9 +13,8 @@ const http = require('http');
 
 
  
-//bot.login(process.env.discord_token);
-bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw')
-/*const music = new Music(bot, {
+bot.login(process.env.discord_token);
+const music = new Music(bot, {
     youtubeKey:process.env.youtubeKey,
     
     disableLoop:true,
@@ -34,7 +33,7 @@ bot.login('MzU2MTA0MDA4MzY2MDMwODYz.DPweEw.0-_GDxxTPtnaipMxPHxzsi4jwNw')
     botOwner:'186540961650835456',
 
 
-  });*/
+  });
 
 
 
