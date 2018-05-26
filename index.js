@@ -515,7 +515,7 @@ bot.on('ready',()=>{
                 let channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                 
                 for (var i=0; i<channels.channels.length; i++) {
-                    
+                    console.log(channels.channels[i])
                     bot.channels.get(channels.channels[i]).send({embed});
                     
                     
