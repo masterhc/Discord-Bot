@@ -24,19 +24,22 @@ const fs = require('fs');
                 if(isAdmin()){
                 if(hasArgs()){
                     if(argsIsNumber()){
-                        let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-                        basemodel.channels.push(base.channels[0])
-                        if (base.channels.length >1){
-                            for(var i=0; i<base.channels.length;i++){
-                                basemodel.channels.push(base.channels[i]);
+                        if(channelexists()){
+                            let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
+                            basemodel.channels.push(base.channels[0])
+                            if (base.channels.length >1){
+                                for(var i=0; i<base.channels.length;i++){
+                                    basemodel.channels.push(base.channels[i]);
+                                }
                             }
-                        }
-                        let novo = args[1];
-                        basemodel.channels.push(novo);
-                        let output = JSON.stringify(basemodel);
-                        fs.writeFileSync('channels.json', output, 'utf-8');
-                        sendMessage(1, novo);
-
+                            let novo = args[1];
+                            basemodel.channels.push(novo);
+                            let output = JSON.stringify(basemodel);
+                            fs.writeFileSync('channels.json', output, 'utf-8');
+                            sendMessage(1, novo);
+                            }else{
+                                sendMessage(3, null)
+                            }
 
                     }else{
                         sendMessage(2, null);
@@ -87,6 +90,10 @@ return false;
     embed.setTitle('Erro');
     embed.setDescription('Verifique os parametros utilizados.')
             break;
+    case 3:
+        embed.setTitle('Erro');
+        embed.setDescription('O canal não existe.')
+            break;
         default:
             break;
     }
@@ -101,5 +108,10 @@ return false;
     if (args[1]!=null) return true
     return false
  }
+    function channelexists(channel)
+       if(message.channels.get(channel)!=null){
+           return true
+       }
+
         }
 }module.exports = setcrackwatchchannelCommand;
