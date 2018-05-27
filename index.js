@@ -514,12 +514,12 @@ bot.on('ready',()=>{
 
                 let channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                 
-                for (var i=0; i<channels.channels.length; i++) {
+             /*   for (var i=0; i<channels.channels.length; i++) {
                   let channel="'"+channels.channels[i].toString()+"'"
                     console.log(typeof channel)
                    bot.channels.get(channel).send({embed});
                     
-                    
+                    */
                     }
                 
               
