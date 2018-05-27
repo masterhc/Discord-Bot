@@ -108,10 +108,10 @@ return false;
     if (args[1]!=null) return true
     return false
  }
-    function channelexists(channel)
+    function channelexists(channel){
        if(message.channels.get(channel)!=null){
            return true
        }
-
+    }
         }
 }module.exports = setcrackwatchchannelCommand;
