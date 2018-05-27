@@ -516,7 +516,7 @@ bot.on('ready',()=>{
                 
                 for (var i=0; i<channels.channels.length; i++) {
                   )
-                    bot.channels.get(channels.channels[i].toString).send({embed});
+                    bot.channels.get(channels.channels[i].toString()).send({embed});
                     
                     
                     }
