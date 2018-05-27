@@ -517,7 +517,7 @@ bot.on('ready',()=>{
                 for (var i=0; i<channels.channels.length; i++) {
                     let channel = "'"+channels.channels[i]+"'"
                     console.log('channel: '+channel)
-                    bot.channels.get('446981613218430976').send({embed});
+                    bot.channels.get(channel).send({embed});
                     
                     
                     }
