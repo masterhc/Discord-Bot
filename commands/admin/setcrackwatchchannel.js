@@ -56,7 +56,7 @@ const fs = require('fs');
 
 
 function argsIsNumber(){
-     
+     console.log(typeof args[1]);
 if( typeof args[1] =='number') return true
 return false;
 
