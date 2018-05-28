@@ -36,7 +36,7 @@ const fs = require('fs');
                             let output = JSON.stringify(basemodel);  
                             console.log(count);
                             console.log('output: '+output)
-                            console.log(basemodel.channels[count])
+                            console.log("basemodel count: "+basemodel.channels[count])
             if(isAdmin()){
                 if(hasArgs()){
                         if(channelexists(basemodel.channels[count])){
