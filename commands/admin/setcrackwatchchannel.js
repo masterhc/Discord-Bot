@@ -104,6 +104,8 @@ const fs = require('fs');
     return false
  }
     function channelexists(channel){
+        console.log("channel: "+channel)
+        console.log('message.channels.get(): 'message.channels.get(channel));
        if(message.channels.get(channel)!=null){
            return true
        }
