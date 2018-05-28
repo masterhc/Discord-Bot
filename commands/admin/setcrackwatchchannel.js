@@ -22,23 +22,28 @@ const fs = require('fs');
                 "channels":[
 
                 ]
-            }
-                if(isAdmin()){
-                if(hasArgs()){
-                        if(channelexists(args[1])){
-                            let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
+            }    
+            let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             console.log('channel.length '+base.channels.length);
                             let novo = args[1];
-                            
+                            let count = 0;
                             if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
                                     basemodel.channels.push(base.channels[i]);
+                                    count++;
                                 }
                             }
-                            
-                            basemodel.channels.push(novo);
-                            let output = JSON.stringify(basemodel);
+                            let output = JSON.stringify(basemodel);  
+               
                             console.log('output: '+output)
+            if(isAdmin()){
+                if(hasArgs()){
+                        if(channelexists(basemodel.channels[count])){
+                        
+                            
+                          
+                            
+                          
                             fs.writeFileSync('channels.json', output, 'utf-8');
                             sendMessage(1, novo);
                             }else{
@@ -104,7 +109,7 @@ const fs = require('fs');
     return false
  }
     function channelexists(channel){
-        channel = '"'+channel+'"'
+        
         console.log("channel: "+channel)
         console.log('message.channels.get(): '+message.channels.get(channel));
        if(message.channels.get(channel)!=null){
