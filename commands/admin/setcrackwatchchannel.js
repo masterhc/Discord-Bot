@@ -17,6 +17,7 @@ const fs = require('fs');
         async run(message, args){
             args = message.content.split(/\s+/g); 
             console.log('args[1]: '+args[1]);
+            console.log('typeof: '+args[1]);
             var basemodel = {
                 "channels":[
 
@@ -24,7 +25,7 @@ const fs = require('fs');
             }
                 if(isAdmin()){
                 if(hasArgs()){
-                        if(channelexists()){
+                        if(channelexists(args[1])){
                             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             console.log('channel.length '+base.channels.length);
                             let novo = args[1];
