@@ -17,7 +17,7 @@ const fs = require('fs');
         async run(message, args){
             args = message.content.split(/\s+/g); 
             console.log('args[1]: '+args[1]);
-            console.log('typeof: '+args[1]);
+            console.log('typeof: '+typeof args[1]);
             var basemodel = {
                 "channels":[
 
