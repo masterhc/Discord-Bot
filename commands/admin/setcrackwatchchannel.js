@@ -34,7 +34,7 @@ const fs = require('fs');
                                 }
                             }
                             let output = JSON.stringify(basemodel);  
-               
+                            console.log(count);
                             console.log('output: '+output)
             if(isAdmin()){
                 if(hasArgs()){
