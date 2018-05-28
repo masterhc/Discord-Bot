@@ -16,6 +16,7 @@ const fs = require('fs');
         }
         async run(message, args){
             args = message.content.split(/\s+/g); 
+            console.log('args[1]: '+args[1]);
             var basemodel = {
                 "channels":[
 
@@ -25,15 +26,18 @@ const fs = require('fs');
                 if(hasArgs()){
                         if(channelexists()){
                             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-                            basemodel.channels.push(base.channels[0])
-                            if (base.channels.length >1){
+                            console.log('channel.length '+base.channels.length);
+                            let novo = args[1];
+                            
+                            if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
                                     basemodel.channels.push(base.channels[i]);
                                 }
                             }
-                            let novo = args[1];
+                            
                             basemodel.channels.push(novo);
                             let output = JSON.stringify(basemodel);
+                            console.log('output: '+output)
                             fs.writeFileSync('channels.json', output, 'utf-8');
                             sendMessage(1, novo);
                             }else{
