@@ -26,7 +26,7 @@ const fs = require('fs');
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             console.log('channel.length '+base.channels.length);
                             let novo = args[1];
-                            let count = 0;
+                            let count = 1;
                             if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
                                     basemodel.channels.push(base.channels[i]);
@@ -36,6 +36,7 @@ const fs = require('fs');
                             let output = JSON.stringify(basemodel);  
                             console.log(count);
                             console.log('output: '+output)
+                            console.log(basemodel.channels[count])
             if(isAdmin()){
                 if(hasArgs()){
                         if(channelexists(basemodel.channels[count])){
