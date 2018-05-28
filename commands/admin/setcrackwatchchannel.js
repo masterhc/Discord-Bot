@@ -23,7 +23,6 @@ const fs = require('fs');
             }
                 if(isAdmin()){
                 if(hasArgs()){
-                    if(argsIsNumber()){
                         if(channelexists()){
                             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             basemodel.channels.push(base.channels[0])
@@ -41,9 +40,7 @@ const fs = require('fs');
                                 sendMessage(3, null)
                             }
 
-                    }else{
-                        sendMessage(2, null);
-                    }
+                    
 
                 }else{
                     sendMessage(2, null);
@@ -54,13 +51,6 @@ const fs = require('fs');
                 sendMessage(1, null);
             }
 
-
-function argsIsNumber(){
-     console.log(typeof args[1]);
-if( typeof args[1] =='number') return true
-return false;
-
-}
 
 
  function isAdmin(){
