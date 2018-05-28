@@ -26,7 +26,7 @@ const fs = require('fs');
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             console.log('channel.length '+base.channels.length);
                             let novo = args[1];
-                            let count = 1;
+                            var count = 1;
                             if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
                                     basemodel.channels.push(base.channels[i]);
