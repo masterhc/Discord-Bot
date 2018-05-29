@@ -41,17 +41,10 @@ const fs = require('fs');
                             console.log("basemodel count: "+basemodel.channels[basemodel.channels.length-1])
             if(isAdmin()){
                 if(hasArgs()){
-                        if(channelexists(basemodel.channels[basemodel.channels.length -1])){
-                        
-                            
-                          
-                            
-                          
+                                                          
                             fs.writeFileSync('channels.json', output, 'utf-8');
                             sendMessage(1, novo);
-                            }else{
-                                sendMessage(3, null)
-                            }
+                          
 
                     
 
@@ -93,10 +86,7 @@ const fs = require('fs');
     embed.setTitle('Erro');
     embed.setDescription('Verifique os parametros utilizados.')
             break;
-    case 3:
-        embed.setTitle('Erro');
-        embed.setDescription('O canal não existe.')
-            break;
+ 
         default:
             break;
     }
@@ -111,12 +101,6 @@ const fs = require('fs');
     if (args[1]!=null) return true
     return false
  }
-    function channelexists(basemodel){
-        console.log('basemodel.channels[final] '+basemodel.channels[basemodel.channels.length-1])
-        console.log('message: ' +message)
-       if(message.channels.get(basemodel.channels[basemodel.channels.length-1])!=null){
-           return true
-       }
-    }
+
         }
 }module.exports = setcrackwatchchannelCommand;
