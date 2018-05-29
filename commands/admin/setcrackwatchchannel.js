@@ -72,7 +72,7 @@ const fs = require('fs');
     if (message.member.has('ADMINISTRATOR')) return true;
     return false;
  }
- function sendMessage(modifier,channel){
+ function sendMessage(modifier,channel2){
      const embed = new Discord.RichEmbed 
      embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
      embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png") 
@@ -81,7 +81,7 @@ const fs = require('fs');
      switch (modifier) {
         case 0:
             embed.setTitle('Canal definido')    
-    embed.addField('Nome:',message.channels.get(channel).name);   
+    embed.addField('Nome:',message.channels.get(channel2).name);   
    
     
             break;
@@ -112,7 +112,7 @@ const fs = require('fs');
     return false
  }
     function channelexists(channel){
-        
+        channel = '"'+channel+'"'
         console.log("channel: "+channel)
         console.log('message.channels.get(): '+message.channels.get(channel));
        if(message.channels.get(channel)!=null){
