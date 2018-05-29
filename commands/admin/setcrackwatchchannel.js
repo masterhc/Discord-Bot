@@ -24,7 +24,7 @@ const fs = require('fs');
                 ]
             }    
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-            console.log('message: ' +message)
+            console.log('message.guild: ' +message.guild)
                             let novo = args[1];
                             
                             console.log("base: "+base.channels[0])
