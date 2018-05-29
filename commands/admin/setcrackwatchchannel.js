@@ -46,12 +46,12 @@ const fs = require('fs');
                     
 
                         }else{
-                            sendMessage(2, null);
+                            sendMessage(2);
                         }
 
 
             }else{
-                sendMessage(1, null);
+                sendMessage(1);
             }
 
 
