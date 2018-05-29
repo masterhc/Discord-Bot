@@ -26,7 +26,7 @@ const fs = require('fs');
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                             console.log('channel.length '+base.channels.length);
                             let novo = args[1];
-                            var count = 0;
+                            var count = 1;
                             console.log("base: "+base.channels[0])
                             if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
