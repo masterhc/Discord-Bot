@@ -36,7 +36,7 @@ const fs = require('fs');
                             }
                             basemodel.channels.push(args[1])
                             let output = JSON.stringify(basemodel);  
-                            console.log(count);
+                          
                             console.log('output: '+output)
                             console.log("basemodel count: "+basemodel.channels[basemodel.channels.length-1])
             if(isAdmin()){
