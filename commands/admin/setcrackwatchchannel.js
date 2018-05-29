@@ -111,11 +111,9 @@ const fs = require('fs');
     if (args[1]!=null) return true
     return false
  }
-    function channelexists(channel){
-        channel = '"'+channel+'"'
-        console.log("channel: "+channel)
-        console.log('message.channels.get(): '+message.channels.get(channel));
-       if(message.channels.get(channel)!=null){
+    function channelexists(basemodel){
+        console.log('basemodel.channels[final] '+basemodel.channels[basemodel.channels.length-1])
+       if(message.channels.get(basemodel.channels[basemodel.channels.length-1])!=null){
            return true
        }
     }
