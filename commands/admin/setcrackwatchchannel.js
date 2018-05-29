@@ -65,7 +65,7 @@ const fs = require('fs');
      const embed = new Discord.RichEmbed 
      embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
      embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png") 
-     embed.setColor(0x510006) // Alterar a cor
+     embed.setColor(0x11080981) // Alterar a cor
      embed.setTimestamp()
      switch (modifier) {
         case 0:
