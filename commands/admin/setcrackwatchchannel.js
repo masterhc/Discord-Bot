@@ -40,7 +40,7 @@ const fs = require('fs');
                         if(hasArgs()==true){
                                                           
                             fs.writeFileSync('channels.json', output, 'utf-8');
-                            sendMessage(1, novo);
+                            sendMessage(0, novo);
                           
 
                     
@@ -65,18 +65,18 @@ const fs = require('fs');
      const embed = new Discord.RichEmbed 
      embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
      embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png") 
-     embed.setColor(0xd31f1f) // Alterar a cor
+     embed.setColor(0x510006) // Alterar a cor
      embed.setTimestamp()
      switch (modifier) {
         case 0:
             embed.setTitle('Canal definido')    
-    embed.addField('Nome:',message.channels.get(channel2).name);   
+    
    
     
             break;
     case 1:
     embed.setTitle('Erro');
-    embed.setDescription('Não tem as premissões necessárias.')
+    embed.setDescription('Não tem as permissões necessárias.')
             break;
     case 2:
     embed.setTitle('Erro');
