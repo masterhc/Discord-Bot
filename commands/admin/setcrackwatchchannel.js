@@ -15,16 +15,14 @@ const fs = require('fs');
             })
         }
         async run(message, args){
-            args = message.content.split(/\s+/g); 
-            console.log('args[1]: '+args[1]);
-            console.log('typeof: '+typeof args[1]);
+          
             var basemodel = {
                 "channels":[
 
                 ]
             }    
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-            console.log('message.guild: ' +message.guild)
+       
                             let novo = args[1];
                             
                             console.log("base: "+base.channels[0])
@@ -37,8 +35,7 @@ const fs = require('fs');
                             basemodel.channels.push(args[1])
                             let output = JSON.stringify(basemodel);  
                           
-                            console.log('output: '+output)
-                            console.log("basemodel count: "+basemodel.channels[basemodel.channels.length-1])
+                          
             if(isAdmin()){
                 if(hasArgs()){
                                                           
@@ -63,7 +60,6 @@ const fs = require('fs');
     if(message.member.id==='186540961650835456') return true;
                 
     if (message.member.has('ADMINISTRATOR')) return true;
-    return false;
  }
  function sendMessage(modifier,channel2){
      const embed = new Discord.RichEmbed 
