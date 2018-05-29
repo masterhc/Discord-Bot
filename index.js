@@ -518,7 +518,7 @@ bot.on('ready',()=>{
                   
                     console.log(typeof channelsfile.channels[i])
                     console.log('channel: '+channelsfile.channels[i])
-                    if(channelexists(channelsfile, i)){
+                    if(channelexists(channelsfile.channels[i])){
                    bot.channels.get(channelsfile.channels[i]).send({embed});
                     }
                   
@@ -528,9 +528,9 @@ bot.on('ready',()=>{
 
         }
 
-function channelexists(channelsfile, i){
+function channelexists(channel){
 
-    if(bot.channels.get(channelsfile.channel[i]) != null) return true
+    if(bot.channels.get(channel) != null) return true
 }
 
     
