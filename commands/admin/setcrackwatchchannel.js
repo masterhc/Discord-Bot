@@ -24,24 +24,24 @@ const fs = require('fs');
                 ]
             }    
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-                            console.log('channel.length '+base.channels.length);
+                       
                             let novo = args[1];
-                            var count = 1;
+                            
                             console.log("base: "+base.channels[0])
                             if (base.channels.length >0){
                                 for(var i=0; i<base.channels.length;i++){
                                     basemodel.channels.push(base.channels[i]);
-                                    count++;
+                                   
                                 }
                             }
                             basemodel.channels.push(args[1])
                             let output = JSON.stringify(basemodel);  
                             console.log(count);
                             console.log('output: '+output)
-                            console.log("basemodel count: "+basemodel.channels[1])
+                            console.log("basemodel count: "+basemodel.channels[basemodel.channels.length-1])
             if(isAdmin()){
                 if(hasArgs()){
-                        if(channelexists(basemodel.channels[count])){
+                        if(channelexists(basemodel.channels[basemodel.channels.length -1])){
                         
                             
                           
