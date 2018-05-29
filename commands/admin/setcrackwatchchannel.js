@@ -36,8 +36,8 @@ const fs = require('fs');
                             let output = JSON.stringify(basemodel);  
                           
                           
-            if(isAdmin()){
-                if(hasArgs()){
+            if(isAdmin()==true){
+                        if(hasArgs()==true){
                                                           
                             fs.writeFileSync('channels.json', output, 'utf-8');
                             sendMessage(1, novo);
@@ -45,9 +45,9 @@ const fs = require('fs');
 
                     
 
-                }else{
-                    sendMessage(2, null);
-                }
+                        }else{
+                            sendMessage(2, null);
+                        }
 
 
             }else{
