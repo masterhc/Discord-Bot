@@ -34,7 +34,7 @@ const fs = require('fs');
                                     count++;
                                 }
                             }
-                            base.channels.push(args[1])
+                            basemodel.channels.push(args[1])
                             let output = JSON.stringify(basemodel);  
                             console.log(count);
                             console.log('output: '+output)
