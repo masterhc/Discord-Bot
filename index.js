@@ -550,7 +550,7 @@ bot.on('ready',()=>{
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
             
-          let Title = fetchedCrack[0].title.replace("/./g", " ").replace("/-/g", " ").replace("///g"," ");
+          let Title = fetchedCrack[0].title.replace("/./g", " ").replace("/-/g", " ").replace("/"," ");
           console.log("title "+ Title);
           let correctedArray = Title.split(" "); 
          let correctedTitle
