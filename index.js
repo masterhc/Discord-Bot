@@ -117,8 +117,10 @@ bot.on('ready',()=>{
         cheerio('td','table.widget', body).each(function(){
             var points = cheerio(this).text();
             pointst.push(points);
-            console.log('pointst '+pointst[1])
-        });
+            
+        }); 
+        
+        console.log('pointst '+pointst[1]);
          cheerio('a', 'table.widget', body).each(function(){
           
           var data= cheerio(this).attr('href');
