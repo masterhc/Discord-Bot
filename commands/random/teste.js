@@ -14,7 +14,7 @@ const Discord = require('discord.js');
             })
         }
         async run(message, args){
-        let     image = __dirname + "/images/BBStage1.png";
+        let     image = "../../images/BBStage1.png";
         const embed = new Discord.RichEmbed;
 
         embed.setThumbnail(image);
