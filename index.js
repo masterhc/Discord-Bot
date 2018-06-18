@@ -489,17 +489,14 @@ bot.on('ready',()=>{
           }
           console.log(correctedTitle);
     let newObject = {
-    "title":"",
-    "sceneGroup":"",
-    "date":"",
-    "image":""
+    "title":correctedTitle,
+    "sceneGroup":fetchedCrack[0].sceneGroup,
+    "date":fetchedCrack[0].date,
+    "image":fetchedCrack[0].image
 
 
     }
-     newObject.title.push(correctedTitle);
-     newObject.sceneGroup.push(fetchedCrack[0].sceneGroup);
-     newObject.date.push(fetchedCrack[0].date);
-     newObject.image.push(fetchedCrack[0].image);   
+    
           let output = JSON.stringify(newObject);  
         if(crackcheck(fetchedCrack)){
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
