@@ -109,12 +109,21 @@ bot.on('ready',()=>{
        
                 let tablelink = [];
                 let nomest = [];
-                if(!err){
+
+
+                let pointst  = [];
         
+                if(!err){
+        cheerio('td','table.widget', body).each(function(){
+            var points = cheerio(this).text();
+            pointst.push(points);
+            console.log('pints '+points)
+        });
          cheerio('a', 'table.widget', body).each(function(){
           
           var data= cheerio(this).attr('href');
           var nomes = cheerio(this).text();
+        
         
         tablelink.push(data);
       
@@ -164,7 +173,7 @@ bot.on('ready',()=>{
         let coordj = nome.split(' ');
         
         let coords = (coordj[coordj.length-2]).split(/(|)/);
-        let coord =[]
+        let coord =[]   
             coord[0]=coords[2]+coords[4]+coords[6]
             coord[1] = coords[10]+coords[12]+coords[14]
         
@@ -471,30 +480,48 @@ bot.on('ready',()=>{
      request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
-          let output = JSON.stringify(fetchedCrack);  
-         
             
-            
+          let Title = fetchedCrack[0].title.replace(".", " ").replace("-", " ").replace("/"," ");
+          let correctedArray = Title.split(" "); 
+         let correctedTitle
+          for (var j = 0; j < correctedArray.length -1; j++) {
+              correctedTitle = correctedTitle + correctedArray[j];
+          }
+          console.log(correctedTitle);
+    let newObject = {
+    "title":"",
+    "sceneGroup":"",
+    "date":"",
+    "image":""
+
+
+    }
+     newObject.title.push(correctedTitle);
+     newObject.sceneGroup.push(fetchedCrack[0].sceneGroup);
+     newObject.date.push(fetchedCrack[0].date);
+     newObject.image.push(fetchedCrack[0].image);   
+          let output = JSON.stringify(newObject);  
         if(crackcheck(fetchedCrack)){
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
-        
-    
-        sendMessage(fetchedCrack);
+        let extra = getInfo(fetchedCrack)
+            
+        sendMessage(fetchedCrack, extra);
          crackwatch();
         }else{crackwatch()}
     }else{
         crackwatch();
     }   
         });
+   
       }, 60000);  
   } 
 
 
    
      
-     function crackcheck(fetchedCrack){
+     function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-        if(fetchedCrack[0].title !=savedCrack[0].title)return true;
+        if(correctedTitle !=savedCrack[0].title)return true;
         else return false;
     }
 
@@ -516,8 +543,7 @@ bot.on('ready',()=>{
                 
                 for (var i=0; i<channelsfile.channels.length; i++) {
                   
-                    console.log(typeof channelsfile.channels[i])
-                    console.log('channel: '+channelsfile.channels[i])
+
                     if(channelexists(channelsfile.channels[i])){
                    bot.channels.get(channelsfile.channels[i]).send({embed});
                     }
@@ -533,6 +559,15 @@ function channelexists(channel){
     if(bot.channels.get(channel) != null) return true
 }
 
+function getInfo(arg){
+    let name = arg[0].title
+    request('http://api.crackwatch.com/api/games', function(err, res, body){
+        let games = JSON.parse(body);
+        name = name.replace("."," ").replace("-"," ")
+        
+    });
+
+}
     
     
 
