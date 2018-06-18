@@ -14,9 +14,17 @@ const Discord = require('discord.js');
             })
         }
         async run(message, args){
-            
-            message.member.voiceChannel.join().then(connection => console.log('Connected!')).catch(console.error);
+        let     image = __dirname + "/images/BBStage1.png";
+        const embed = new Discord.RichEmbed;
 
+        embed.setThumbnail(image);
 
+        message.channel.send(embed);
+        
+        
+        
+        
+        
+        
         }
 }module.exports = testeCommand;

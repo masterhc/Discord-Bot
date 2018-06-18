@@ -146,7 +146,7 @@ bot.on('ready',()=>{
                 let mundo = world.mundo;
                
             let laldeia = `https://${mundo}.tribalwars.com.pt/guest.php?screen=map&x=${coordX}&y=${coordY}&beacon#${coordX};${coordY}`
-            mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY);
+            mensagem(nomest[0], nomest[1], nomest[2],nomest[3], nomest[4],laldeia,tablelink[1], tablelink[2], tablelink[3], tablelink[4], modifier, mundo, coordX, coordY, pointst);
             }else{
                 console.log('modifier err');
                 crawler();
@@ -364,7 +364,7 @@ bot.on('ready',()=>{
  
     
  
-    function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY){   
+    function mensagem( naldeia, ndono, ntdono, nnovo, ntnovo, laldeia, ldono, ltdono, lnovo, ltnovo, modifier, mundo, coordX, coordY, pointst){   
       let embed = new Discord.RichEmbed;
        
         console.log("modifier "+modifier);
@@ -374,8 +374,69 @@ bot.on('ready',()=>{
          lnovo =`http://www.twstats.com/${mundo}/${lnovo}`
          ltnovo =`http://www.twstats.com/${mundo}/${ltnovo}`
 
-         //console.log('modifier '+modifier);
-     
+        //Imagem
+            var image;
+
+            // BBs em primeiro
+            //players em segundo
+            if(pointst[1]<299){
+               
+               if(modifier == 1){ 
+                image = __dirname + "/images/BBStage1.png";
+               } else if(modifier==2) {
+                   image = "";
+                }else{//player
+                    image="";
+                }
+            
+            }else if(300<pointst[1]<999){
+                if(modifier == 1){ 
+                    image = "";
+                   } else if(modifier==2) {
+                       image = "";
+                    }else{//player
+                        image="";
+                    }
+                
+            }else if(1000<pointst[1]<2999){
+                if(modifier == 1){ 
+                    image = "";
+                   } else if(modifier==2) {
+                       image = "";
+                    }else{//player
+                        image="";
+                    }
+                
+            }else if(3000<pointst[1]<8999){
+                if(modifier == 1){ 
+                    image = "";
+                   } else if(modifier==2) {
+                       image = "";
+                    }else{//player
+                        image="";
+                    }
+                
+            }else if(9000<points[1]<10999){
+                if(modifier == 1){ 
+                    image = "";
+                   } else if(modifier==2) {
+                       image = "";
+                    }else{//player
+                        image="";
+                    }
+                
+            }else{
+                if(modifier == 1){ 
+                    image = "";
+                   } else if(modifier==2) {
+                       image = "";
+                    }else{//player
+                        image="";
+                    }
+                
+            }
+
+        //Tipologia da conquista
          switch (modifier) {
             case 1://BB conquistada por um jogador sem tribo
             console.log("BB conquistada por um jogador sem tribo");
@@ -385,6 +446,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 
@@ -399,6 +461,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
@@ -411,6 +474,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break;
@@ -424,6 +488,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 bot.channels.get('356084548003561474').send({embed}) 
                 break; 
@@ -437,6 +502,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
               bot.channels.get('356084548003561474').send({embed}) 
                 break;
@@ -451,6 +517,7 @@ bot.on('ready',()=>{
                 embed.setTitle('Aldeia conquistada!');
                 embed.setColor(0xecd7ac);        
                 embed.setTimestamp();
+                embed.setThumbnail(image);
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
 
                 bot.channels.get('356084548003561474').send({embed}) 
