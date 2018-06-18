@@ -599,11 +599,11 @@ bot.on('ready',()=>{
         function sendMessage(arg, arg2){
            var image;
             const embed = new Discord.RichEmbed
-            if(args2 != null){ 
+            if(arg2 != null){ 
                 image = arg2[0].imagePoster;
                 embed.setThumbnail(arg[2].image);
                 embed.addField('Steam:',`[${arg[0].title}](${arg2[0].Steam})`);
-                
+
             }else{
                 image = arg[0].image
             }
