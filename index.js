@@ -608,7 +608,7 @@ bot.on('ready',()=>{
                 image = arg.image
             }
                 
-                embed.setTitle(arg[0].title)
+                embed.setTitle(arg.title)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
                 embed.setDescription("Jogo crackeado por "+arg.sceneGroup)
