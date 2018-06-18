@@ -382,7 +382,7 @@ bot.on('ready',()=>{
             if(pointst[1]<299){
                
                if(modifier == 1){ 
-                image = __dirname + "/images/BBStage1.png";
+                image = ''
                } else if(modifier==2) {
                    image = "";
                 }else{//player
@@ -554,7 +554,12 @@ bot.on('ready',()=>{
           let correctedArray = Title.split(" "); 
          let correctedTitle
           for (var j = 0; j < correctedArray.length -1; j++) {
-              correctedTitle = correctedTitle + correctedArray[j];
+              if(j==0){
+                    correctedTitle = correctedArray[j]
+              }else{
+
+                 correctedTitle = correctedTitle + correctedArray[j];
+              }
           }
           console.log(correctedTitle);
     let newObject = {
@@ -569,9 +574,9 @@ bot.on('ready',()=>{
           let output = JSON.stringify(newObject);  
         if(crackcheck(fetchedCrack)){
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
-        let extra = getInfo(fetchedCrack)
+       
             
-        sendMessage(fetchedCrack, extra);
+        sendMessage(fetchedCrack, getInfo(fetchedCrack));
          crackwatch();
         }else{crackwatch()}
     }else{
@@ -625,8 +630,8 @@ function channelexists(channel){
     if(bot.channels.get(channel) != null) return true
 }
 
-function getInfo(arg){
-    let name = arg[0].title
+function getInfo(correctedTitle){
+    let name = correctedTitle
     request('http://api.crackwatch.com/api/games', function(err, res, body){
         let games = JSON.parse(body);
         name = name.replace("."," ").replace("-"," ")
