@@ -576,7 +576,7 @@ bot.on('ready',()=>{
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
             
-        sendMessage(fetchedCrack, getInfo(fetchedCrack));
+        sendMessage(newObject, getInfo(fetchedCrack));
          crackwatch();
         }else{crackwatch()}
     }else{
@@ -597,7 +597,17 @@ bot.on('ready',()=>{
     }
 
         function sendMessage(arg, arg2){
-                const embed = new Discord.RichEmbed
+           var image;
+            const embed = new Discord.RichEmbed
+            if(args2 != null){ 
+                image = arg2[0].imagePoster;
+                embed.setThumbnail(arg[2].image);
+                embed.addField('Steam:',`[${arg[0].title}](${arg2[0].Steam})`);
+                
+            }else{
+                image = arg[0].image
+            }
+                
                 embed.setTitle(arg[0].title)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
@@ -606,7 +616,8 @@ bot.on('ready',()=>{
 
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
 
-                embed.setImage(arg[0].image)
+                embed.setImage(image)
+                
 
                 embed.setTimestamp()
 
