@@ -602,17 +602,17 @@ bot.on('ready',()=>{
             if(arg2 != null){ 
                 image = arg2[0].imagePoster;
                 embed.setThumbnail(arg[2].image);
-                embed.addField('Steam:',`[${arg[0].title}](${arg2[0].Steam})`);
+                embed.addField('Steam:',`[${arg.title}](${arg2[0].Steam})`);
 
             }else{
-                image = arg[0].image
+                image = arg.image
             }
                 
                 embed.setTitle(arg[0].title)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
-                embed.setDescription("Jogo crackeado por "+arg[0].sceneGroup)
-                embed.addField('Data do crack:',arg[0].date)
+                embed.setDescription("Jogo crackeado por "+arg.sceneGroup)
+                embed.addField('Data do crack:',arg.date)
 
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
 
