@@ -550,7 +550,7 @@ bot.on('ready',()=>{
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
             
-          let Title = fetchedCrack[0].title.replace(".", " ").replace("-", " ").replace("/"," ");
+          let Title = fetchedCrack[0].title.replace("/./g", " ").replace("/-/g", " ").replace("///g"," ");
           let correctedArray = Title.split(" "); 
          let correctedTitle
           for (var j = 0; j < correctedArray.length -1; j++) {
@@ -592,6 +592,7 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+      console.log(savedCrack[0].title)
         if(correctedTitle !=savedCrack[0].title)return true;
         else return false;
     }
