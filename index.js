@@ -556,7 +556,8 @@ bot.on('ready',()=>{
          let correctedEnding = correctedArray[correctedArray.length - 1].split('-');
 
          let correctedTitle
-          for (var j = 0; j < correctedArray.length -1; j++) {
+      if(correctedArray.length != null){
+         for (var j = 0; j < correctedArray.length -1; j++) {
               if(j==0){
 
                     correctedTitle = correctedArray[j]+ ' ';
@@ -568,7 +569,9 @@ bot.on('ready',()=>{
                  correctedTitle = correctedTitle +' ' +  correctedArray[j];
               }
           }
-          console.log(correctedTitle);
+        }else{
+            correctedTitle = fetchedCrack[0].title;
+        }
     let newObject = {
     "title":correctedTitle,
     "sceneGroup":fetchedCrack[0].sceneGroup,
