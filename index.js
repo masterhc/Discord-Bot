@@ -560,7 +560,7 @@ bot.on('ready',()=>{
               if(j==0){
 
                     correctedTitle = correctedArray[j]+ ' ';
-              }else if(j == correctedArray -2){
+              }else if(j == correctedArray.length -1){
                     correctedTitle = correctedEnding[0]
               
               }else{
@@ -599,7 +599,7 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-      console.log('savedcrack '+savedCrack.title)
+      
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
