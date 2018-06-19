@@ -654,9 +654,15 @@ function getInfo(correctedTitle){
     
     request('http://api.crackwatch.com/api/games', function(err, res, body){
         let games = JSON.parse(body);
-        if(games[0].tilte == correctedTitle){
-            return games;
+       
+        for ( var i=0; i<games.length; i++) {
+            if(games[i].tilte == correctedTitle){
+                return games;
+            }
         }
+        
+        
+       
         
     });
 
