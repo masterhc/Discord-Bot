@@ -549,10 +549,10 @@ bot.on('ready',()=>{
      request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
-            console.log('titleoriginal '+fetchedCrack[0].title)
-          let Title = fetchedCrack[0].title.replace("/./g", " ")
-          console.log("title "+ Title);
-          let correctedArray = Title.split(" "); 
+         
+         
+        
+          let correctedArray = fetchedCrack[0].title.split(" "); 
          let correctedTitle
           for (var j = 0; j < correctedArray.length -1; j++) {
               if(j==0){
