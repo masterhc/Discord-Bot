@@ -552,12 +552,17 @@ bot.on('ready',()=>{
          
          
         
-          let correctedArray = fetchedCrack[0].title.split(" "); 
+          let correctedArray = fetchedCrack[0].title.split("."); 
+         let correctedEnding = correctedArray[correctedArray.length - 1].split('-');
+
          let correctedTitle
           for (var j = 0; j < correctedArray.length -1; j++) {
               if(j==0){
 
                     correctedTitle = correctedArray[j]+ ' ';
+              }else if(j == correctedArray -2){
+                    correctedTitle = correctedEnding[0]
+              
               }else{
 
                  correctedTitle = correctedTitle +' ' +  correctedArray[j];
