@@ -580,6 +580,7 @@ bot.on('ready',()=>{
     
           let output = JSON.stringify(newObject);  
         if(crackcheck(fetchedCrack)){
+            console.log("resultado "+ crackcheck(fetchedCrack));
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
             
@@ -599,7 +600,7 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-      
+      console.log("saved crack "+ savedCrack)
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
