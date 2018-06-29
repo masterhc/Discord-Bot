@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-
+const discord = require('discord.js')
 const axios = require('axios')
 class crycommando extends commando.Command{
         constructor(client){
@@ -15,8 +15,15 @@ class crycommando extends commando.Command{
             var cmd = 'cry';
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
-            message.channel.send(`https://cdn.ram.moe/`+path);
-            
+            message(path);
+           
+            function message(path){
+                let embed = new discord.RichEmbed;
+
+                   embed.setImage(`https://cdn.ram.moe/`+path);
+
+               message.channel.send(embed) 
+            }
 
          }
         }module.exports = crycommando;
