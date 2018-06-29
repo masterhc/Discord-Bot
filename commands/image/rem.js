@@ -23,8 +23,7 @@ class remcommando extends commando.Command{
 
               embed.setImage(`https://cdn.ram.moe/${path}`);
 
-
-               message.channel.send(embed) 
+              message.channel.send({embed}) 
             }
          }
         }module.exports = remcommando;
