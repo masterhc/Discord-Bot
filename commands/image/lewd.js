@@ -20,9 +20,11 @@ class lewdcommando extends commando.Command{
             function message(path){
            const  embed = new discord.RichEmbed;
 
-                   embed.setImage(`https://cdn.ram.moe/`+path);
+           embed.setColor(0xb50000);
+           embed.setDescription('[Original]'+`(${gifs.url})`);
+                embed.setImage(`https://cdn.ram.moe/`+path);
 
-                   message.channel.send({embed}) 
+            message.channel.send({embed}) 
             }
 
          }

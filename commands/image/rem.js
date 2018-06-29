@@ -19,11 +19,12 @@ class remcommando extends commando.Command{
             message(path);
            
             function message(path){
-              const embed = new discord.RichEmbed;
-
-              embed.setImage(`https://cdn.ram.moe/${path}`);
-
-              message.channel.send({embed}) 
+                const embed = new discord.RichEmbed;
+                embed.setColor(0xb50000);
+                embed.setDescription('[Original]'+`(${gifs.url})`);
+                     embed.setImage(`https://cdn.ram.moe/`+path);
+  
+                 message.channel.send({embed}) 
             }
          }
         }module.exports = remcommando;
