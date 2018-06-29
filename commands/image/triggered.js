@@ -19,7 +19,7 @@ class triggeredcommando extends commando.Command{
            
             function message(path){
 
-                let embed = new discord.RichEmbed;
+            const embed = new discord.RichEmbed;
                     
                    embed.setImage(`https://cdn.ram.moe/`+path);
 

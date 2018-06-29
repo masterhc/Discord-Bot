@@ -18,7 +18,7 @@ class lickcommando extends commando.Command{
             message(path);
            
             function message(path){
-                let embed = new discord.RichEmbed;
+               const embed = new discord.RichEmbed;
 
                    embed.setImage(`https://cdn.ram.moe/`+path);
 
