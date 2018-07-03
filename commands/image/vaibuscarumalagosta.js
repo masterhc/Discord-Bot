@@ -19,7 +19,7 @@ class vaibuscarumalagostacommando extends commando.Command{
            
             function message(path){
 
-            const embed = new discord.RichEmbed;
+            const embed = new discord.RichEmbed();
                     
             embed.setColor(0xb50000);
             embed.setDescription('[Original]'+`(${path})`);
