@@ -1,13 +1,13 @@
 const commando = require('discord.js-commando');
 const axios = require('axios')
 const discord = require('discord.js')
-class triggeredcommando extends commando.Command{
+class vaibuscarumalagostacommando extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'triggered',
+                name: 'vaibuscarumalagosta',
                 group:'image',
-                memberName: 'triggered',
-                description: 'Publica uma imagem do tema: TRIGGERED!'
+                memberName: 'vaibuscarumalagosta',
+                description: 'Publica uma imagem do tema: lagosta xD'
 
             })
         }
@@ -29,4 +29,4 @@ class triggeredcommando extends commando.Command{
             }
 
          }
-        }module.exports = triggeredcommando;
+        }module.exports = vaibuscarumalagostacommando;
