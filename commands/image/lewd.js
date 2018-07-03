@@ -21,7 +21,10 @@ class lewdcommando extends commando.Command{
            const  embed = new discord.RichEmbed();
            embed.setColor(0xb50000);
            embed.setDescription('[Original]'+`(${path})`);
+           embed.setTitle('Imagem:')
                 embed.setImage(`https://cdn.ram.moe/`+path);
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                embed.setTimestamp();
 
             message.channel.send({embed}) 
             }

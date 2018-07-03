@@ -21,8 +21,11 @@ class patcommando extends commando.Command{
             function message(path){
               const embed = new discord.RichEmbed();
               embed.setColor(0xb50000);
+              embed.setTitle('Imagem:')
               embed.setDescription('[Original]'+`(${path})`);
                    embed.setImage(`https://cdn.ram.moe/`+path);
+                   embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                   embed.setTimestamp();
 
                message.channel.send({embed}) 
             }
