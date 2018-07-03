@@ -12,9 +12,9 @@ class triggeredcommando extends commando.Command{
             })
         }
         async run(message, args){
-            var cmd = 'triggered';
-            var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
-            var path = res.data.path.replace('/i/', '');
+           
+        let path ="https://imgur.com/a/o48X3RZ"
+            
             message(path);
            
             function message(path){
@@ -23,7 +23,7 @@ class triggeredcommando extends commando.Command{
                     
             embed.setColor(0xb50000);
             embed.setDescription('[Original]'+`(${path})`);
-                 embed.setImage(`https://cdn.ram.moe/`+path);
+                 embed.setImage(path);
 
              message.channel.send({embed}) 
             }
