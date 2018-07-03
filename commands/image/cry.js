@@ -27,6 +27,9 @@ class crycommando extends commando.Command{
                    embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                    embed.setTimestamp();
 
+                console.log("path: "+path);
+                console.log("embed: "+embed)
+
                message.channel.send({embed}) 
             }
 
