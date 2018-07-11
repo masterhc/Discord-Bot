@@ -15,7 +15,7 @@ class remcommando extends commando.Command{
             var cmd = 'rem';
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
-        
+            console.log(path);
             message(path);
            
             function message(path){
