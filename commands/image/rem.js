@@ -20,15 +20,16 @@ class remcommando extends commando.Command{
            
             function message(path){
                 const embed = new discord.RichEmbed;
-                console.log("adsadasdasd")
+               
                 embed.setColor(0xb50000);
                 embed.setTitle('Imagem:')
                 embed.setDescription('[Original]'+`(${path})`);
-                     embed.setImage(`https://cdn.ram.moe/'${path}`);
-                     embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                     embed.setTimestamp();
+                embed.setImage(`https://cdn.ram.moe/'${path}`);
+                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                embed.setTimestamp();
+                embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
   
-                 message.channel.send({embed}) 
+                message.channel.send({embed}) 
             }
          }
         }module.exports = remcommando;
