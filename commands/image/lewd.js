@@ -18,7 +18,7 @@ class lewdcommando extends commando.Command{
             message(path);
            
             function message(path){
-           const  embed = new discord.RichEmbed();
+           const  embed = new discord.RichEmbed;
            embed.setColor(0xb50000);
            embed.setDescription('[Original]'+`(${path})`);
            embed.setTitle('Imagem:')
