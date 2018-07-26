@@ -20,7 +20,7 @@ class remcommando extends commando.Command{
            
             function message(path){
                 const embed = new discord.RichEmbed;
-               
+               message.channel.send(`https://cdn.ram.moe/'${path}`);
                 embed.setColor(0xb50000);
                 embed.setTitle('Imagem:')
                 embed.setDescription('[Original]'+`(${path})`);
