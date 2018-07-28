@@ -16,7 +16,8 @@ class remcommando extends commando.Command{
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
             console.log(path);   
-           
+           message.channel.send(`https://cdn.ram.moe/${path}`);
+           /*
             message(path);
            
             function message(path){
@@ -29,8 +30,8 @@ class remcommando extends commando.Command{
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 embed.setTimestamp();
                 embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
-  
+                
                 message.channel.send({embed}) 
-            }
+            }*/
          }
         }module.exports = remcommando;
