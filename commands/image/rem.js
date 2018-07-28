@@ -30,14 +30,8 @@ class remcommando extends commando.Command{
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 embed.setTimestamp();
                 embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
-                 console.log(embed.color)
-                 console.log(emebd.title)
-                 console.log(embed.description)
-                 console.log(embed.image)
-                 console.log(embed.footer)
-                 console.log(embed.timestamp)
-                 console.log(embed.author)
-                 
+                 console.log(embed)
+
                 message.channel.send({embed}) 
             }
          }
