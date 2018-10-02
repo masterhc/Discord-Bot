@@ -21,7 +21,7 @@ class remcommando extends commando.Command{
             message(path);
            
             function message(path){
-                const embed = new discord.RichEmbed;
+               var embed = new discord.RichEmbed;
                
                 embed.setColor(0xb50000);
                 embed.setTitle('Imagem:')
@@ -30,7 +30,8 @@ class remcommando extends commando.Command{
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                 embed.setTimestamp();
                 embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
-                 console.log('mesage.channel: '+message.channel);
+                console.log('message: '+message) 
+                console.log('mesage.channel: '+message.channel);
 
                 message.channel.send({embed}) 
             }
