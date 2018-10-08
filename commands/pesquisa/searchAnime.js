@@ -1,15 +1,8 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-/*
-const MAL = require('mal-api');
-let username='MasterHc12';
-let password='H0eNZxoClnSE';
-let debug;
-const mal = new MAL(username, password, debug);
-mal.account.verifyCredentials()
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+
+const jikanjs  = require('jikanjs');
 
   
 class Animecommando extends commando.Command{
@@ -36,8 +29,17 @@ class Animecommando extends commando.Command{
                
             };
           console.log(searchString);  
-         mal.anime.searchAnime(searchString).then(res => mensagem(res, message)).catch(err => falhou(err));
-          function falhou(err){
+      
+         jikanjs.search(anime, searchString, 1).then(function (response) {
+          // do stuff here
+          console.log(res)
+          mensagem(response);
+      }).catch(function (err) {
+          // handle error
+          falhou(err);
+      });
+         
+         function falhou(err){
           let embed2 = new Discord.Richembed();
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
@@ -73,4 +75,3 @@ class Animecommando extends commando.Command{
         
          }
         }module.exports = Animecommando;
-*/

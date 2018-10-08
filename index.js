@@ -45,8 +45,8 @@ bot.registry.registerGroup('music','Music');
 bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
-bot.registry.registerGroup('riot','RiotGames');
-bot.registry.registerGroup('steam', 'Steam');
+
+
 bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
