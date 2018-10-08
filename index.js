@@ -6,7 +6,7 @@ const Music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
 
-var config = JSON.parse(fs.readFileSync('.settings.json', 'utf-8'));
+
 
 const bot = new commando.Client();
 const http = require('http');
