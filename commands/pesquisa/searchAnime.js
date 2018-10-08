@@ -30,7 +30,7 @@ class Animecommando extends commando.Command{
             };
           console.log(searchString);  
       
-         jikanjs.search(anime, searchString, 1).then(function (response) {
+         jikanjs.search(anime, searchString, 2).then(function (response) {
           // do stuff here
           console.log(response)
           mensagem(response);
