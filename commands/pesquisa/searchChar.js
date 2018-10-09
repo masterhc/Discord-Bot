@@ -66,21 +66,19 @@ class Animecommando extends commando.Command{
                         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                         if (res.anime.length >0){
                             for (let i=0; i < 3; i++) {
-                                embed.addField("Anime:", res.anime[i].name) 
-                                embed.addField("Link",'[MAL]'+`(${res.anime[i].url})`)
+                                embed.addField("Anime:", `[${res.anime[i].name}]`+`(${res.anime[i].url})`) 
+                                
                             }
                          }
-                         if (res.anime.length >3){
-                             embed.addField("Vê mais na página do anime.")
-                         }
+                        
                          if (res.manga.length >0){
                             for (let i=0; i < 3; i++) {
-                                embed.addField("Manga:", res.manga[i].name) 
-                                embed.addField("Link",'[MAL]'+`(${res.manga[i].url})`)
+                                embed.addField("Manga:", `[${res.manga[i].name}]`+`(${res.manga[i].url})`) 
+                                
                             }
                          }
                          if (res.manga.length >3 || res.anime.length >3){
-                            embed.addField("Vê mais na página do personagem.")
+                            embed.addField("Vê mais na página do personagem.",' ')
                         }
                         embed.setImage(res.image_url)
                     
