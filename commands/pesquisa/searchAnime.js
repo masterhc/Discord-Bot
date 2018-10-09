@@ -3,7 +3,7 @@ const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 
 const jikanjs  = require('jikanjs');
-jikanjs.settings.version = 2
+
   
 class Animecommando extends commando.Command{
         constructor(client){
@@ -29,7 +29,8 @@ class Animecommando extends commando.Command{
                
             };
           console.log(searchString);  
-            let type = "anime"
+            
+          let type = "anime"
 
       
          jikanjs.search(type, searchString, 1).then(function (response) {
