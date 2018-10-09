@@ -62,7 +62,7 @@ class Animecommando extends commando.Command{
           
          function mensagem(res, message){
               
-            const embed = new Discord.RichEmbed()
+            const embed = new Discord.RichEmbed
             
             embed.setTitle(res.title)
             embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
