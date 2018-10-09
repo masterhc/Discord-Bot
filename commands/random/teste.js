@@ -23,7 +23,7 @@ const jikanjs  = require('jikanjs');
                   
                      jikanjs.search(type, searchString, 1).then(function (response) {
                       // do stuff here
-                  console.log(response[0]);
+                  console.log(response.results[0]);
                       
                       
                   }).catch(function (err) {
