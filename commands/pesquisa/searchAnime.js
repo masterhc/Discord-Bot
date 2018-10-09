@@ -44,8 +44,7 @@ class Animecommando extends commando.Command{
          
        
          }
-        }module.exports = Animecommando;
-
+      
 
 
   function falhou(err){
@@ -81,4 +80,4 @@ class Animecommando extends commando.Command{
           
             message.channel.send({embed});
          }
-        
+          }module.exports = Animecommando;
