@@ -64,6 +64,8 @@
 <p>Apresenta informações relativas ao anime pesquisado. Este comando apenas funciona com argumentos.</p>
 <h2>!manga</h2>
 <p>Apresenta informações relativas ao manga pesquisado. Este comando apenas funciona com argumentos.</p>
+<h2>!char</h2>
+<p>Apresenta informações relativas ao personagem pesquisado. Este comando apenas funciona com argumentos.</p>
 
 <h1>Random</h1>
 <h2>!coinflip</h2>
