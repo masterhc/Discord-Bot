@@ -34,7 +34,7 @@ class Animecommando extends commando.Command{
       
          jikanjs.search(type, searchString, 1).then(function (response) {
           // do stuff here
-          console.log(response.results[0]);
+          
           mensagem(response.results[0]);
       }).catch(function (err) {
           // handle error
@@ -66,14 +66,14 @@ class Animecommando extends commando.Command{
                         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                         if (res.anime.length >0){
                             for (let i=0; i < 3; i++) {
-                                embed.addField("Anime:", `[${res.anime[i].name}]`+`(${res.anime[i].url})`) 
+                                embed.addField("Anime:", `[${res.anime[i].name}](${res.anime[i].url})`) 
                                 
                             }
                          }
                         
                          if (res.manga.length >0){
                             for (let i=0; i < 3; i++) {
-                                embed.addField("Manga:", `[${res.manga[i].name}]`+`(${res.manga[i].url})`) 
+                                embed.addField("Manga:", `[${res.manga[i].name}](${res.manga[i].url})`) 
                                 
                             }
                          }
@@ -87,7 +87,7 @@ class Animecommando extends commando.Command{
                        
                            
                         
-                      
+                      console.log(embed )
                      
                     
                         message.channel.send({embed});
