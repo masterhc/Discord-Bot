@@ -42,40 +42,49 @@ class Animecommando extends commando.Command{
           falhou(err);
       });
          
-       
-  function falhou(err){
-         const embed2 = new Discord.RichEmbed;
-            embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
-            embed2.setColor(0xdb06db)
-            embed2.setDescription(err)
-            embed2.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-            embed2.setTimestamp()
-            
-            message.channel.send({embed2})
-          }
-       
-          
-         function mensagem(res){
-              
-            const embed = new Discord.RichEmbed
-            
-            embed.setTitle(res.title)
-            embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
-            embed.setColor(0xdb06db)
-            embed.setDescription(res.synopsis)
-           
-            embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-            
-            embed.setImage(res.image)
-          
-            embed.setTimestamp()  
-            embed.addField("Estado", res.status)     
-            embed.addField("Episódios", res.episodes, true)
-            embed.addField("Score", res.score, true)
-            console.log({embed})
-          
-            message.channel.send({embed});
-         }
+                
+            function falhou(err){
+                    const embed2 = new Discord.RichEmbed;
+                        embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+                        embed2.setColor(0xdb06db)
+                        embed2.setDescription(err)
+                        embed2.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                        embed2.setTimestamp()
+                        
+                        message.channel.send({embed2})
+                    }
+                
+                    
+                    function mensagem(res){
+                        
+                        const embed = new Discord.RichEmbed
+                        
+                        embed.setTitle(res.title)
+                        embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+                        embed.setColor(0xdb06db)
+                        embed.setDescription(res.synopsis)
+                    
+                        embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+                        
+                        embed.setImage(res.image_url)
+                    
+                        embed.setTimestamp()  
+
+                        var status;
+                        if (res.airing == true){
+                            status = "Em transmissão."
+                        }else{
+                            status = "Completo"
+                        }
+                           
+                        embed.addField("Estado:", status )     
+                        embed.addField("Episódios:", res.episodes, true)
+                        embed.addField("Pontuação:", res.score, true)
+                        embed.addField('[Link para o MAL]'+res.url )
+                        console.log({embed})
+                    
+                        message.channel.send({embed});
+                    }
          }
       
 
