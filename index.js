@@ -382,56 +382,56 @@ bot.on('ready',()=>{
             if(pointst[1]<299){
                
                if(modifier == 1){ 
-                image = 'https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v1_left.png'
+                image = 'https://github.com/masterhc/Discord-Bot/blob/master/img/v1_left.png'
                } else if(modifier==2) {
-                   image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v1_left.png";
+                   image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v1_left.png";
                 }else{//player
-                    image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v1.png";
+                    image="https://github.com/masterhc/Discord-Bot/blob/master/img/v1.png";
                 }
             
             }else if(300<pointst[1]<999){
                 if(modifier == 1){ 
-                    image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v2_left.png";
+                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v2_left.png";
                    } else if(modifier==2) {
-                       image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v2_left.png";
+                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v2_left.png";
                     }else{//player
-                        image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v2.png";
+                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v2.png";
                     }
                 
             }else if(1000<pointst[1]<2999){
                 if(modifier == 1){ 
-                    image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v3_left.png";
+                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v3_left.png";
                    } else if(modifier==2) {
-                       image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v3_left.png";
+                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v3_left.png";
                     }else{//player
-                        image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v3.png";
+                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v3.png";
                     }
                 
             }else if(3000<pointst[1]<8999){
                 if(modifier == 1){ 
-                    image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v4_left.png";
+                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v4_left.png";
                    } else if(modifier==2) {
-                       image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v4_left.png";
+                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v4_left.png";
                     }else{//player
-                        image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v4.png";
+                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v4.png";
                     }
                 
             }else if(9000<points[1]<10999){
                 if(modifier == 1){ 
-                    image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v5_left.png";
+                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v5_left.png";
                    } else if(modifier==2) {
-                       image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v5_left.png";
+                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v5_left.png";
                     }else{//player
-                        image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v5.png";
+                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v5.png";
                     }
                 
             }else{
                 if(modifier == 1){ 
-                    image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v6_left.png";
+                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v6_left.png";
                    } else if(modifier==2) {
-                       image = "https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v6_left.png";
+                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v6_left.png";
                     }else{//player
-                        image="https://dspt.innogamescdn.com/8.130/37430/graphic//map/version2/v6.png";
+                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v6.png";
                     }
                 
             }
