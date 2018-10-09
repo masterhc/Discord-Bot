@@ -64,19 +64,19 @@ class Animecommando extends commando.Command{
               
             const embed = new Discord.RichEmbed()
             
-            embed.setTitle(res[0].title)
+            embed.setTitle(res.title)
             embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed.setColor(0xdb06db)
-            embed.setDescription(res[0].synopsis)
+            embed.setDescription(res.synopsis)
            
             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
             
-            embed.setImage(res[0].image)
+            embed.setImage(res.image)
           
             embed.setTimestamp()  
-            embed.addField("Estado", res[0].status)     
-            embed.addField("Episódios", res[0].episodes, true)
-            embed.addField("Score", res[0].score, true)
+            embed.addField("Estado", res.status)     
+            embed.addField("Episódios", res.episodes, true)
+            embed.addField("Score", res.score, true)
       
           
             message.channel.send({embed});
