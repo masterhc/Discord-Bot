@@ -12,15 +12,13 @@ class remcommando extends commando.Command{
             })
         }
         async run(message, args){
-            var cmd = 'rem';
-            var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
+            
+            var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": "rem"}});
             var path = res.data.path.replace('/i/', '');
              
           
            
-            message(path);
-           
-            function message(path){
+          
                var embed = new discord.RichEmbed;
                
                 embed.setColor(0xb50000);
@@ -34,6 +32,6 @@ class remcommando extends commando.Command{
                 console.log('mesage.channel: '+message.channel);
 
                 message.channel.send({embed}) 
-            }
+        
          }
         }module.exports = remcommando;

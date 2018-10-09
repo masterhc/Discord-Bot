@@ -1,6 +1,5 @@
 const commando = require('discord.js-commando');
-const winston = require('winston');
-const request = require('request');
+
 const Discord = require('discord.js');
 
     class phgifs extends commando.Command{

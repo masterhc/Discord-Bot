@@ -1,12 +1,8 @@
 const commando = require('discord.js-commando');
-const winston = require('winston');
+
 const request = require('request');
 const Discord = require('discord.js');
-const konachanFilter = [
-    'loli', // loli, lolicon
-    'shota', // shota, shotacon
-    'child' // child, child_porn
-];
+
 
 
     class konachan extends commando.Command{
