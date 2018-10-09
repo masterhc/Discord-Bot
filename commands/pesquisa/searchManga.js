@@ -35,7 +35,7 @@ class Mangacommando extends commando.Command{
       
          jikanjs.search(type, searchString, 1).then(function (response) {
           // do stuff here
-          console.log(response);
+          console.log(response.results[0]);
           mensagem(response.results[0]);
       }).catch(function (err) {
           // handle error
