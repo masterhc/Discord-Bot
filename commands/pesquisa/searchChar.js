@@ -67,7 +67,7 @@ class Animecommando extends commando.Command{
                         if (res.anime.length >0){
                             for (let i=0; i < 4; i++) {
                                 embed.addField("Anime:", res.anime[i].name) 
-                                embed.addField("Link",'[MAL]'+`(${res.anime.url})`)
+                                embed.addField("Link",'[MAL]'+`(${res.anime[i].url})`)
                             }
                          }
                          if (res.anime.length > 4){
@@ -76,10 +76,10 @@ class Animecommando extends commando.Command{
                          if (res.manga.length >0){
                             for (let i=0; i < 4; i++) {
                                 embed.addField("Manga:", res.manga[i].name) 
-                                embed.addField("Link",'[MAL]'+`(${res.manga.url})`)
+                                embed.addField("Link",'[MAL]'+`(${res.manga[i].url})`)
                             }
                          }
-                         if (res.manga.length > 4){
+                         if (res.manga.length > 4 || res.anime.length > 4){
                             embed.addField("[Vê mais na página do anime.]"+`(${res.url})`)
                         }
                         embed.setImage(res.image_url)
