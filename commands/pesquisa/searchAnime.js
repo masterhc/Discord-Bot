@@ -29,9 +29,10 @@ class Animecommando extends commando.Command{
                
             };
           console.log(searchString);  
-       
+            let type = "anime"
+
       
-         jikanjs.search(anime, searchString, 1).then(function (response) {
+         jikanjs.search(type, searchString, 1).then(function (response) {
           // do stuff here
           console.log(response)
           mensagem(response);
@@ -40,7 +41,13 @@ class Animecommando extends commando.Command{
           falhou(err);
       });
          
-         function falhou(err){
+       
+         }
+        }module.exports = Animecommando;
+
+
+
+  function falhou(err){
           let embed2 = new Discord.Richembed();
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
@@ -74,5 +81,3 @@ class Animecommando extends commando.Command{
             message.channel.send({embed});
          }
         
-         }
-        }module.exports = Animecommando;
