@@ -61,7 +61,7 @@ class Animecommando extends commando.Command{
                         embed.setTitle(res.name)
                         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                         embed.setColor(0x003284)
-                        embed.setDescription(`[${alternative_names}]`+`(${res.url})`)
+                        embed.setDescription(`[${res.alternative_names[0]}]`+`(${res.url})`)
                     
                         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                         if (res.anime.length >0){
