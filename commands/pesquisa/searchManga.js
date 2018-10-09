@@ -53,7 +53,7 @@ class Mangacommando extends commando.Command{
             message.channel.send({embed2})
           }
        
-          function mensagem(res, message){
+          function mensagem(res){
             const embed = new Discord.RichEmbed;
             
             embed.setTitle(res.title)
