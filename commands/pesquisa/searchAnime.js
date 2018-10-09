@@ -80,7 +80,7 @@ class Animecommando extends commando.Command{
                         embed.addField("Estado:", status )     
                         embed.addField("Episódios:", res.episodes, true)
                         embed.addField("Pontuação:", res.score, true)
-                        embed.addField("Links",'[MAL]'+res.url )
+                        embed.addField("Links",'[MAL]'+`${res.url}` )
                         console.log({embed})
                     
                         message.channel.send({embed});
