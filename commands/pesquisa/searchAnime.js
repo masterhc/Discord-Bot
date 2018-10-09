@@ -60,7 +60,7 @@ class Animecommando extends commando.Command{
           }
        
           
-         function mensagem(res, message){
+         function mensagem(res){
               
             const embed = new Discord.RichEmbed
             
