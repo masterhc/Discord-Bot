@@ -58,10 +58,10 @@ class Animecommando extends commando.Command{
                         
                         const embed = new Discord.RichEmbed
                         
-                        embed.setTitle(res.name)
+                        embed.setTitle("Name: "+res.name)
                         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                         embed.setColor(0x003284)
-                        embed.setDescription(`[${res.alternative_names[0]}]`+`(${res.url})`)
+                        embed.setDescription(`Nome alternativo: [${res.alternative_names[0]}]`+`(${res.url})`)
                     
                         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                         if (res.anime.length >0){
@@ -78,7 +78,7 @@ class Animecommando extends commando.Command{
                             }
                          }
                          if (res.manga.length >3 || res.anime.length >3){
-                            embed.addField("Vê mais na página do personagem.")
+                            embed.addField("Vê mais na página do personagem.",`[${res.name}]`+`(${res.url})`)
                         }
                         embed.setImage(res.image_url)
                     
