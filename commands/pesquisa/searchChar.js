@@ -80,7 +80,7 @@ class Animecommando extends commando.Command{
                             }
                          }
                          if (res.manga.length >3 || res.anime.length >3){
-                            embed.addField("Vê mais na página do [personagem]."+`(${res.url})`)
+                            embed.addField("Vê mais na página do personagem.")
                         }
                         embed.setImage(res.image_url)
                     
