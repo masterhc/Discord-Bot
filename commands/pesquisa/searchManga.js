@@ -1,14 +1,7 @@
-/*
+
 const commando = require('discord.js-commando');
 const Discord = require('discord.js')
-const MAL = require('mal-api');
-let username='MasterHc12';
-let password='H0eNZxoClnSE';
-let debug;
-const mal = new MAL(username, password, debug);
-mal.account.verifyCredentials()
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
+
   
 class Mangacommando extends commando.Command{
         constructor(client){
@@ -33,9 +26,23 @@ class Mangacommando extends commando.Command{
                
             };
             
-          mal.manga.searchManga(searchString).then(res =>mensagem(res, message)).catch(err => falhou(err));
+
+
+
+            let type = "manga"
+
+      
+         jikanjs.search(type, searchString, 1).then(function (response) {
+          // do stuff here
+          console.log(response.results[0]);
+          mensagem(response.results[0]);
+      }).catch(function (err) {
+          // handle error
+          falhou(err);
+      });
+       
           function falhou(err){
-          let embed2 = new Discord.Richembed();
+          let embed2 = new Discord.Richembed;
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
             embed2.setDescription(err)
@@ -46,23 +53,23 @@ class Mangacommando extends commando.Command{
           }
        
           function mensagem(res, message){
-            const embed = new Discord.RichEmbed()
+            const embed = new Discord.RichEmbed;
             
-            embed.setTitle(res[0].title)
+            embed.setTitle(res.title)
             embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed.setColor(0xdb06db)
-            embed.setDescription(res[0].synopsis)
+            embed.setDescription(res.synopsis)
            
             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
             
-            embed.setImage(res[0].image)
+            embed.setImage(res.image_url)
           
             embed.setTimestamp()
   
-            embed.addField("Capitulos", res[0].chapters, true)
-            embed.addField("Estado", res[0].status, true)
-            embed.addField("Volumes", res[0].volumes, true)
-            embed.addField("Score", res[0].score, true)
+            embed.addField("Capitulos", res.chapters, true)
+            embed.addField("Estado", res.status, true)
+            embed.addField("Volumes", res.volumes, true)
+            embed.addField("Score", res.score, true)
          
           
             message.channel.send({embed});
@@ -70,4 +77,3 @@ class Mangacommando extends commando.Command{
 
          }
         }module.exports = Mangacommando;
-*/
