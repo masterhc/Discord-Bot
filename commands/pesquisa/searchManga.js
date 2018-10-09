@@ -71,7 +71,7 @@ class Mangacommando extends commando.Command{
             embed.addField("Estado", res.status, true)
             embed.addField("Volumes", res.volumes, true)
             embed.addField("Pontuação", res.score, true)
-            embed.addField("Links",'[MAL]'+res.url, true )
+            embed.addField("Links",'[MAL]'+`(${res.url})`, true )
          
           
             message.channel.send({embed});
