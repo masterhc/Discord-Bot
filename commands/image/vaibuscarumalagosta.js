@@ -15,9 +15,7 @@ class vaibuscarumalagostacommando extends commando.Command{
            
         let path ="https://imgur.com/a/o48X3RZ"
             
-            message(path);
-           
-            function message(path){
+            
 
             const embed = new discord.RichEmbed;
                     
@@ -29,7 +27,7 @@ class vaibuscarumalagostacommando extends commando.Command{
                  embed.setTimestamp();
 
              message.channel.send({embed}) 
-            }
+            
 
          }
         }module.exports = vaibuscarumalagostacommando;

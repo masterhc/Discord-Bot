@@ -21,7 +21,7 @@ class remcommando extends commando.Command{
           
                var embed = new discord.RichEmbed;
                
-                embed.setColor(0xb50000);
+                embed.setColor(0x85b1f7);
                 embed.setTitle('Imagem:')
                 embed.setDescription('[Original]'+`(https://cdn.ram.moe/${path})`);
                 embed.setImage(`https://cdn.ram.moe/${path}`);

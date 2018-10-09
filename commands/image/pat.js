@@ -16,9 +16,7 @@ class patcommando extends commando.Command{
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
         
-            message(path);
            
-            function message(path){
               const embed = new discord.RichEmbed;
               embed.setColor(0xb50000);
               embed.setTitle('Imagem:')
@@ -28,6 +26,6 @@ class patcommando extends commando.Command{
                    embed.setTimestamp();
 
                message.channel.send({embed}) 
-            }
+          
          }
         }module.exports = patcommando;
