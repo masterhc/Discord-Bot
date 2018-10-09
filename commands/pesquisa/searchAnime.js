@@ -77,7 +77,7 @@ class Animecommando extends commando.Command{
             embed.addField("Estado", res.status)     
             embed.addField("Episódios", res.episodes, true)
             embed.addField("Score", res.score, true)
-      
+            console.log({embed})
           
             message.channel.send({embed});
          }
