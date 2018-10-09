@@ -83,7 +83,7 @@ class Animecommando extends commando.Command{
                        
                            
                         
-                       
+                       console.log(embed)
                      
                     
                         message.channel.send({embed});
