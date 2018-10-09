@@ -1,4 +1,3 @@
-
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 
@@ -8,10 +7,10 @@ const jikanjs  = require('jikanjs');
 class Animecommando extends commando.Command{
         constructor(client){
             super(client, {
-                name: 'anime',
+                name: 'char',
                 group:'pesquisa',
-                memberName: 'anime',
-                description: 'Mostra informação de um anime que escolha.'
+                memberName: 'char',
+                description: 'Mostra informação de uma personagem que escolha.'
 
             })
         }
@@ -28,14 +27,14 @@ class Animecommando extends commando.Command{
                }
                
             };
-         
+          console.log(searchString);  
             
-          let type = "anime"
+          let type = "character"
 
       
          jikanjs.search(type, searchString, 1).then(function (response) {
           // do stuff here
-  
+          console.log(response.results[0]);
           mensagem(response.results[0]);
       }).catch(function (err) {
           // handle error
@@ -59,7 +58,7 @@ class Animecommando extends commando.Command{
                         
                         const embed = new Discord.RichEmbed
                         
-                        embed.setTitle(res.title)
+                        embed.setTitle(res.name)
                         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                         embed.setColor(0x003284)
                         embed.setDescription(res.synopsis)
@@ -70,18 +69,11 @@ class Animecommando extends commando.Command{
                     
                         embed.setTimestamp()  
 
-                        var status;
-                        if (res.airing == true){
-                            status = "Em transmissão."
-                        }else{
-                            status = "Completo"
-                        }
+                       
                            
-                        embed.addField("Estado:", status )     
-                        embed.addField("Episódios:", res.episodes, true)
-                        embed.addField("Pontuação:", res.score, true)
-                        embed.addField("Links",'[MAL]'+`(${res.url})` )
-                      
+                        
+                       
+                     
                     
                         message.channel.send({embed});
                     }
