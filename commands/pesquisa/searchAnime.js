@@ -49,7 +49,7 @@ class Animecommando extends commando.Command{
 
 
   function falhou(err){
-         const embed2 = new Discord.Richembed;
+         const embed2 = new Discord.RichEmbed;
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
             embed2.setDescription(err)
