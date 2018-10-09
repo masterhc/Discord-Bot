@@ -1,6 +1,6 @@
 # REM-CHAN
 <p align="center">
-<img src="https://raw.githubusercontent.com/masterhc/Discord-Bot/master/img/rem-chan.png">
+<img src="https://remchan-website.herokuapp.com/images/297223b974b01cc567b25a200d1e3229.png?crc=4157105431">
 </p>
 
 # Prefixo
