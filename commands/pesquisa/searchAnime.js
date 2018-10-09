@@ -36,7 +36,7 @@ class Animecommando extends commando.Command{
          jikanjs.search(type, searchString, 1).then(function (response) {
           // do stuff here
           console.log(response)
-          mensagem(response);
+          mensagem(response.results[0]);
       }).catch(function (err) {
           // handle error
           falhou(err);
