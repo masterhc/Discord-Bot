@@ -13,7 +13,7 @@ class vaibuscarumalagostacommando extends commando.Command{
         }
         async run(message, args){
            
-        let path ="https://imgur.com/a/o48X3RZ"
+        let path ="http://cdn.sabado.pt/images/2016-03/img_797x448$2016_03_31_16_13_47_160957.jpg"
             
             
 
