@@ -1,6 +1,7 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js')
+const jikanjs  = require('jikanjs');
 
   
 class Mangacommando extends commando.Command{
