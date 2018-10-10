@@ -382,56 +382,56 @@ bot.on('ready',()=>{
             if(pointst[1]<299){
                
                if(modifier == 1){ 
-                image = 'https://github.com/masterhc/Discord-Bot/blob/master/img/v1_left.png'
+                image = 'https://imgur.com/EzbTh5V'
                } else if(modifier==2) {
-                   image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v1_left.png";
+                   image = "https://imgur.com/EzbTh5V";
                 }else{//player
-                    image="https://github.com/masterhc/Discord-Bot/blob/master/img/v1.png";
+                    image="https://imgur.com/SGpKnqu";
                 }
             
             }else if(300<pointst[1]<999){
                 if(modifier == 1){ 
-                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v2_left.png";
+                    image = "https://imgur.com/vFDLdXQ";
                    } else if(modifier==2) {
-                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v2_left.png";
+                       image = "https://imgur.com/vFDLdXQ";
                     }else{//player
-                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v2.png";
+                        image="https://imgur.com/4N7h6Rb";
                     }
                 
             }else if(1000<pointst[1]<2999){
                 if(modifier == 1){ 
-                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v3_left.png";
+                    image = "https://imgur.com/oPZH21u";
                    } else if(modifier==2) {
-                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v3_left.png";
+                       image = "https://imgur.com/oPZH21u";
                     }else{//player
-                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v3.png";
+                        image="https://imgur.com/5j8jOa0";
                     }
                 
             }else if(3000<pointst[1]<8999){
                 if(modifier == 1){ 
-                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v4_left.png";
+                    image = "https://imgur.com/MHNjzvE";
                    } else if(modifier==2) {
-                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v4_left.png";
+                       image = "https://imgur.com/MHNjzvE";
                     }else{//player
-                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v4.png";
+                        image="https://imgur.com/JkaDZGX";
                     }
                 
             }else if(9000<points[1]<10999){
                 if(modifier == 1){ 
-                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v5_left.png";
+                    image = "https://imgur.com/Zfk8j6L";
                    } else if(modifier==2) {
-                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v5_left.png";
+                       image = "https://imgur.com/Zfk8j6L";
                     }else{//player
-                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v5.png";
+                        image="https://imgur.com/SHMY0Nq";
                     }
                 
             }else{
                 if(modifier == 1){ 
-                    image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v6_left.png";
+                    image = "https://imgur.com/dWbsNgj";
                    } else if(modifier==2) {
-                       image = "https://github.com/masterhc/Discord-Bot/blob/master/img/v6_left.png";
+                       image = "https://imgur.com/dWbsNgj";
                     }else{//player
-                        image="https://github.com/masterhc/Discord-Bot/blob/master/img/v6.png";
+                        image="https://imgur.com/Rxd16Jm";
                     }
                 
             }
@@ -555,7 +555,7 @@ bot.on('ready',()=>{
          let correctedTitleArray = fetchedCrack[0].title.split("."); 
 
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
-         console.log("correctedEnding[0] "+correctedEnding[0])
+        
          let correctedTitle
       if(correctedTitleArray.length != null){
          for (var j = 0; j <= correctedTitleArray.length; j++) {
@@ -564,13 +564,13 @@ bot.on('ready',()=>{
                     correctedTitle = correctedTitleArray[j];
 
               }else if(j == correctedTitleArray.length){
-                    console.log("[elseif1]dentro do if, correctedEnding[0] "+ correctedEnding[0])
+                    
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
-                    console.log("still inside correctedTItle "+ correctedTitle)
+                    
                     
               }else if(j <= correctedTitleArray.length-2){
                     correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                    console.log("[elseif2]corrected title iteration["+j+"]"+ correctedTitle);
+                    
               }
           }
         }else{
