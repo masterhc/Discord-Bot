@@ -566,13 +566,11 @@ bot.on('ready',()=>{
               }else if(j == correctedTitleArray.length){
                     console.log("[elseif1]dentro do if, correctedEnding[0] "+ correctedEnding[0])
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
+                    console.log("still inside correctedTItle "+ correctedTitle)
                     
               }else if(j <= correctedTitleArray.length-2){
                     correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
                     console.log("[elseif2]corrected title iteration["+j+"]"+ correctedTitle);
-              }else{
-                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                    console.log("[else]corrected title iteration["+j+"]"+ correctedTitle);
               }
           }
         }else{
