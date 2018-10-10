@@ -564,6 +564,7 @@ bot.on('ready',()=>{
                     correctedTitle = correctedTitleArray[j]+ ' ';
 
               }else if(j == correctedTitleArray.length){
+                   console.log("dentro do if, correctedEnding[0] "+ correctedEnding[0])
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
                     
               }else{
