@@ -558,7 +558,7 @@ bot.on('ready',()=>{
          console.log("correctedEnding[0] "+correctedEnding[0])
          let correctedTitle
       if(correctedTitleArray.length != null){
-         for (var j = 0; j < correctedTitleArray.length; j++) {
+         for (var j = 0; j <= correctedTitleArray.length; j++) {
               if(j==0){
 
                     correctedTitle = correctedTitleArray[j];
@@ -567,7 +567,7 @@ bot.on('ready',()=>{
                     console.log("[elseif1]dentro do if, correctedEnding[0] "+ correctedEnding[0])
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
                     
-              }else if(j <= correctedTitleArray.length-1){
+              }else if(j <= correctedTitleArray.length-2){
                     correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
                     console.log("[elseif2]corrected title iteration["+j+"]"+ correctedTitle);
               }else{
