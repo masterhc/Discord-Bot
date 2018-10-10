@@ -564,14 +564,15 @@ bot.on('ready',()=>{
                     correctedTitle = correctedTitleArray[j]+ ' ';
 
               }else if(j == correctedTitleArray.length){
-                   console.log("dentro do if, correctedEnding[0] "+ correctedEnding[0])
+                    console.log("dentro do if, correctedEnding[0] "+ correctedEnding[0])
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
                     
+              }else if(j <= correctedTitleArray.length-1){
+                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
+                    console.log("corrected title iteration["+j+"]"+ correctedTitle);
               }else{
-                if(j <= correctedTitleArray.length-1){
-                 correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                 console.log("corrected title iteration["+j+"]"+ correctedTitle);
-                }
+                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
+                    console.log("corrected title iteration["+j+"]"+ correctedTitle);
               }
           }
         }else{
