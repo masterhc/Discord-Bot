@@ -557,13 +557,13 @@ bot.on('ready',()=>{
          console.log("correctedEnding "+correctedEnding)
          let correctedTitle
       if(correctedTitleArray.length != null){
-         for (var j = 0; j < correctedTitleArray.length -1; j++) {
+         for (var j = 0; j < correctedTitleArray.length; j++) {
               if(j==0){
 
                     correctedTitle = correctedTitleArray[j]+ ' ';
 
-              }else if(j == correctedTitleArray.length -1){
-                    correctedTitle = correctedEnding[0]
+              }else if(j == correctedTitleArray.length){
+                    correctedTitle =correctedTitle +' ' + correctedEnding[0]
               
               }else{
 
