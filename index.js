@@ -565,9 +565,9 @@ bot.on('ready',()=>{
 
               }else if(j == correctedTitleArray.length){
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
-              
+                    
               }else{
-                if(j == correctedTitleArray.length-1){
+                if(j <= correctedTitleArray.length-1){
                  correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
                  console.log("corrected title iteration["+j+"]"+ correctedTitle);
                 }
