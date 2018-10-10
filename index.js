@@ -552,21 +552,23 @@ bot.on('ready',()=>{
          
          
         
-          let correctedArray = fetchedCrack[0].title.split("."); 
-         let correctedEnding = correctedArray[correctedArray.length - 1].split('-');
-
+         let correctedTitleArray = fetchedCrack[0].title.split("."); 
+         let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
+         console.log("correctedEnding "+correctedEnding)
          let correctedTitle
-      if(correctedArray.length != null){
-         for (var j = 0; j < correctedArray.length -1; j++) {
+      if(correctedTitleArray.length != null){
+         for (var j = 0; j < correctedTitleArray.length -1; j++) {
               if(j==0){
 
-                    correctedTitle = correctedArray[j]+ ' ';
-              }else if(j == correctedArray.length -1){
+                    correctedTitle = correctedTitleArray[j]+ ' ';
+
+              }else if(j == correctedTitleArray.length -1){
                     correctedTitle = correctedEnding[0]
               
               }else{
 
-                 correctedTitle = correctedTitle +' ' +  correctedArray[j];
+                 correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
+                 console.log("corrected title iteration["+j+"]"+ correctedTitle);
               }
           }
         }else{
