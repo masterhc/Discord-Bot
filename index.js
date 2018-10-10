@@ -567,9 +567,10 @@ bot.on('ready',()=>{
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
               
               }else{
-
+                if(j == correctedTitleArray.length-1){
                  correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
                  console.log("corrected title iteration["+j+"]"+ correctedTitle);
+                }
               }
           }
         }else{
