@@ -1,0 +1,17 @@
+{ "info":
+    [ {
+         "id": 1, 
+         "YTcode": "undefined", 
+         "user": "user", 
+         "channel": "channel",
+         "guidID":"guildID"
+        },
+      { 
+          "id": 1,
+           "YTcode": "undefined", 
+           "user": "user", 
+           "channel": "channel" ,
+           "guildID":"guildID"
+           } 
+           ] 
+        }
