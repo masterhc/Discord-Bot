@@ -167,7 +167,7 @@ function errResolve(err){
   }
   
 }
-
+/*
 function play(){
   let queue = updateQueue();  
   let queuePlace = 0;
@@ -183,7 +183,7 @@ function play(){
       });
      }
     }
-};
+};*/
 
 function updateQueue(){
   var  queue = JSON.parse(fs.readFileSync('../../queue.json'));
