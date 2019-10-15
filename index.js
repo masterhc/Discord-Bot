@@ -22,7 +22,7 @@ bot.login(process.env.discord_token);
 
 bot.registry.registerGroup('random','Random');
 bot.registry.registerGroup('tribos', 'Tribos');
-bot.registry.registerGroup('music','Music');
+//bot.registry.registerGroup('music','Music');
 bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
