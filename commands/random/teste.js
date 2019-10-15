@@ -1,8 +1,14 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-
-const jikanjs  = require('jikanjs');
+const YDconstructor = require('youtube-mp3-downloader')
+var YD = new YDconstructor({
+    "ffmpegpath":"/node_modules/ffmpeg",
+    "outputPath": "/YDOutput",    
+    "youtubeVideoQuality": "highest",       
+    "queueParallelism": 2,                  
+    "progressTimeout": 2000   
+})
 
     class testeCommand extends commando.Command{
         constructor(client){
@@ -15,24 +21,9 @@ const jikanjs  = require('jikanjs');
             })
         }
         async run(message, args){
+      
+       
 
-              
-            let type = "anime"
-            let searchString = "Overlord"
-            
-                  
-                     jikanjs.search(type, searchString, 1).then(function (response) {
-                      // do stuff here
-                  console.log(response.results[0]);
-                      
-                      
-                  }).catch(function (err) {
-                      // handle error
-                      //console.log(err);
-                  });
-        
-        
-        
         
         }
 }module.exports = testeCommand;

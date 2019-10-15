@@ -10,5 +10,7 @@ class clearqueuecommando extends commando.Command{
         })
     }
     async run(message, args){
+        let guildID= message.guild.id
+       fs.unlinkSync("../../queue["+guildID+"].json");
     }
 }module.exports = clearqueuecommando;

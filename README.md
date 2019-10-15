@@ -1,5 +1,5 @@
 # REM-CHAN
-<p align="center">
+<p styles="align:center"> <!-- before was => <p align = center>-->
 <img src="https://remchan-website.herokuapp.com/images/297223b974b01cc567b25a200d1e3229.png?crc=4157105431">
 </p>
 

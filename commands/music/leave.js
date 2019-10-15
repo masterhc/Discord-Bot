@@ -10,5 +10,21 @@ class leavecommando extends commando.Command{
         })
     }
     async run(message, args){
+        let botID = '356104008366030863';
+        let guild = message.guild;
+        var author = message.author;
+        let hasRole1 = author.roles.some(role=>role.name.includes('Mod'))
+
+        if(guild.members.get(botID).voiceChannel!=null){
+
+            if(hasRole1==true){
+                guild.members.get(botID).voiceChannel.leave;
+            }
+        }else{
+            message.channel.send('Não estou em nenhum canal de voz.')
+        } 
+
     }
+    
+    
 }module.exports = leavecommando;

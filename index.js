@@ -9,31 +9,12 @@ const cheerio = require('cheerio');
 
 
 const bot = new commando.Client();
-const http = require('http');
+
 
 
  
 bot.login(process.env.discord_token);
-const music = new Music(bot, {
-    youtubeKey:process.env.youtubeKey,
-    
-    disableLoop:true,
-    ownerOverMember:true,
-    anyoneCanSkip:false,
-    anyoneCanLeave:true,
-    defVolume:10,
-    enableQueueStat:true,
-    botAdmins:[
-        '186540961650835456', 
-        '278011316487192577'
-    ],
-    disableHelp:true,
 
-    
-    botOwner:'186540961650835456',
-
-
-  });
 
 
 
@@ -60,7 +41,7 @@ bot.on('ready', ()=>{
    var i = 0
    var tipo = [
        'PLAYING',
-       'STREMING',
+       'STREAMING',
        'LISTENING',
        'WATCHING'
    ]
@@ -68,7 +49,7 @@ bot.on('ready', ()=>{
        'with crazy people',//Playing message
        'crappy content', //watching message
        'sounds of my people', //listening message
-       'windoh'//watching message
+       'paint dry'//watching message
    ]
    timeout();
    function timeout(){
@@ -98,6 +79,7 @@ bot.on('ready', ()=>{
 //Conquistas em direto
 
 bot.on('ready',()=>{
+    musicCrawler();
    
     crawler();
    function crawler(){
@@ -538,9 +520,10 @@ bot.on('ready',()=>{
 
  
 
-bot.on('ready',()=>{
+bot.on('ready',()=>{ 
     
-    crackwatch()
+    
+    crackwatch();
     
     function crackwatch(){
     setTimeout(()=>{
@@ -675,11 +658,72 @@ function getInfo(correctedTitle){
 
 }
     
-    
 
 
 
 }); // on Ready ending
 
 
+function musicCrawler(){
+    
 
+let guildsSize = bot.guilds.size;
+  var timeframe;
+  //The way I have this right now it will only play one file at the time because the loop only advances after finishing its job
+
+for(let i=0; i<guildsSize;i++){
+    let guildID = bot.guilds[i];
+    let queue = JSON.parse(fs.readFileSync('queue['+guildID+'].json'))
+    let queuesize = queue.info.length;
+    var connected = bot.guilds.get(queue.info[0].guildID).voiceChannel;
+    for(let j=0; j<queuesize; j++){
+            if(queue.info.length>0){
+                ytdl(YTcode,
+                    {
+                    filter: (format) => format.container === 'mp4', 
+                        
+                  }).pipe(fs.createWriteStream('audio['+queuePlace+']['+guild+'].mp3'));
+                
+             setTimeout(()=>{     
+                while(bot.guilds.get(queue.info[0].guildID).voiceChannel!=queue.info[0].channel){
+                    bot.guilds.get(queue.info[0].guildID).voiceChannel.join().then(connection=>{
+                    
+                    const dispatcher = connection.playFile('audio['+queuePlace+']['+guild+'].mp3')
+                        dispatcher.then(remove('audio['+queuePlace+']['+guild+'].mp3', queue, guildID))
+                    });                    
+                }
+             }, 3000);
+            
+                ytdl.getInfo(queue.info.YTcode, (err, info)=>{
+                    if(err){throw err}
+                    timeframe = info.length_seconds;
+            })
+
+          }else{
+                if(bot.guilds.get(queue.info[0]).voiceConnection.speaking!=true){
+                  setTimeout(()=>{
+                      bot.guilds.get(queue.info[0].guildID).voiceChannel.leave();
+                  },timeframe);
+                }
+              
+          }
+              musicCrawler();
+          }//for(queueSize) end
+        }//for(guildSize) end
+        
+}//function end
+
+function remove(fileName, queue,guildID){
+    fs.unlinkSync(fileName);
+    
+    var newQueue = {
+            info:[
+            ]
+        }
+    for(let i=1; i<queue.info.length; i++){
+        newQueue.info.push(queue.info[i]);
+    }
+    let stringified = JSON.stringify(newQueue);
+    fs.writeFileSync('queue['+guildID+'].json', stringified, 'utf-8');
+
+}
