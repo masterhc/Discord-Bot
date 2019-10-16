@@ -79,7 +79,7 @@ bot.on('ready', ()=>{
 //Conquistas em direto
 
 bot.on('ready',()=>{
-    musicCrawler();
+   // musicCrawler();
    
     crawler();
    function crawler(){
