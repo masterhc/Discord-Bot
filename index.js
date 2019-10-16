@@ -663,7 +663,7 @@ function getInfo(correctedTitle){
 
 }); // on Ready ending
 
-
+/*
 function musicCrawler(){
     
 
@@ -726,4 +726,4 @@ function remove(fileName, queue,guildID){
     let stringified = JSON.stringify(newQueue);
     fs.writeFileSync('queue['+guildID+'].json', stringified, 'utf-8');
 
-}
+}*/
