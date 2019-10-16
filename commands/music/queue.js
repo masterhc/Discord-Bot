@@ -13,9 +13,9 @@ class queuecommando extends commando.Command{
         })
     }
     async run(message, args){
-      let guildID= message.guild.id
+     /* let guildID= message.guild.id
       //Its giving problems ATM
-     /*let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json")); 
+     let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json")); 
         var embed = new discord.RichEmbed
       
             embed.setTitle('Lista')
