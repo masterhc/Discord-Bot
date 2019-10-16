@@ -91,6 +91,7 @@ class PlannerCommand extends commando.Command {
                             break;
                                 default:
                                     //Adicionar aqui para todas as unidades
+                                    console.log("I need to know where is the problem...")
                                    tempo = 0;
                                     tempoforall.push(distancia * 18) //lanceiro/viking/arqueiro
                                     tempoforall.push(distancia *22)  //espada
@@ -99,6 +100,7 @@ class PlannerCommand extends commando.Command {
                                     tempoforall.push(distancia *11)  //heavy
                                     tempoforall.push(distancia *30)  //ram/catapult
                                     tempoforall.push(distancia *35)  //snob
+                                    console.log("I need to know where is the problem...")
                                break;
                             }
            if (tempo !== 0) {
@@ -235,7 +237,7 @@ class PlannerCommand extends commando.Command {
         if(horas2<10){
             horas2='0'+horas2;
         }
-        console.log("I need to know where is the problem...")
+        
         let embed = new Discord.RichEmbed()
         embed.setColor(0xecd7ac);
         embed.setDescription('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
