@@ -40,17 +40,17 @@ const fs = require('fs');
     
 
             if(args[1]== null){
-                return message.channel.send('Por favor defina um continente');
+                return message.channel.send('Por favor defina um continente. No formato KNN.');
             }
             if(typeof K!== "string" ){ 
                 return message.channel.send('Verifique a forma como escreveu o continente que deseja.');
             }
             if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
-           
+            basemodel.K.push(k);
             var output = JSON.stringify(basemodel); 
          console.log("output "+ output);
-         let K = args[1]
-            basemodel.K.push(K);
+         
+           
 
 
             alterar(output);

@@ -8,7 +8,7 @@ const commando = require('discord.js-commando');
                 group:'tribos',
                 memberName: 'reminder',
                 description: 'Este comando enviar-lhe-á um aviso quando faltarem 5 minutos para a hora pedida. \n Pode escolher entre 3 tipos de aviso:\n 1 - "O seu ataque tem que ser enviado!" \n 2-"Aviso! Tem algo para fazer!"\n 3-"Considere-se relembrado." .\n Exemplo de uso:\n "!reminder 23:03 2" ',
-                hidden:true
+                hidden:false
 
             })
         }

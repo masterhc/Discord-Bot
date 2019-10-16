@@ -9,7 +9,7 @@ const fs = require('fs');
                 group:'tribos',
                 memberName: 'world',
                 description: 'Diz-lhe o mundo que está a ser utilizado para as conquistas ao vivo.',
-                hidden:true
+                hidden:false
 
             })
         }
