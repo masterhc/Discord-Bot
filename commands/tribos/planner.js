@@ -235,9 +235,9 @@ class PlannerCommand extends commando.Command {
         if(horas2<10){
             horas2='0'+horas2;
         }
-        
+        Console.log("I need to know where is the problem...")
         let embed = new Discord.RichEmbed()
-        embed.setColor(0xb50000);
+        embed.setColor(0xecd7ac);
         embed.setDescription('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
         embed.setTitle('O ataque com ' + unidade + ' demorará ' + horas + ':' + minutos + ':' + segundos + ':' + milesimosDeSegundo + '.');
         embed.setImage(`http://dspt.innogamescdn.com/asset/6f680fef/graphic/unit/unit_${unidade2}.png`);
@@ -248,7 +248,7 @@ class PlannerCommand extends commando.Command {
         message.channel.send({embed}) 
         
            }else {
-            embed.setColor(0xb50000);
+            embed.setColor(0xecd7ac);
             embed.setTitle('Unidade não especificada.');           
             embed.addField('Lanceiro/Viking/Arqueiro', horasdecentes(tempoforall[0]))
             embed.addField('Espadas', horasdecentes(tempoforall[1]))
