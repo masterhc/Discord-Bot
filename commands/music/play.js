@@ -13,7 +13,7 @@ class playcommando extends commando.Command{
     }
     async run(message, args){
         var searchString;
-         
+     /*    
         var messageSplit = message.content.split(' ');
             for(var i=1;i<messageSplit.length; i++){
                if (i===1) {
@@ -167,7 +167,7 @@ function errResolve(err){
   }
   
 }
-/*
+
 function play(){
   let queue = updateQueue();  
   let queuePlace = 0;
@@ -183,7 +183,7 @@ function play(){
       });
      }
     }
-};*/
+};
 
 function updateQueue(){
   var  queue = JSON.parse(fs.readFileSync('../../queue.json'));
@@ -222,7 +222,7 @@ function download(YTcode, queuePlace, guildID){
 
 
 
-
+*/
 
 
 
