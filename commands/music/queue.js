@@ -1,5 +1,5 @@
 const commando = require('discord.js-commando');
-const fs = require("fs")
+//const fs = require("fs")
 const discord = require('discord.js')
 const ytdl = require('ytdl-core')
 class queuecommando extends commando.Command{
