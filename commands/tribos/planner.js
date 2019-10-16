@@ -235,7 +235,7 @@ class PlannerCommand extends commando.Command {
         if(horas2<10){
             horas2='0'+horas2;
         }
-        Console.log("I need to know where is the problem...")
+        console.log("I need to know where is the problem...")
         let embed = new Discord.RichEmbed()
         embed.setColor(0xecd7ac);
         embed.setDescription('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
