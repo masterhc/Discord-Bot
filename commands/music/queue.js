@@ -14,7 +14,8 @@ class queuecommando extends commando.Command{
     }
     async run(message, args){
       let guildID= message.guild.id
-     // let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json")); Its giving problems ATM
+      //Its giving problems ATM
+     /*let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json")); 
         var embed = new discord.RichEmbed
       
             embed.setTitle('Lista')
@@ -33,7 +34,7 @@ class queuecommando extends commando.Command{
             }
             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
             embed.setTimestamp()
-            
+           */ 
     }
 
 
