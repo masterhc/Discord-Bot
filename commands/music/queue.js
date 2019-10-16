@@ -14,7 +14,7 @@ class queuecommando extends commando.Command{
     }
     async run(message, args){
       let guildID= message.guild.id
-      let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json"));
+     // let queue =   JSON.parse(fs.readFileSync("../../queue["+guildID+"].json")); Its giving problems ATM
         var embed = new discord.RichEmbed
       
             embed.setTitle('Lista')
