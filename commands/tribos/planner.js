@@ -238,13 +238,24 @@ class PlannerCommand extends commando.Command {
         if(horas2<10){
             horas2='0'+horas2;
         }
-        console.log("I need to know where is the problem...")
+        console.log(unidade)
+        console.log(horas2)
+        console.log(minutos2)
+        console.log(segundos2)
+        console.log(milesimos2)
+        console.log(diaABater)
+        console.log(unidade)
+        console.log(horas)
+        console.log(minutos)
+        console.log(segundos)
+        console.log(milesimosDeSegundo)
+        console.log(uinidade2)
+
         let embed = new Discord.RichEmbed()
         embed.setColor(0xecd7ac);
         embed.setDescription('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
         embed.setTitle('O ataque com ' + unidade + ' demorará ' + horas + ':' + minutos + ':' + segundos + ':' + milesimosDeSegundo + '.');
         embed.setImage(`http://dspt.innogamescdn.com/asset/6f680fef/graphic/unit/unit_${unidade2}.png`);
-        embed.addField('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.')
         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
         embed.setTimestamp();
 
