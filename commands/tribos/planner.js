@@ -91,7 +91,7 @@ class PlannerCommand extends commando.Command {
                             break;
                                 default:
                                     //Adicionar aqui para todas as unidades
-                                    console.log("I need to know where is the problem...")
+                                    
                                    tempo = 0;
                                     tempoforall.push(distancia * 18) //lanceiro/viking/arqueiro
                                     tempoforall.push(distancia *22)  //espada
@@ -100,7 +100,7 @@ class PlannerCommand extends commando.Command {
                                     tempoforall.push(distancia *11)  //heavy
                                     tempoforall.push(distancia *30)  //ram/catapult
                                     tempoforall.push(distancia *35)  //snob
-                                    console.log("I need to know where is the problem...")
+                                   
                                break;
                             }
            if (tempo !== 0) {
@@ -158,7 +158,7 @@ class PlannerCommand extends commando.Command {
 
 
             var d = new Date();
-         
+            console.log("I need to know where is the problem...")
             var dia = d.getDate();
             var hora = d.getHours();
             var minuto =d.getMinutes();
@@ -214,6 +214,7 @@ class PlannerCommand extends commando.Command {
                 }
               
             }
+        console.log("I need to know where is the problem...")
         //Acerto Horário
         if(segundos2+segundos>0&&segundos2+segundos<60){
             minutos2--;
@@ -225,7 +226,7 @@ class PlannerCommand extends commando.Command {
             horas2--; 
         }            
         //Apresentação das Horas
-        
+        console.log("I need to know where is the problem...")
         if(segundos2<10){ 
                 segundos2='0'+segundos2;
         }
