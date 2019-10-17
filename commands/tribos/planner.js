@@ -156,7 +156,7 @@ class PlannerCommand extends commando.Command {
                             
             }
 
-
+            console.log('where is the problem?')
             var d = new Date();
              
             var dia = d.getDate();
@@ -214,7 +214,7 @@ class PlannerCommand extends commando.Command {
                 }
               
             }
-         console.log('where is the problem?')
+         
         //Acerto Horário
         if(segundos2+segundos>0&&segundos2+segundos<60){
             minutos2--;
