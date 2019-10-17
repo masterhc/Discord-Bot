@@ -104,7 +104,7 @@ class PlannerCommand extends commando.Command {
                                break;
                             }
            if (tempo !== 0) {
-            console.log("I need to know where is the problem...")
+           
             //calcular o tempo de viagem
                 horas = Math.floor(tempo / 60);
                 minutos = Math.floor(((tempo / 60) - horas) * 60);
@@ -127,7 +127,7 @@ class PlannerCommand extends commando.Command {
             }else{
                horas2 = 7; 
             }
-            console.log("I need to know where is the problem...")
+             
 
             var dias =0;
         
@@ -158,7 +158,7 @@ class PlannerCommand extends commando.Command {
 
 
             var d = new Date();
-            console.log("I need to know where is the problem...")
+             
             var dia = d.getDate();
             var hora = d.getHours();
             var minuto =d.getMinutes();
@@ -214,7 +214,7 @@ class PlannerCommand extends commando.Command {
                 }
               
             }
-        console.log("I need to know where is the problem...")
+         
         //Acerto Horário
         if(segundos2+segundos>0&&segundos2+segundos<60){
             minutos2--;
@@ -226,7 +226,7 @@ class PlannerCommand extends commando.Command {
             horas2--; 
         }            
         //Apresentação das Horas
-        console.log("I need to know where is the problem...")
+         
         if(segundos2<10){ 
                 segundos2='0'+segundos2;
         }
@@ -238,7 +238,7 @@ class PlannerCommand extends commando.Command {
         if(horas2<10){
             horas2='0'+horas2;
         }
-        
+        console.log("I need to know where is the problem...")
         let embed = new Discord.RichEmbed()
         embed.setColor(0xecd7ac);
         embed.setDescription('Para que este chegue ao destino às 8:01 mais próximas( Dia: ' + diaABater + '), este deverá ser enviado às ' + horas2 + ':' + minutos2 + ':' + segundos2 + ':' + milesimos2 + ' do dia ' + diaDeEnvio+'.');
@@ -250,7 +250,7 @@ class PlannerCommand extends commando.Command {
 
         message.channel.send({embed}) 
         
-           }else {
+    }else {
             embed.setColor(0xecd7ac);
             embed.setTitle('Unidade não especificada.');           
             embed.addField('Lanceiro/Viking/Arqueiro', horasdecentes(tempoforall[0]))
