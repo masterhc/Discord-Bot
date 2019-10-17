@@ -104,7 +104,7 @@ class PlannerCommand extends commando.Command {
                                break;
                             }
            if (tempo !== 0) {
-
+            console.log("I need to know where is the problem...")
             //calcular o tempo de viagem
                 horas = Math.floor(tempo / 60);
                 minutos = Math.floor(((tempo / 60) - horas) * 60);
@@ -127,7 +127,7 @@ class PlannerCommand extends commando.Command {
             }else{
                horas2 = 7; 
             }
-            
+            console.log("I need to know where is the problem...")
 
             var dias =0;
         
