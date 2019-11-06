@@ -74,7 +74,8 @@ bot.on('ready', ()=>{
       
    
    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
-   console.log(`Rem is up and ready to serve on ${bot.guilds}`);
+   console.log(`Rem is up and ready to serve on ${Map(bot.guilds)}`);
+
     timeout()
 }});
 //Conquistas em direto
