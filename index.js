@@ -74,13 +74,15 @@ bot.on('ready', ()=>{
       
    
    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
+   console.log(`Rem is up and ready to serve on ${bot.guilds}`);
     timeout()
 }});
 //Conquistas em direto
 
 bot.on('ready',()=>{
    // musicCrawler();
-   
+    //giveRole();
+
     crawler();
    function crawler(){
     setTimeout(()=>{
@@ -727,3 +729,14 @@ function remove(fileName, queue,guildID){
     fs.writeFileSync('queue['+guildID+'].json', stringified, 'utf-8');
 
 }*/
+
+
+function giveRole (){
+
+//.react('👍').then(() => message.react('👎'));
+
+const filter = (reaction, user) => {
+	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+};
+
+}
