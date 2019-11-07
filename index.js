@@ -76,10 +76,10 @@ bot.on('ready', ()=>{
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
     //const filter = (reaction, user) => reaction.emoji.name === '👌' && user.id === 'someID'
     //console.log('filter ='+filter)
-    //console.log(bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).reactions.count)
+    //console.log(bot.channels.find('name', "👐bem-vindo").reactions.count)
     
     
-    console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").channel.messages[0]}`);
+    console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).content}`);
 
     timeout()
 }});
