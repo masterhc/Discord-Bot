@@ -81,7 +81,7 @@ bot.on('ready', ()=>{
     
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => {
-            console.log(message.reactions.count)
+            console.log(message.reaction.count)
         }
     ).catch(console.error)
     timeout()
