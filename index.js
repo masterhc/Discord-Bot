@@ -79,8 +79,11 @@ bot.on('ready', ()=>{
     //console.log(bot.channels.find('name', "👐bem-vindo").reactions.count)
     
     
-    console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).reactions}`);
-
+    bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
+        message => {
+            console.log(message.content)
+        }
+    ).catch(console.error)
     timeout()
 }});
 //Conquistas em direto
