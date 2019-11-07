@@ -74,7 +74,7 @@ bot.on('ready', ()=>{
       
    
    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
-   console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo")}`);
+   console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560)}`);
 
     timeout()
 }});
