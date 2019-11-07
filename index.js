@@ -79,7 +79,7 @@ bot.on('ready', ()=>{
     //console.log(bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).reactions.count)
     
     console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).content}`);
-    console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445276823153016832).content}`);
+    console.log(`Rem is up and ready to serve on ${bot.channels.find('name', "👐bem-vindo").fetchMessage(445276823153016832)}`);
 
     timeout()
 }});
