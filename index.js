@@ -51,13 +51,9 @@ bot.on('ready', ()=>{
        'sounds of my people', //listening message
        'paint dry'//watching message
    ]
-    setTimeout(()=>{
-        bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
-            message => {
-                console.log(message.reactions)
-            }
-        ).catch(console.error)
-        },5000)
+    
+        
+       
    timeout();
    function timeout(){
     setTimeout(()=>{
@@ -83,7 +79,11 @@ bot.on('ready', ()=>{
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
     
     
-    
+    bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
+        message => {
+            console.log(message.reaction)
+        }
+    ).catch(console.error)
  
     timeout()
 }});
