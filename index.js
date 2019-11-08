@@ -78,24 +78,30 @@ bot.on('ready', ()=>{
    
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
     
+   
+    bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
+        message => { 
+            const filter = (reaction, user) => {
+                return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+            message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+                    .then(collected => {
+                        const reaction = collected.first();
+                
+                        if (reaction.emoji.name === '👍') {
+                            message.reply('you reacted with a thumbs up.');
+                        } else {
+                            message.reply('you reacted with a thumbs down.');
+                        }
+                    })
+                    .catch(collected => {
+                        message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+                    }); 
+        }
+    ).catch(console.error)
     
-    const filter = (reaction, user) => {
-        return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
-    };
     
-    bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-        .then(collected => {
-            const reaction = collected.first();
-    
-            if (reaction.emoji.name === '👍') {
-                message.reply('you reacted with a thumbs up.');
-            } else {
-                message.reply('you reacted with a thumbs down.');
-            }
-        })
-        .catch(collected => {
-            message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
-        });
+   
     timeout()
 }});
 //Conquistas em direto
