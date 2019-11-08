@@ -89,17 +89,16 @@ bot.on('ready', ()=>{
                         const reaction = collected.first();
                 
                         if (reaction.emoji.name === '👌') {
-                          //giveRole  
-
+                          //giveRole 
+                          console.log(message.author.id)
+                          console.log('310263865575473163')
+                          message.reply('you reacted with a thumbs up.');
                           var role = message.guild.roles.find(role => role.name === "Membro");
                             // user some how.addRole(role);
-                        } else {
-                          //removeReaction
                         }
                     })
                     .catch(collected => {
-                        console.log('collected: ');
-                        console.log(collected.first());
+                        console.log('Wrong Reaction');
                     }); 
         }
     ).catch(console.error)
