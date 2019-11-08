@@ -82,25 +82,18 @@ bot.on('ready', ()=>{
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction, user) => {
-                return ['👌'].includes(reaction.emoji.name) && user.id === message.author.id;
+                return ['👌'].includes(reaction.emoji.name);
             };
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
                         const reaction = collected.first();
-                
-                        if (reaction.emoji.name === '👌') {
-                          //giveRole 
-                          
-                          message.reply('you reacted with a thumbs up.');
-                          var role = message.guild.roles.find(role => role.name === "Membro");
-                            // user some how.addRole(role);
-                        }
-                    })
-                    .catch(collected => {
-                        console.log(user.id)
-                        console.log(message.user.id)
+                        console.log(reaction)
+                        console.log(reaction.user.id)
                         console.log('310263865575473163')
                         console.log('Wrong Reaction');
+                    })
+                    .catch(collected => {
+                        
                     }); 
         }
     ).catch(console.error)
