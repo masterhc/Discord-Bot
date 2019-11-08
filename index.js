@@ -51,6 +51,11 @@ bot.on('ready', ()=>{
        'sounds of my people', //listening message
        'paint dry'//watching message
    ]
+   bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
+    message => {
+        console.log(message.reactions)
+    }
+).catch(console.error)
    timeout();
    function timeout(){
     setTimeout(()=>{
@@ -74,9 +79,6 @@ bot.on('ready', ()=>{
       
    
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
-    //const filter = (reaction, user) => reaction.emoji.name === '👌' && user.id === 'someID'
-    //console.log('filter ='+filter)
-    //console.log(bot.channels.find('name', "👐bem-vindo").reactions.count)
     
     
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
@@ -84,6 +86,8 @@ bot.on('ready', ()=>{
             console.log(message.reactions)
         }
     ).catch(console.error)
+    
+ 
     timeout()
 }});
 //Conquistas em direto
