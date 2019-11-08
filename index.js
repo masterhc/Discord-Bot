@@ -89,13 +89,13 @@ bot.on('ready', ()=>{
                         const reaction = collected.first();
                 
                         if (reaction.emoji.name === '👍') {
-                            message.reply('you reacted with a thumbs up.');
+                            
                         } else {
-                            message.reply('you reacted with a thumbs down.');
+                          
                         }
                     })
                     .catch(collected => {
-                        message.reply('you reacted with neither a thumbs up, nor a thumbs down.');
+                        console.log('collected: '+collected);
                     }); 
         }
     ).catch(console.error)
