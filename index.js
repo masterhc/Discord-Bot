@@ -82,7 +82,7 @@ bot.on('ready', ()=>{
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction, user) => {
-                return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
+                return ['👌'].includes(reaction.emoji.name) && user.id === message.author.id;
             };
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
@@ -95,7 +95,8 @@ bot.on('ready', ()=>{
                         }
                     })
                     .catch(collected => {
-                        console.log('collected: '+collected);
+                        console.log('collected: ');
+                        console.logf(collected);
                     }); 
         }
     ).catch(console.error)
