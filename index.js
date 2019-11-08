@@ -88,15 +88,18 @@ bot.on('ready', ()=>{
                     .then(collected => {
                         const reaction = collected.first();
                 
-                        if (reaction.emoji.name === '👍') {
-                            
+                        if (reaction.emoji.name === '👌') {
+                          //giveRole  
+
+                          var role = message.guild.roles.find(role => role.name === "Membro");
+                            // user some how.addRole(role);
                         } else {
-                          
+                          //removeReaction
                         }
                     })
                     .catch(collected => {
                         console.log('collected: ');
-                        console.logf(collected);
+                        console.log(collected.first());
                     }); 
         }
     ).catch(console.error)
