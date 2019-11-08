@@ -82,7 +82,7 @@ bot.on('ready', ()=>{
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction, user) => {
-                return ['👌'].includes(reaction.emoji.name) && user.id === message.author.id;
+                return ['👌'].includes(reaction.emoji.name);
             };
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
@@ -90,7 +90,7 @@ bot.on('ready', ()=>{
                 
                         if (reaction.emoji.name === '👌') {
                           //giveRole 
-                          console.log(message.author.id)
+                          console.log(message.user.id)
                           console.log('310263865575473163')
                           message.reply('you reacted with a thumbs up.');
                           var role = message.guild.roles.find(role => role.name === "Membro");
