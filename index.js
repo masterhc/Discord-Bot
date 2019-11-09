@@ -79,6 +79,14 @@ bot.on('ready', ()=>{
     console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
     
    
+   
+    
+    
+   
+    timeout()
+}});
+
+bot.on('ready', ()=>{
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -98,11 +106,7 @@ bot.on('ready', ()=>{
                     .catch(console.error()); 
         }
     ).catch(console.error)
-    
-    
-   
-    timeout()
-}});
+});
 //Conquistas em direto
 
 bot.on('ready',()=>{
