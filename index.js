@@ -88,7 +88,7 @@ bot.on('ready', ()=>{
                     .then(collected => {
                         const reaction = collected.first();
                         console.log("coiso")
-                        console.log(reaction.users)
+                        console.log(reaction.users.id)
                         
                     })
                     .catch(console.error()); 
