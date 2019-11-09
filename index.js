@@ -89,7 +89,7 @@ bot.on('ready', ()=>{
                         const reaction = collected.first();
                         console.log("coiso")
                         
-                        console.log(reaction.users.first().id)
+                        reaction.users.first().id.setRole([336235115782864906]).then(console.log("role apllyed")).catch(console.error);
                         
                     })
                     .catch(console.error()); 
