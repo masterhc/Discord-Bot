@@ -90,7 +90,8 @@ bot.on('ready', ()=>{
                         console.log("coiso")
                         
                         reactor = reaction.users.first().id
-                        bot.guilds.find('id', '334456736633323520').fetchMember(reactor).addRole('336235115782864906');
+                        console.log("reactor:"+reactor)
+                        console.log(bot.guilds.find('id', '334456736633323520').name)
                     })
                     .catch(console.error()); 
         }
