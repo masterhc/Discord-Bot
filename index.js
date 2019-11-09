@@ -81,7 +81,7 @@ bot.on('ready', ()=>{
    
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
-            const filter = (reaction, user) => {
+            const filter = (reaction) => {
                 return ['👌'].includes(reaction.emoji.name);
             };
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
