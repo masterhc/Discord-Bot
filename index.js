@@ -87,10 +87,8 @@ bot.on('ready', ()=>{
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
                         const reaction = collected.first();
-                        console.log("test")
-                        console.log(reaction.user.id)
-                        console.log('310263865575473163')
-                        console.log('Wrong Reaction');
+                        console.log(collected);
+
                     })
                     .catch(collected => {
                         
