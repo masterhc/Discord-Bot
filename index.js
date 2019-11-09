@@ -89,10 +89,10 @@ bot.on('ready', ()=>{
                         const reaction = collected.first();
                         console.log("coiso")
                         
-                        reactor = reaction.users.first().id
+                        reactor = reaction.users.first()
                         console.log("reactor:"+reactor)
-                        bot.guilds.find('id', '334456736633323520').fetchMembers(reactor).setRoles('336235115782864906')
-                            .then(console.log)
+                        bot.guilds.find('id', '334456736633323520').fetchMembers(reactor.id).setRoles('336235115782864906')
+                            .then(console.log) 
                             .catch(console.error);
                     })
                     .catch(console.error()); 
