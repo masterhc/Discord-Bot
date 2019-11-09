@@ -87,7 +87,7 @@ bot.on('ready', ()=>{
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
                         const reaction = collected.first();
-                        console.log(collected);
+                        console.log("coiso")
 
                     })
                     .catch(collected => {
