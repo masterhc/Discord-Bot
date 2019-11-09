@@ -89,8 +89,8 @@ bot.on('ready', ()=>{
                         const reaction = collected.first();
                         console.log("coiso")
                         
-                        reaction.users.first().setRole([336235115782864906]).then(console.log("role apllyed")).catch(console.error);
-                        
+                        reactor = reaction.users.first().id
+                        bot.guilds.find('id', '334456736633323520').fetchMember(reactor).addRole('336235115782864906');
                     })
                     .catch(console.error()); 
         }
