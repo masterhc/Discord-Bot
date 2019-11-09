@@ -93,6 +93,11 @@ bot.on('ready', ()=>{
             giveRole()       
         }, 60000);
     }
+/*
+    message.member.edit({
+        nick: 'Cool Name',
+        roles: []
+      })*/
     function giveRole(){
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
@@ -107,8 +112,8 @@ bot.on('ready', ()=>{
                         reactor = reaction.users.first()
                         console.log("reactor:"+reactor.id)
                         bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id).name
-                            .then(console.log) 
-                            .catch(console.error);
+                            /*.then(console.log) 
+                            .catch(console.error);*/
                     })
                     .catch(console.error()); 
         }
