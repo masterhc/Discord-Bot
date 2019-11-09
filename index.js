@@ -87,7 +87,7 @@ bot.on('ready', ()=>{
 }});
 
 bot.on('ready', ()=>{
-    timer()
+    giveRole();
     function timer(){
         setTimeout(()=>{
             giveRole()       
