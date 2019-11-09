@@ -111,7 +111,7 @@ bot.on('ready', ()=>{
                         
                         reactor = reaction.users.first()
                         console.log("reactor:"+reactor.id)
-                        console.log(bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id).first())
+                        console.log(bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id))
                             /*.then(console.log) 
                             .catch(console.error);*/
                     })
