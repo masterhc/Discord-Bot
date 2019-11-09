@@ -87,6 +87,13 @@ bot.on('ready', ()=>{
 }});
 
 bot.on('ready', ()=>{
+    timer()
+    function timer(){
+        setTimeout(()=>{
+            giveRole()       
+        }, 60000);
+    }
+    function giveRole(){
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -106,6 +113,8 @@ bot.on('ready', ()=>{
                     .catch(console.error()); 
         }
     ).catch(console.error)
+    timer();
+    };
 });
 //Conquistas em direto
 
