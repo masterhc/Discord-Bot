@@ -88,11 +88,10 @@ bot.on('ready', ()=>{
                     .then(collected => {
                         const reaction = collected.first();
                         console.log("coiso")
-
-                    })
-                    .catch(collected => {
+                        console.log(reaction)
                         
-                    }); 
+                    })
+                    .catch(console.error()); 
         }
     ).catch(console.error)
     
