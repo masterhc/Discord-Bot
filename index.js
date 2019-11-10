@@ -582,7 +582,10 @@ bot.on('ready',()=>{
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
          
-         
+         if(fetchedCrack[0].title == null){
+             console.log("api Fucked")
+             crackwatch();
+         }
         
          let correctedTitleArray = fetchedCrack[0].title.split("."); 
 
