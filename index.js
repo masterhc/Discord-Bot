@@ -111,9 +111,12 @@ bot.on('ready', ()=>{
                         
                         reactor = reaction.users.first()
                         console.log("reactor:"+reactor.id)
-                        console.log(bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id))
-                            /*.then(console.log) 
-                            .catch(console.error);*/
+                        //console.log(bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id))
+                        try{        
+                            reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
+                        }
+                        catch{console.error}
+                        finally{ console.log('done')}
                     })
                     .catch(console.error()); 
         }
