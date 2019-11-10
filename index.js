@@ -115,7 +115,7 @@ bot.on('ready', ()=>{
                         try{        
                             reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
                         }
-                        catch{console.error}
+                        catch(error){console.error}
                         finally{ console.log('done')}
                     })
                     .catch(console.error()); 
