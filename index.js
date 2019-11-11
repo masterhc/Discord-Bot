@@ -145,7 +145,14 @@ bot.on('ready',()=>{
                 let pointst  = [];
         
                 if(!err){
-        cheerio('td','table.widget', body).each(function(){
+                  try {
+                      cheerio('td', 'table.widget', body).each(function(){
+                          let  coiso = cheerio(this).text();
+                      })
+                  } catch (error) {
+                      console.log("error");
+                  }
+            cheerio('td','table.widget', body).each(function(){
             var points = cheerio(this).text();
             pointst.push(points);
             
