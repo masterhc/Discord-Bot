@@ -151,6 +151,7 @@ bot.on('ready',()=>{
                       })
                   } catch (error) {
                       console.log("error");
+                      crawler();
                   }
             cheerio('td','table.widget', body).each(function(){
             var points = cheerio(this).text();
