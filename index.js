@@ -589,11 +589,17 @@ bot.on('ready',()=>{
      request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
-         
-         if(fetchedCrack[0] == null){
+         try {
+             if(fetchedCrack[0] !=null){
+                 console.log("working fine")
+             }
+         } catch (error) {
+             
              console.log("api Fucked")
              crackwatch();
          }
+         
+         
         
          let correctedTitleArray = fetchedCrack[0].title.split("."); 
 
