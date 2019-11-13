@@ -757,9 +757,9 @@ function getInfo(Title){
                     
                 }else if(k == titleSize){
                     
-                   GameTitle =fixedTitle;
+                   GameTitle =fixedTitle[k];
                 }else if(k<titleSize){
-                    GameTitle = fixedTitle + " "+ fixedTitleaux[k]
+                    GameTitle = GameTitle + " "+ fixedTitleaux[k]
                 }
             }
 
