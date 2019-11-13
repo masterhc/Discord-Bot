@@ -747,9 +747,10 @@ function getInfo(Title){
                     default:
                         break;
                 }
-            }
+            } 
+            let GameTitle;
             for(var k=0; k<titleSize; k++){
-                let GameTitle;
+               
                 if(k==0){
                     
                     GameTitle= fixedTitleaux[j];
