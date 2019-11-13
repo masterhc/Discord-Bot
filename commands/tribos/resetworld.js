@@ -24,7 +24,7 @@ se nenhum for pedido deixar o ultimo da lista
 
 
 */
-const commando = require('discord.js-commando');
+/*const commando = require('discord.js-commando');
 const discord = require('discord.js')
 const fs = require('fs');
 
@@ -72,4 +72,4 @@ const fs = require('fs');
 
         }
     }module.exports = clearfilterCommand;
-        
+        */
