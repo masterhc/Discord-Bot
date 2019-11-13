@@ -612,8 +612,8 @@ bot.on('ready',()=>{
         
          let correctedTitleArray = fetchedCrack[0].title.split("."); 
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
-         if(correctedTitleArray.split("_")>0){
-            correctedTitleArray= correctedTitleArray.split("_")
+         if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0){
+            correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
          }
         
         

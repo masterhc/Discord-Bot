@@ -24,7 +24,7 @@ const fs = require('fs');
             let mundo = file.mundo
             let basemodel =
             {
-                "mundo":'"'+mundo+'"',
+                "mundo":[],
                 "K":[]
                 
                 }
