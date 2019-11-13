@@ -82,7 +82,9 @@ const fs = require('fs');
            
             if(count>0){   
         
-            
+            //é preciso alterar isto para que aceite mais que um mundo
+            //fazer um base model para depois  "stringify" e mais facilmente o voltar a escrever
+            //aceitar o mundo como um array de mundos
             alterar(mundo, kfilter);
             }else{
                 message.channel.send("O servidor referido não existe.")

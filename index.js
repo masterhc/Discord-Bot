@@ -140,8 +140,8 @@ bot.on('ready',()=>{
     setTimeout(()=>{
         var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
         
-        var mundo = world.mundo;
-        if(world.size >1){
+        var mundo = world.mundo[0];
+        if(mundo.size >1){
 
         }   
 

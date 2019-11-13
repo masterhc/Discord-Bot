@@ -10,6 +10,9 @@
 COPY OF clean filter
 
 
+apagar os mundos todos deixando apenas o pedido
+se nenhum for pedido deixar o ultimo da lista
+
 
 
 
