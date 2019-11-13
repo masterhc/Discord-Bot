@@ -87,6 +87,7 @@ bot.on('ready', ()=>{
 }});
 
 bot.on('ready', ()=>{
+    let checker = 0
     giveRole();
     function timer(){
         setTimeout(()=>{
@@ -99,6 +100,7 @@ bot.on('ready', ()=>{
         roles: []
       })*/
     function giveRole(){
+        console.log(checker)
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -107,21 +109,24 @@ bot.on('ready', ()=>{
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
                         const reaction = collected.first();
-                        console.log("coiso")
+                        console.log("Reaction added")
                         
                         reactor = reaction.users.first()
                         console.log("reactor:"+reactor.id)
-                        //console.log(bot.guilds.find('id', '334456736633323520').fetchMember(reactor.id))
+                        
                         try{        
                             reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
+                            console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name)
                         }
                         catch(error){console.error}
                         finally{ console.log('done')}
                     })
                     .catch(console.error()); 
         }
+       
     ).catch(console.error)
     timer();
+    checker = checker +1;
     };
 });
 //Conquistas em direto
@@ -136,6 +141,10 @@ bot.on('ready',()=>{
         var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
         
         var mundo = world.mundo;
+        if(world.size >1){
+
+        }   
+
             request(`http://pt.twstats.com/${mundo}/index.php?page=ennoblements&live=live`, function(err, res, body){
        
                 let tablelink = [];
@@ -602,24 +611,28 @@ bot.on('ready',()=>{
          
         
          let correctedTitleArray = fetchedCrack[0].title.split("."); 
-
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
+         if(correctedTitleArray.split("_")>0){
+            correctedTitleArray= correctedTitleArray.split("_")
+         }
+        
         
          let correctedTitle
+      
       if(correctedTitleArray.length != null){
          for (var j = 0; j <= correctedTitleArray.length; j++) {
               if(j==0){
-
+                    
                     correctedTitle = correctedTitleArray[j];
-
+                    
               }else if(j == correctedTitleArray.length){
                     
                     correctedTitle =correctedTitle +' ' + correctedEnding[0]
-                    
+                   
                     
               }else if(j <= correctedTitleArray.length-2){
                     correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                    
+                   
               }
           }
         }else{
@@ -640,7 +653,7 @@ bot.on('ready',()=>{
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
             
-        sendMessage(newObject, getInfo(correctedTitle));
+        sendMessage(fetchedCrack[0], getInfo(correctedTitle));
          crackwatch();
         }else{crackwatch()}
     }else{
@@ -706,14 +719,51 @@ function channelexists(channel){
     if(bot.channels.get(channel) != null) return true
 }
 
-function getInfo(correctedTitle){
+function getInfo(Title){
     
     request('http://api.crackwatch.com/api/games', function(err, res, body){
         let games = JSON.parse(body);
-       
+            let fixedTitleaux = Title.split(" ");
+           let titleSize; 
+            for(var j = 0; i<fixedTitleaux.size; j++){
+                switch (fixedTitleaux[j]) {
+                    case "v":
+                        titleSize = j-1;
+                        break;
+                    case "Update":
+                        titleSize = j-1;
+                        break;
+                    case "DLC":
+                    titleSize = j-1;
+                        break;
+                    case "Episode":
+                        titleSize = j-1;
+                        break;
+                    case "Season":
+                        titleSize = j-1;
+                        break;
+                    
+                
+                    default:
+                        break;
+                }
+            }
+            for(var k=0; k<titleSize; k++){
+                if(k==0){
+                    
+                    GameTitle= fixedTitleaux[j];
+                    
+                }else if(k == titleSize){
+                    
+                   GameTitle =fixedTitle;
+                }else if(k<titleSize){
+                    GameTitle = fixedTitle + " "+ fixedTitleaux[k]
+                }
+            }
+
         for ( var i=0; i<games.length; i++) {
-            if(games[i].tilte == correctedTitle){
-                return games;
+            if(games[i].tilte == GameTitle){
+                return games[i];
             }
         }
         
@@ -795,12 +845,3 @@ function remove(fileName, queue,guildID){
 }*/
 
 
-function giveRole (){
-
-//.react('👍').then(() => message.react('👎'));
-
-const filter = (reaction, user) => {
-	return ['👍', '👎'].includes(reaction.emoji.name) && user.id === message.author.id;
-};
-
-}

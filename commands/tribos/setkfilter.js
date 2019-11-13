@@ -34,18 +34,7 @@ const fs = require('fs');
           
            
 
-
-
-            
-    
-
-            if(args[1]== null){
-                return message.channel.send('Por favor defina um continente. No formato KNN.');
-            }
-            if(typeof K!== "string" ){ 
-                return message.channel.send('Verifique a forma como escreveu o continente que deseja.');
-            }
-            if(!hasK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
+            if(!hasK()&&!completK())return message.channel.send('Verifique a forma como escreveu o continente que deseja.')
             basemodel.K.push(k);
             var output = JSON.stringify(basemodel); 
          console.log("output "+ output);
@@ -101,3 +90,8 @@ function mensagem(filtro){
 }
 }
 }module.exports = setkfilterCommand;
+
+function completK(){
+    if (args[1].split('')==2)return true
+
+}
