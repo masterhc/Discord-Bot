@@ -95,6 +95,8 @@ bot.on('ready', ()=>{
             giveRole()       
         }, 60000);
     }
+//Não mandou a dm
+//Nem deu a permissão
 
     function giveRole(){
         console.log(checker)
@@ -110,13 +112,19 @@ bot.on('ready', ()=>{
                             
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
-                            if(hasPermission(reactor)){
+                            if(hasPermission(reactor)==true){
                                 try{        
-                                    reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
+                                    reaction.message.guild.member(reactor)
+                                    .addRole('336235115782864906')
+                                    .catch(console.error);
                                     console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name);
                                 }
-                                catch(error){console.error}
+                                catch(error){
+                                    console.error
+                                }
                                 finally{ console.log('done')}
+                            }else if(hasRole(reactor)==true){
+                                console.log(reactor.reaction.message.name.guild.member(reactor).name+"tryed but got the role denied.")
                             }else{
                                 reactor.send("Coloque o seu nome igual ao nick que tem na Legend.");
                                 console.log("!Permissions denied to"+reactor.reaction.message.guild.member(reactor).name);
@@ -140,18 +148,21 @@ bot.on('ready', ()=>{
                     let document = JSON.parse(body);
                 try {
                     if(document.querySelectorAll("table") !=null){
-                        console.log("working fine")
+                        console.log("Got a table from the TWSTATS")
                     }
                 } catch (error) {
                     
                     console.log("twStats is fucked")
                     crackwatch();
                 }
+
                 for(let i =0; i<document.querySelectorAll("td a.playerlink").length; i++){
-                
-                if(reactor == document.querySelectorAll("td a.playerlink")[0].innerHTML || hasRole(reactor)== true){
-                    return true;
-                }
+                    console.log("Ammount of members:"+document.querySelectorAll("td a.player").length)
+
+                    if(reactor == document.querySelectorAll("td a.playerlink")[i].innerHTML || hasRole(reactor)== true){
+                        console.log("match found:"+document.querySelectorAll("td a.playerlink ")[i].innerHTML)
+                        return true;
+                    }
                 }
 
 
@@ -161,9 +172,10 @@ bot.on('ready', ()=>{
 
 }
 function hasRole(reactor){
-      if( reactor.roles.has('643063263478939661')) return true
+      if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')) return true
     }
 
+  
 })
 //Conquistas em direto
 
