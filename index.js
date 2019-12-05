@@ -758,7 +758,7 @@ function channelexists(channel){
 function getInfo(Title){
     let fixedTitleaux = Title.split(" ");
     let titleSize; 
-    for(var j = 0; i<fixedTitleaux.size; j++){
+    for(var j = 0; j<fixedTitleaux.size; j++){
          switch (fixedTitleaux[j]) {
              case "v":
                  titleSize = j-1;
