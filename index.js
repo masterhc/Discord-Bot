@@ -796,11 +796,12 @@ function getInfo(Title){
          }
      }
      console.log(GameTitle)
-     let count =0;
+    let finish = false;   
+    let count = 0;
      do{
         request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
         let games = JSON.parse(body);
-        let finish = false;  
+        
         for ( var i=0; i<games.length; i++) {
             if(games[i].tilte == GameTitle){
                 console.log("gameTitle="+GameTitle)
