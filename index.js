@@ -37,6 +37,7 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 //Start Up Log
 bot.on('ready', ()=>{
+
    
    var i = 0
    var tipo = [
@@ -94,11 +95,7 @@ bot.on('ready', ()=>{
             giveRole()       
         }, 60000);
     }
-/*
-    message.member.edit({
-        nick: 'Cool Name',
-        roles: []
-      })*/
+
     function giveRole(){
         console.log(checker)
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
@@ -108,27 +105,66 @@ bot.on('ready', ()=>{
             };
             message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
                     .then(collected => {
-                        const reaction = collected.first();
-                        console.log("Reaction added")
+                            const reaction = collected.first();
+                            console.log("Reaction added")
+                            
+                            reactor = reaction.users.first()
+                            console.log("reactor:"+reactor.id)
+                            if(hasPermission(reactor)){
+                                try{        
+                                    reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
+                                    console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name);
+                                }
+                                catch(error){console.error}
+                                finally{ console.log('done')}
+                            }else{
+                                reactor.send("Coloque o seu nome igual ao nick que tem na Legend.");
+                                console.log("!Permissions denied to"+reactor.reaction.message.guild.member(reactor).name);
+                            }
                         
-                        reactor = reaction.users.first()
-                        console.log("reactor:"+reactor.id)
-                        
-                        try{        
-                            reaction.message.guild.member(reactor).addRole('336235115782864906').catch(console.error);
-                            console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name)
                         }
-                        catch(error){console.error}
-                        finally{ console.log('done')}
-                    })
-                    .catch(console.error()); 
+                    ).catch(
+                        console.error()
+                    ); 
         }
        
     ).catch(console.error)
     timer();
     checker = checker +1;
     };
-});
+
+
+    function hasPermission(reactor){
+        request(`https://www.twstats.com/pt70/index.php?page=tribe&mode=members&id=9`, function(err, res, body){
+            if(!err){ 
+                    let document = JSON.parse(body);
+                try {
+                    if(document.querySelectorAll("table") !=null){
+                        console.log("working fine")
+                    }
+                } catch (error) {
+                    
+                    console.log("twStats is fucked")
+                    crackwatch();
+                }
+                for(let i =0; i<document.querySelectorAll("td a.playerlink").length; i++){
+                
+                if(reactor == document.querySelectorAll("td a.playerlink")[0].innerHTML || hasRole(reactor)== true){
+                    return true;
+                }
+                }
+
+
+            }
+    });   
+    
+
+}
+function hasRole(reactor){
+      if( reactor.roles.has('643063263478939661')) return true
+    }
+
+})
 //Conquistas em direto
 
 bot.on('ready',()=>{
@@ -720,66 +756,107 @@ function channelexists(channel){
 }
 
 function getInfo(Title){
-    
-    request('http://api.crackwatch.com/api/games', function(err, res, body){
+    let fixedTitleaux = Title.split(" ");
+    let titleSize; 
+    for(var j = 0; i<fixedTitleaux.size; j++){
+         switch (fixedTitleaux[j]) {
+             case "v":
+                 titleSize = j-1;
+                 break;
+             case "Update":
+                 titleSize = j-1;
+                 break;
+             case "DLC":
+             titleSize = j-1;
+                 break;
+             case "Episode":
+                 titleSize = j-1;
+                 break;
+             case "Season":
+                 titleSize = j-1;
+                 break;
+             
+         
+             default:
+                 break;
+         }
+    } 
+     let GameTitle;
+     for(var k=0; k<titleSize; k++){
+        
+         if(k==0){
+             
+             GameTitle= fixedTitleaux[j];
+             
+         }else if(k == titleSize){
+             
+            GameTitle =fixedTitle[k];
+         }else if(k<titleSize){
+             GameTitle = GameTitle + " "+ fixedTitleaux[k]
+         }
+     }
+     console.log(GameTitle)
+     let count =0;
+     do{
+        request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
         let games = JSON.parse(body);
-            let fixedTitleaux = Title.split(" ");
-           let titleSize; 
-            for(var j = 0; i<fixedTitleaux.size; j++){
-                switch (fixedTitleaux[j]) {
-                    case "v":
-                        titleSize = j-1;
-                        break;
-                    case "Update":
-                        titleSize = j-1;
-                        break;
-                    case "DLC":
-                    titleSize = j-1;
-                        break;
-                    case "Episode":
-                        titleSize = j-1;
-                        break;
-                    case "Season":
-                        titleSize = j-1;
-                        break;
-                    
-                
-                    default:
-                        break;
-                }
-            } 
-            let GameTitle;
-            for(var k=0; k<titleSize; k++){
-               
-                if(k==0){
-                    
-                    GameTitle= fixedTitleaux[j];
-                    
-                }else if(k == titleSize){
-                    
-                   GameTitle =fixedTitle[k];
-                }else if(k<titleSize){
-                    GameTitle = GameTitle + " "+ fixedTitleaux[k]
-                }
-            }
-
+        let finish = false;  
         for ( var i=0; i<games.length; i++) {
             if(games[i].tilte == GameTitle){
+                console.log("gameTitle="+GameTitle)
+                console.log("games.title="+games[i].title)
+
+                finish = true
                 return games[i];
             }
         }
-        
+      
         
        
         
-    });
+        }); 
+    count++;
+    }while(finish == true);
+    
+
 
 }
     
 
 
 
-}); // on Ready ending
+}); 
+bot.on('ready',()=>{
+    //Make the Leadership AFK room the reunion room
+    /*
+     to use in admin commands that need a user id (from a reaction) to do something (message.mentions.users.first().id)
+    */
+   timer();
+   function timer(){
+    setTimeout(()=>{
+        moveAFKs()       
+    }, 310000);
+}
+
+function moveAFKs(){
+    let membersCount = bot.channels.find('name', "🖮 AFK/DnD").members.size
+    let members = bot.channels.find('name', "🖮 AFK/DnD").members
+    for(let i =0; i<membersCount; i++){
+        if(isLeader(members[i])==true){
+            let member = members[i];
+            member.setVoiceChannel('334807373615071233')
+                    .then(() => console.log(`Moved ${member.displayName}`))
+                    .catch(console.error);
+        }
+    }
+}
+function isLeader(){
+    if(member.roles.has('334806160601382940')) return true
+}
+
+});
+
+// on Ready ending
 
 /*
 function musicCrawler(){
@@ -845,5 +922,3 @@ function remove(fileName, queue,guildID){
     fs.writeFileSync('queue['+guildID+'].json', stringified, 'utf-8');
 
 }*/
-
-
