@@ -100,6 +100,10 @@ bot.on('ready', ()=>{
 
     function giveRole(){
         console.log(checker)
+function hasRole(reactor){
+    if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')) return true
+}
+
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -182,17 +186,14 @@ function hasPermission(reactor){
         }
 
 }
-function hasRole(reactor){
-      if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')) return true
-    }
-
+}
   
-})
+});
 //Conquistas em direto
 
 bot.on('ready',()=>{
    // musicCrawler();
-    //giveRole();
+    
 
     crawler();
    function crawler(){
@@ -273,7 +274,7 @@ bot.on('ready',()=>{
         });
     }, 60000); 
    
-}
+
 
 
      function processcoord(nome){
@@ -639,6 +640,7 @@ bot.on('ready',()=>{
 }      
 
 
+}
 });
 
  
