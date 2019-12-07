@@ -142,12 +142,13 @@ bot.on('ready', ()=>{
     };
 
 
-    function hasPermission(reactor){
-        request(`https://www.twstats.com/pt70/index.php?page=tribe&mode=members&id=9`, function(err, res, body){
-            //Erro ao carregar o documento(ler)
-            let nomes = [];
+function hasPermission(reactor){
+    var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
+        //Para novos mundos também é necessário alterar o id da(s) tribo(s)
+    var mundo = world.mundo[0];
+     let nomes = [];   
+     request(`https://www.twstats.com/${mundo}/index.php?page=tribe&mode=members&id=9`, function(err, res, body){            
             if(!err){ 
-                    let document = JSON.parse(body);
                 try {
                     cheerio('a', 'table.widget', body).each(function(){                             
                         nomes.push(cheerio(this).text())
@@ -156,20 +157,29 @@ bot.on('ready', ()=>{
                     console.log("twStats is fucked")
                     crackwatch();
                 }
-
-                for(let i =0; i<nomes.length; i++){
-                    console.log("Ammount of members:"+nomes.length)
-
-                    if(reactor.reaction.message.guild.member(reactor).name == nomes[i]){
-                        console.log("match found:"+nomes[i])
-                        return true;
-                    }
-                }
-
-
             }
-    });   
-    
+
+
+        }
+    );  
+    request(`https://pt.twstats.com/${mundo}/index.php?page=tribe&mode=members&id=102`, function(err, res, body){
+        if(!err){
+            try {
+                cheerio("a", "table.widget", body).each(function(){
+                    nomes.push(cheerio(this).text())
+                })
+            } catch (error) {
+                console.log("TwStats is scuffed")
+            }
+        }
+    });
+    for(let i =0; i<nomes.length; i++){
+        console.log("Ammount of members:"+nomes.length)
+
+        if(reactor.reaction.message.guild.member(reactor).name == nomes[i]){
+            console.log("match found:"+nomes[i])
+            return true;
+        }
 
 }
 function hasRole(reactor){
