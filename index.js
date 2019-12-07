@@ -865,7 +865,7 @@ bot.on('ready',()=>{
 function moveAFKs(){
     let membersCount = bot.channels.find('name', "🖮 AFK/DnD").members.size
     let members = bot.channels.find('name', "🖮 AFK/DnD").members
-    console.log("Member list: " + members.)
+    console.log("Member list: " + members)
     for(let i =0; i<membersCount; i++){
         if(isLeader(members[i])==true){
             let member = members[i];
