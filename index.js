@@ -109,10 +109,10 @@ bot.on('ready', ()=>{
                     .then(collected => {
                             const reaction = collected.first();
                             console.log("Reaction added")
-                            
+                            console.log("reacotr: "+reactor)
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
-                            if(hasPermission(reactor)==true){
+                            if(hasPermission(reactor)==true || hasRole(reactor)== true){
                                 try{        
                                     reaction.message.guild.member(reactor)
                                     .addRole('336235115782864906')
@@ -144,23 +144,24 @@ bot.on('ready', ()=>{
 
     function hasPermission(reactor){
         request(`https://www.twstats.com/pt70/index.php?page=tribe&mode=members&id=9`, function(err, res, body){
+            //Erro ao carregar o documento(ler)
+            let nomes = [];
             if(!err){ 
                     let document = JSON.parse(body);
                 try {
-                    if(document.querySelectorAll("table") !=null){
-                        console.log("Got a table from the TWSTATS")
-                    }
-                } catch (error) {
-                    
+                    cheerio('a', 'table.widget', body).each(function(){                             
+                        nomes.push(cheerio(this).text())
+                             });
+                } catch (error) { 
                     console.log("twStats is fucked")
                     crackwatch();
                 }
 
-                for(let i =0; i<document.querySelectorAll("td a.playerlink").length; i++){
-                    console.log("Ammount of members:"+document.querySelectorAll("td a.player").length)
+                for(let i =0; i<nomes.length; i++){
+                    console.log("Ammount of members:"+nomes.length)
 
-                    if(reactor == document.querySelectorAll("td a.playerlink")[i].innerHTML || hasRole(reactor)== true){
-                        console.log("match found:"+document.querySelectorAll("td a.playerlink ")[i].innerHTML)
+                    if(reactor.reaction.message.guild.member(reactor).name == nomes[i]){
+                        console.log("match found:"+nomes[i])
                         return true;
                     }
                 }
@@ -205,16 +206,14 @@ bot.on('ready',()=>{
                   try {
                       cheerio('td', 'table.widget', body).each(function(){
                           let  coiso = cheerio(this).text();
+                          var points = cheerio(this).text();
+                            pointst.push(points);
                       })
                   } catch (error) {
                       console.log("error");
                       crawler();
                   }
-            cheerio('td','table.widget', body).each(function(){
-            var points = cheerio(this).text();
-            pointst.push(points);
-            
-        }); 
+             
         
         console.log('pointst '+pointst[1]);
          cheerio('a', 'table.widget', body).each(function(){
