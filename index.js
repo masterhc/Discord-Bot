@@ -876,7 +876,7 @@ function moveAFKs(){
         }
     }
 }
-function isLeader(){
+function isLeader(member){
     if(member.roles.has('334806160601382940')) return true
 }
 
