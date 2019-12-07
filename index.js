@@ -865,9 +865,11 @@ bot.on('ready',()=>{
 function moveAFKs(){
     let membersCount = bot.channels.find('name', "🖮 AFK/DnD").members.size
     let members = bot.channels.find('name', "🖮 AFK/DnD").members
+    console.log("Member list: " + members.)
     for(let i =0; i<membersCount; i++){
         if(isLeader(members[i])==true){
             let member = members[i];
+            console.log("leader: "+member.displayName);
             member.setVoiceChannel('334807373615071233')
                     .then(() => console.log(`Moved ${member.displayName}`))
                     .catch(console.error);
@@ -889,6 +891,8 @@ function musicCrawler(){
 let guildsSize = bot.guilds.size;
   var timeframe;
   //The way I have this right now it will only play one file at the time because the loop only advances after finishing its job
+    // And how is that a problem? likely it means it will only play a file per server, a server at a given time.
+
 
 for(let i=0; i<guildsSize;i++){
     let guildID = bot.guilds[i];
