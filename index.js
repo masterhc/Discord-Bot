@@ -166,7 +166,7 @@ bot.on('ready', ()=>{
         console.log(checker)
 
 
-
+        bot.channels.find('name', "🎴-crackwatch").then(console.log("channel found"))
     bot.channels.find('name', "🎴-crackwatch").fetchMessage(657807330238398485).then(
         message => { 
             const filter = (reaction) => {
