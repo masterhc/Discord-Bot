@@ -100,9 +100,8 @@ bot.on('ready', ()=>{
 
     function giveRole(){
         console.log(checker)
-function hasRole(reactor){
-    if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')) return true
-}
+
+
 
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
@@ -116,7 +115,8 @@ function hasRole(reactor){
                             console.log("reacotr: "+reactor)
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
-                            if(hasPermission(reactor)==true || hasRole(reactor)== true){
+                            
+                            if(hasRole(reactor.reaction.message.guild.member(reactor))== false){
                                 try{        
                                     reaction.message.guild.member(reactor)
                                     .addRole('336235115782864906')
@@ -129,9 +129,6 @@ function hasRole(reactor){
                                 finally{ console.log('done')}
                             }else if(hasRole(reactor)==true){
                                 console.log(reactor.reaction.message.name.guild.member(reactor).name+"tryed but got the role denied.")
-                            }else{
-                                reactor.send("Coloque o seu nome igual ao nick que tem na Legend.");
-                                console.log("!Permissions denied to"+reactor.reaction.message.guild.member(reactor).name);
                             }
                         
                         }
@@ -146,48 +143,12 @@ function hasRole(reactor){
     };
 
 
-function hasPermission(reactor){
-    var world = JSON.parse(fs.readFileSync('coiso.json', 'utf-8'));
-        //Para novos mundos também é necessário alterar o id da(s) tribo(s)
-    var mundo = world.mundo[0];
-     let nomes = [];   
-     request(`https://www.twstats.com/${mundo}/index.php?page=tribe&mode=members&id=9`, function(err, res, body){            
-            if(!err){ 
-                try {
-                    cheerio('a', 'table.widget', body).each(function(){                             
-                        nomes.push(cheerio(this).text())
-                             });
-                } catch (error) { 
-                    console.log("twStats is fucked")
-                    crackwatch();
-                }
-            }
 
 
-        }
-    );  
-    request(`https://pt.twstats.com/${mundo}/index.php?page=tribe&mode=members&id=102`, function(err, res, body){
-        if(!err){
-            try {
-                cheerio("a", "table.widget", body).each(function(){
-                    nomes.push(cheerio(this).text())
-                })
-            } catch (error) {
-                console.log("TwStats is scuffed")
-            }
-        }
-    });
-    for(let i =0; i<nomes.length; i++){
-        console.log("Ammount of members:"+nomes.length)
-
-        if(reactor.reaction.message.guild.member(reactor).name == nomes[i]){
-            console.log("match found:"+nomes[i])
-            return true;
-        }
-
-}
-}
-  
+function hasRole(reactor){
+    console.log("in hasrole")
+    if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')||reactor.roles.has('456822341025005580')||reactor.roles.has('336235115782864906')) {return true }else return false
+}   
 });
 //Conquistas em direto
 
