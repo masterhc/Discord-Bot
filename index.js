@@ -828,8 +828,8 @@ function moveAFKs(){
     let members = bot.channels.find('name', "🖮 AFK/DnD").members
     console.log("Member list: " + members)
     for(let i =0; i<membersCount; i++){
-        if(isLeader(members[i])==true){
-            let member = members[i];
+        let member = members[i];
+        if(isLeader(members[i])==true){            
             console.log("leader: "+member.displayName);
             member.setVoiceChannel('334807373615071233')
                     .then(() => console.log(`Moved ${member.displayName}`))
