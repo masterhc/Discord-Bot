@@ -180,7 +180,7 @@ bot.on('ready', ()=>{
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
                             
-                            if(hasRole(reactor.reaction.message.guild.member(reactor))== false){
+                            
                                 try{        
                                     reaction.message.guild.member(reactor)
                                     .addRole('642891554964635659')
@@ -191,9 +191,7 @@ bot.on('ready', ()=>{
                                     console.error
                                 }
                                 finally{ console.log('done')}
-                            }else if(hasRole(reactor)==true){
-                                console.log(reactor.reaction.message.name.guild.member(reactor).name+"tryed but got the role denied.")
-                            }
+                           
                         
                         }
                     ).catch(
@@ -209,10 +207,7 @@ bot.on('ready', ()=>{
 
 
 
-function hasRole(reactor){
-    console.log("in hasrole")
-    if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')||reactor.roles.has('456822341025005580')||reactor.roles.has('336235115782864906')) {return true }else return false
-}   
+
 });
 //Conquistas em direto
 
