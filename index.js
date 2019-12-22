@@ -165,9 +165,9 @@ bot.on('ready', ()=>{
     function giveRole(){
         console.log(checker)
 
-
-        bot.channels.find('name', "🎴-crackwatch").then(console.log("channel found"))
-    bot.channels.find('name', "🎴-crackwatch").fetchMessage(657807330238398485).then(
+//Diz não encontrar a mensagem
+        
+    bot.channels.find('name', "🎴-crackwatch").fetchMessage('657807330238398485').then(
         message => { 
             const filter = (reaction) => {
                 return ['👌'].includes(reaction.emoji.name);
