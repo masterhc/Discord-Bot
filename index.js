@@ -890,7 +890,7 @@ function moveAFKs(){
     console.log("Member list: " + members)
     for(let i =0; i<membersCount; i++){
         let member = members[i];
-        if(isLeader(members[i])==true){            
+        if(member.roles.has('334806160601382940')){            
             console.log("leader: "+member.displayName);
             member.setVoiceChannel('334807373615071233')
                     .then(() => console.log(`Moved ${member.displayName}`))
@@ -898,9 +898,7 @@ function moveAFKs(){
         }
     }
 }
-function isLeader(member){
-    if(member.roles.has('334806160601382940')) return true
-}
+
 
 });
 
