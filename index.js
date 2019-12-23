@@ -152,9 +152,8 @@ function hasRole(reactor){
 });
 
 bot.on('ready', ()=>{
-    console.log("coiso")
-    console.log("Canal crackwatch: "+bot.channels.find("id", '657806522243481619'))
-  /*   let checker = 0
+   
+   let checker = 0
     giveRole();
     function timer(){
         setTimeout(()=>{
@@ -166,10 +165,10 @@ bot.on('ready', ()=>{
     function giveRole(){
         console.log(checker)
 
-//Diz não encontrar a mensagem
+
 
        
-    bot.channels.find('name', "🎴-crackwatch").fetchMessage(657807330238398485).then(
+    bot.channels.find('id', ('657806522243481619')).fetchMessage('657807330238398485').then(
         message => { 
             const filter = (reaction) => {
                 return ['👌'].includes(reaction.emoji.name);
@@ -209,7 +208,7 @@ bot.on('ready', ()=>{
 
 
 
-*/
+
 });
 //Conquistas em direto
 
