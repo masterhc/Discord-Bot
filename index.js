@@ -152,21 +152,22 @@ function hasRole(reactor){
 });
 
 bot.on('ready', ()=>{
-    let checker = 0
+    console.log("Coleção de canais: "+bot.channels)
+  /*   let checker = 0
     giveRole();
     function timer(){
         setTimeout(()=>{
             giveRole()       
         }, 60000);
     }
-//Não mandou a dm
-//Nem deu a permissão
+
 
     function giveRole(){
         console.log(checker)
 
 //Diz não encontrar a mensagem
-        
+
+       
     bot.channels.find('name', "🎴-crackwatch").fetchMessage(657807330238398485).then(
         message => { 
             const filter = (reaction) => {
@@ -207,7 +208,7 @@ bot.on('ready', ()=>{
 
 
 
-
+*/
 });
 //Conquistas em direto
 
