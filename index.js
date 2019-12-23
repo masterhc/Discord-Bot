@@ -153,7 +153,7 @@ function hasRole(reactor){
 
 bot.on('ready', ()=>{
     console.log("coiso")
-    console.log("Coleção de canais: "+bot.channels.find("id",657806522243481619))
+    console.log("Canal crackwatch: "+bot.channels.find("id", '657806522243481619'))
   /*   let checker = 0
     giveRole();
     function timer(){
