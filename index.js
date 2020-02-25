@@ -211,7 +211,7 @@ bot.on('ready', ()=>{
 
 });
 //Conquistas em direto
-
+/*
 bot.on('ready',()=>{
    // musicCrawler();
     
@@ -664,7 +664,7 @@ bot.on('ready',()=>{
 }
 });
 
- 
+ */
 
 bot.on('ready',()=>{ 
     
