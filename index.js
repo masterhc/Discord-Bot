@@ -10,13 +10,13 @@ const cheerio = require('cheerio');
 
 const bot = new commando.Client();
 console.log(process.env.youtubeKey);
-/*music.start(bot,{
-youtubeKey = process.env.youtubeKey,
-defVolume = 75,
-musicPresence = true,
+music.start(bot,{
+youtubeKey: process.env.youtubeKey,
+defVolume: 75,
+musicPresence: true,
 
 });
-*/
+
  
 bot.login(process.env.discord_token);
 
