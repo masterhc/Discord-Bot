@@ -2,7 +2,7 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const Music = require('discord.js-musicbot-addon')
+const music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
 
@@ -10,10 +10,16 @@ const cheerio = require('cheerio');
 
 const bot = new commando.Client();
 
+music.start(bot,{
+youtubeKey = process.env.youtubeKey,
+defVolume = 75,
+musicPresence = true,
 
+});
 
  
 bot.login(process.env.discord_token);
+
 
 
 
@@ -31,6 +37,7 @@ bot.registry.registerGroup('pesquisa', 'Pesquisa');
 bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
+
 
 
 
