@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "ascii-table": "0.0.9",
-    "axios": "^0.16.2",
+    "axios": "^0.18.1",
     "bufferutil": "^3.0.5",
     "cheerio": "^1.0.0-rc.2",
     "crackwatch": "^1.0.0",
