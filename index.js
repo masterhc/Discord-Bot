@@ -2,18 +2,20 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const music = require('discord.js-musicbot-addon')
+const Music = require('discord.js-musicbot-addon')
 const fs = require('fs');
 const cheerio = require('cheerio');
 
 
 
 const bot = new commando.Client();
-bot.guilds.forEach
-    music.start(bot, {
+bot.guilds.forEach(
+        music = new Music(bot, {
         youtubeKey: process.env.youtubeKey,
-        defVolume: 75,
-    });
+        defVolume: 75
+      })
+      
+);
 
 bot.login(process.env.discord_token);
 
