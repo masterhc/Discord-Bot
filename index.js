@@ -12,9 +12,10 @@ const bot = new commando.Client();
 
 music = new Music(bot, {
     youtubeKey: process.env.youtubeKey,
-    defVolume: 75
+    defVolume: 75,
+    enableQueueStat:true
 })
-      
+   
 
 
 bot.login(process.env.discord_token);
