@@ -154,7 +154,7 @@ bot.on('ready', ()=>{
 // Give Role => CrackWatch
 function hasRole(reactor){
     console.log("in hasrole")
-    if( reactor.roles.has('643063263478939661')||reactor.roles.has('450772952095391744')||reactor.roles.has('456822341025005580')||reactor.roles.has('336235115782864906')) {return true }else return false
+    if( reactor.roles.has('334461623307730946') || reactor.roles.has("342744569676562443")) {return true }else return false
 }   
 });
 
