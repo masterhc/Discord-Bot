@@ -13,7 +13,15 @@ const bot = new commando.Client();
 music = new Music(bot, {
     youtubeKey: process.env.youtubeKey,
     defVolume: 75,
-    enableQueueStat:true
+    enableQueueStat:true,
+    global: true,            // Non-server-specific queues.
+    maxQueueSize: 25,        // Maximum queue size of 25.
+    clearInvoker: true,      // If permissions applicable, allow the bot to delete the messages that invoke it.
+    helpCmd: 'mhelp',        // Sets the name for the help command.
+    playCmd: 'play',        // Sets the name for the 'play' command.
+    volumeCmd: 'volume',     // Sets the name for the 'volume' command.
+    leaveCmd: 'leave',      // Sets the name for the 'leave' command.
+    disableLoop: true        // Disable the loop command.
 })
    
 
