@@ -11,7 +11,7 @@ const cheerio = require('cheerio');
 const bot = new commando.Client();
 
 music.start(bot,{
-youtubeKey = process.env.youtubeKey,
+youtubeKey = `${process.env.youtubeKey}`,
 defVolume = 75,
 musicPresence = true,
 
