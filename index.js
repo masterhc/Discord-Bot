@@ -389,12 +389,14 @@ function getInfo(Title){
     let finish = false;   
     let count = 0;
      do{
-         console.log("chegou aqui")
+         
         request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
         let games = JSON.parse(body);
         
         for ( var i=0; i<games.length; i++) {
+            console.log("chegou aqui (for games length)")
             if(games[i].tilte == Title){
+                console.log("chegou aqui for games.lengh{verification}")
                 console.log("gameTitle="+Title)
                 console.log("games.title="+games[i].title)
 
