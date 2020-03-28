@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const fs = require('fs');
 
-    class CoinFlip extends commando.Command{
+    class Guilds extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'guilds',
@@ -25,4 +25,4 @@ const fs = require('fs');
 
           
     
-    }module.exports = CoinFlip;
+    }module.exports = Guilds;

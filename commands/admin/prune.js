@@ -3,7 +3,7 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 
-    class testeCommand extends commando.Command{
+    class prune extends commando.Command{
         constructor(client){
             super(client, {
                 name: 'prune',
@@ -68,4 +68,4 @@ const Discord = require('discord.js');
 
 
         }
-}module.exports = testeCommand;
+}module.exports = prune;
