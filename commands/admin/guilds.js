@@ -1,4 +1,5 @@
 const commando = require('discord.js-commando');
+const Discord = require('discord.js');
 const fs = require('fs');
 
     class Guilds extends commando.Command{
