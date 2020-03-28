@@ -257,7 +257,7 @@ bot.on('ready',()=>{
              let fetchedCrack = JSON.parse(body);
          try {
              if(fetchedCrack[0] !=null){
-                 console.log("working fine")
+                
              }
          } catch (error) {
              
@@ -308,15 +308,14 @@ bot.on('ready',()=>{
 
 
     }
-    console.log("fetchedcrack[0]: ")
-    console.log(fetchedCrack[0])
-    console.log("newobject.title: "+newObject.sceneGroup)
+   
     
           let output = JSON.stringify(newObject);  
+          console.log("before crack check")
         if(crackcheck(correctedTitle)){
           
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
-       
+            
             
         sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
          crackwatch();
@@ -333,9 +332,11 @@ bot.on('ready',()=>{
    
      
      function crackcheck(correctedTitle){
+         console.log("inside crack Check")
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-      
+        console.log("Save crack parsed")
         
+        console.log("correctedTitle: " +correctedTitle + " saved crack.title: " + savedCrack.title);
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
