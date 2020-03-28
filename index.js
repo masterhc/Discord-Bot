@@ -298,14 +298,14 @@ bot.on('ready',()=>{
             correctedTitle = fetchedCrack[0].title;
         }
         //Title comes out ok
-    let newObject = {
+    let newObject = [{
     "title":correctedTitle,
     "sceneGroup":fetchedCrack[0].sceneGroup,
     "date":fetchedCrack[0].date,
     "image":fetchedCrack[0].image
 
 
-    }
+    }]
     console.log(fetchedCrack[0])
     console.log("newobject.title: "+newObject)
     
