@@ -306,7 +306,7 @@ bot.on('ready',()=>{
 
 
     }
-    console.log("newobject.title: "+newObject.title)
+    console.log("newobject.title: "+newObject.sceneGroup)
     
           let output = JSON.stringify(newObject);  
         if(crackcheck(correctedTitle)){
@@ -340,9 +340,9 @@ bot.on('ready',()=>{
            var image;
             const embed = new Discord.RichEmbed
             if(arg2 != null){ 
-                image = arg2[0].imagePoster;
-                embed.setThumbnail(arg[2].image);
-                embed.addField('Steam:',`[${arg3}](${arg2[0].Steam})`);
+                image = arg2.imagePoster;
+                embed.setThumbnail(arg2.image);
+                embed.addField('Steam:',`[${arg3}](${arg2.Steam})`);
 
             }else{
                 image = arg.image
@@ -367,12 +367,12 @@ bot.on('ready',()=>{
                   
 
                     if(channelexists(channelsfile.channels[i])){
-                   bot.channels.get(channelsfile.channels[i]).send({embed});
+                        bot.channels.get(channelsfile.channels[i]).send({embed});
                     }
                   
-                    }
+                }
                 
-              
+                
 
         }
 
@@ -382,46 +382,7 @@ function channelexists(channel){
 }
 
 function getInfo(Title){
-    let fixedTitleaux = Title.split(" ");
-    let titleSize; 
-    for(var j = 0; j<fixedTitleaux.size; j++){
-         switch (fixedTitleaux[j]) {
-             case "v":
-                 titleSize = j-1;
-                 break;
-             case "Update":
-                 titleSize = j-1;
-                 break;
-             case "DLC":
-             titleSize = j-1;
-                 break;
-             case "Episode":
-                 titleSize = j-1;
-                 break;
-             case "Season":
-                 titleSize = j-1;
-                 break;
-             
-         
-             default:
-                 break;
-         }
-    } 
-     let GameTitle;
-     for(var k=0; k<titleSize; k++){
-        
-         if(k==0){
-             console.log("fixed title aux"+ fixedTitleaux[j])
-             GameTitle= fixedTitleaux[j];
-             
-         }else if(k == titleSize){
-             
-            GameTitle =fixedTitle[k];
-         }else if(k<titleSize){
-             GameTitle = GameTitle + " "+ fixedTitleaux[k]
-         }
-     }
-     console.log(GameTitle)
+    
     let finish = false;   
     let count = 0;
      do{
@@ -429,8 +390,8 @@ function getInfo(Title){
         let games = JSON.parse(body);
         
         for ( var i=0; i<games.length; i++) {
-            if(games[i].tilte == GameTitle){
-                console.log("gameTitle="+GameTitle)
+            if(games[i].tilte == Title){
+                console.log("gameTitle="+Title)
                 console.log("games.title="+games[i].title)
 
                 finish = true
@@ -442,8 +403,8 @@ function getInfo(Title){
        
         
         }); 
-    count++;
-    }while(finish == true);
+        count++;
+    }while(finish == false);
     
 
 
