@@ -54,7 +54,9 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 bot.on('ready', ()=>{
     //log servers
     let guildinfo = {
-        guilds:""
+       "guilds":[
+
+        ]
     }
 
     for(i=0;i<bot.guilds.size+1;i++){
