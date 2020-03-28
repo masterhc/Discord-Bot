@@ -300,14 +300,14 @@ bot.on('ready',()=>{
         //Title comes out ok
     let newObject = [{
     "title":correctedTitle,
-    "sceneGroup":fetchedCrack[0].sceneGroup,
+    "sceneGroup":fetchedCrack[0].groupName,
     "date":fetchedCrack[0].date,
     "image":fetchedCrack[0].image
 
 
     }]
     console.log(fetchedCrack[0])
-    console.log("newobject.title: "+newObject)
+    console.log("newobject.title: "+newObject.sceneGroup)
     
           let output = JSON.stringify(newObject);  
         if(crackcheck(correctedTitle)){
