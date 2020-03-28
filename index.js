@@ -53,7 +53,7 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     //log servers
-    console.log(new Map(bot.guilds))
+    console.log(new Map(bot.guilds[0]).guild.name)
     let guildinfo = {
        "guilds":[
 
@@ -266,11 +266,11 @@ bot.on('ready',()=>{
          }
          
          
-        console.log("fetchedcrack.title: "+fetchedCrack[0].title)
+    
          let correctedTitleArray = fetchedCrack[0].title.split(".");
-         console.log("correctedTitleArray: "+correctedTitleArray) 
+
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
-         console.log("correctedEnding: " + correctedEnding)
+        
          if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0){
             correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
          }
@@ -297,7 +297,7 @@ bot.on('ready',()=>{
         }else{
             correctedTitle = fetchedCrack[0].title;
         }
-        console.log("correctedTile: "+ correctedTitle)
+        //Title comes out ok
     let newObject = {
     "title":correctedTitle,
     "sceneGroup":fetchedCrack[0].sceneGroup,
@@ -306,6 +306,7 @@ bot.on('ready',()=>{
 
 
     }
+    console.log("newobject.title: "+newObject.title)
     
           let output = JSON.stringify(newObject);  
         if(crackcheck(correctedTitle)){
@@ -329,7 +330,9 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-   
+        console.log("savedCrack: "+savedCrack)
+        console.log("savedCrack.title: "+savedCrack.title)
+        
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
@@ -345,7 +348,7 @@ bot.on('ready',()=>{
             }else{
                 image = arg.image
             }
-                
+                console.log("Messaged title: "+arg.title)
                 embed.setTitle(arg.title)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
