@@ -266,9 +266,11 @@ bot.on('ready',()=>{
          }
          
          
-        
-         let correctedTitleArray = fetchedCrack[0].title.split("."); 
+        console.log("fetchedcrack.title: "+fetchedCrack[0].title)
+         let correctedTitleArray = fetchedCrack[0].title.split(".");
+         console.log("correctedTitleArray: "+correctedTitleArray) 
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
+         console.log("correctedEnding: " + correctedEnding)
          if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0){
             correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
          }
@@ -295,6 +297,7 @@ bot.on('ready',()=>{
         }else{
             correctedTitle = fetchedCrack[0].title;
         }
+        console.log("correctedTile: "+ correctedTitle)
     let newObject = {
     "title":correctedTitle,
     "sceneGroup":fetchedCrack[0].sceneGroup,
