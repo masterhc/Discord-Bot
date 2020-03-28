@@ -11,6 +11,7 @@
 <h2>!clearchat</h2>
 <p>Apaga as últimas 99 mensagens, apaga também a mensagem de chamada.</p>
 <p>Pode ser usado com argumentos, usando um id de mensagem, esta pode ser excluída da seleção de mensagens a apagar.</p>
+
 <h1>Imagem</h1>
 <p>Apresentam imagens de anime sobre o tema referente.</p>
 <h2>!cry</h2>
@@ -79,26 +80,7 @@
 <h2>!teste</h2>
 <p>Este comando é apenas usado par o desenvolvimento de novos comandos. É aconselhado guardar uma cópia do estado original do comando no momento da sua alteração.</p>
 
-<h1>Tribos</h1>
-<p>Estes comandos são direcionados ao jogo de browser www.tribos.com.pt .</p>
-<h2>!clearfilter</h2>
-<p>Limpa o filtro de continente.</p>
-<h2>!planner</h2>
-<p>Diz o dia em que é preciso enviar um ataque numa determinada aldeia, dependendo da unidade mais lenta. O dia é calculado com base nas horas a que o comando é usado. Este comando só funciona com argumentos.</p>
-<p>Uma forma de utilização seria:</p>
-<p>!planner 200 300 400 500 nobre</p>
-<h2>!remminder</h2>
-<p>Avisa 5 minutos antes da hora marcada com a mensagem predefinida na chamada. Este comando só funciona com argumentos.</p>
-<p>Uma possivel forma de utilização seria:</p>
-<p>!remminder 12:12 2</p>
-<h2>!setkfilter</h2>
-<p>Altera o filtro de continente que está a ser utilizado no canal conquistas ao vivo.</p>
-<h2>!setworld</h2>
-<p>Altera o filtro de mundo que está a ser utilizado no canal conquistas ao vivo.</p>
-<h2>!world</h2>
-<p>Mostra o filtro de mundo que está a ser utilizado no canal conquistas ao vivo.</p>
-<h2>!kfilter</h2>
-<p>Mostra o filtro de continente que está a ser utilizado no canal conquistas ao vivo.</p>
+
 
 # Creditos
 <h3>Todos os direitos de autor de cada parte de código pertence aos respetivos.</h3>

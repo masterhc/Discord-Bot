@@ -3,11 +3,10 @@ Purge by servers
 Acept multiple servers
 
 
-only purge members with member role
-only purge if member doesn't have an eaqueal name
-if permission NickAllowed is found then purge doens't affect said member
+Purge roleless members? 
+Purge inactive members?
+Purge specific role?
 
-finding tribe member list...?
 
 
 

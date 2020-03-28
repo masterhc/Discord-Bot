@@ -10,17 +10,18 @@ const fs = require('fs');
                 name: 'setcrackwatchchannel',
                 group:'admin',
                 memberName: 'setcrackwatchchannel',
-                description: 'Na possibilidade de partir o bot ao meio, é só não usar se faz favor.'
+                description: 'Este comando irá usar o canal indicado para mostrar os updates do site crackwatch. É necessário voltar a usar este comando cada vez que o bot tem uma atialização.'
 
             })
         }
         async run(message, args){
-          
+          //start channel array var
             var basemodel = {
                 "channels":[
 
                 ]
             }    
+            //fill channel array var
             let base = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
        
                             let novo = args[1];
@@ -35,10 +36,10 @@ const fs = require('fs');
                             basemodel.channels.push(args[1])
                             let output = JSON.stringify(basemodel);  
                           
-                          
+            //Check admin privilege
             if(isAdmin()==true){
                         if(hasArgs()==true){
-                                                          
+                            //add crackwatch channel to the list                              
                             fs.writeFileSync('channels.json', output, 'utf-8');
                             sendMessage(0, novo);
                           
@@ -55,12 +56,13 @@ const fs = require('fs');
             }
 
 
-
+//actualy admin check
  function isAdmin(){
     if(message.member.id==='186540961650835456') return true;
                 
     if (message.member.has('ADMINISTRATOR')) return true;
  }
+ //Message sending function
  function sendMessage(modifier,channel2){
      const embed = new Discord.RichEmbed 
      embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
@@ -92,6 +94,8 @@ const fs = require('fs');
     
   message.channel.send({embed});
  }
+
+ //check for complete command
  function hasArgs(){
 
     if (args[1]!=null) return true

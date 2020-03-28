@@ -14,6 +14,7 @@ const Discord = require('discord.js');
             })
         }
         async run(message, args){
+            //Check administration privilege
             if(isAdmin()){
 
                 let name = message.channel.name;
@@ -28,6 +29,7 @@ const Discord = require('discord.js');
                 
                             
             }else{
+                //if privilege isn't present send a error message
                 sendMessage();
             }
         
@@ -36,7 +38,7 @@ const Discord = require('discord.js');
             
             
             
-            
+            //error message sending function
             function sendMessage(){
             
                 const embed = new Discord.RichEmbed();            
@@ -44,7 +46,7 @@ const Discord = require('discord.js');
                 embed.setColor(0x27e33d);
                 embed.setThumbnail('https://i.imgur.com/g6FSNhL.png');
              
-                        embed.addField('Erro:',message.author.username+', não tem permissões para usar este comando');
+                        embed.addField('Erro 403:',message.author.username+', não tem permissões para usar este comando');
                         
                         message.channel.send({embed}); 
                 }
@@ -52,7 +54,7 @@ const Discord = require('discord.js');
             
             
             
-            
+            //actual administratrion check
             function isAdmin(){
          
           

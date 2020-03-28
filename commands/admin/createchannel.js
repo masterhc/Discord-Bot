@@ -13,11 +13,13 @@ const Discord = require('discord.js');
 
             })
         }
+        
         async run(message, args){
-           if(isAdmin()){ let server = message.guild
+        //Check admin privilege 
+        if(isAdmin()){ let server = message.guild
             args=message.content.split(/\s+/g);
             var name;
-         
+            //break the command into the usable info.
             var messageSplit = message.content.split(' ');
               for(var i=1;i<messageSplit.length; i++){
                  if (i===1) {
@@ -27,15 +29,17 @@ const Discord = require('discord.js');
                }
                
             };
-
-             console.log('server '+server);
-             console.log('name '+name)
-           
-                server.createChannel(name, 'text');
-            
+            //log the creation of a new channel.
+           console.log("Creatina a new channel on server:"+server+" with the name:"+name+".");
+           //Actually create the channel.
+           server.createChannel(name, 'text');
+        
            sendMessage(name)
         }else{message.channel.send("Necessita de premissões de administrador para usar este comando.")}
-            function sendMessage(name){
+       
+        //Send message confirming the creation of said new channel.
+
+        function sendMessage(name){
                 const embed = new Discord.RichEmbed
                 embed.setTitle('Novo canal criado ')
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
@@ -53,7 +57,10 @@ const Discord = require('discord.js');
                 
               message.channel.send({embed});
             }
-            function isAdmin(){
+
+        //actual Administration check
+        
+        function isAdmin(){
                 if(message.member.id==='186540961650835456') return true;
                 
                 if (message.member.has('ADMINISTRATOR')) return true;
