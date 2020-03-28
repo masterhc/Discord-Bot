@@ -389,6 +389,7 @@ function getInfo(Title){
     
     let finish = false;   
     let count = 0;
+    console.log("just before verification")
      do{
          
         request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
@@ -403,18 +404,17 @@ function getInfo(Title){
 
                 finish = true
                 return games[i];
-            }else if(count > 50){
-                finish=false
-                return null
             }
         }
       
         
-       
+       if(count==49){
+           console.log("count at 49, stoping search")
+       }
         
         }); 
         count++;
-    }while(finish == false);
+    }while(count < 50);
     
 
 
