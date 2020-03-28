@@ -297,16 +297,18 @@ bot.on('ready',()=>{
         }else{
             correctedTitle = fetchedCrack[0].title;
         }
+
+        console.log("correctedTitle: " + correctedTitle)
         //Title comes out ok
-    let newObject = [{
+    let newObject = {
     "title":correctedTitle,
     "sceneGroup":fetchedCrack[0].groupName,
     "date":fetchedCrack[0].date,
     "image":fetchedCrack[0].image
 
 
-    }]
-    console.log(fetchedCrack[0])
+    }
+    console.log("fetchedcrack[0]: "+fetchedCrack[0])
     console.log("newobject.title: "+newObject.sceneGroup)
     
           let output = JSON.stringify(newObject);  
@@ -387,6 +389,7 @@ function getInfo(Title){
     let finish = false;   
     let count = 0;
      do{
+         console.log("chegou aqui")
         request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
         let games = JSON.parse(body);
         
