@@ -402,6 +402,9 @@ function getInfo(Title){
 
                 finish = true
                 return games[i];
+            }else if(count > 50){
+                finish=false
+                return null
             }
         }
       
