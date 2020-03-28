@@ -52,8 +52,18 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 //Start Up Log
 bot.on('ready', ()=>{
+    //log servers
+    let guildinfo = {
+        guilds:""
+    }
 
-   
+    for(i=0;i<bot.guilds.size+1;i++){
+        guildinfo.guilds.push(guilds[i].id)
+    }
+    fs.writeFileSync('guilds.json', guildinfo, 'utf-8');
+
+
+    //change game presence
    var i = 0
    var tipo = [
        'PLAYING',
@@ -390,7 +400,7 @@ function getInfo(Title){
      for(var k=0; k<titleSize; k++){
         
          if(k==0){
-             
+             console.log("fixed title aux"+ fixedTitleaux[j])
              GameTitle= fixedTitleaux[j];
              
          }else if(k == titleSize){
