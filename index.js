@@ -311,7 +311,7 @@ bot.on('ready',()=>{
    
     
           let output = JSON.stringify(newObject);  
-          console.log("before crack check")
+          
         if(crackcheck(correctedTitle)){
           
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
@@ -332,11 +332,11 @@ bot.on('ready',()=>{
    
      
      function crackcheck(correctedTitle){
-         console.log("inside crack Check")
+       
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-        console.log("Save crack parsed")
         
-        console.log("correctedTitle: " +correctedTitle + " saved crack.title: " + savedCrack.title);
+        
+        console.log("CrackCheck:correctedTitle: " +correctedTitle + "  saved crack.title: " + savedCrack.title);
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
@@ -356,8 +356,8 @@ bot.on('ready',()=>{
                 embed.setTitle(arg3)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
-                embed.setDescription("Jogo crackeado por "+arg.sceneGroup)
-                embed.addField('Data do crack:',arg.date)
+                embed.setDescription("Jogo crackado por "+arg.groupName)
+                embed.addField('Data do crack:',arg.date.split("T")[0])
 
                 embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
 
@@ -390,18 +390,16 @@ function getInfo(Title){
     
     let finish = false;   
     let count = 0;
-    console.log("just before verification")
+    
      do{
          
         request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
         let games = JSON.parse(body);
         
         for ( var i=0; i<games.length; i++) {
-            console.log("chegou aqui (for games length)")
+              
             if(games[i].tilte == Title){
-                console.log("chegou aqui for games.lengh{verification}")
-                console.log("gameTitle="+Title)
-                console.log("games.title="+games[i].title)
+                console.log("found match")
 
                 finish = true
                 return games[i];
