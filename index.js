@@ -58,7 +58,7 @@ bot.on('ready', ()=>{
     }
 
     for(i=0;i<bot.guilds.size+1;i++){
-        guildinfo.guilds.push(guilds[i].id)
+        guildinfo.guilds.push(guilds[i].name)
     }
     fs.writeFileSync('guilds.json', guildinfo, 'utf-8');
 

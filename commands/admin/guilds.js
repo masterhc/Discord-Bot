@@ -12,9 +12,10 @@ const fs = require('fs');
             })
         }
         async run(message, args){
-            let guilds=JSON.parse(fs.readFileSync('guilds.json', 'utf-8'));
-            console.log("guilds"+guilds);´
-            
+            let guilds=JSON.parse(fs.readFileSync('guilds.json', 'utf-8')).guilds;
+            for(i=0;i<=guilds.size; i++){
+                console.log("guilds"+guilds[i]);
+            }
 
 
     }
