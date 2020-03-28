@@ -16,9 +16,9 @@ const fs = require('fs');
             console.log("guilds:")
             console.log(guilds)
             //for(i=0;i<=guilds.size; i++){
-                console.log("guilds"+guilds[i]);
                 
-            }
+                
+            //}
 
 
     }
