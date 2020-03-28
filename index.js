@@ -330,8 +330,8 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-        console.log("savedCrack: "+savedCrack)
-        console.log("savedCrack.title: "+savedCrack.title)
+        console.log("savedCrack: "+savedCrack[0])
+        console.log("savedCrack.title: "+savedCrack[0].title)
         
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
