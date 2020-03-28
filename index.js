@@ -58,9 +58,10 @@ bot.on('ready', ()=>{
     }
 
     for(i=0;i<bot.guilds.size+1;i++){
-        guildinfo.guilds.push(guilds[i].name)
-    }
-    fs.writeFileSync('guilds.json', guildinfo, 'utf-8');
+        guildinfo.guilds.push(bot.guilds[i].name)
+    } 
+    let outputGuilds =  JSON.stringify(guildinfo);  
+    fs.writeFileSync('guilds.json', outputGuilds, 'utf-8');
 
 
     //change game presence
