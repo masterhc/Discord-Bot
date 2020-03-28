@@ -53,7 +53,7 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     //log servers
-    console.log(bot.guilds)
+    console.log(bot.guilds.name)
     let guildinfo = {
        "guilds":[
 
@@ -63,6 +63,7 @@ bot.on('ready', ()=>{
     for(i=0;i<bot.guilds.size+1;i++){
         guildinfo.guilds.push(bot.guilds[i])
     } 
+
     let outputGuilds =  JSON.stringify(guildinfo);  
 
     fs.writeFileSync('guilds.json', outputGuilds, 'utf-8');
