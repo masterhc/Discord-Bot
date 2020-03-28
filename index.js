@@ -314,7 +314,7 @@ bot.on('ready',()=>{
             fs.writeFileSync('crackwatch.json', output, 'utf-8');
        
             
-        sendMessage(fetchedCrack[0], getInfo(correctedTitle));
+        sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
          crackwatch();
         }else{crackwatch()}
     }else{
@@ -330,26 +330,25 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
       let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
-        console.log("savedCrack: "+savedCrack[0])
-        console.log("savedCrack.title: "+savedCrack[0].title)
+      
         
         if(correctedTitle !=savedCrack.title)return true;
         else return false;
     }
 
-        function sendMessage(arg, arg2){
+        function sendMessage(arg, arg3, arg2){
            var image;
             const embed = new Discord.RichEmbed
             if(arg2 != null){ 
                 image = arg2[0].imagePoster;
                 embed.setThumbnail(arg[2].image);
-                embed.addField('Steam:',`[${arg.title}](${arg2[0].Steam})`);
+                embed.addField('Steam:',`[${arg3}](${arg2[0].Steam})`);
 
             }else{
                 image = arg.image
             }
-                console.log("Messaged title: "+arg.title)
-                embed.setTitle(arg.title)
+               
+                embed.setTitle(arg3)
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
                 embed.setDescription("Jogo crackeado por "+arg.sceneGroup)
