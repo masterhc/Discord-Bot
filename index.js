@@ -308,7 +308,8 @@ bot.on('ready',()=>{
 
 
     }
-    console.log("fetchedcrack[0]: "+fetchedCrack[0])
+    console.log("fetchedcrack[0]: ")
+    console.log(fetchedCrack[0])
     console.log("newobject.title: "+newObject.sceneGroup)
     
           let output = JSON.stringify(newObject);  
