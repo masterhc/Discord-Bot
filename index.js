@@ -53,7 +53,7 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     //log servers
-    console.log(new Map(bot.guilds[0]).guild.name)
+   // console.log(new Map(bot.guilds[0]).guild.name)
     let guildinfo = {
        "guilds":[
 
