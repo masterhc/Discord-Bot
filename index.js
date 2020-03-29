@@ -56,7 +56,7 @@ bot.on('ready', ()=>{
  let outputGuilds =  JSON.stringify(bot.guilds);  
 
     fs.writeFileSync('guilds.json', outputGuilds, 'utf-8');
-
+    console.log(outputGuilds)
 
     //change game presence
    var i = 0
