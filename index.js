@@ -58,7 +58,7 @@ bot.on('ready', ()=>{
     // Split the info into the usefull bits
     var usefullInfo = process(baseServerInfo);
     console.log("bot.guild:")
-    console.log(bot.guild[1])
+    console.log(bot.guild)
     console.log("teste: ");
     console.log(bot.guilds.resolve(bot.guilds[0]))
     //Actual Split function
