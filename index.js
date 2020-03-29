@@ -58,7 +58,8 @@ bot.on('ready', ()=>{
     // Split the info into the usefull bits
     var usefullInfo = process(baseServerInfo);
      for(var [key, values] of bot.guilds){
-         console.log("keys: "+ keys)
+         console.log("keys: ")
+         console.log(key)
          console.log("values: ")
          console.log(values)
      }
