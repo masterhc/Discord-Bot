@@ -53,10 +53,18 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     //log servers
- let outputGuilds =  JSON.stringify(bot.guilds);  
-
-    fs.writeFileSync('guilds.json', outputGuilds, 'utf-8');
-    console.log(outputGuilds)
+    //Base server info
+    var  baseServerInfo = bot.guilds;
+    // Split the info into the usefull bits
+    var usefullInfo = process(baseServerInfo);
+    console.log("bot.guild:")
+    console.log(bot.guild[1])
+    console.log("teste: ");
+    console.log(bot.guilds.resolve(bot.guilds[0]))
+    //Actual Split function
+    function process(arg){
+        
+    }
 
     //change game presence
    var i = 0
