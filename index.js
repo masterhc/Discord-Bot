@@ -53,21 +53,21 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 //Start Up Log
 bot.on('ready', ()=>{
     //log servers
-    //Base server info
-    var  baseServerInfo = bot.guilds;
-    // Split the info into the usefull bits
-    var usefullInfo = process(baseServerInfo);
-     for(var [key, values] of bot.guilds){
-         console.log("keys: ")
-         console.log(key)
-         console.log("values: ")
-         console.log(values)
-     }
-    //Actual Split function
-    function process(arg){
-        
-    }
+    // Remove the wanted information of the guilds map.
+    
+    GuildsModel={//model for saving on a file
+        "names":[
 
+        ]
+    }
+  
+     for(var [key, values] of bot.guilds){
+       GuildsModel.names.push(values.name)
+     } 
+
+      let GuildsO = JSON.stringify(GuildsModel);  //stringify for file saving reasons
+    //Send it to a file so it can be searched with another command.
+    fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file
     //change game presence
    var i = 0
    var tipo = [
