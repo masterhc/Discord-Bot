@@ -11,7 +11,7 @@ const bot = new commando.Client();
 
 const musicPlayer = new MusicClient(process.env.youtubeKey, options = {
         earProtections: true,
-        loop: false,
+        loop: true,
         songChooseTimeout: 10,
         volume: 40
     })
