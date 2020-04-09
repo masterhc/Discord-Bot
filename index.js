@@ -1,29 +1,58 @@
-
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const Music = require('discord.js-musicbot-addon')
-const fs = require('fs');
-const cheerio = require('cheerio');
 
+const fs = require('fs');
+const MusicClient = require("discord-music-wrapper")
 
 
 const bot = new commando.Client();
 
-music = new Music(bot, {
-    youtubeKey: process.env.youtubeKey,
-    defVolume: 75,
-    enableQueueStat:true,
-    global: true,            // Non-server-specific queues.
-    maxQueueSize: 50,        // Maximum queue size of 25.
-    clearInvoker: true,      // If permissions applicable, allow the bot to delete the messages that invoke it.
-    helpCmd: 'mhelp',        // Sets the name for the help command.
-    playCmd: 'play',        // Sets the name for the 'play' command.
-    volumeCmd: 'volume',     // Sets the name for the 'volume' command.
-    leaveCmd: 'leave',      // Sets the name for the 'leave' command.
-    disableLoop: true        // Disable the loop command.
-})
+
+const musicPlayer = new MusicClient(process.env.youtubeKey, options = {
+        earProtections: true,
+        loop: false,
+        songChooseTimeout: 10,
+        volume: 40
+    })
+
+bot.on("message", (message)=>{
+    console.log("message: "+ message)
+    var searchArray 
+
    
+    var key = message.toString().split(" ");
+    console.log(key)
+        switch (key[0]){
+            case "!play":
+                musicPlayer.play(message, searchArray);
+            break;
+            case "!top":
+                musicPlayer.stop(message);
+            break;
+            case "!nowPlaying":
+                musicPlayer.nowPlaying(message);
+            break;
+            case "!queue":
+                musicPlayer.showQueue(message);
+            break;
+            case "!skip":
+                musicPlayer.skip(message);
+            break;
+            case "!pause":
+                musicPlayer.pause(message);
+            break;
+            case "!remove":
+                musicPlayer.remove(message);
+            break;
+            case "!repeat":
+                musicPlayer.repeat(message);
+            break;
+            case "!loop":
+                musicPlayer.loops(message);
+            break;
+        }
+})	
 
 
 bot.login(process.env.discord_token);
@@ -35,7 +64,7 @@ bot.login(process.env.discord_token);
 
 
 bot.registry.registerGroup('random','Random');
-bot.registry.registerGroup('tribos', 'Tribos');
+bot.registry.registerGroup('games', 'Games');
 bot.registry.registerGroup('music', 'Music');
 bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
@@ -50,10 +79,16 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 
 
+
 //Start Up Log
 bot.on('ready', ()=>{
-    //log servers
-    // Remove the wanted information of the guilds map.
+    //Cool looking console starting message
+    console.log("--------------------------")
+    console.log("    Legendary Rem-Chan    ")
+    console.log("          Ready           ")
+    console.log("       on "+bot.guilds.size+" guilds        ")
+    console.log("--------------------------")
+   
     
     GuildsModel={//model for saving on a file
         "names":[
@@ -68,7 +103,10 @@ bot.on('ready', ()=>{
       let GuildsO = JSON.stringify(GuildsModel);  //stringify for file saving reasons
     //Send it to a file so it can be searched with another command.
     fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file
-    //change game presence
+
+   rustCommits();//Start webscraping of rust commit webpage
+     
+    
    var i = 0
    var tipo = [
        'PLAYING',
@@ -452,3 +490,64 @@ function moveAFKs(){
 
 });
 
+
+function rustCommits()
+{
+    //collection to store the commited information
+    var latestCommit = {
+        "Author":"",
+        "Avatar":"",
+        "Content":"",
+        "Time":""
+    }
+    //Filling the collection and sending the message
+   request("https://commits.facepunch.com/?format=json", (err, res, body)=>{
+       
+       
+       if(!err){
+        let newCommit = JSON.parse(body).results[1]
+        let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8")
+        
+        if(newCommit.repo.search(/rust/i)!=-1){
+           
+            latestCommit.Author = newCommit.user.name;
+            latestCommit.Avatar = newCommit.user.avatar;
+            latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
+            latestCommit.Content = newCommit.message;
+          
+            
+            if(lastSentCommitsContent !=latestCommit.Content){
+                console.log("There is a new commit");
+                fs.writeFileSync("latest.hc",latestCommit.Content, "utf-8")
+                messageCommit(latestCommit);
+            }
+        }
+
+       }
+   } )
+
+};
+
+
+
+function messageCommit(commit){
+     const embed = new Discord.RichEmbed        
+         embed.setTitle("Novo Commit às "+commit.Time)
+         embed.setAuthor(commit.Author, commit.Avatar)
+         embed.setColor(0xc23811)
+         embed.setDescription(commit.Content)
+         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+         embed.setTimestamp()         
+         if(channelexists('696724807416283136'))
+         {
+                 bot.channels.get('696724807416283136').send({embed});
+         }
+ }
+
+function channelexists(channel){
+
+if(bot.channels.get(channel) != null) return true
+}
+
+
+//Music

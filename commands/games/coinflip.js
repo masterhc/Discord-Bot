@@ -5,7 +5,7 @@ const commando = require('discord.js-commando');
         constructor(client){
             super(client, {
                 name: 'coinflip',
-                group:'random',
+                group:'games',
                 memberName: 'coinflip',
                 description: 'Lança uma moeda.'
 
