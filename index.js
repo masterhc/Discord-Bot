@@ -17,7 +17,7 @@ const musicPlayer = new MusicClient(process.env.youtubeKey, options = {
     })
 
 bot.on("message", (message)=>{
-    console.log("message: "+ message)
+    
     var searchArray 
 
    
@@ -507,7 +507,7 @@ function rustCommits()
        if(!err){
         console.log("request works")
         let newCommit = JSON.parse(body).results[0]
-        let lastSentCommit = JSON.parse(fs.readFileSync("latest.hc","utf-8"));
+        let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8");
         if(lastSentCommit != null)console.log("fs worked")
         if(newCommit.repo.search(/rust/i)!=-1){
            
@@ -519,7 +519,7 @@ function rustCommits()
             
             if(lastSentCommit!=latestCommit){
                 console.log("There is a new commit");
-                fs.writeFileSync("latest.hc",JSON.stringify(latestCommit), "utf-8")
+                fs.writeFileSync("latest.hc",latestCommit, "utf-8")
                 messageCommit(latestCommit, newCommit.repo);
             }
         }
