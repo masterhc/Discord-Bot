@@ -514,6 +514,9 @@ function rustCommits()
             latestCommit.Author = newCommit.user.name;
             latestCommit.Avatar = newCommit.user.avatar;
             latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
+            console.log(newCommit.message)
+            let aux = newCommit.message
+            if(aux.search("\u258B")){console.log("This one is hidden")}else console.log("it could be as well just not using this block...")          
             latestCommit.Content = newCommit.message;
             console.log(latestCommit)
             
