@@ -506,9 +506,9 @@ function rustCommits()
        
        if(!err){
         console.log("request works")
-        let newCommit = JSON.parse(body).results[1]
-        let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8")
-        if(lastSentCommitsContent != null)console.log("fs worked")
+        let newCommit = JSON.parse(body).results[0]
+        let lastSentCommit = JSON.parse(fs.readFileSync("latest.hc","utf-8"));
+        if(lastSentCommit != null)console.log("fs worked")
         if(newCommit.repo.search(/rust/i)!=-1){
            
             latestCommit.Author = newCommit.user.name;
@@ -517,9 +517,9 @@ function rustCommits()
             latestCommit.Content = newCommit.message;
             console.log(latestCommit)
             
-            if(lastSentCommitsContent !=latestCommit.Content){
+            if(lastSentCommit!=latestCommit){
                 console.log("There is a new commit");
-                fs.writeFileSync("latest.hc",latestCommit.Content, "utf-8")
+                fs.writeFileSync("latest.hc",JSON.stringify(latestCommit), "utf-8")
                 messageCommit(latestCommit, newCommit.repo);
             }
         }
