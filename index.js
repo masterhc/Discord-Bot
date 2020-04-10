@@ -505,21 +505,22 @@ function rustCommits()
        
        
        if(!err){
+        console.log("request works")
         let newCommit = JSON.parse(body).results[1]
         let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8")
-        
+        if(lastSentCommitsContent != null)console.log("fs worked")
         if(newCommit.repo.search(/rust/i)!=-1){
            
             latestCommit.Author = newCommit.user.name;
             latestCommit.Avatar = newCommit.user.avatar;
             latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
             latestCommit.Content = newCommit.message;
-          
+            console.log(latestCommit)
             
             if(lastSentCommitsContent !=latestCommit.Content){
                 console.log("There is a new commit");
                 fs.writeFileSync("latest.hc",latestCommit.Content, "utf-8")
-                messageCommit(latestCommit);
+                messageCommit(latestCommit, newCommit.repo);
             }
         }
 
@@ -530,10 +531,11 @@ function rustCommits()
 
 
 
-function messageCommit(commit){
+function messageCommit(commit, repo){
      const embed = new Discord.RichEmbed        
          embed.setTitle("Novo Commit às "+commit.Time)
          embed.setAuthor(commit.Author, commit.Avatar)
+         embed.addField("Repo: "+ repo)
          embed.setColor(0xc23811)
          embed.setDescription(commit.Content)
          embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
