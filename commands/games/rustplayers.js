@@ -2,7 +2,7 @@
 
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-const puppeteer = require("puppeteer")
+
 
 
     class rustplayersCommand extends commando.Command{
@@ -16,32 +16,7 @@ const puppeteer = require("puppeteer")
             })
         }
         async run(message, args){
-            puppeteer.launch({headless: true}).then(
-                async  browser=>{ 
-                    let names = [];
-                    const page = await browser.newPage();
-                    await page.goto('https://www.battlemetrics.com/servers/rust/5059971');
-
-                    try {
-                        await page.waitFor(500);
-                        names = await page.evaluate(
-                            ()=>{
-                                let coiso = [];
-                                for (var i =0; i<document.querySelectorAll("a.css-zwebxb").length; i++){
-                                    coiso.push(document.querySelectorAll("a.css-zwebxb")[i].innerText)
-                                }
-                                return coiso
-                            }
-                        )
-                            sendMessage(names);
-                    } catch (error) {
-                        console.log(error)
-                        
-                    }finally{
-                        browser.close()
-
-                    }
-        })   
+             
         }
 }module.exports = rustplayersCommand; 
 
