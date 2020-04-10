@@ -1,1 +1,1 @@
-Toptier wall/half/third corner conditional meshes/colliders
+Utils to clear out stuff that isn't needed post conversion
