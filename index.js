@@ -509,19 +509,19 @@ function rustCommits()
         let newCommit = JSON.parse(body).results[0]
         let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8");
         if(lastSentCommitsContent != null)console.log("fs worked")
+        console.log("previous content: "+ lastSentCommitsContent)
         if(newCommit.repo.search(/rust/i)!=-1){
            
             latestCommit.Author = newCommit.user.name;
             latestCommit.Avatar = newCommit.user.avatar;
             latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
             console.log(newCommit.message)
-            let aux = newCommit.message
-            if(aux.search("\u258B")){console.log("This one is hidden")}else console.log("it could be as well just not using this block...")          
             latestCommit.Content = newCommit.message;
             console.log(latestCommit)
             
             if(lastSentCommitsContent!=latestCommit.Content){
                 console.log("There is a new commit");
+                console.log("Content to register: "+ latestCommit.Content)
                 fs.writeFileSync("latest.hc",latestCommit.Content, "utf-8")
                 messageCommit(latestCommit, newCommit.repo);
             }
