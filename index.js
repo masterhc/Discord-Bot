@@ -293,12 +293,13 @@ bot.on('ready',()=>{
        if(!err){ 
              let fetchedCrack = JSON.parse(body);
          try {
-             if(fetchedCrack[0] !=null){
-                
+             if(fetchedCrack.message!= null && fetchedCrack.message == "Internal server error"){
+                 console.log("crackwatch fucked");
+                 crackwatch();
              }
          } catch (error) {
              
-             console.log("api Fucked")
+             console.log("api completly Fucked")
              crackwatch();
          }
          
