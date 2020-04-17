@@ -290,22 +290,13 @@ bot.on('ready',()=>{
       
     
      request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
-       if(!err){ 
+       if(!err){
              let fetchedCrack = JSON.parse(body);
          try {
              if(fetchedCrack.message!= null && fetchedCrack.message == "Internal server error"){
                  console.log("crackwatch fucked");
                  crackwatch();
-             }
-         } catch (error) {
-             
-             console.log("api completly Fucked")
-             crackwatch();
-         }
-         
-         
-    
-         let correctedTitleArray = fetchedCrack[0].title.split(".");
+                      let correctedTitleArray = fetchedCrack[0].title.split(".");
 
          let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
         
@@ -316,52 +307,63 @@ bot.on('ready',()=>{
         
          let correctedTitle
       
-      if(correctedTitleArray.length != null){
-         for (var j = 0; j <= correctedTitleArray.length; j++) {
-              if(j==0){
-                    
-                    correctedTitle = correctedTitleArray[j];
-                    
-              }else if(j == correctedTitleArray.length){
-                    
-                    correctedTitle =correctedTitle +' ' + correctedEnding[0]
-                   
-                    
-              }else if(j <= correctedTitleArray.length-2){
-                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                   
-              }
-          }
-        }else{
-            correctedTitle = fetchedCrack[0].title;
-        }
+                    if(correctedTitleArray.length != null){
+                        for (var j = 0; j <= correctedTitleArray.length; j++) {
+                            if(j==0){
+                                    
+                                    correctedTitle = correctedTitleArray[j];
+                                    
+                            }else if(j == correctedTitleArray.length){
+                                    
+                                    correctedTitle =correctedTitle +' ' + correctedEnding[0]
+                                
+                                    
+                            }else if(j <= correctedTitleArray.length-2){
+                                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
+                                
+                            }
+                        }
+                        }else{
+                            correctedTitle = fetchedCrack[0].title;
+                        }
 
-        console.log("correctedTitle: " + correctedTitle)
-        //Title comes out ok
-    let newObject = {
-    "title":correctedTitle,
-    "sceneGroup":fetchedCrack[0].groupName,
-    "date":fetchedCrack[0].date,
-    "image":fetchedCrack[0].image
+                        console.log("correctedTitle: " + correctedTitle)
+                        //Title comes out ok
+                    let newObject = {
+                    "title":correctedTitle,
+                    "sceneGroup":fetchedCrack[0].groupName,
+                    "date":fetchedCrack[0].date,
+                    "image":fetchedCrack[0].image
 
 
-    }
-   
+                    }
+                
+                    
+                        let output = JSON.stringify(newObject);  
+                        
+                        if(crackcheck(correctedTitle)){
+                        
+                            fs.writeFileSync('crackwatch.json', output, 'utf-8');
+                            
+                            
+                        sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
+                        crackwatch();
+                        }else{crackwatch()}
+                    }else{
+                        crackwatch();
+                    }   
+             }catch (error) {
+             
+             console.log("api completly Fucked")
+             crackwatch();
+         }
+                }
+         } 
+         
+         
     
-          let output = JSON.stringify(newObject);  
-          
-        if(crackcheck(correctedTitle)){
-          
-            fs.writeFileSync('crackwatch.json', output, 'utf-8');
-            
-            
-        sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
-         crackwatch();
-        }else{crackwatch()}
-    }else{
-        crackwatch();
-    }   
-        });
+
+        );
    
       }, 60000);  
   } 
