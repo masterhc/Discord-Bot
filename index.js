@@ -464,7 +464,7 @@ function getInfo(Title){
 
 }); 
 bot.on('ready',()=>{
-    //Make hidden afk role  hide on the hidden voiceroom when afk
+    //Make SS - Secret Services  hide on the hidden voiceroom when afk
     /*
      to use in admin commands that need a user id (from a reaction) to do something (message.mentions.users.first().id)
     */
@@ -497,6 +497,8 @@ function moveAFKs(){
 
 function rustCommits()
 {  // Getting the lastSentCommit message from the channel
+    //There is a better way to do this... but this works
+
     var lastSentCommit
     if(channelexists('696724807416283136'))
     {
