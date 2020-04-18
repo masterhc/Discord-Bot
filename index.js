@@ -104,8 +104,8 @@ bot.on('ready', ()=>{
     //Send it to a file so it can be searched with another command.
     fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file
 
-   rustCommits();//Start webscraping of rust commit webpage
-     
+    rustCommits();//Start webscraping of rust commit webpage
+    moveAFKs();
     
    var i = 0
    var tipo = [
@@ -471,31 +471,47 @@ bot.on('ready',()=>{
    timer();
    function timer(){
     setTimeout(()=>{
-        moveAFKs()       
+        moveAFKs()
+        timer();       
     }, 310000);
 }
 
+
+
+
+});
 function moveAFKs(){
-    let membersCount = bot.channels.find('name', "🖮 AFK/DnD").members.size
-    let members = bot.channels.find('name', "🖮 AFK/DnD").members
-    console.log("Member list: " + members)
-    for(let i =0; i<membersCount; i++){
-        let member = members[i];
-        if(member.roles.has('693413934715240498')){            
-            console.log("leader: "+member.displayName);
-            member.setVoiceChannel('648189029589843999')
-                    .then(() => console.log(`Moved ${member.displayName}`))
+    let auxmembers = bot.channels.find('name', "🖮 AFK/DnD").members
+    
+    
+    for(var [key, values] of auxmembers){
+       console.log("Member list with a "+ auxmembers.size+" user size: " + values.id)
+        if(values.roles.has('693413934715240498')){            
+            console.log("leader: "+values.displayName);
+            values.setVoiceChannel('648189029589843999')
+                    .then(() => console.log(`Moved ${values.displayName}`))
                     .catch(console.error);
         }
     }
 }
 
-
-});
-
-
 function rustCommits()
-{
+{  // Getting the lastSentCommit message from the channel
+    var lastSentCommit
+    if(channelexists('696724807416283136'))
+    {
+           bot.channels.get('696724807416283136').fetchMessages({limit:1}).then(messages=>{
+           
+              
+            for(var [key, values] of messages){
+                
+                bot.channels.get('696724807416283136').fetchMessage(values.id).then(message =>{
+                  lastSentCommit = message.embeds[0].description;
+                })
+              } 
+            });
+        
+    }
     //collection to store the commited information
     var latestCommit = {
         "Author":"",
@@ -508,24 +524,24 @@ function rustCommits()
        
        
        if(!err){
-        console.log("request works")
+        //console.log("request works")
         let newCommit = JSON.parse(body).results[0]
-        let lastSentCommitsContent = fs.readFileSync("latest.hc","utf-8");
-        if(lastSentCommitsContent != null)console.log("fs worked")
-        console.log("previous content: "+ lastSentCommitsContent)
+        
+        
+        //console.log("previous content: "+ lastSentCommitsContent)
         if(newCommit.repo.search(/rust/i)!=-1){
            
             latestCommit.Author = newCommit.user.name;
             latestCommit.Avatar = newCommit.user.avatar;
             latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
-            console.log(newCommit.message)
+            //console.log(newCommit.message)
             latestCommit.Content = newCommit.message;
-            console.log(latestCommit)
+            //console.log(latestCommit)
             
-            if(lastSentCommitsContent!=latestCommit.Content){
+            if(lastSentCommit!=latestCommit.Content){
                 console.log("There is a new commit");
-                console.log("Content to register: "+ latestCommit.Content)
-                fs.writeFileSync("latest.hc",latestCommit.Content, "utf-8")
+                
+                
                 messageCommit(latestCommit, newCommit.repo);
             }
         }
