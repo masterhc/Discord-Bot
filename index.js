@@ -104,8 +104,7 @@ bot.on('ready', ()=>{
     //Send it to a file so it can be searched with another command.
     fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file
 
-    rustCommits();//Start webscraping of rust commit webpage
-    moveAFKs();
+    
     
    var i = 0
    var tipo = [
@@ -157,10 +156,13 @@ bot.on('ready', ()=>{
 //Give role => Membro
 bot.on('ready', ()=>{
     let checker = 0
-    giveRole();
+    timer();
     function timer(){
         setTimeout(()=>{
-            giveRole()       
+            giveRole() 
+            timer();
+            rustCommits();//Start webscraping of rust commit webpage
+            moveAFKs();      
         }, 60000);
     }
 //Não mandou a dm
@@ -432,27 +434,37 @@ function getInfo(Title){
     let count = 0;
     
      do{
-         
-        request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
-        let games = JSON.parse(body);
+        try {
+            request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
+                let games = JSON.parse(body);
+                if(err){
+                    console.error(err);
+                }
+                if(res >399){
+                    console.log("error reference: "+ res);
+                }
+                for ( var i=0; i<games.length; i++) {
+                      
+                    if(games[i].tilte.search(Title) != -1){
+                        console.log("found match")
         
-        for ( var i=0; i<games.length; i++) {
+                        finish = true
+                        return games[i];
+                    }
+                }
               
-            if(games[i].tilte == Title){
-                console.log("found match")
-
-                finish = true
-                return games[i];
-            }
-        }
+                
+               if(count==49){
+                   console.log("Count at 49, stoping search. It took too much time already.")
+               }
+                
+                }); 
+                count++;
+        } catch (error) {
+            console.log("Error on request.");
+            console.error(error);
+        } 
       
-        
-       if(count==49){
-           console.log("count at 49, stoping search")
-       }
-        
-        }); 
-        count++;
     }while(count < 50);
     
 
@@ -524,29 +536,36 @@ function rustCommits()
     //Filling the collection and sending the message
    request("https://commits.facepunch.com/?format=json", (err, res, body)=>{
        
-       
+       var commitCount;
        if(!err){
         //console.log("request works")
-        let newCommit = JSON.parse(body).results[0]
-        
-        
-        //console.log("previous content: "+ lastSentCommitsContent)
-        if(newCommit.repo.search(/rust/i)!=-1){
-           
-            latestCommit.Author = newCommit.user.name;
-            latestCommit.Avatar = newCommit.user.avatar;
-            latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
-            //console.log(newCommit.message)
-            latestCommit.Content = newCommit.message;
-            //console.log(latestCommit)
-            
-            if(lastSentCommit!=latestCommit.Content){
-                console.log("There is a new commit");
-                
-                
-                messageCommit(latestCommit, newCommit.repo);
+        let Results = JSON.parse(body).results[0]
+        let newCommit=Results[0]
+        for(var i=0; i<Results.length; i++){
+            if(lastSentCommit!=Results[i].message){
+               commitCount += commitCount;
+            }else{
+                return newCommits();
             }
         }
+        function newCommits(){
+           for(var i =0; i<commitCount; i++){
+            newCommit = Results[i]
+            if(newCommit.repo.search(/rust/i)!=-1){
+                console.log("New commit")   
+                latestCommit.Author = newCommit.user.name;
+                latestCommit.Avatar = newCommit.user.avatar;
+                latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
+                latestCommit.Content = newCommit.message;
+                messageCommit(latestCommit, newCommit.repo);   
+                
+                
+            }
+        }  
+        }
+       
+        //console.log("previous content: "+ lastSentCommitsContent)
+        
 
        }
    } )
@@ -556,6 +575,7 @@ function rustCommits()
 
 
 function messageCommit(commit, repo){
+    
      const embed = new Discord.RichEmbed        
          embed.setTitle("Novo Commit às "+commit.Time)
          embed.setAuthor(commit.Author, commit.Avatar)
@@ -563,11 +583,15 @@ function messageCommit(commit, repo){
          embed.setColor(0xc23811)
          embed.setDescription(commit.Content)
          embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-         embed.setTimestamp()         
-         if(channelexists('696724807416283136'))
+         embed.setTimestamp() 
+         let allChannels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
+         for(var i =0; i<allChannels.rustCommitsChannels.length;i++){
+             if(channelexists(allChannels.rustCommitsChannels[i]))
          {
-                 bot.channels.get('696724807416283136').send({embed});
+                 bot.channels.get(allChannels.rustCommitsChannels[i]).send({embed});
          }
+         }
+         
  }
 
 function channelexists(channel){

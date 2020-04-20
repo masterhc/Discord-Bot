@@ -26,7 +26,7 @@ const fs = require('fs');
 
             
                 if(isAdmin()){ let server = message.guild
-                    args=message.content.split(/\s+/g);
+                    args=splitBySpaces(args);
                     var name;
                     //break the command into the usable info.
                     var messageSplit = message.content.split(' ');
