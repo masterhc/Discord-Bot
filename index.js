@@ -156,8 +156,8 @@ bot.on('ready', ()=>{
 //Give role => Membro
 bot.on('ready', ()=>{
    
-    timer();
-    function timer(){
+    timer2();
+    function timer2(){
         setTimeout(()=>{
             //Role Channel to be changed for wellcome on all role admission function
             //Differente message for role admission (different reaction for each channel admission)
@@ -179,7 +179,7 @@ bot.on('ready', ()=>{
             giveRole2(); //Crackwatch role on CrackWatch Channel
             //Rust commit role
             rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
-            timer();   
+            timer2();   
         }, 60000);
     }
 
