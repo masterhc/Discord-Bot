@@ -102,7 +102,7 @@ bot.on('ready', ()=>{
 
       let GuildsO = JSON.stringify(GuildsModel);  //stringify for file saving reasons
     //Send it to a file so it can be searched with another command.
-    fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file
+    fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file, find a way to do this with a data base.
 
     
     
@@ -159,20 +159,32 @@ bot.on('ready', ()=>{
     timer();
     function timer(){
         setTimeout(()=>{
-            giveRole() 
-            timer();
-            rustCommits();//Start webscraping of rust commit webpage
-            moveAFKs();      
+            //Role Channel to be changed for wellcome on all role admission function
+            //Differente message for role admission (different reaction for each channel admission)
+           /* Priority Level nº1(-5000) -> 
+            * Find a way to make this for multiple servers (make a give role that looks what roles id can be admissible,
+            * what are the correspondent assigned reactions, look on all the channels assigned to have role admissions,
+            * look on all the channels and messages to do it. Add a command to add entries.)
+            * 
+            * Command needs:
+            *  Arg 1 - channelID
+            *  Arg 2 - messageID
+            *  Arg 3 - roleID
+            *  Arg 4 - assigned reaction
+            * extra : - server ID from the message 
+            * 
+            * This will mean there would be a single giveRole function
+            */
+            giveRole(); // Member role on wellcome channel
+            giveRole2(); //Crackwatch role on CrackWatch Channel
+            //Rust commit role
+            rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
+            timer();   
         }, 60000);
     }
-//Não mandou a dm
-//Nem deu a permissão
 
     function giveRole(){
         console.log(checker)
-
-
-
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -182,7 +194,6 @@ bot.on('ready', ()=>{
                     .then(collected => {
                             const reaction = collected.first();
                             console.log("Reaction added")
-                            console.log("reacotr: "+reactor)
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
                             
@@ -197,7 +208,7 @@ bot.on('ready', ()=>{
                                     console.error
                                 }
                                 finally{ console.log('done')}
-                            }else if(hasRole(reactor)==true){
+                            }else{
                                 console.log(reactor.reaction.message.name.guild.member(reactor).name+"tryed but got the role denied.")
                             }
                         
@@ -208,31 +219,23 @@ bot.on('ready', ()=>{
         }
        
     ).catch(console.error)
-    timer();
     checker = checker +1;
     };
 
 
 
 // Give Role => CrackWatch
+
+
+
+
+
 function hasRole(reactor){
-    console.log("in hasrole")
+    console.log("in hasRole")
     if( reactor.roles.has('334461623307730946') || reactor.roles.has("342744569676562443")) {return true }else return false
 }   
 });
-
-bot.on('ready', ()=>{
-   
-   let checker = 0
-    giveRole();
-    function timer(){
-        setTimeout(()=>{
-            giveRole()       
-        }, 60000);
-    }
-
-
-    function giveRole(){
+    function giveRole2(){
         console.log(checker)
 
 
@@ -247,16 +250,13 @@ bot.on('ready', ()=>{
                     .then(collected => {
                             const reaction = collected.first();
                             console.log("Reaction added")
-                            console.log("reacotr: "+reactor)
                             reactor = reaction.users.first()
                             console.log("reactor:"+reactor.id)
-                            
-                            
                                 try{        
                                     reaction.message.guild.member(reactor)
                                     .addRole('642891554964635659')
                                     .catch(console.error);
-                                    console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name);
+                                    console.log("Permissions granted to"+reactor.reaction.message.guild.member(reactor).name+"!");
                                 }
                                 catch(error){
                                     console.error
@@ -279,7 +279,7 @@ bot.on('ready', ()=>{
 
 
 
-});
+
 
 
 bot.on('ready',()=>{ 
@@ -289,7 +289,22 @@ bot.on('ready',()=>{
     
     function crackwatch(){
     setTimeout(()=>{
-      
+      //Get lastCrackMessageSentTitle from the message on the channel
+      var lastCrackMessageSentTitle
+    if(channelexists('643995527389773855'))
+    {
+           bot.channels.get('643995527389773855').fetchMessages({limit:1}).then(messages=>{
+           
+              
+            for(var [key, values] of messages){
+                
+                bot.channels.get('643995527389773855').fetchMessage(values.id).then(message =>{
+                  lastCrackMessageSentTitle = message.embeds[0].Title;
+                })
+              } 
+            });
+        
+    }
     
      request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
        if(!err){
@@ -344,10 +359,6 @@ bot.on('ready',()=>{
                         let output = JSON.stringify(newObject);  
                         
                         if(crackcheck(correctedTitle)){
-                        
-                            fs.writeFileSync('crackwatch.json', output, 'utf-8');
-                            
-                            
                         sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
                         crackwatch();
                         }else{crackwatch()}
@@ -375,11 +386,11 @@ bot.on('ready',()=>{
      
      function crackcheck(correctedTitle){
        
-      let savedCrack=JSON.parse(fs.readFileSync('crackwatch.json', 'utf-8')); 
+     
         
         
-        console.log("CrackCheck:correctedTitle: " +correctedTitle + "  saved crack.title: " + savedCrack.title);
-        if(correctedTitle !=savedCrack.title)return true;
+        console.log("CrackCheck:correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
+        if(correctedTitle !=lastCrackMessageSentTitle)return true;
         else return false;
     }
 
@@ -485,7 +496,7 @@ bot.on('ready',()=>{
     setTimeout(()=>{
         moveAFKs()
         timer();       
-    }, 310000);
+    }, 60000);
 }
 
 
