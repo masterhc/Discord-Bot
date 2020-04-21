@@ -291,14 +291,16 @@ bot.on('ready',()=>{
     setTimeout(()=>{
       //Get lastCrackMessageSentTitle from the message on the channel
       var lastCrackMessageSentTitle
-    if(channelexists('643995527389773855'))
+      const baseChannel = 643995527389773855;
+    if(channelexists(baseChannel))
     {
-           bot.channels.get('643995527389773855').fetchMessages({limit:1}).then(messages=>{
+           bot.channels.get(baseChannel).fetchMessages({limit:1}).then(messages=>{
            
               
             for(var [key, values] of messages){
                 
-                bot.channels.get('643995527389773855').fetchMessage(values.id).then(message =>{
+                bot.channels.get(baseChannel).fetchMessage(values.id).then(message =>{
+                    console.log("previously sent crack message title: "+ message.emebds[0].Title)
                   lastCrackMessageSentTitle = message.embeds[0].Title;
                 })
               } 
@@ -361,7 +363,9 @@ bot.on('ready',()=>{
                         if(crackcheck(correctedTitle)){
                         sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
                         crackwatch();
-                        }else{crackwatch()}
+                        }else{
+                            crackwatch()
+                        }
                     }else{
                         crackwatch();
                     }   
