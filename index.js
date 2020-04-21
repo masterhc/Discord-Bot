@@ -185,7 +185,7 @@ bot.on('ready', ()=>{
 
     function giveRole(){
         
-    bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
+    bot.channels.find('name', "👐bem-vindo").fetchMessage('445251380639170560').then(
         message => { 
             const filter = (reaction) => {
                 return ['👌'].includes(reaction.emoji.name);
@@ -253,7 +253,7 @@ bot.on('ready',()=>{
     setTimeout(()=>{
       //Get lastCrackMessageSentTitle from the message on the channel
       var lastCrackMessageSentTitle
-      const baseChannel = 643995527389773855;
+      const baseChannel = '643995527389773855';
     if(channelexists(baseChannel))
     {
            bot.channels.get(baseChannel).fetchMessages({limit:1}).then(messages=>{
