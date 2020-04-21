@@ -155,7 +155,7 @@ bot.on('ready', ()=>{
 }});
 //Give role => Membro
 bot.on('ready', ()=>{
-    let checker = 0
+   
     timer();
     function timer(){
         setTimeout(()=>{
@@ -184,7 +184,7 @@ bot.on('ready', ()=>{
     }
 
     function giveRole(){
-        console.log(checker)
+        
     bot.channels.find('name', "👐bem-vindo").fetchMessage(445251380639170560).then(
         message => { 
             const filter = (reaction) => {
@@ -219,7 +219,7 @@ bot.on('ready', ()=>{
         }
        
     ).catch(console.error)
-    checker = checker +1;
+    
     };
 
 
@@ -236,7 +236,7 @@ function hasRole(reactor){
 }   
 });
     function giveRole2(){
-        console.log(checker)
+       
 
 
 
@@ -272,7 +272,7 @@ function hasRole(reactor){
        
     ).catch(console.error)
     timer();
-    checker = checker +1;
+   
     };
 
 
