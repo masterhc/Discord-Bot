@@ -176,7 +176,7 @@ bot.on('ready', ()=>{
             * This will mean there would be a single giveRole function
             */
             giveRole(); // Member role on wellcome channel
-            giveRole2(); //Crackwatch role on CrackWatch Channel
+            //Crackwatch role
             //Rust commit role
             rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
             timer2();   
@@ -235,45 +235,7 @@ function hasRole(reactor){
     if( reactor.roles.has('334461623307730946') || reactor.roles.has("342744569676562443")) {return true }else return false
 }   
 });
-    function giveRole2(){
-       
 
-
-
-       
-    bot.channels.find('id', ('657806522243481619')).fetchMessage('657807330238398485').then(
-        message => { 
-            const filter = (reaction) => {
-                return ['👌'].includes(reaction.emoji.name);
-            };
-            message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-                    .then(collected => {
-                            const reaction = collected.first();
-                            console.log("Reaction added")
-                            reactor = reaction.users.first()
-                            console.log("reactor:"+reactor.id)
-                                try{        
-                                    reaction.message.guild.member(reactor)
-                                    .addRole('642891554964635659')
-                                    .catch(console.error);
-                                    console.log("Permissions granted to"+reactor.reaction.message.guild.member(reactor).name+"!");
-                                }
-                                catch(error){
-                                    console.error
-                                }
-                                finally{ console.log('done')}
-                           
-                        
-                        }
-                    ).catch(
-                        console.error()
-                    ); 
-        }
-       
-    ).catch(console.error)
-
-   
-    };
 
 
 
