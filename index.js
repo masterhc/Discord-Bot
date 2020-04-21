@@ -271,7 +271,7 @@ function hasRole(reactor){
         }
        
     ).catch(console.error)
-    timer();
+
    
     };
 
