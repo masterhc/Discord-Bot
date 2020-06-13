@@ -7,77 +7,8 @@ const MusicClient = require("discord-music-wrapper")
 
 
 const bot = new commando.Client(({ partials: ['MESSAGE', 'REACTION'] }));
-const sql = postgres('postgres://username:password@host:port/database', {
-    host        : process.env.postgresURL,         // Postgres ip address or domain name
-    port        : process.env.postgresPort,       // Postgres server port
-    path        : '',         // unix socket path (usually '/tmp')
-    database    : process.env.postgresDB,         // Name of database to connect to
-    username    : process.env.postgresUser,         // Username of database user
-    password    : process.env.postgresPW,         // Password of database user
-    ssl         : false,      // True, or options for tls.connect
-    max         : 10,         // Max number of connections
-    timeout     : 0,          // Idle connection timeout in seconds
-    types       : []         // Array of custom types, see more below
-   
-  })
-   
-/*
-
-Music garbage still not working still not caring enough to make it work
-
-const musicPlayer = new MusicClient(process.env.youtubeKey, options = {
-        earProtections: true,
-        loop: true,
-        songChooseTimeout: 10,
-        volume: 40
-    })
-
-bot.on("message", (message)=>{
-    
-    var searchArray 
-
-   
-    var key = message.toString().split(" ");
-    console.log(key)
-        switch (key[0]){
-            case "!play":
-                musicPlayer.play(message, searchArray);
-            break;
-            case "!top":
-                musicPlayer.stop(message);
-            break;
-            case "!nowPlaying":
-                musicPlayer.nowPlaying(message);
-            break;
-            case "!queue":
-                musicPlayer.showQueue(message);
-            break;
-            case "!skip":
-                musicPlayer.skip(message);
-            break;
-            case "!pause":
-                musicPlayer.pause(message);
-            break;
-            case "!remove":
-                musicPlayer.remove(message);
-            break;
-            case "!repeat":
-                musicPlayer.repeat(message);
-            break;
-            case "!loop":
-                musicPlayer.loops(message);
-            break;
-        }
-})	
-*/
 
 bot.login(process.env.discord_token);
-
-
-
-
-
-
 
 bot.registry.registerGroup('random','Random');
 bot.registry.registerGroup('games', 'Games');
@@ -90,10 +21,6 @@ bot.registry.registerGroup('pesquisa', 'Pesquisa');
 bot.registry.registerGroup('admin','Admin');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
-
-
-
-
 
 
 //Start Up Log

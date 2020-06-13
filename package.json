@@ -10,7 +10,7 @@
   "author": "MasterHc",
   "license": "MIT",
   "engines": {
-    "node": "8.1.4"
+    "node": "14.4.0"
   },
   "dependencies": {
     "ascii-table": "0.0.9",
