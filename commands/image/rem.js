@@ -19,7 +19,7 @@ class remcommando extends commando.Command{
           
            
           
-               var embed = new discord.RichEmbed;
+               var embed = new discord.MessageEmbed;
                
                 embed.setColor(0x85b1f7);
                 embed.setTitle('Imagem:')

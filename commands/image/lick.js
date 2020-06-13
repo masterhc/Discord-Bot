@@ -16,7 +16,7 @@ class lickcommando extends commando.Command{
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
            
-                const embed = new discord.RichEmbed;
+                const embed = new discord.MessageEmbed;
                 embed.setColor(0xb50000);
                 embed.setDescription('[Original]'+`(${path})`);
                 embed.setTitle('Imagem:')

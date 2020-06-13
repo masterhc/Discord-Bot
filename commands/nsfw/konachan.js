@@ -23,8 +23,8 @@ const Discord = require('discord.js');
     'child' // child, child_porn
 ];
             //Checkar se é nsfw
-             if (!message.channel.name.startsWith('nsfw')) {
-            return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
+             if (!message.channel.cache.name.startsWith('nsfw')) {
+            return message.channel.cache.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
         }   
         var messageSplit = message.content.split(' ');
@@ -41,7 +41,7 @@ const Discord = require('discord.js');
          // Checkar pedofilos
            for (var filter of konachanFilter) {
             if (searchOrig.indexOf(filter) > -1) {
-                return message.channel.send('Por favor não seja pedofilo!');
+                return message.channel.cache.send('Por favor não seja pedofilo!');
 
             }
    }
@@ -54,13 +54,13 @@ const Discord = require('discord.js');
             }
         }, (error, response, body) => {
             if (error) {
-                return message.channel.send('Erro 1');
+                return message.cache.send('Erro 1');
             }
             if (!error && response.statusCode === 200) {
                 try {
                     body = JSON.parse(body);
                 } catch (e) {
-                    return message.channel.send('Erro 2');
+                    return message.channel.cache.send('Erro 2');
                 }
                 if (typeof body !== 'undefined') {
                     // Filter response for bad items
@@ -77,7 +77,7 @@ const Discord = require('discord.js');
                     if (body.length > 0) {
                         var random = Math.floor(Math.random() * body.length);
                         if (typeof(body[random]) !== 'undefined' && typeof (body[random].file_url) !== 'undefined') {
-                            var embed = new Discord.RichEmbed;
+                            var embed = new Discord.MessageEmbed;
                             embed.setColor(0xb50000);
                             embed.setTitle('Imagem:')
                             embed.setAuthor("Rem-chan", 'https://i.imgur.com/g6FSNhL.png');
@@ -85,15 +85,15 @@ const Discord = require('discord.js');
                             embed.setDescription('[Original]'+`(${body[random].file_url})`);
                             embed.setTimestamp();
                             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                            message.channel.send({embed});
+                            message.channel.cache.send({embed});
                         } else {
-                            message.channel.send('Erro 3');
+                            message.channel.cache.send('Erro 3');
                         }
                         return;
                     }
                 }
 
-                message.channel.send('Nada encontrado', searchOrig);
+                message.channel.cache.send('Nada encontrado', searchOrig);
     
             }
         });

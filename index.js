@@ -13,15 +13,12 @@ const bot = new commando.Client
 
 bot.login(process.env.discord_token);
 
-bot.registry.registerGroup('random','Random');
-bot.registry.registerGroup('games', 'Games');
-
-bot.registry.registerGroup('nsfw', 'Nsfw');
-bot.registry.registerGroup('image', 'Imagens');
-bot.registry.registerGroup('pesquisa', 'Pesquisa');
-
-
-bot.registry.registerGroup('admin','Admin');
+bot.registry.registerGroup('random','random');
+bot.registry.registerGroup('games', 'games');
+bot.registry.registerGroup('nsfw', 'nsfw');
+bot.registry.registerGroup('admin', 'admin');
+bot.registry.registerGroup('image', 'imagens');
+bot.registry.registerGroup('pesquisa', 'pesquisa');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 

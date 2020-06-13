@@ -17,7 +17,7 @@ class smugcommando extends commando.Command{
             var path = res.data.path.replace('/i/', '');
         
             
-                const embed = new discord.RichEmbed;
+                const embed = new discord.MessageEmbed;
 
                embed.setColor(0xb50000);
                embed.setTitle('Imagem:')

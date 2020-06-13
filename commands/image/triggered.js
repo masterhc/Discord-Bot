@@ -17,7 +17,7 @@ class triggeredcommando extends commando.Command{
             var path = res.data.path.replace('/i/', '');
       
 
-                const embed = new discord.RichEmbed;
+                const embed = new discord.MessageEmbed;
                     
             embed.setColor(0xb50000);
             embed.setTitle('Imagem:')
@@ -26,7 +26,7 @@ class triggeredcommando extends commando.Command{
                  embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                  embed.setTimestamp();
 
-             message.channel.send({embed}) 
+             message.channel.cache.send({embed}) 
             
 
          }
