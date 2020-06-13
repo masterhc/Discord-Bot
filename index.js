@@ -3,7 +3,7 @@ const commando = require('discord.js-commando');
 const request = require('request');
 const postgres = require('postgres');
 const fs = require('fs');
-const MusicClient = require("discord-music-wrapper")
+
 
 
 const bot = new commando.Client(({ partials: ['MESSAGE', 'REACTION'] }));
@@ -12,7 +12,7 @@ bot.login(process.env.discord_token);
 
 bot.registry.registerGroup('random','Random');
 bot.registry.registerGroup('games', 'Games');
-bot.registry.registerGroup('music', 'Music');
+
 bot.registry.registerGroup('nsfw', 'Nsfw');
 bot.registry.registerGroup('image', 'Imagens');
 bot.registry.registerGroup('pesquisa', 'Pesquisa');
@@ -29,7 +29,7 @@ bot.on('ready', ()=>{
     console.log("--------------------------")
     console.log("    Legendary Rem-Chan    ")
     console.log("          Ready           ")
-    console.log("       on "+bot.guilds.size+" guilds        ")
+    console.log("       on "+bot.guilds.cache.size+" guilds        ")
     console.log("--------------------------")
    
     
@@ -38,8 +38,8 @@ bot.on('ready', ()=>{
 
         ]
     }
-  
-     for(var [key, values] of bot.guilds){
+   
+     for(var [key, values] of bot.guilds.cache){
        GuildsModel.names.push(values.name)
      } 
 
