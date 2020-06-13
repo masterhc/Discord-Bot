@@ -212,7 +212,7 @@ bot.on('ready', ()=>{
  
    function giveRole()
    {
-       
+       //jsut forcing a new commit
         const wellcomeChannelID="445249426743754764"
         const wellcomeChannel = bot.channels.get(wellcomeChannelID);
         const messageID = "445251380639170560";
