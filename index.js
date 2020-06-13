@@ -6,7 +6,10 @@ const fs = require('fs');
 
 
 
-const bot = new commando.Client(({ partials: ['MESSAGE', 'REACTION'] }));
+const bot = new commando.Client
+(({
+    partials: ["REACTION", "MESSAGE"] 
+}));
 
 bot.login(process.env.discord_token);
 
@@ -73,7 +76,7 @@ bot.on('ready', ()=>{
 }
   function changeActivity(){ 
      bot.user.setActivity(message[i], {type: tipo[i]})
-     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : message[i]}`))
+     .then(presence => console.log(`Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
      .catch(console.error);
  
         console.log("I: "+ i);
@@ -82,7 +85,7 @@ bot.on('ready', ()=>{
  }else{
      i=0;
      bot.user.setActivity('!help', {type: 'LISTENING'})
-     .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'to !help'}`))
+     .then(presence => console.log(`Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
      .catch(console.error);
  }
       
@@ -141,21 +144,22 @@ bot.on('ready', ()=>{
    {
        //jsut forcing a new commit
         const wellcomeChannelID="445249426743754764"
-        const wellcomeChannel = bot.channels.get(wellcomeChannelID);
+        const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
         const messageID = "445251380639170560";
         var message;
         var reaction;
-        roles = ["Member", "Rust", "Valorant", "CrackWatch"]
-        wellcomeChannel.fetchMessage(messageID).then
+        roles = ["Member", "Rust", "Valorant", "CrackWatch"]      
+        wellcomeChannel.messages.fetch(messageID).then
         (
             m =>
             {
+                
                 const filter = (reaction, user) =>
                 {   
-                    if(reaction.emoji.name==="tuturu")//||reaction.emoji.name==="rust_icon"||reaction.emoji.name==="valorant_icon"||reaction.emoji.name==="crackwatch")
+                    if(reaction.emoji.name==="tuturu")
                     {
                         return true ;
-                    }
+                    }   
                 };
                 m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
                 .catch
@@ -166,14 +170,14 @@ bot.on('ready', ()=>{
                         for(var [key, values] of collected)
                         {
                             
-                           for(var [key, value] of values.users) 
+                           for(var [key, value] of values.users.cache) 
                            {
                             
-                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("336235115782864906");
+                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("336235115782864906");
                             console.log(`Role ${roles[0]} given to ${value.username}`)
                            }
                            
-                          
+                           
                         }
                         
                     }
@@ -181,7 +185,7 @@ bot.on('ready', ()=>{
             }
         )
      
-        wellcomeChannel.fetchMessage(messageID).then
+        wellcomeChannel.messages.fetch(messageID).then
         (
             m =>
             {
@@ -199,10 +203,10 @@ bot.on('ready', ()=>{
                         {
                        
 
-                           for(var [key, value] of values.users) 
+                           for(var [key, value] of values.users.cache) 
                            {
 
-                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("687634126387544115");
+                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("687634126387544115");
                             console.log(`Role ${roles[1]} given to ${value.username}`)
                            }
                            
@@ -213,7 +217,7 @@ bot.on('ready', ()=>{
                 )
             }
         )
-        wellcomeChannel.fetchMessage(messageID).then
+        wellcomeChannel.messages.fetch(messageID).then
         (
             m =>
             {
@@ -231,10 +235,10 @@ bot.on('ready', ()=>{
                         {
                      
 
-                           for(var [key, value] of values.users) 
+                           for(var [key, value] of values.users.cache) 
                            {
 
-                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("717826411695702119");
+                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("717826411695702119");
                             console.log(`Role ${roles[2]} given to ${value.username}`)
                            }
                            
@@ -246,7 +250,7 @@ bot.on('ready', ()=>{
             }
         )
         
-        wellcomeChannel.fetchMessage(messageID).then
+        wellcomeChannel.messages.fetch(messageID).then
         (
             m =>
             {
@@ -263,11 +267,11 @@ bot.on('ready', ()=>{
 
                         for(var [key, values] of collected)
                         {
-                           for(var [key, value] of values.users) 
+                           for(var [key, value] of values.users.cache) 
                            {
                             
-                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("642891554964635659");
-                            console.log(`Role ${roles[4]} given to ${value.username}`)
+                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("642891554964635659");
+                            console.log(`Role ${roles[3]} given to ${value.username}`)
                            }
                            
                           
@@ -287,7 +291,7 @@ bot.on('ready', ()=>{
 
 function hasRole(reactor){
     console.log("in hasRole")
-    if( reactor.roles.has('334461623307730946') || reactor.roles.has("342744569676562443")) {return true }else return false
+    if( reactor.roles.cache.has('334461623307730946') || reactor.roles.cache.has("342744569676562443")) {return true }else return false
 }   
 });
 
@@ -312,11 +316,11 @@ function crackwatch()
         const baseChannel = '643995527389773855';
         if(channelexists(baseChannel))
         {
-            bot.channels.get(baseChannel).fetchMessages({limit:1}).then(messages=>{
+            bot.channels.cache.get(baseChannel).messages.fetch({limit:1}).then(messages=>{
             
                 for(var [key, values] of messages){
                     
-                    bot.channels.get(baseChannel).fetchMessage(values.id).then(message =>{
+                    bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>{
                     // console.log("previously sent crack message title: "+ message.embeds[0].title)
                     lastCrackMessageSentTitle = message.embeds[0].title;
                     console.log("lastCrackSent from the last Message :" + lastCrackMessageSentTitle);
@@ -433,7 +437,7 @@ function crackwatch()
 
         function sendMessage(arg, arg3, arg2){
            var image;
-            const embed = new Discord.RichEmbed
+            const embed = new Discord.MessageEmbed
             if(arg2 != null){ 
                 image = arg2.imagePoster;
                 embed.setThumbnail(arg2.image);
@@ -465,7 +469,7 @@ function crackwatch()
 
                     if(channelexists(channelsfile.channels[i]))
                     {
-                        bot.channels.get(channelsfile.channels[i]).send({embed});
+                        bot.channels.cache.get(channelsfile.channels[i]).send({embed});
                     }
                   
                 }
@@ -476,7 +480,7 @@ function crackwatch()
 
 function channelexists(channel){
 
-    if(bot.channels.get(channel) != null) return true
+    if(bot.channels.cache.get(channel) != null) return true
 }
 
 function getInfo(Title){
@@ -545,14 +549,14 @@ bot.on('ready',()=>{
 
 });
 function moveAFKs(){
-    let auxmembers = bot.channels.find('name', "🖮 AFK/DnD").members
+    let auxmembers = bot.channels.cache.get("335494006890823680").members
     
     
     for(var [key, values] of auxmembers){
-       console.log("Member list with a "+ auxmembers.size+" user size: " + values.id)
-        if(values.roles.has('693413934715240498')){            
+       console.log("Member list with a "+ auxmembers.size+" user size, hosting:\n" + values.id+"\n")
+        if(values.roles.cache.has('693413934715240498')){            
             console.log("leader: "+values.displayName);
-            values.setVoiceChannel('648189029589843999')
+            values.voice.setChannel('648189029589843999')
                     .then(() => console.log(`Moved ${values.displayName}`))
                     .catch(console.error);
         }
@@ -569,13 +573,13 @@ function rustCommits()
         {
             if(lastSentCommit==null)
             {
-                bot.channels.get('721061781824471080').fetchMessages({limit:1}).then(messages=>
+                bot.channels.cache.get('721061781824471080').messages.fetch({limit:1}).then(messages=>
                 {
         
                     for(var [key, values] of messages)
                     {
                     
-                        bot.channels.get('721061781824471080').fetchMessage(values.id).then(message =>
+                        bot.channels.cache.get('721061781824471080').messages.fetch(values.id).then(message =>
                         {
                         lastSentCommit = message.embeds[0].description;
                         lastSentDate = message.embeds[0].title
@@ -722,7 +726,7 @@ function rustCommits()
 
 function messageCommit(commit, repo){
         //console.log("New commit!") 
-     const embed = new Discord.RichEmbed        
+     const embed = new Discord.MessageEmbed        
          embed.setTitle("Novo Commit às "+commit.Time)
          embed.setAuthor(commit.Author, commit.Avatar)
          embed.addField("Repo: ", repo)
@@ -735,7 +739,7 @@ function messageCommit(commit, repo){
          {//Likely the error is beyond this *the channel file* -> Odds are it actualy isn't
             if(channelexists(allChannels.rustCommitsChannels[i]))
             {
-                bot.channels.get(allChannels.rustCommitsChannels[i]).send({embed}).then(()=>
+                bot.channels.cache.get(allChannels.rustCommitsChannels[i]).send({embed}).then(()=>
                 {
                     lastSentCommit = commit;
                     lastSentDate = ("Novo Commit às "+commit.Time);
@@ -749,7 +753,7 @@ function messageCommit(commit, repo){
 
 function channelexists(channel){
 
-if(bot.channels.get(channel) != null) return true
+if(bot.channels.cache.get(channel) != null) return true
 }
 
 

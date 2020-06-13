@@ -28,6 +28,7 @@
     "http": "0.0.0",
     "humblebundle": "^1.0.5",
     "jikanjs": "^0.6.0",
+    "loader.js": "^4.7.0",
     "mal-api": "^1.0.0",
     "mathjs": "^3.20.2",
     "moment": "^2.24.0",
