@@ -30,7 +30,6 @@ class clearchatcommando extends commando.Command{
             }else{
                
                 //verificar se tem argumentos
-              console.log("coiso")
                 if(hasArgs()){
                     console.log("correctArgs");
                     if(correctArgs()){
@@ -43,7 +42,6 @@ class clearchatcommando extends commando.Command{
                 }//Quais-quer eventuais problemas são tratados na função
             }else{
                     //caso normal, apenas apaga tudo.
-                    console.log("clear normie");
                     clearnormie();
                 }
             }
@@ -71,10 +69,14 @@ class clearchatcommando extends commando.Command{
         }
 
         async function clearnormie() {
-            console.log("normie")
+            console.log("clear normie")
             message.delete();
-            const fetched = await message.channel.fetchMessages({limit: 99});
             
+           
+            
+            
+            const fetched = await message.channel.messages.fetch({limit: 99});
+            //console.log(fetched)
             message.channel.bulkDelete(fetched, true);
           
            
@@ -83,14 +85,14 @@ class clearchatcommando extends commando.Command{
             
         
             message.delete();
-            const fetched = await message.channel.fetchMessages({limit: 99, after: '436122906565804032'});
+            const fetched = await message.channel.messages.fetch({limit: 99, after: '436122906565804032'});
  
             
             message.channel.bulkDelete(fetched, true);
         }
         async function cleararound(aroundarg) {
             message.delete();
-            const fetched = await message.channel.fetchMessages({limit: 99, around:aroundarg});
+            const fetched = await message.channel.messages.fetch({limit: 99, around:aroundarg});
 
             message.channel.bulkDelete(fetched, true);
            

@@ -26,7 +26,7 @@ const commando = require('discord.js-commando');
     
         
         
-        message.channel.send(mensagem, {tts:true});
+        message.channel.cache.send(mensagem, {tts:true});
           
     }
     }

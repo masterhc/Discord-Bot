@@ -17,7 +17,7 @@ const fs = require('fs');
             let guilds=JSON.parse(fs.readFileSync('guilds.json', 'utf-8'));
                 
 
-          const embed = new Discord.RichEmbed;
+          const embed = new Discord.MessageEmbed;
                 embed.setTitle('Servidores que usam a Rem-chan:')
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)

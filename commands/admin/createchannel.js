@@ -16,7 +16,10 @@ const Discord = require('discord.js');
         
         async run(message, args){
         //Check admin privilege 
-        if(isAdmin()){ let server = message.guild
+        if(isAdmin())
+        {   
+            let server = message.guild
+            
             args=message.content.split(/\s+/g);
             var name;
             //break the command into the usable info.
@@ -30,9 +33,9 @@ const Discord = require('discord.js');
                
             };
             //log the creation of a new channel.
-           console.log("Creatina a new channel on server:"+server+" with the name:"+name+".");
+           console.log("Creating a new channel on server:"+server.name +" with the name:"+name+".");
            //Actually create the channel.
-           server.createChannel(name, 'text');
+           server.channels.create(name,  { type: 'text'});
         
            sendMessage(name)
         }else{message.channel.send("Necessita de premissões de administrador para usar este comando.")}
@@ -40,7 +43,7 @@ const Discord = require('discord.js');
         //Send message confirming the creation of said new channel.
 
         function sendMessage(name){
-                const embed = new Discord.RichEmbed
+                const embed = new Discord.MessageEmbed
                 embed.setTitle('Novo canal criado ')
                 embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
                 embed.setColor(0xd31f1f)
@@ -64,7 +67,10 @@ const Discord = require('discord.js');
                 if(message.member.id==='186540961650835456') return true;
                 
                 if (message.member.has('ADMINISTRATOR')) return true;
-                return false;
+                {
+                    return false;
+                }
+               
             }
 
         }

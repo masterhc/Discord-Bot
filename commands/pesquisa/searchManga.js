@@ -43,7 +43,7 @@ class Mangacommando extends commando.Command{
       });
        
           function falhou(err){
-          let embed2 = new Discord.RichEmbed;
+          let embed2 = new Discord.MessageEmbed;
             embed2.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
             embed2.setColor(0xdb06db)
             embed2.setDescription(err)
@@ -54,7 +54,7 @@ class Mangacommando extends commando.Command{
           }
        
           function mensagem(res){
-            const embed = new Discord.RichEmbed;
+            const embed = new Discord.MessageEmbed;
             
             embed.setTitle(res.title)
             embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
