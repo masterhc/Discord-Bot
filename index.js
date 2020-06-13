@@ -1,13 +1,29 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-
+const postgres = require('postgres');
 const fs = require('fs');
 const MusicClient = require("discord-music-wrapper")
 
 
-const bot = new commando.Client();
+const bot = new commando.Client(({ partials: ['MESSAGE', 'REACTION'] }));
+const sql = postgres('postgres://username:password@host:port/database', {
+    host        : process.env.postgresURL,         // Postgres ip address or domain name
+    port        : process.env.postgresPort,       // Postgres server port
+    path        : '',         // unix socket path (usually '/tmp')
+    database    : process.env.postgresDB,         // Name of database to connect to
+    username    : process.env.postgresUser,         // Username of database user
+    password    : process.env.postgresPW,         // Password of database user
+    ssl         : false,      // True, or options for tls.connect
+    max         : 10,         // Max number of connections
+    timeout     : 0,          // Idle connection timeout in seconds
+    types       : []         // Array of custom types, see more below
+   
+  })
+   
+/*
 
+Music garbage still not working still not caring enough to make it work
 
 const musicPlayer = new MusicClient(process.env.youtubeKey, options = {
         earProtections: true,
@@ -53,7 +69,7 @@ bot.on("message", (message)=>{
             break;
         }
 })	
-
+*/
 
 bot.login(process.env.discord_token);
 
@@ -155,7 +171,17 @@ bot.on('ready', ()=>{
 }});
 //Give role => Membro
 bot.on('ready', ()=>{
-   
+    giveRole();
+    timer1();
+    function timer1()
+    {
+        setTimeout(() => 
+        {
+            giveRole(); // Member role on wellcome channel
+            timer1();
+        }, 
+        3000);
+    }
     timer2();
     function timer2(){
         setTimeout(()=>{
@@ -175,55 +201,157 @@ bot.on('ready', ()=>{
             * 
             * This will mean there would be a single giveRole function
             */
-            giveRole(); // Member role on wellcome channel
+            
             //Crackwatch role
             //Rust commit role
-            rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
+            
             timer2();   
         }, 60000);
     }
-
-    function giveRole(){
-        
-    bot.channels.find('name', "👐bem-vindo").fetchMessage('445251380639170560').then(
-        message => { 
-            const filter = (reaction) => {
-                return ['👌'].includes(reaction.emoji.name);
-            };
-            message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-                    .then(collected => {
-                            const reaction = collected.first();
-                            console.log("Reaction added")
-                            reactor = reaction.users.first()
-                            console.log("reactor:"+reactor.id)
-                            
-                            if(hasRole(reactor.reaction.message.guild.member(reactor))== false){
-                                try{        
-                                    reaction.message.guild.member(reactor)
-                                    .addRole('336235115782864906')
-                                    .catch(console.error);
-                                    console.log("!Permissions granted to"+reactor.reaction.message.guild.member(reactor).name);
-                                }
-                                catch(error){
-                                    console.error
-                                }
-                                finally{ console.log('done')}
-                            }else{
-                                console.log(reactor.reaction.message.name.guild.member(reactor).name+"tryed but got the role denied.")
-                            }
-                        
-                        }
-                    ).catch(
-                        console.error()
-                    ); 
-        }
-       
-    ).catch(console.error)
     
-    };
+ 
+   function giveRole()
+   {
+       
+        const wellcomeChannelID="445249426743754764"
+        const wellcomeChannel = bot.channels.get(wellcomeChannelID);
+        const messageID = "445251380639170560";
+        var message;
+        var reaction;
+        roles = ["Member", "Rust", "Valorant", "CrackWatch"]
+        wellcomeChannel.fetchMessage(messageID).then
+        (
+            m =>
+            {
+                const filter = (reaction, user) =>
+                {   
+                    if(reaction.emoji.name==="tuturu")//||reaction.emoji.name==="rust_icon"||reaction.emoji.name==="valorant_icon"||reaction.emoji.name==="crackwatch")
+                    {
+                        return true ;
+                    }
+                };
+                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+                .catch
+                (
+                    
+                    collected =>
+                    {
+                        for(var [key, values] of collected)
+                        {
+                            
+                           for(var [key, value] of values.users) 
+                           {
+                            
+                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("336235115782864906");
+                            console.log(`Role ${roles[0]} given to ${value.username}`)
+                           }
+                           
+                          
+                        }
+                        
+                    }
+                )
+            }
+        )
+     
+        wellcomeChannel.fetchMessage(messageID).then
+        (
+            m =>
+            {
+                const filter = (reaction, user) =>
+                {   
+                    return reaction.emoji.name === 'rust_icon';
+                };
+                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+                .catch
+                (
+                    
+                    collected =>
+                    {
+                        for(var [key, values] of collected)
+                        {
+                       
 
+                           for(var [key, value] of values.users) 
+                           {
 
+                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("687634126387544115");
+                            console.log(`Role ${roles[1]} given to ${value.username}`)
+                           }
+                           
+                          
+                        }
+                        
+                    }
+                )
+            }
+        )
+        wellcomeChannel.fetchMessage(messageID).then
+        (
+            m =>
+            {
+                const filter = (reaction, user) =>
+                {   
+                    return reaction.emoji.name === 'valorant_icon';
+                };
+                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+                .catch
+                (
+                    
+                    collected =>
+                    {
+                        for(var [key, values] of collected)
+                        {
+                     
 
+                           for(var [key, value] of values.users) 
+                           {
+
+                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("717826411695702119");
+                            console.log(`Role ${roles[2]} given to ${value.username}`)
+                           }
+                           
+                          
+                        }
+                        
+                    }
+                )
+            }
+        )
+        
+        wellcomeChannel.fetchMessage(messageID).then
+        (
+            m =>
+            {
+                const filter = (reaction, user) =>
+                {   
+                    return reaction.emoji.name === 'crackwatch';
+                };
+                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+                .catch
+                (
+                    
+                    collected =>
+                    {
+
+                        for(var [key, values] of collected)
+                        {
+                           for(var [key, value] of values.users) 
+                           {
+                            
+                            bot.channels.get(wellcomeChannelID).members.get(value.id).addRole("642891554964635659");
+                            console.log(`Role ${roles[4]} given to ${value.username}`)
+                           }
+                           
+                          
+                        }
+                        
+                    }
+                )
+            }
+        )
+    }      
+   
 // Give Role => CrackWatch
 
 
@@ -248,116 +376,132 @@ bot.on('ready',()=>{
     
     
     crackwatch();
-    
-    function crackwatch(){
-    setTimeout(()=>{
-      //Get lastCrackMessageSentTitle from the message on the channel
-      var lastCrackMessageSentTitle
-      const baseChannel = '643995527389773855';
-    if(channelexists(baseChannel))
-    {
-           bot.channels.get(baseChannel).fetchMessages({limit:1}).then(messages=>{
-           
-              
-            for(var [key, values] of messages){
-                
-                bot.channels.get(baseChannel).fetchMessage(values.id).then(message =>{
-                    console.log("previously sent crack message title: "+ message.emebds[0].Title)
-                  lastCrackMessageSentTitle = message.embeds[0].Title;
-                })
-              } 
-            });
-        
-    }
-    
-     request(`http://api.crackwatch.com/api/cracks`, function(err, res, body){
-       if(!err){
-             let fetchedCrack = JSON.parse(body);
-         try {
-             if(fetchedCrack.message!= null && fetchedCrack.message == "Internal server error"){
-                 console.log("crackwatch fucked");
-                 crackwatch();
-                      let correctedTitleArray = fetchedCrack[0].title.split(".");
-
-         let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
-        
-         if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0){
-            correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
-         }
-        
-        
-         let correctedTitle
       
-                    if(correctedTitleArray.length != null){
-                        for (var j = 0; j <= correctedTitleArray.length; j++) {
-                            if(j==0){
-                                    
-                                    correctedTitle = correctedTitleArray[j];
-                                    
-                            }else if(j == correctedTitleArray.length){
-                                    
-                                    correctedTitle =correctedTitle +' ' + correctedEnding[0]
-                                
-                                    
-                            }else if(j <= correctedTitleArray.length-2){
-                                    correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];
-                                
-                            }
-                        }
-                        }else{
-                            correctedTitle = fetchedCrack[0].title;
-                        }
-
-                        console.log("correctedTitle: " + correctedTitle)
-                        //Title comes out ok
-                    let newObject = {
-                    "title":correctedTitle,
-                    "sceneGroup":fetchedCrack[0].groupName,
-                    "date":fetchedCrack[0].date,
-                    "image":fetchedCrack[0].image
-
-
-                    }
-                
+function crackwatch()
+{ 
+        setTimeout(()=>{  
+         //Get lastCrackMessageSentTitle from the message on the channel
+        var lastCrackMessageSentTitle
+        const baseChannel = '643995527389773855';
+        if(channelexists(baseChannel))
+        {
+            bot.channels.get(baseChannel).fetchMessages({limit:1}).then(messages=>{
+            
+                for(var [key, values] of messages){
                     
-                        let output = JSON.stringify(newObject);  
+                    bot.channels.get(baseChannel).fetchMessage(values.id).then(message =>{
+                    // console.log("previously sent crack message title: "+ message.embeds[0].title)
+                    lastCrackMessageSentTitle = message.embeds[0].title;
+                    console.log("lastCrackSent from the last Message :" + lastCrackMessageSentTitle);
+                    })
+                } 
+                });
+            
+        }
+   
+    request(`https://api.crackwatch.com/api/cracks`, function(err, res, body){
+       if(!err)
+       {
+          
+             let fetchedCrack = JSON.parse(body);
+            try 
+            {
+                if(lastCrackMessageSentTitle == null)
+                {
+                    crackwatch();
+                }else
+                {
+                    if(fetchedCrack != null && fetchedCrack.message != "Internal server error")
+                    {
                         
-                        if(crackcheck(correctedTitle)){
-                        sendMessage(fetchedCrack[0], correctedTitle, getInfo(correctedTitle));
-                        crackwatch();
-                        }else{
-                            crackwatch()
-                        }
+                            let correctedTitleArray = fetchedCrack[0].title.split(".");
+
+                            let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
+                            
+                            if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0)
+                            {
+                                correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
+                            }
+                            
+                            
+                            let correctedTitle
+                    
+                            if(correctedTitleArray.length != null)
+                            {
+                                for (var j = 0; j <= correctedTitleArray.length; j++)
+                                {
+                                    if(j==0)
+                                    {
+                                                    
+                                        correctedTitle = correctedTitleArray[j];
+                                                    
+                                    }else if(j == correctedTitleArray.length)
+                                    {
+                                                    
+                                        correctedTitle =correctedTitle +' ' + correctedEnding[0]
+                                                
+                                                    
+                                    }else if(j <= correctedTitleArray.length-2)
+                                    {
+                                        correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];           
+                                    }
+                                }
+                            }else{
+                                correctedTitle = fetchedCrack[0].title;
+                            }
+
+                            //console.log("correctedTitle: " + correctedTitle)
+                            //Title comes out ok
+                            let newObject = 
+                            {
+                                "title":correctedTitle,
+                                "sceneGroup":fetchedCrack[0].groupName,
+                                "date":fetchedCrack[0].date,    
+                                "image":fetchedCrack[0].image
+                            }       
+                            let output = JSON.stringify(newObject);  
+                            
+                            if(crackcheck(correctedTitle, lastCrackMessageSentTitle)==true)
+                            { 
+                                let info 
+                                info =  getInfo(correctedTitle);
+                                console.log("passed the check will now be sent")
+                                sendMessage(fetchedCrack[0], correctedTitle,  info);
+                                crackwatch();
+                            }else{
+                                console.log("Didn't pass the check, same as the last one sent.")
+                                crackwatch()
+                            }
                     }else{
                         crackwatch();
-                    }   
-             }catch (error) {
-             
-             console.log("api completly Fucked")
-             crackwatch();
-         }
-                }
-         } 
+                    } 
+                }  
+            }catch (error) 
+            {
+                        
+                console.log("CrackWatch Updates: something went wrong on the try")
+                crackwatch();
+            }
+        }
+    } 
          
          
     
 
         );
    
-      }, 60000);  
-  } 
+    }, 10000);  
+    
+} 
 
 
    
      
-     function crackcheck(correctedTitle){
-       
-     
-        
-        
+     function crackcheck(correctedTitle, lastCrackMessageSentTitle){
         console.log("CrackCheck:correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
-        if(correctedTitle !=lastCrackMessageSentTitle)return true;
-        else return false;
+        console.log("CrackCheck: Are they equal? "+(correctedTitle ==lastCrackMessageSentTitle));
+        if(correctedTitle ==lastCrackMessageSentTitle)return false;
+        else return true;
     }
 
         function sendMessage(arg, arg3, arg2){
@@ -387,10 +531,13 @@ bot.on('ready',()=>{
 
                 let channelsfile = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
                 
-                for (var i=0; i<channelsfile.channels.length; i++) {
+                for (var i=0; i<channelsfile.channels.length; i++) 
+                {
                   
+                    //there is likely the cause of errors *channels file* untrue
 
-                    if(channelexists(channelsfile.channels[i])){
+                    if(channelexists(channelsfile.channels[i]))
+                    {
                         bot.channels.get(channelsfile.channels[i]).send({embed});
                     }
                   
@@ -422,7 +569,7 @@ function getInfo(Title){
                 }
                 for ( var i=0; i<games.length; i++) {
                       
-                    if(games[i].tilte.search(Title) != -1){
+                    if(games[i].title.search(Title) != -1){
                         console.log("found match")
         
                         finish = true
@@ -461,8 +608,9 @@ bot.on('ready',()=>{
    function timer(){
     setTimeout(()=>{
         moveAFKs()
+        rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
         timer();       
-    }, 60000);
+    }, 10000);
 }
 
 
@@ -487,22 +635,35 @@ function moveAFKs(){
 function rustCommits()
 {  // Getting the lastSentCommit message from the channel
     //There is a better way to do this... but this works
-
+    
+    var lastSentDate
     var lastSentCommit
-    if(channelexists('696724807416283136'))
-    {
-           bot.channels.get('696724807416283136').fetchMessages({limit:1}).then(messages=>{
-           
-              
-            for(var [key, values] of messages){
-                
-                bot.channels.get('696724807416283136').fetchMessage(values.id).then(message =>{
-                  lastSentCommit = message.embeds[0].description;
-                })
-              } 
-            });
+        if(channelexists('721061781824471080'))
+        {
+            if(lastSentCommit==null)
+            {
+                bot.channels.get('721061781824471080').fetchMessages({limit:1}).then(messages=>
+                {
         
-    }
+                    for(var [key, values] of messages)
+                    {
+                    
+                        bot.channels.get('721061781824471080').fetchMessage(values.id).then(message =>
+                        {
+                        lastSentCommit = message.embeds[0].description;
+                        lastSentDate = message.embeds[0].title
+                        //console.log("lastSentDate took from cached message : " + lastSentDate);
+                       
+                        })
+                    } 
+                });
+          
+            }
+           
+        }
+    
+   
+    
     //collection to store the commited information
     var latestCommit = {
         "Author":"",
@@ -513,38 +674,119 @@ function rustCommits()
     //Filling the collection and sending the message
    request("https://commits.facepunch.com/?format=json", (err, res, body)=>{
        
-       var commitCount;
-       if(!err){
-        //console.log("request works")
-        let Results = JSON.parse(body).results[0]
-        let newCommit=Results[0]
-        for(var i=0; i<Results.length; i++){
-            if(lastSentCommit!=Results[i].message){
-               commitCount += commitCount;
-            }else{
-                return newCommits();
+       var commitCount=0;
+       if(!err)
+       {
+        let Results = JSON.parse(body).results  
+        let RustResults = []; 
+        for(var i=0; i<Results.length; i++)
+        {
+            if(commitCount <=30)
+            {
+                if(Results[i].repo.search(/rust/i)!=-1)
+                {  
+                    if(lastSentCommit!=Results[i].message)
+                    {
+                        RustResults.push(Results[i]);
+                        //console.log("Commit saved")
+                        commitCount ++;
+                        
+                    }else{
+
+                        //console.log("Commits matches the last sent.")
+                        if(commitCount >0)
+                        {
+                            return newCommits(1);
+                        }else{
+                            //console.log("Não há commits novos.")
+                            return 
+                        }
+                    }
+                }else
+                {
+                    //console.log("Commit not saved, as it's for another game.")
+                }
+            }else
+            {
+                //console.log("Count reached the limit.")
+                return newCommits(2);
             }
+            
         }
-        function newCommits(){
-           for(var i =0; i<commitCount; i++){
-            newCommit = Results[i]
-            if(newCommit.repo.search(/rust/i)!=-1){
-                console.log("New commit")   
-                latestCommit.Author = newCommit.user.name;
-                latestCommit.Avatar = newCommit.user.avatar;
-                latestCommit.Time = newCommit.created.split("T")[1]+ " do dia "+ newCommit.created.split("T")[0];
-                latestCommit.Content = newCommit.message;
-                messageCommit(latestCommit, newCommit.repo);   
-                
-                
+        function newCommits(int)
+        {
+           /* if(int ==1)
+            {
+                console.log("comes from a match")
+            }else if(int ==2)
+            {
+                console.log("Comes from a maxed out counter.")
+            }*/
+            
+           for(var i =commitCount-1; i>-1; i--)
+           {
+               
+                if(RustResults[i].repo.search(/rust/i)!=-1)
+                {   
+                     //console.log("counter: "+i);
+
+                    latestCommit.Author = RustResults[i].user.name;
+                    latestCommit.Avatar = RustResults[i].user.avatar;
+                    latestCommit.Time = RustResults[i].created.split("T")[1]+ " do dia "+ RustResults[i].created.split("T")[0];
+                    latestCommit.Content = RustResults[i].message;
+                   // console.log(lastSentDate)
+                    //console.log(latestCommit.Time)
+                    if(latestCommit.Time != lastSentDate)
+                    {
+                        if(latestCommit.Time.split(" do dia ")[1].split("-")[0]>lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for maior 
+                        {
+                        messageCommit(latestCommit, RustResults[i].repo);
+                        }else if(latestCommit.Time.split(" do dia ")[1].split("-")[0]=lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for igual
+                        {
+                        if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
+                        {
+                            messageCommit(latestCommit, RustResults[i].repo);
+                        }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
+                        {
+                            if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
+                            {
+                                messageCommit(latestCommit, RustResults[i].repo);
+                            }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
+                            {
+                               
+                                if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
+                                {   
+                                    messageCommit(latestCommit, RustResults[i].repo);
+                                }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
+                                {
+                                    if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
+                                    {
+                                        messageCommit(latestCommit, RustResults[i].repo);
+                                    }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
+                                    {
+                                        if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
+                                        {
+                                            messageCommit(latestCommit, RustResults[i].repo);
+                                        }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to be sent already
+                                    }
+                                }
+                            } 
+                        }
+                        }                    
+                    }
+                    //console.log(latestCommit)
+                    
+                    
+
+                }
             }
-        }  
+              
         }
        
         //console.log("previous content: "+ lastSentCommitsContent)
         
 
-       }
+    }
    } )
 
 };
@@ -552,21 +794,28 @@ function rustCommits()
 
 
 function messageCommit(commit, repo){
-    
+        //console.log("New commit!") 
      const embed = new Discord.RichEmbed        
          embed.setTitle("Novo Commit às "+commit.Time)
          embed.setAuthor(commit.Author, commit.Avatar)
          embed.addField("Repo: ", repo)
          embed.setColor(0xc23811)
          embed.setDescription(commit.Content)
-         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+         embed.setFooter('Rem-chan ', "https://i.imgur.com/g6FSNhL.png")
          embed.setTimestamp() 
          let allChannels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-         for(var i =0; i<allChannels.rustCommitsChannels.length;i++){
-             if(channelexists(allChannels.rustCommitsChannels[i]))
-         {
-                 bot.channels.get(allChannels.rustCommitsChannels[i]).send({embed});
-         }
+         for(var i =0; i<allChannels.rustCommitsChannels.length;i++)
+         {//Likely the error is beyond this *the channel file* -> Odds are it actualy isn't
+            if(channelexists(allChannels.rustCommitsChannels[i]))
+            {
+                bot.channels.get(allChannels.rustCommitsChannels[i]).send({embed}).then(()=>
+                {
+                    lastSentCommit = commit;
+                    lastSentDate = ("Novo Commit às "+commit.Time);
+                    //console.log("lastSentDate changed when sending the message : " + lastSentDate);
+
+                });
+            }
          }
          
  }
