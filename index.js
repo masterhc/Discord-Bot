@@ -600,122 +600,124 @@ function rustCommits()
         "Time":""
     }
     //Filling the collection and sending the message
-   request("https://commits.facepunch.com/?format=json", (err, res, body)=>{
-       
-       var commitCount=0;
-       if(!err)
-       {
-        let Results = JSON.parse(body).results  
-        let RustResults = []; 
-        for(var i=0; i<Results.length; i++)
+    try {
+        
+    
+        request("https://commits.facepunch.com/?format=json", (err, res, body)=>
         {
-            if(commitCount <=30)
+            
+            var commitCount=0;
+            if(!err)
             {
-                if(Results[i].repo.search(/rust/i)!=-1)
-                {  
-                    if(lastSentCommit!=Results[i].message)
-                    {
-                        RustResults.push(Results[i]);
-                        //console.log("Commit saved")
-                        commitCount ++;
-                        
-                    }else{
-
-                        //console.log("Commits matches the last sent.")
-                        if(commitCount >0)
-                        {
-                            return newCommits(1);
-                        }else{
-                            //console.log("Não há commits novos.")
-                            return 
-                        }
-                    }
-                }else
+                let Results = JSON.parse(body).results  
+                let RustResults = []; 
+                for(var i=0; i<Results.length; i++)
                 {
-                    //console.log("Commit not saved, as it's for another game.")
-                }
-            }else
-            {
-                //console.log("Count reached the limit.")
-                return newCommits(2);
-            }
-            
-        }
-        function newCommits(int)
-        {
-           /* if(int ==1)
-            {
-                console.log("comes from a match")
-            }else if(int ==2)
-            {
-                console.log("Comes from a maxed out counter.")
-            }*/
-            
-           for(var i =commitCount-1; i>-1; i--)
-           {
-               
-                if(RustResults[i].repo.search(/rust/i)!=-1)
-                {   
-                     //console.log("counter: "+i);
-
-                    latestCommit.Author = RustResults[i].user.name;
-                    latestCommit.Avatar = RustResults[i].user.avatar;
-                    latestCommit.Time = RustResults[i].created.split("T")[1]+ " do dia "+ RustResults[i].created.split("T")[0];
-                    latestCommit.Content = RustResults[i].message;
-                   // console.log(lastSentDate)
-                    //console.log(latestCommit.Time)
-                    if(latestCommit.Time != lastSentDate)
+                    if(commitCount <=30)
                     {
-                        if(latestCommit.Time.split(" do dia ")[1].split("-")[0]>lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for maior 
-                        {
-                        messageCommit(latestCommit, RustResults[i].repo);
-                        }else if(latestCommit.Time.split(" do dia ")[1].split("-")[0]=lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for igual
-                        {
-                        if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
-                        {
-                            messageCommit(latestCommit, RustResults[i].repo);
-                        }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
-                        {
-                            if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
+                        if(Results[i].repo.search(/rust/i)!=-1)
+                        {  
+                            if(lastSentCommit!=Results[i].message)
                             {
-                                messageCommit(latestCommit, RustResults[i].repo);
-                            }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
-                            {
-                               
-                                if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
-                                {   
-                                    messageCommit(latestCommit, RustResults[i].repo);
-                                }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
+                                RustResults.push(Results[i]);
+                                //console.log("Commit saved")
+                                commitCount ++;
+                                
+                            }else{
+
+                                //console.log("Commits matches the last sent.")
+                                if(commitCount >0)
                                 {
-                                    if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
+                                    return newCommits();
+                                }else{
+                                    //console.log("Não há commits novos.")
+                                    return 
+                                }
+                            }
+                        }else
+                        {
+                            //console.log("Commit not saved, as it's for another game.")
+                        }
+                    }else
+                    {
+                        console.log("RustCommits: Count reached the limit.")
+                        return newCommits();
+                    }
+                    
+                }
+        
+                function newCommits(int)
+                {
+                    
+                for(var i =commitCount-1; i>-1; i--)
+                {
+                    
+                        if(RustResults[i].repo.search(/rust/i)!=-1)
+                        {   
+                            //console.log("counter: "+i);
+
+                            latestCommit.Author = RustResults[i].user.name;
+                            latestCommit.Avatar = RustResults[i].user.avatar;
+                            latestCommit.Time = RustResults[i].created.split("T")[1]+ " do dia "+ RustResults[i].created.split("T")[0];
+                            latestCommit.Content = RustResults[i].message;
+                        // console.log(lastSentDate)
+                            //console.log(latestCommit.Time)
+                            if(latestCommit.Time != lastSentDate)
+                            {
+                                if(latestCommit.Time.split(" do dia ")[1].split("-")[0]>lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for maior 
+                                {
+                                messageCommit(latestCommit, RustResults[i].repo);
+                                }else if(latestCommit.Time.split(" do dia ")[1].split("-")[0]=lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for igual
+                                {
+                                if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
+                                {
+                                    messageCommit(latestCommit, RustResults[i].repo);
+                                }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
+                                {
+                                    if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
                                     {
                                         messageCommit(latestCommit, RustResults[i].repo);
-                                    }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
+                                    }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
                                     {
-                                        if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
-                                        {
+                                    
+                                        if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
+                                        {   
                                             messageCommit(latestCommit, RustResults[i].repo);
-                                        }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to be sent already
-                                    }
+                                        }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
+                                        {
+                                            if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
+                                            {
+                                                messageCommit(latestCommit, RustResults[i].repo);
+                                            }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
+                                            {
+                                                if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
+                                                {
+                                                    messageCommit(latestCommit, RustResults[i].repo);
+                                                }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to be sent already
+                                            }
+                                        }
+                                    } 
                                 }
-                            } 
+                                }                    
+                            }
+                            //console.log(latestCommit)
+                            
+                            
+
                         }
-                        }                    
                     }
-                    //console.log(latestCommit)
                     
-                    
+                }
+            
+                //console.log("previous content: "+ lastSentCommitsContent)
+                
 
                 }
-            }
-              
-        }
-       
-        //console.log("previous content: "+ lastSentCommitsContent)
-        
-
+        } )//end of request
+    } catch (error) {
+        console.log("RustCommits: Request Failed")
+        console.error(error)  
     }
-   } )
 
 };
 
