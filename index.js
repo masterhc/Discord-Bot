@@ -73,7 +73,7 @@ bot.on('ready', ()=>{
 }
   function changeActivity(){ 
      bot.user.setActivity(message[i], {type: tipo[i]})
-     .then(presence => console.log(`Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
+     .then(presence => console.log(`RichPresence: Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
      .catch(console.error);
  
         console.log("I: "+ i);
@@ -82,12 +82,12 @@ bot.on('ready', ()=>{
  }else{
      i=0;
      bot.user.setActivity('!help', {type: 'LISTENING'})
-     .then(presence => console.log(`Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
+     .then(presence => console.log(`RichPresence: Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
      .catch(console.error);
  }
       
    
-    console.log(`Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
+    console.log(`Info: Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
     
    
    
@@ -171,7 +171,7 @@ bot.on('ready', ()=>{
                            {
                             
                             bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("336235115782864906");
-                            console.log(`Role ${roles[0]} given to ${value.username}`)
+                            console.log(`RoleAssignment: Role ${roles[0]} given to ${value.username}`)
                            }
                            
                            
@@ -204,7 +204,7 @@ bot.on('ready', ()=>{
                            {
 
                             bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("687634126387544115");
-                            console.log(`Role ${roles[1]} given to ${value.username}`)
+                            console.log(`RoleAssignment: Role ${roles[1]} given to ${value.username}`)
                            }
                            
                           
@@ -236,7 +236,7 @@ bot.on('ready', ()=>{
                            {
 
                             bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("717826411695702119");
-                            console.log(`Role ${roles[2]} given to ${value.username}`)
+                            console.log(`RoleAssingment: Role ${roles[2]} given to ${value.username}`)
                            }
                            
                           
@@ -268,7 +268,7 @@ bot.on('ready', ()=>{
                            {
                             
                             bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("642891554964635659");
-                            console.log(`Role ${roles[3]} given to ${value.username}`)
+                            console.log(`RoleAssingment: Role ${roles[3]} given to ${value.username}`)
                            }
                            
                           
@@ -320,7 +320,7 @@ function crackwatch()
                     bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>{
                     // console.log("previously sent crack message title: "+ message.embeds[0].title)
                     lastCrackMessageSentTitle = message.embeds[0].title;
-                    console.log("lastCrackSent from the last Message :" + lastCrackMessageSentTitle);
+                    console.log("CrackWatch: lastCrackSent from the last Message: " + lastCrackMessageSentTitle);
                     })
                 } 
                 });
@@ -393,11 +393,11 @@ function crackwatch()
                             { 
                                 let info 
                                 info =  getInfo(correctedTitle);
-                                console.log("passed the check will now be sent")
+                                console.log("CrackWatch: passed the check will now be sent")
                                 sendMessage(fetchedCrack[0], correctedTitle,  info);
                                 crackwatch();
                             }else{
-                                console.log("Didn't pass the check, same as the last one sent.")
+                                console.log("CrackWatch: Didn't pass the check, same as the last one sent.")
                                 crackwatch()
                             }
                     }else{
@@ -407,7 +407,7 @@ function crackwatch()
             }catch (error) 
             {
                         
-                console.log("CrackWatch Updates: something went wrong on the try")
+                console.log("CrackWatch: something went wrong on the try")
                 crackwatch();
             }
         }
@@ -426,8 +426,8 @@ function crackwatch()
    
      
      function crackcheck(correctedTitle, lastCrackMessageSentTitle){
-        console.log("CrackCheck:correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
-        console.log("CrackCheck: Are they equal? "+(correctedTitle ==lastCrackMessageSentTitle));
+        //console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
+        //console.log("CrackWatch: CrackCheck: Are they equal? "+(correctedTitle ==lastCrackMessageSentTitle));
         if(correctedTitle ==lastCrackMessageSentTitle)return false;
         else return true;
     }
@@ -493,12 +493,12 @@ function getInfo(Title){
                     console.error(err);
                 }
                 if(res >399){
-                    console.log("error reference: "+ res);
+                    console.log("CrackWatch: error reference: "+ res);
                 }
                 for ( var i=0; i<games.length; i++) {
                       
                     if(games[i].title.search(Title) != -1){
-                        console.log("found match")
+                        console.log("CrackWatch: found match")
         
                         finish = true
                         return games[i];
@@ -507,13 +507,13 @@ function getInfo(Title){
               
                 
                if(count==49){
-                   console.log("Count at 49, stoping search. It took too much time already.")
+                   console.log("CrackWatch: Count at 49, stoping search. It took too much time already.")
                }
                 
                 }); 
                 count++;
         } catch (error) {
-            console.log("Error on request.");
+            console.log("CrackWatch: Error on request.");
             console.error(error);
         } 
       
@@ -550,11 +550,11 @@ function moveAFKs(){
     
     
     for(var [key, values] of auxmembers){
-       console.log("Member list with a "+ auxmembers.size+" user size, hosting:\n" + values.id+"\n")
+       console.log("SS: Member list with a "+ auxmembers.size+" user size, hosting:\n" + values.id+"\n")
         if(values.roles.cache.has('693413934715240498')){            
-            console.log("leader: "+values.displayName);
+            console.log("SS: leader: "+values.displayName);
             values.voice.setChannel('648189029589843999')
-                    .then(() => console.log(`Moved ${values.displayName}`))
+                    .then(() => console.log(`SS: Moved ${values.displayName}`))
                     .catch(console.error);
         }
     }
@@ -580,7 +580,7 @@ function rustCommits()
                         {
                         lastSentCommit = message.embeds[0].description;
                         lastSentDate = message.embeds[0].title
-                        //console.log("lastSentDate took from cached message : " + lastSentDate);
+                        //console.log("RustCommits: lastSentDate took from cached message : " + lastSentDate);
                        
                         })
                     } 
@@ -620,23 +620,23 @@ function rustCommits()
                             if(lastSentCommit!=Results[i].message)
                             {
                                 RustResults.push(Results[i]);
-                                //console.log("Commit saved")
+                                //console.log("RustCommits: Commit saved")
                                 commitCount ++;
                                 
                             }else{
 
-                                //console.log("Commits matches the last sent.")
+                                //console.log("RustCommits: Commits matches the last sent.")
                                 if(commitCount >0)
                                 {
                                     return newCommits();
                                 }else{
-                                    //console.log("Não há commits novos.")
+                                    //console.log("RustCmmits: Não há commits novos.")
                                     return 
                                 }
                             }
                         }else
                         {
-                            //console.log("Commit not saved, as it's for another game.")
+                            //console.log("RustCommits: Commit not saved, as it's for another game.")
                         }
                     }else
                     {
@@ -724,7 +724,7 @@ function rustCommits()
 
 
 function messageCommit(commit, repo){
-        //console.log("New commit!") 
+      console.log("RustCommits: Sending a new commit.") 
      const embed = new Discord.MessageEmbed        
          embed.setTitle("Novo Commit às "+commit.Time)
          embed.setAuthor(commit.Author, commit.Avatar)
@@ -742,7 +742,7 @@ function messageCommit(commit, repo){
                 {
                     lastSentCommit = commit;
                     lastSentDate = ("Novo Commit às "+commit.Time);
-                    //console.log("lastSentDate changed when sending the message : " + lastSentDate);
+                    //console.log("RustCommits: lastSentDate changed when sending the message : " + lastSentDate);
 
                 });
             }
