@@ -87,7 +87,7 @@ bot.on('ready', ()=>{
  }
       
    
-    console.log(`Info: Rem is up and ready to serve on ${bot.guilds.size} servers, for ${bot.users.size} users.`);
+    console.log(`Info: Rem is up and ready to serve on ${bot.guilds.cache.size} servers, for ${bot.users.cache.size} users.`);
     
    
    
