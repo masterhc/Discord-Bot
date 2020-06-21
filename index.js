@@ -426,7 +426,7 @@ function crackwatch()
    
      
      function crackcheck(correctedTitle, lastCrackMessageSentTitle){
-        //console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
+        //<console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
         //console.log("CrackWatch: CrackCheck: Are they equal? "+(correctedTitle ==lastCrackMessageSentTitle));
         if(correctedTitle ==lastCrackMessageSentTitle)return false;
         else return true;
@@ -609,7 +609,15 @@ function rustCommits()
             var commitCount=0;
             if(!err)
             {
-                let Results = JSON.parse(body).results  
+                if(JSON.parse(body).result != null)
+                {
+                  let Results = JSON.parse(body).result;  
+                }else
+                {
+                    return
+                }
+                
+
                 let RustResults = []; 
                 for(var i=0; i<Results.length; i++)
                 {
