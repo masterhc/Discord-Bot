@@ -25,7 +25,7 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 //Start Up Log
 bot.on('ready', ()=>{
-    //Cool looking console starting message
+    //Fancy looking console starting message
     console.log("--------------------------")
     console.log("    Legendary Rem-Chan    ")
     console.log("          Ready           ")
@@ -564,31 +564,33 @@ function rustCommits()
 {  // Getting the lastSentCommit message from the channel
     //There is a better way to do this... but this works
     
-    var lastSentDate
-    var lastSentCommit
+   
+    var lastSentDate  
+    var lastSentCommit 
+    
+   if(lastSentCommit==null) 
+   {
         if(channelexists('721061781824471080'))
         {
-            if(lastSentCommit==null)
+            bot.channels.cache.get('721061781824471080').messages.fetch({limit:1}).then(messages=>
             {
-                bot.channels.cache.get('721061781824471080').messages.fetch({limit:1}).then(messages=>
+            console.log("RustCommits: FetchLastMessageSent: Found Messages")
+                
+
+                for(var [key, values] of messages)
                 {
-        
-                    for(var [key, values] of messages)
+                
+                    bot.channels.cache.get('721061781824471080').messages.fetch(values.id).then(message =>
                     {
+                    lastSentCommit = message.embeds[0].description;
+                    lastSentDate = message.embeds[0].title
                     
-                        bot.channels.cache.get('721061781824471080').messages.fetch(values.id).then(message =>
-                        {
-                        lastSentCommit = message.embeds[0].description;
-                        lastSentDate = message.embeds[0].title
-                        //console.log("RustCommits: lastSentDate took from cached message : " + lastSentDate);
-                       
-                        })
-                    } 
-                });
-          
-            }
-           
+                    console.log("RustCommits: lastSentDate took from cached message : " + message.embeds[0].title);
+                    })
+                } 
+            });     
         }
+   }    
     
    
     
@@ -605,15 +607,18 @@ function rustCommits()
     
         request("https://commits.facepunch.com/?format=json", (err, res, body)=>
         {
-            
+            let Results
             var commitCount=0;
             if(!err)
             {
-                if(JSON.parse(body).result != null)
+                if(JSON.parse(body).results != null)
                 {
-                  let Results = JSON.parse(body).result;  
+                    
+                  Results = JSON.parse(body).results;  
+                 
                 }else
                 {
+                    console.log("RustCommits: JSON.parse Error: body is null")
                     return
                 }
                 
@@ -663,13 +668,18 @@ function rustCommits()
                         if(RustResults[i].repo.search(/rust/i)!=-1)
                         {   
                             //console.log("counter: "+i);
-
+                            
                             latestCommit.Author = RustResults[i].user.name;
                             latestCommit.Avatar = RustResults[i].user.avatar;
                             latestCommit.Time = RustResults[i].created.split("T")[1]+ " do dia "+ RustResults[i].created.split("T")[0];
                             latestCommit.Content = RustResults[i].message;
                         // console.log(lastSentDate)
                             //console.log(latestCommit.Time)
+                            if(lastSentDate==null)
+                            {
+                                console.log("RustCommits: LastSentDate was null returning back to the begining.")
+                                return
+                            }
                             if(latestCommit.Time != lastSentDate)
                             {
                                 if(latestCommit.Time.split(" do dia ")[1].split("-")[0]>lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for maior 
@@ -728,7 +738,6 @@ function rustCommits()
     }
 
 };
-
 
 
 function messageCommit(commit, repo){
