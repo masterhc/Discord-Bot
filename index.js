@@ -31,7 +31,8 @@ bot.on('ready', ()=>{
     console.log("          Ready           ")
     console.log("       on "+bot.guilds.cache.size+" guilds        ")
     console.log("--------------------------")
-   
+    
+
     
     GuildsModel={//model for saving on a file
         "names":[
@@ -308,17 +309,16 @@ bot.on('ready',()=>{
 function crackwatch()
 { 
         setTimeout(()=>{  
-         //Get lastCrackMessageSentTitle from the message on the channel
+        //Gets the lastCrackMessageSentTitle from the message on the channel
         var lastCrackMessageSentTitle
         const baseChannel = '643995527389773855';
         if(channelexists(baseChannel))
         {
             bot.channels.cache.get(baseChannel).messages.fetch({limit:1}).then(messages=>{
-            
-                for(var [key, values] of messages){
-                    
-                    bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>{
-                    // console.log("previously sent crack message title: "+ message.embeds[0].title)
+                for(var [key, values] of messages)
+                {
+                    bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>
+                    {
                     lastCrackMessageSentTitle = message.embeds[0].title;
                     console.log("CrackWatch: lastCrackSent from the last Message: " + lastCrackMessageSentTitle);
                     })
@@ -378,7 +378,7 @@ function crackwatch()
                                 correctedTitle = fetchedCrack[0].title;
                             }
 
-                            //console.log("correctedTitle: " + correctedTitle)
+                            //console.log("CrackWatch: correctedTitle: " + correctedTitle)
                             //Title comes out ok
                             let newObject = 
                             {
@@ -401,6 +401,7 @@ function crackwatch()
                                 crackwatch()
                             }
                     }else{
+                        console.log("CrackWatch: Server Internal Error")
                         crackwatch();
                     } 
                 }  
@@ -410,6 +411,10 @@ function crackwatch()
                 console.log("CrackWatch: something went wrong on the try")
                 crackwatch();
             }
+        }else
+        {
+
+            console.log("CrackWatch: Server Error: Page doesn't even display a error message.")
         }
     } 
          
@@ -426,8 +431,7 @@ function crackwatch()
    
      
      function crackcheck(correctedTitle, lastCrackMessageSentTitle){
-        //<console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  saved crack.title: " + lastCrackMessageSentTitle);
-        //console.log("CrackWatch: CrackCheck: Are they equal? "+(correctedTitle ==lastCrackMessageSentTitle));
+        console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  lastCrackSentTitle: " + lastCrackMessageSentTitle);
         if(correctedTitle ==lastCrackMessageSentTitle)return false;
         else return true;
     }
@@ -461,9 +465,6 @@ function crackwatch()
                 
                 for (var i=0; i<channelsfile.channels.length; i++) 
                 {
-                  
-                    //there is likely the cause of errors *channels file* untrue
-
                     if(channelexists(channelsfile.channels[i]))
                     {
                         bot.channels.cache.get(channelsfile.channels[i]).send({embed});
@@ -485,8 +486,10 @@ function getInfo(Title){
     let finish = false;   
     let count = 0;
     
-     do{
-        try {
+     do
+     {
+        try 
+        {
             request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
                 let games = JSON.parse(body);
                 if(err){
@@ -546,15 +549,17 @@ bot.on('ready',()=>{
 
 });
 function moveAFKs(){
+    //Gets the members inside the AFK channel
     let auxmembers = bot.channels.cache.get("335494006890823680").members
-    
-    
+    console.log("MoveAFK: Member list with "+ auxmembers.size+"members.")
+    //Sorts through them looking for those who have the SS - Secret Services Role
     for(var [key, values] of auxmembers){
-       console.log("SS: Member list with a "+ auxmembers.size+" user size, hosting:\n" + values.id+"\n")
-        if(values.roles.cache.has('693413934715240498')){            
-            console.log("SS: leader: "+values.displayName);
+       console.log("hosting:" + values.id);;
+        if(values.roles.cache.has('693413934715240498')){ 
+            //Upon fiding someoe that has said role.           
+            //Moves it to the correct Channel.
             values.voice.setChannel('648189029589843999')
-                    .then(() => console.log(`SS: Moved ${values.displayName}`))
+                    .then(() => console.log(`MoveAFK: Moved ${values.displayName}.`))
                     .catch(console.error);
         }
     }
@@ -562,7 +567,7 @@ function moveAFKs(){
 
 function rustCommits()
 {  // Getting the lastSentCommit message from the channel
-    //There is a better way to do this... but this works
+   
     
    
     var lastSentDate  
@@ -575,16 +580,12 @@ function rustCommits()
             bot.channels.cache.get('721061781824471080').messages.fetch({limit:1}).then(messages=>
             {
             console.log("RustCommits: FetchLastMessageSent: Found Messages")
-                
-
                 for(var [key, values] of messages)
                 {
-                
                     bot.channels.cache.get('721061781824471080').messages.fetch(values.id).then(message =>
                     {
                     lastSentCommit = message.embeds[0].description;
                     lastSentDate = message.embeds[0].title
-                    
                     console.log("RustCommits: lastSentDate took from cached message : " + message.embeds[0].title);
                     })
                 } 
@@ -711,7 +712,7 @@ function rustCommits()
                                                 if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
                                                 {
                                                     messageCommit(latestCommit, RustResults[i].repo);
-                                                }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to be sent already
+                                                }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to have been sent already
                                             }
                                         }
                                     } 
@@ -741,18 +742,18 @@ function rustCommits()
 
 
 function messageCommit(commit, repo){
-      console.log("RustCommits: Sending a new commit.") 
-     const embed = new Discord.MessageEmbed        
-         embed.setTitle("Novo Commit às "+commit.Time)
-         embed.setAuthor(commit.Author, commit.Avatar)
-         embed.addField("Repo: ", repo)
-         embed.setColor(0xc23811)
-         embed.setDescription(commit.Content)
-         embed.setFooter('Rem-chan ', "https://i.imgur.com/g6FSNhL.png")
-         embed.setTimestamp() 
+    console.log("RustCommits: Sending a new commit.") 
+    const embed = new Discord.MessageEmbed        
+          embed.setTitle("Novo Commit às "+commit.Time)
+          embed.setAuthor(commit.Author, commit.Avatar)
+          embed.addField("Repo: ", repo)
+          embed.setColor(0xc23811)
+          embed.setDescription(commit.Content)
+          embed.setFooter('Rem-chan ', "https://i.imgur.com/g6FSNhL.png")
+          embed.setTimestamp() 
          let allChannels = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
          for(var i =0; i<allChannels.rustCommitsChannels.length;i++)
-         {//Likely the error is beyond this *the channel file* -> Odds are it actualy isn't
+         {
             if(channelexists(allChannels.rustCommitsChannels[i]))
             {
                 bot.channels.cache.get(allChannels.rustCommitsChannels[i]).send({embed}).then(()=>
