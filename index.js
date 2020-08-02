@@ -3,6 +3,7 @@ const commando = require('discord.js-commando');
 const request = require('request');
 const postgres = require('postgres');
 const fs = require('fs');
+const { Console } = require('console');
 
 
 
@@ -113,8 +114,7 @@ bot.on('ready', ()=>{
     timer2();
     function timer2(){
         setTimeout(()=>{
-            //Role Channel to be changed for wellcome on all role admission function
-            //Differente message for role admission (different reaction for each channel admission)
+
            /* Priority Level nº1(-5000) -> 
             * Find a way to make this for multiple servers (make a give role that looks what roles id can be admissible,
             * what are the correspondent assigned reactions, look on all the channels assigned to have role admissions,
@@ -136,11 +136,49 @@ bot.on('ready', ()=>{
             timer2();   
         }, 60000);
     }
+    bot.on('raw', packet => 
+    {
+        // We don't want this to run on unrelated packets
+        if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
+        //console.log(packet);
+        if (packet.t === 'MESSAGE_REACTION_REMOVE')
+        {
+            
+            console.log("New Emmiter: Removed a reaction." +"\n Reaction name: "+packet.d.emoji.name);
+            switch (packet.d.emoji.name) 
+            {
+                case "tuturu":
+                    bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("336235115782864906");
+                    console.log("Role Assignment: Role Removed. Role: Membro, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                    break;
+                case "valorant_icon":
+                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("717826411695702119");
+                    console.log("Role Assignment: Role Removed. Role: Valorant, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                    
+                    break;
+                case "rust_icon":
+                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("687634126387544115");
+                    console.log("Role Assignment: Role Removed. Role: Rust, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                    
+                    break;
+                case "crackwatch":
+                    bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("642891554964635659");
+                    console.log("Role Assignment: Role Removed. Role: CrackWatch, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                    
+                    break;
+            
+                    
+                default:
+                    break;
+            }
+
+        }
+    });
     
  
    function giveRole()
    {
-       //jsut forcing a new commit
+     
         const wellcomeChannelID="445249426743754764"
         const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
         const messageID = "445251380639170560";
@@ -281,16 +319,7 @@ bot.on('ready', ()=>{
         )
     }      
    
-// Give Role => CrackWatch
 
-
-
-
-
-function hasRole(reactor){
-    console.log("in hasRole")
-    if( reactor.roles.cache.has('334461623307730946') || reactor.roles.cache.has("342744569676562443")) {return true }else return false
-}   
 });
 
 
@@ -531,7 +560,6 @@ function getInfo(Title){
 
 }); 
 bot.on('ready',()=>{
-    //Make SS - Secret Services  hide on the hidden voiceroom when afk
     /*
      to use in admin commands that need a user id (from a reaction) to do something (message.mentions.users.first().id)
     */
@@ -551,10 +579,14 @@ bot.on('ready',()=>{
 function moveAFKs(){
     //Gets the members inside the AFK channel
     let auxmembers = bot.channels.cache.get("335494006890823680").members
-    console.log("MoveAFK: Member list with "+ auxmembers.size+"members.")
+    console.log("MoveAFK: Member list with "+ auxmembers.size+" members.")
     //Sorts through them looking for those who have the SS - Secret Services Role
+    if(auxmembers.size >0)
+    {
+        console.log("hosting:");
+    }
     for(var [key, values] of auxmembers){
-       console.log("hosting:" + values.id);;
+       console.log(values.id);;
         if(values.roles.cache.has('693413934715240498')){ 
             //Upon fiding someoe that has said role.           
             //Moves it to the correct Channel.
@@ -660,7 +692,7 @@ function rustCommits()
                     
                 }
         
-                function newCommits(int)
+                function newCommits()
                 {
                     
                 for(var i =commitCount-1; i>-1; i--)
@@ -685,33 +717,33 @@ function rustCommits()
                             {
                                 if(latestCommit.Time.split(" do dia ")[1].split("-")[0]>lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for maior 
                                 {
-                                messageCommit(latestCommit, RustResults[i].repo);
+                                messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                 }else if(latestCommit.Time.split(" do dia ")[1].split("-")[0]=lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for igual
                                 {
                                 if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
                                 {
-                                    messageCommit(latestCommit, RustResults[i].repo);
+                                    messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                 }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
                                 {
                                     if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
                                     {
-                                        messageCommit(latestCommit, RustResults[i].repo);
+                                        messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                     }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
                                     {
                                     
                                         if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
                                         {   
-                                            messageCommit(latestCommit, RustResults[i].repo);
+                                            messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                         }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
                                         {
                                             if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
                                             {
-                                                messageCommit(latestCommit, RustResults[i].repo);
+                                                messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                             }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
                                             {
                                                 if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
                                                 {
-                                                    messageCommit(latestCommit, RustResults[i].repo);
+                                                    messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch );
                                                 }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to have been sent already
                                             }
                                         }
@@ -741,12 +773,12 @@ function rustCommits()
 };
 
 
-function messageCommit(commit, repo){
+function messageCommit(commit, repo, branch){
     console.log("RustCommits: Sending a new commit.") 
     const embed = new Discord.MessageEmbed        
           embed.setTitle("Novo Commit às "+commit.Time)
           embed.setAuthor(commit.Author, commit.Avatar)
-          embed.addField("Repo: ", repo)
+          embed.addField("Repo: ", repo+"/"+branch)
           embed.setColor(0xc23811)
           embed.setDescription(commit.Content)
           embed.setFooter('Rem-chan ', "https://i.imgur.com/g6FSNhL.png")
