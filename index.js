@@ -4,6 +4,8 @@ const request = require('request');
 const postgres = require('postgres');
 const fs = require('fs');
 const { Console } = require('console');
+const { ConstantNodeDependencies } = require('mathjs');
+const { cookie } = require('request');
 
 
 
@@ -98,6 +100,114 @@ bot.on('ready', ()=>{
    
     timeout()
 }});
+
+bot.on("message", message=>
+{
+    try {
+        if(message!=null)
+        {
+            var domainEnd=["gg", ".gg"]
+            for(var i =0; i<domainEnd.length; i++)
+            {
+                if(message.content.search(domainEnd[i])!=-1||message.content.search(/discord/i)!=-1)
+                {
+                    //console.log("Invite Killer: Potencial Invite Detected", domainEnd[i], message.content.search(domainEnd[i])!=-1);
+                    //message potentialy has a link
+                    if(message.content.search(domainEnd)&&message.content.split("/").length>0)
+                    {
+                        //message is definitely an invit link
+                        //is the link for the server we are on?
+                    message.guild.fetchInvites().then(
+                        invites =>   
+                        {
+                            var inviteCodes =[];
+                                for(var [key, values] of invites)
+                                {
+                                    inviteCodes.push(key)
+                                }
+                                //console.log("Invites",Invites)
+                                var content = message.content;
+                                var code = content.split("/")[1]
+                                //console.log("Invite Killer: code: ", code);
+
+                            if(code.split("").length>7)
+                            {
+                                    //either the link is wrong or its in a sentence
+                                    code = code.split(" ")[0]
+                                    //console.log("Invite Killer: Longer message//wrong code ");
+                                    if(code.split("").length==7)
+                                    {
+                                        //link was in sentence  
+                                        comparelink(inviteCodes, code, message.author, message);    
+
+                                    }
+                                    else
+                                    {
+                                        //Dude's dumb
+                                        console.log("Invite Killer: Dude's dumb; Code is misspeled in some way.")
+                                    }
+
+                            }
+                            else
+                            {
+
+                                comparelink(inviteCodes, code, message.author, message);
+                            }
+                        }
+                    )
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        //console.log(error)  ;
+    }
+})
+function comparelink (Invites, code, author, message, from)
+{   
+    try {
+    //console.log("Invite Killer: CompareLink: code: ", code)
+        if(message !=null)
+        {
+            for(var i = 0; i<Invites.length; i++)
+            {
+                if(Invites[i]==code)
+                {
+                    console.log("Invite Killer: Aborted: Link is for this messages Guild");
+
+                }
+                else
+                {
+                    processPunishment(author, message);
+                }
+            }  
+        }
+        else
+        {
+            console.log("Invite Killer: Message is no longer available.");
+        }        
+    } catch (error) {
+        //console.log(error)
+    }
+}
+function processPunishment(author, message)
+{
+    //Apply strike system when implemented
+    //delete the message
+    try 
+    {
+        if(message!=null)
+        {
+            message.delete({timeout:1000});
+        }  
+    } 
+    catch (error) 
+    {
+      //console.log(error)  
+    }
+    
+
+};
 //Give role => Membro
 bot.on('ready', ()=>{
     giveRole();
