@@ -217,6 +217,7 @@ bot.on('ready', ()=>{
         setTimeout(() => 
         {
             giveRole(); // Member role on wellcome channel
+            onlinePlayers();
             timer1();
         }, 
         3000);
@@ -913,6 +914,38 @@ function messageCommit(commit, repo, branch){
 function channelexists(channel){
 
 if(bot.channels.cache.get(channel) != null) return true
+}
+function onlinePlayers()
+{
+    request(`https://api.rust-servers.info/status/4016`, function(err, res, body)
+    {
+        if(!err)
+        {
+            if(body!=null)
+            {
+                var data;
+                try 
+                {
+                    data = JSON.parse(body)
+                    activePlayers = data.players;
+                } catch (error) 
+                {
+                    console.log(error);
+                }
+                changeChannelName(activePlayers);
+            }
+        }
+    });
+}
+function changeChannelName(count)
+{
+    const channel = bot.channels.cache.get('696076735917326546');
+    //console.log("OnlinePlayer: Comparison: ",channel.name, count,channel.name != `🎮☢-rust-on-${count}`, '🎮☢');
+    if(channel.name != `🎮☢-rust-on-${count}`)
+    {
+        channel.setName(`🎮☢-rust-on-${count}`);
+        console.log("OnlinePlayers: Changing channel Name.")
+    }
 }
 
 
