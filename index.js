@@ -210,228 +210,200 @@ function processPunishment(author, message)
 };
 //Give role => Membro
 bot.on('ready', ()=>{
-    giveRole();
-    timer1();
-    function timer1()
-    {
-        setTimeout(() => 
+        setInterval(() => 
         {
             giveRole(); // Member role on wellcome channel
             onlinePlayers();
-            timer1();
         }, 
         3000);
-    }
-    timer2();
-    function timer2(){
-        setTimeout(()=>{
-
-           /* Priority Level nº1(-5000) -> 
-            * Find a way to make this for multiple servers (make a give role that looks what roles id can be admissible,
-            * what are the correspondent assigned reactions, look on all the channels assigned to have role admissions,
-            * look on all the channels and messages to do it. Add a command to add entries.)
-            * 
-            * Command needs:
-            *  Arg 1 - channelID
-            *  Arg 2 - messageID
-            *  Arg 3 - roleID
-            *  Arg 4 - assigned reaction
-            * extra : - server ID from the message 
-            * 
-            * This will mean there would be a single giveRole function
-            */
-            
-            //Crackwatch role
-            //Rust commit role
-            
-            timer2();   
-        }, 60000);
-    }
-    bot.on('raw', packet => 
-    {
-        // We don't want this to run on unrelated packets
-        if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
-        //console.log(packet);
-        if (packet.t === 'MESSAGE_REACTION_REMOVE')
-        {
-            
-            console.log("New Emmiter: Removed a reaction." +"\n Reaction name: "+packet.d.emoji.name);
-            switch (packet.d.emoji.name) 
-            {
-                case "tuturu":
-                    bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("336235115782864906");
-                    console.log("Role Assignment: Role Removed. Role: Membro, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
-                    break;
-                case "valorant_icon":
-                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("717826411695702119");
-                    console.log("Role Assignment: Role Removed. Role: Valorant, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
-                    
-                    break;
-                case "rust_icon":
-                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("687634126387544115");
-                    console.log("Role Assignment: Role Removed. Role: Rust, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
-                    
-                    break;
-                case "crackwatch":
-                    bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("642891554964635659");
-                    console.log("Role Assignment: Role Removed. Role: CrackWatch, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
-                    
-                    break;
-            
-                    
-                default:
-                    break;
-            }
-
-        }
-    });
     
- 
-   function giveRole()
-   {
-     
-        const wellcomeChannelID="445249426743754764"
-        const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
-        const messageID = "445251380639170560";
-        var message;
-        var reaction;
-        roles = ["Member", "Rust", "Valorant", "CrackWatch"]      
-        wellcomeChannel.messages.fetch(messageID).then
-        (
-            m =>
-            {
-                
-                const filter = (reaction, user) =>
-                {   
-                    if(reaction.emoji.name==="tuturu")
-                    {
-                        return true ;
-                    }   
-                };
-                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
-                .catch
-                (
-                    
-                    collected =>
-                    {
-                        for(var [key, values] of collected)
-                        {
-                            
-                           for(var [key, value] of values.users.cache) 
-                           {
-                            
-                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("336235115782864906");
-                            console.log(`RoleAssignment: Role ${roles[0]} given to ${value.username}`)
-                           }
-                           
-                           
-                        }
-                        
-                    }
-                )
-            }
-        )
-     
-        wellcomeChannel.messages.fetch(messageID).then
-        (
-            m =>
-            {
-                const filter = (reaction, user) =>
-                {   
-                    return reaction.emoji.name === 'rust_icon';
-                };
-                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
-                .catch
-                (
-                    
-                    collected =>
-                    {
-                        for(var [key, values] of collected)
-                        {
-                       
-
-                           for(var [key, value] of values.users.cache) 
-                           {
-
-                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("687634126387544115");
-                            console.log(`RoleAssignment: Role ${roles[1]} given to ${value.username}`)
-                           }
-                           
-                          
-                        }
-                        
-                    }
-                )
-            }
-        )
-        wellcomeChannel.messages.fetch(messageID).then
-        (
-            m =>
-            {
-                const filter = (reaction, user) =>
-                {   
-                    return reaction.emoji.name === 'valorant_icon';
-                };
-                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
-                .catch
-                (
-                    
-                    collected =>
-                    {
-                        for(var [key, values] of collected)
-                        {
-                     
-
-                           for(var [key, value] of values.users.cache) 
-                           {
-
-                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("717826411695702119");
-                            console.log(`RoleAssingment: Role ${roles[2]} given to ${value.username}`)
-                           }
-                           
-                          
-                        }
-                        
-                    }
-                )
-            }
-        )
-        
-        wellcomeChannel.messages.fetch(messageID).then
-        (
-            m =>
-            {
-                const filter = (reaction, user) =>
-                {   
-                    return reaction.emoji.name === 'crackwatch';
-                };
-                m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
-                .catch
-                (
-                    
-                    collected =>
-                    {
-
-                        for(var [key, values] of collected)
-                        {
-                           for(var [key, value] of values.users.cache) 
-                           {
-                            
-                            bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("642891554964635659");
-                            console.log(`RoleAssingment: Role ${roles[3]} given to ${value.username}`)
-                           }
-                           
-                          
-                        }
-                        
-                    }
-                )
-            }
-        )
-    }      
-   
 
 });
+bot.on('raw', packet => 
+{
+    // We don't want this to run on unrelated packets
+    if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
+    //console.log(packet);
+    if (packet.t === 'MESSAGE_REACTION_REMOVE')
+    {
+        
+        console.log("New Emmiter: Removed a reaction." +"\n Reaction name: "+packet.d.emoji.name);
+        switch (packet.d.emoji.name) 
+        {
+            case "tuturu":
+                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("336235115782864906");
+                console.log("Role Assignment: Role Removed. Role: Membro, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                break;
+            case "valorant_icon":
+            bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("717826411695702119");
+                console.log("Role Assignment: Role Removed. Role: Valorant, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                
+                break;
+            case "rust_icon":
+            bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("687634126387544115");
+                console.log("Role Assignment: Role Removed. Role: Rust, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                
+                break;
+            case "crackwatch":
+                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("642891554964635659");
+                console.log("Role Assignment: Role Removed. Role: CrackWatch, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                
+                break;
+        
+                
+            default:
+                break;
+        }
+
+    }
+});
+    
+ 
+function giveRole()
+{
+    
+    const wellcomeChannelID="445249426743754764"
+    const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
+    const messageID = "445251380639170560";
+    var message;
+    var reaction;
+    roles = ["Member", "Rust", "Valorant", "CrackWatch"]      
+    wellcomeChannel.messages.fetch(messageID).then
+    (
+        m =>
+        {
+            
+            const filter = (reaction, user) =>
+            {   
+                if(reaction.emoji.name==="tuturu")
+                {
+                    return true ;
+                }   
+            };
+            m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+            .catch
+            (
+                
+                collected =>
+                {
+                    for(var [key, values] of collected)
+                    {
+                        
+                        for(var [key, value] of values.users.cache) 
+                        {
+                        
+                        bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("336235115782864906");
+                        console.log(`RoleAssignment: Role ${roles[0]} given to ${value.username}`)
+                        }
+                        
+                        
+                    }
+                    
+                }
+            )
+        }
+    )
+    
+    wellcomeChannel.messages.fetch(messageID).then
+    (
+        m =>
+        {
+            const filter = (reaction, user) =>
+            {   
+                return reaction.emoji.name === 'rust_icon';
+            };
+            m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+            .catch
+            (
+                
+                collected =>
+                {
+                    for(var [key, values] of collected)
+                    {
+                    
+
+                        for(var [key, value] of values.users.cache) 
+                        {
+
+                        bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("687634126387544115");
+                        console.log(`RoleAssignment: Role ${roles[1]} given to ${value.username}`)
+                        }
+                        
+                        
+                    }
+                    
+                }
+            )
+        }
+    )
+    wellcomeChannel.messages.fetch(messageID).then
+    (
+        m =>
+        {
+            const filter = (reaction, user) =>
+            {   
+                return reaction.emoji.name === 'valorant_icon';
+            };
+            m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+            .catch
+            (
+                
+                collected =>
+                {
+                    for(var [key, values] of collected)
+                    {
+                    
+
+                        for(var [key, value] of values.users.cache) 
+                        {
+
+                        bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("717826411695702119");
+                        console.log(`RoleAssingment: Role ${roles[2]} given to ${value.username}`)
+                        }
+                        
+                        
+                    }
+                    
+                }
+            )
+        }
+    )
+    
+    wellcomeChannel.messages.fetch(messageID).then
+    (
+        m =>
+        {
+            const filter = (reaction, user) =>
+            {   
+                return reaction.emoji.name === 'crackwatch';
+            };
+            m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
+            .catch
+            (
+                
+                collected =>
+                {
+
+                    for(var [key, values] of collected)
+                    {
+                        for(var [key, value] of values.users.cache) 
+                        {
+                        
+                        bot.channels.cache.get(wellcomeChannelID).members.get(value.id).roles.add("642891554964635659");
+                        console.log(`RoleAssingment: Role ${roles[3]} given to ${value.username}`)
+                        }
+                        
+                        
+                    }
+                    
+                }
+            )
+        }
+    )
+}      
+   
+
+
 
 
 
@@ -944,7 +916,7 @@ function changeChannelName(count)
     if(channel.name != `🎮☢-rust-on-${count}`)
     {
         channel.setName(`🎮☢-rust-on-${count}`);
-        console.log("OnlinePlayers: Changing channel Name.")
+        console.log("OnlinePlayers: Changing channel name to: ",`🎮☢-rust-on-${count}`);
     }
 }
 
