@@ -349,7 +349,7 @@ function crackwatch()
                     bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>
                     {
                     lastCrackMessageSentTitle = message.embeds[0].title;
-                    console.log("CrackWatch: lastCrackSent from the last Message: " + lastCrackMessageSentTitle);
+                    //console.log("CrackWatch: lastCrackSent from the last Message: " + lastCrackMessageSentTitle);
                     })
                 } 
                 });
@@ -422,15 +422,15 @@ function crackwatch()
                             { 
                                 let info 
                                 info =  getInfo(correctedTitle);
-                                console.log("CrackWatch: passed the check will now be sent")
+                                console.log("CrackWatch:Sending new Crack Message",fetchedCrack[0], correctedTitle, info)
                                 sendMessage(fetchedCrack[0], correctedTitle,  info);
                                 crackwatch();
                             }else{
-                                console.log("CrackWatch: Didn't pass the check, same as the last one sent.")
+                                //console.log("CrackWatch: Didn't pass the check, same as the last one sent.")
                                 crackwatch()
                             }
                     }else{
-                        console.log("CrackWatch: Server Internal Error")
+                        //console.log("CrackWatch: Server Internal Error")
                         crackwatch();
                     } 
                 }  
