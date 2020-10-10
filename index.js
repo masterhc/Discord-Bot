@@ -284,9 +284,9 @@ function giveRole()
             
             const filter = (reaction, user) =>
             {               
-                for(var i=0; i<roleEmojis.length-1; i++)
+                for(var i=0; i<roleEmojis.length; i++)
                 {
-                    if(reaction.emoji.name===roleEmojis[i])
+                    if(reaction.emoji.name==roleEmojis[i])
                     {
                         return true;
                     }  
@@ -301,7 +301,7 @@ function giveRole()
                     {
                         for(var [key, value] of values.users.cache) 
                         {
-                            for(var i = 0; i<roleEmojis.length-1;i++)
+                            for(var i = 0; i<roleEmojis.length;i++)
                             {
                                 if(roleEmojis[i]==values._emoji.name)
                                 {
