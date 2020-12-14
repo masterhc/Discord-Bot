@@ -804,36 +804,43 @@ function channelexists(channel){
 
 if(bot.channels.cache.get(channel) != null) return true
 }
+let ServerApiKey =['4016','4429'];
+let RustServerChannels = ['696076735917326546','788056567429726208']
 function onlinePlayers()
 {
-    request(`https://api.rust-servers.info/status/4016`, function(err, res, body)
+    for(var i = 0; i<ServerApiKey.length-1; i++)
     {
-        if(!err)
+       request(`https://api.rust-servers.info/status/${ServerApiKey[i]}`, function(err, res, body)
         {
-            if(body!=null)
+            if(!err)
             {
-                var data;
-                try 
+                if(body!=null)
                 {
-                    data = JSON.parse(body)
-                    activePlayers = data.players;
-                } catch (error) 
-                {
-                    console.log(error);
+                    var data;
+                    try 
+                    {
+                        data = JSON.parse(body)
+                        activePlayers = data.players;
+                    } catch (error) 
+                    {
+                        console.log(error);
+                    }
+                    changeChannelName(activePlayers, i);
                 }
-                changeChannelName(activePlayers);
             }
-        }
-    });
+        }); 
+    }
+    
 }
-function changeChannelName(count)
+function changeChannelName(count, i)
 {
-    const channel = bot.channels.cache.get('696076735917326546');
+    let name =['vanilla', 'pvp']
+    const channel = bot.channels.cache.get(RustServerChannels[i]);
     //console.log("OnlinePlayer: Comparison: ",channel.name, count,channel.name != `🎮☢-rust-on-${count}`, '🎮☢');
     if(channel.name != `🎮☢-rust-on-${count}`)
     {
         channel.setName(`🎮☢-rust-on-${count}`);
-        console.log("OnlinePlayers: Changing channel name to: ",`🎮☢-rust-on-${count}`);
+        console.log("OnlinePlayers: Changing channel name to: ",`🎮☢-rust-${name}-${count}`);
     }
 }
 
