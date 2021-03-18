@@ -8,6 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon index.js"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "*.json"
+    ]
+  },
   "author": "MasterHc",
   "license": "MIT",
   "engines": {
@@ -28,6 +33,7 @@
     "got": "^7.1.0",
     "http": "0.0.0",
     "humblebundle": "^1.0.5",
+    "is-promise": "^4.0.0",
     "jikanjs": "^0.6.0",
     "loader.js": "^4.7.0",
     "mal-api": "^1.0.0",
