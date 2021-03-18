@@ -226,7 +226,6 @@ bot.on('raw', packet =>
     //console.log(packet);
     if (packet.t === 'MESSAGE_REACTION_REMOVE')
     {
-        
         console.log("Role Assignment: Reaction "+packet.d.emoji.name+" remove.");
         switch (packet.d.emoji.name) 
         {
