@@ -26,6 +26,7 @@
     "crackwatch": "^1.1.0",
     "discord.js": "^12.2.0",
     "discord.js-commando": "github:discordjs/Commando",
+    "emoji-regex": "^9.2.2",
     "eventemitter3": "^2.0.3",
     "ffmpeg.js": "^3.1.9001",
     "fs": "0.0.1-security",
