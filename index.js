@@ -213,7 +213,7 @@ bot.on('ready', ()=>{
         setInterval(() => 
         {
             giveRole(); // Member role on wellcome channel
-            onlinePlayers();
+            //onlinePlayers();
         }, 
         3000);
     
@@ -824,7 +824,7 @@ function onlinePlayers()
                     {
                         console.log(error);
                     }
-                    changeChannelName(activePlayers, i);
+                   changeChannelName(activePlayers, i);
                 }
             }
         }); 
