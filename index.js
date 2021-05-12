@@ -1,11 +1,8 @@
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
-const postgres = require('postgres');
 const fs = require('fs');
-const { Console } = require('console');
-const { ConstantNodeDependencies } = require('mathjs');
-const { cookie } = require('request');
+const { add } = require('winston');
 
 
 
@@ -66,7 +63,7 @@ bot.on('ready', ()=>{
        'sounds of my people', //listening message
        'paint dry'//watching message
    ]
-    
+    conquests();
         
        
    timeout();
@@ -843,5 +840,133 @@ function changeChannelName(count, i)
     }
 }
 
+//Conquests
+function conquests()
+{
+    //START
+    const got = require('got');
+    const cheerio = require('cheerio');
 
-//Music
+    (async () => {
+        try {
+            const response = await got('https://pt.twstats.com/pt79/index.php?page=ennoblements&live=live');
+            const $ = cheerio.load(response.body);
+            
+            var refactoredData = [];
+            for(var i = 1; i< $('table.widget tr').length;i++)
+            {
+                refactoredData.push(refactorData($('table.widget tr')[i]));
+            }
+            redundancyCheck(refactoredData);
+        } catch (error) {
+            console.log("Index: Conquuests: GotError:",error);
+        }
+    })()
+    //END
+    conquests();
+
+
+    function refactorData($)
+    {
+        var PrevOwnerTribe = null;
+        var PrevOwnerTribeLink = null;
+        var NewOwnerTribe = null;
+        var NewOwnerTribeLink = null;
+        var PrevOwnerLink = null;
+        var PrevOwner
+        if($.children[2].children.length>=2)//0 -> barbarian 1 -> Player w/out tribe 2 -> Player w/ tribe
+        {
+            PrevOwner = $.children[2].children[0].children[0].data;
+            PrevOwnerLink ='https://pt.twstats.com/pt79/'+$.children[2].children[0].attribs.href;
+            if($.children[2].children.length==4)
+            {
+                PrevOwnerTribe = $.children[2].children[2].children[0].data;
+                PrevOwnerTribeLink ='https://pt.twstats.com/pt79/'+$.children[2].children[2].attribs.href;
+            }
+        }
+        if($.children[3].children.length == 4)
+        {
+            NewOwnerTribe = $.children[3].children[2].children[0].data;
+            NewOwnerTribeLink = 'https://pt.twstats.com/pt79/'+$.children[3].children[2].attribs.href;
+        }  
+        return{
+            Date:$.children[4].children[0].data,
+            VillageName:$.children[0].children[0].children[0].data,
+            VillageLink:'https://pt.twstats.com/pt79/'+$.children[0].children[0].attribs.href,
+            VillagePoints:$.children[1].children[0].data,
+            PrevOwner:PrevOwner || 'Barbarians',
+            PrevOwnerLink: PrevOwnerLink || 'https://pt79.tribalwars.com.pt/game.php?village=*',
+            PrevOwnerTribe: PrevOwnerTribe ||'No tribe',
+            PrevOwnerTribeLink: PrevOwnerTribeLink || 'https://pt79.tribalwars.com.pt/game.php?village=*',
+            NewOwner:$.children[3].children[0].children[0].data,
+            NewOwnerLink:'https://pt.twstats.com/pt79/'+$.children[3].children[0].attribs.href,
+            NewOwnerTribe: NewOwnerTribe || 'No Tribe',
+            NewOwnerTribeLink: NewOwnerTribeLink || 'https://pt79.tribalwars.com.pt/game.php?village=*'
+        }         
+    }
+    function redundancyCheck(Data)
+    {
+
+        var channelsfile = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
+
+        if(lastSentCommit==null) 
+        {
+            for (var i=0; i<channelsfile.conquests.length; i++) 
+            {
+                var lastSentConquestDate 
+                if(bot.channels.cache.get())
+                {
+                    bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch({limit:1}).then(messages=>
+                    {
+                        for(var [key, values] of messages)
+                        {
+                            bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch(values.id).then(message =>
+                            {
+                                lastSentConquestDate = message.embeds[0].title
+                                console.log("Conquest: lastSentDate: " + message.embeds[0].title);
+                                var finalData = [];
+                                for(var k =Data.length-1; k<0; k--)
+                                {
+                                   if(workableDate(Data[k].Date)>workableDate(message.embeds[0].title))
+                                   {
+                                        finalData.push(Data[k])
+                                   }    
+                                }
+                                for(var j = 0; i< finalData.length; j++)
+                                {
+                                    for (var i=0; i<channelsfile.conquests.length; i++) 
+                                    {
+                                        sendMessage(channelsfile.conquests[i],finalData[j]);
+                                    }
+                                }
+                            })
+                        } 
+                    });     
+                }
+            }
+        }  
+    }
+    function workableDate(Date)
+    {
+        var data = Date
+        var spliton_ = data.split('-');
+        var splittime = spliton_[3].split(' ')[1].split(':');
+        return new Date(spliton_[0], parseInt(spliton_[1])-1, spliton_[2].split(' ')[0], parseInt(splittime[0])+1, splittime[1], splittime[2]);
+    }
+    function sendMessage(channel, content)
+    {
+        const embed = new Discord.MessageEmbed
+        embed.setTitle(content.Date)
+        embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+        embed.setColor(0xb59f7d)
+        embed.setDescription(`Aldeia Coquistada por [${content.NewOwner}](${content.NewOwnerLink}) [[${contentNewOwnerTribe}](${content.NewOwnerTribeLink})]`)
+        embed.addField('Aldeia:',`[${content.VillageName}](${content.VillageLink})`)
+        embed.addField(`Pontos:${content.VillagePoints}`);
+        embed.addField(`Dono antigo: [${content.PrevOwner}](${content.PrevOwnerLink}) [[${content.PrevOwnerTribe}](${content.PrevOwnerTribeLink})]`)
+        embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+        embed.setImage(image)
+        embed.setTimestamp()
+        bot.channels.cache.get(channel).send({embed});
+        
+    }
+}
