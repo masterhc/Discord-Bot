@@ -63,13 +63,13 @@ bot.on('ready', ()=>{
        'sounds of my people', //listening message
        'paint dry'//watching message
    ]
-    conquests();
         
        
    timeout();
    function timeout(){
     setTimeout(()=>{
     changeActivity();
+    conquests();
     }, 60000);
 }
   function changeActivity(){ 
@@ -862,10 +862,7 @@ function conquests()
             console.log("Index: Conquuests: GotError:",error);
         }
     })()
-    //END
-    conquests();
-
-
+ 
     function refactorData($)
     {
         var PrevOwnerTribe = null;
@@ -923,7 +920,6 @@ function conquests()
                             bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch(values.id).then(message =>
                             {
                                 lastSentConquestDate = message.embeds[0].title
-                                console.log("Conquest: lastSentDate: " + message.embeds[0].title);
                                 var finalData = [];
                                 for(var k =Data.length-1; k<0; k--)
                                 {
