@@ -905,42 +905,39 @@ function conquests()
     {
 
         var channelsfile = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-
-        if(lastSentCommit==null) 
+        for (var i=0; i<channelsfile.conquests.length; i++) 
         {
-            for (var i=0; i<channelsfile.conquests.length; i++) 
+            if(bot.channels.cache.get())
             {
-                var lastSentConquestDate 
-                if(bot.channels.cache.get())
-                {
-                    bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch({limit:1}).then(messages=>
+                bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch({limit:1}).then(messages=>
                     {
                         for(var [key, values] of messages)
                         {
-                            bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch(values.id).then(message =>
+                        var lastSentConquestDate 
+                        bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch(values.id).then(message =>
+                        {
+                            lastSentConquestDate = message.embeds[0].title
+                            var finalData = [];
+                            for(var k =Data.length-1; k<0; k--)
                             {
-                                lastSentConquestDate = message.embeds[0].title
-                                var finalData = [];
-                                for(var k =Data.length-1; k<0; k--)
+                                if(workableDate(Data[k].Date)>workableDate(message.embeds[0].title))
                                 {
-                                   if(workableDate(Data[k].Date)>workableDate(message.embeds[0].title))
-                                   {
-                                        finalData.push(Data[k])
-                                   }    
-                                }
-                                for(var j = 0; i< finalData.length; j++)
+                                    finalData.push(Data[k])
+                                }    
+                            }
+                            for(var j = 0; i< finalData.length; j++)
+                            {
+                                for (var i=0; i<channelsfile.conquests.length; i++) 
                                 {
-                                    for (var i=0; i<channelsfile.conquests.length; i++) 
-                                    {
-                                        sendMessage(channelsfile.conquests[i],finalData[j]);
-                                    }
+                                    sendMessage(channelsfile.conquests[i],finalData[j]);
                                 }
-                            })
-                        } 
-                    });     
-                }
+                            }
+                        })
+                    } 
+                });     
             }
-        }  
+        }
+        
     }
     function workableDate(Date)
     {
