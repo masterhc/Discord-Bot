@@ -907,9 +907,10 @@ function conquests()
         var channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8')).conquests;
         //console.log('Conquest: Channel File:', channels)
         let promise = Promise.resolve();
-        for (var i=0; i<channels.length-1; i++) 
-        { 
-            let curChannel = channels[i];
+        let i = 0;
+        do {
+
+             let curChannel = channels[i];
             channel = bot.channels.cache.get(channels[i])
             //console.log('Conquest: Redundancy Check: Channel: ', channel!=null) 
             if(channel)
@@ -924,11 +925,11 @@ function conquests()
                             {
                                 if(workableDate(Data[j].Date)>workableDate(message.embeds[0].title))
                                 {
-                                    console.log('Conquest: Redundancy Check: Last Message outdated: i:',i,'New Data: ', Data[j].Date);
+                                    console.log('Conquest: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',i,'New Data: ', Data[j].Date);
                                     sendMessage(curChannel,Data[j]);
                                 }
                             }
-                            console.log('Conquest: Redundancy Check: Last Message Up to date.')
+                            console.log('Conquest: Redundancy Check: Last Message Up to date.', curChannel)
                         })
                 }
                 else
@@ -940,7 +941,11 @@ function conquests()
                     }
                 }
             }
-        }
+            i++;
+        } while (i<channels.length);
+        
+           
+        
     }
     function workableDate(Date_)
     {
