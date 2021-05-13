@@ -912,7 +912,6 @@ function conquests()
 
              let curChannel = channels[i];
             channel = bot.channels.cache.get(channels[i])
-            //console.log('Conquest: Redundancy Check: Channel: ', channel!=null) 
             if(channel)
             {
                 //console.log('Conquest: Redundancy Check: LastMessageID: ',i,channel.lastMessageID);
@@ -973,6 +972,8 @@ function conquests()
     }
     function villageIcon(num, prevOwner)
     {
+        num = parseInt(num.VillagePoints.replace(',',''),10)
+        console.log('Conquest: VillageIcon: num: ', num) 
         if(prevOwner == 'Barbarian')
         {
             
