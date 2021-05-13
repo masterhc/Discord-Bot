@@ -4,7 +4,7 @@
   "description": "<p align=\"center\">\r <img src=\"https://raw.githubusercontent.com/masterhc/Discord-Bot/master/img/legend.jpg\">\r </p>",
   "main": "index.js",
   "scripts": {
-    "start": "node  index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon index.js"
   },

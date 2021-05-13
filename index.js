@@ -3,6 +3,7 @@ const commando = require('discord.js-commando');
 const request = require('request');
 const fs = require('fs');
 const { add } = require('winston');
+const { send } = require('process');
 
 
 
@@ -69,7 +70,6 @@ bot.on('ready', ()=>{
    function timeout(){
     setTimeout(()=>{
     changeActivity();
-    conquests();
     }, 60000);
 }
   function changeActivity(){ 
@@ -559,13 +559,14 @@ bot.on('ready',()=>{
     /*
      to use in admin commands that need a user id (from a reaction) to do something (message.mentions.users.first().id)
     */
-   timer();
-   function timer(){
-    setTimeout(()=>{
-        moveAFKs()
-        rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
-        timer();       
-    }, 10000);
+    timer();
+    function timer(){
+        setTimeout(()=>{
+            moveAFKs()
+            rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
+            conquests()
+            timer();       
+        }, 10000);
 }
 
 
@@ -859,7 +860,7 @@ function conquests()
             }
             redundancyCheck(refactoredData);
         } catch (error) {
-            console.log("Index: Conquuests: GotError:",error);
+            console.log("Conquests: GotError:",error);
         }
     })()
  
@@ -892,74 +893,90 @@ function conquests()
             VillageLink:'https://pt.twstats.com/pt79/'+$.children[0].children[0].attribs.href,
             VillagePoints:$.children[1].children[0].data,
             PrevOwner:PrevOwner || 'Barbarians',
-            PrevOwnerLink: PrevOwnerLink || 'https://pt79.tribalwars.com.pt/game.php?village=*',
+            PrevOwnerLink: PrevOwnerLink || 'https://tribalwars.com.pt/',
             PrevOwnerTribe: PrevOwnerTribe ||'No tribe',
-            PrevOwnerTribeLink: PrevOwnerTribeLink || 'https://pt79.tribalwars.com.pt/game.php?village=*',
+            PrevOwnerTribeLink: PrevOwnerTribeLink || 'https://tribalwars.com.pt',
             NewOwner:$.children[3].children[0].children[0].data,
             NewOwnerLink:'https://pt.twstats.com/pt79/'+$.children[3].children[0].attribs.href,
             NewOwnerTribe: NewOwnerTribe || 'No Tribe',
-            NewOwnerTribeLink: NewOwnerTribeLink || 'https://pt79.tribalwars.com.pt/game.php?village=*'
+            NewOwnerTribeLink: NewOwnerTribeLink || 'https://tribalwars.com.pt/'
         }         
     }
     function redundancyCheck(Data)
     {
-
-        var channelsfile = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-        for (var i=0; i<channelsfile.conquests.length; i++) 
-        {
-            if(bot.channels.cache.get())
+        var channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8')).conquests;
+        //console.log('Conquest: Channel File:', channels)
+        let promise = Promise.resolve();
+        for (var i=0; i<channels.length-1; i++) 
+        { 
+            let curChannel = channels[i];
+            channel = bot.channels.cache.get(channels[i])
+            //console.log('Conquest: Redundancy Check: Channel: ', channel!=null) 
+            if(channel)
             {
-                bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch({limit:1}).then(messages=>
-                    {
-                        for(var [key, values] of messages)
+                //console.log('Conquest: Redundancy Check: LastMessageID: ',i,channel.lastMessageID);
+                if(channel.lastMessageID)
+                {
+                    bot.channels.cache.get(channels[i]).messages.fetch(channel.lastMessageID).then(message =>
                         {
-                        var lastSentConquestDate 
-                        bot.channels.cache.get(channelsfile.conquests[i]).messages.fetch(values.id).then(message =>
-                        {
-                            lastSentConquestDate = message.embeds[0].title
-                            var finalData = [];
-                            for(var k =Data.length-1; k<0; k--)
+                            //console.log('Conquest: Redundancy Check: lastMessage: ', message)
+                            for(var j = Data.length-1; j>=0; j--)
                             {
-                                if(workableDate(Data[k].Date)>workableDate(message.embeds[0].title))
+                                if(workableDate(Data[j].Date)>workableDate(message.embeds[0].title))
                                 {
-                                    finalData.push(Data[k])
-                                }    
-                            }
-                            for(var j = 0; i< finalData.length; j++)
-                            {
-                                for (var i=0; i<channelsfile.conquests.length; i++) 
-                                {
-                                    sendMessage(channelsfile.conquests[i],finalData[j]);
+                                    console.log('Conquest: Redundancy Check: Last Message outdated: i:',i,'New Data: ', Data[j].Date);
+                                    sendMessage(curChannel,Data[j]);
                                 }
                             }
+                            console.log('Conquest: Redundancy Check: Last Message Up to date.')
                         })
-                    } 
-                });     
+                }
+                else
+                {
+                    for(var j = Data.length-1; j>=0; j--)
+                    {
+                        //console.log('Conquest: Redundancy Check: Data:', Data[j]);
+                        sendMessage(channels[i], Data[j])
+                    }
+                }
             }
         }
-        
     }
-    function workableDate(Date)
+    function workableDate(Date_)
     {
-        var data = Date
+        var data = Date_
         var spliton_ = data.split('-');
         var splittime = spliton_[3].split(' ')[1].split(':');
         return new Date(spliton_[0], parseInt(spliton_[1])-1, spliton_[2].split(' ')[0], parseInt(splittime[0])+1, splittime[1], splittime[2]);
     }
     function sendMessage(channel, content)
     {
+        console.log('Conquest: SendMessage: Content:', content.Date);
         const embed = new Discord.MessageEmbed
         embed.setTitle(content.Date)
         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
         embed.setColor(0xb59f7d)
-        embed.setDescription(`Aldeia Coquistada por [${content.NewOwner}](${content.NewOwnerLink}) [[${contentNewOwnerTribe}](${content.NewOwnerTribeLink})]`)
+        embed.setDescription(`Aldeia Coquistada por [${content.NewOwner}](${content.NewOwnerLink}) [[${content.NewOwnerTribe}](${content.NewOwnerTribeLink})]`)
         embed.addField('Aldeia:',`[${content.VillageName}](${content.VillageLink})`)
-        embed.addField(`Pontos:${content.VillagePoints}`);
-        embed.addField(`Dono antigo: [${content.PrevOwner}](${content.PrevOwnerLink}) [[${content.PrevOwnerTribe}](${content.PrevOwnerTribeLink})]`)
+        embed.addField('Pontos:',`${content.VillagePoints}`);
+        embed.addField('Dono antigo: ',`[${content.PrevOwner}](${content.PrevOwnerLink}) [[${content.PrevOwnerTribe}](${content.PrevOwnerTribeLink})]`)
         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-        embed.setImage(image)
+        embed.setThumbnail(`https://dspt.innogamescdn.com/asset/dbeaf8db/graphic///map_new/${villageIcon(content.VillagePoints,content.PrevOwner)}.png`)
         embed.setTimestamp()
         bot.channels.cache.get(channel).send({embed});
         
+    }
+    function villageIcon(num, prevOwner)
+    {
+        if(prevOwner == 'Barbarian')
+        {
+            
+            return (num<300)? 'b1_left': ((num<1000)?'b2_left':((num<3000)?'b3_left':((num<9000)? 'b4_left':((num<12000)?'b5_left':'b6_left'))));
+
+        }
+        else
+        {
+            return (num<300)? 'v1': ((num<1000)?'v2':((num<3000)?'v3':((num<9000)? 'v4':((num<12000)?'v5':'v6'))));
+        }
     }
 }
