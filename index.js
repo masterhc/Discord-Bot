@@ -975,7 +975,7 @@ function conquests()
         num = parseInt(num.replace(',',''),10)
         console.log('Conquest: VillageIcon: num: ', num) 
 
-        if(prevOwner == 'Barbarian')
+        if(prevOwner == 'Barbarians')
         {
             
             return (num<300)? 'b1_left': ((num<1000)?'b2_left':((num<3000)?'b3_left':((num<9000)? 'b4_left':((num<12000)?'b5_left':'b6_left'))));
