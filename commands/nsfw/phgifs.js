@@ -13,7 +13,6 @@ const Discord = require('discord.js');
             })
         }
         async run(message, args){
-            
           if (!message.channel.name.split('nsfw').length>1) {
     return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
@@ -39,13 +38,17 @@ const Discord = require('discord.js');
                   
                     const Pornsearch = require('pornsearch');
                     const Searcher = new Pornsearch(searchOrig);
-                     
                     Searcher.gifs()
-                      .then(gifs => mensagem(gifs[random], message));
+                      .then(gifs =>{
+                            console.log(gifs.length)
+                            mensagem(gifs[random], message)
+
+                            } 
+                        );
                       
                    function mensagem(gifs, message){ 
                       
-                      const embed = new Discord.RichEmbed();
+                      const embed = new Discord.MessageEmbed();
                       embed.setColor(0xb50000);
                       embed.setTitle('Imagem:')
                       embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png");
