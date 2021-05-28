@@ -26,7 +26,7 @@ class triggeredcommando extends commando.Command{
                  embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
                  embed.setTimestamp();
 
-             message.channel.cache.send({embed}) 
+             message.channel.send({embed}) 
             
 
          }
