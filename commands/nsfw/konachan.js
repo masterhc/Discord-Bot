@@ -21,10 +21,10 @@ const Discord = require('discord.js');
     'loli', // loli, lolicon
     'shota', // shota, shotacon
     'child' // child, child_porn
-];
+    ];
             //Checkar se é nsfw
-             if (!message.channel.cache.name.startsWith('nsfw')) {
-            return message.channel.cache.send('Este comando pode apenas ser utilizado em salas NSFW!');
+             if (!message.channel.name.split('nsfw').length>1) {
+            return message.channel.send('Este comando pode apenas ser utilizado em salas NSFW!');
 
         }   
         var messageSplit = message.content.split(' ');
@@ -37,11 +37,10 @@ const Discord = require('discord.js');
                 searchOrig = searchOrig + ' ' + messageSplit[i];
             }
         }
-       
          // Checkar pedofilos
            for (var filter of konachanFilter) {
             if (searchOrig.indexOf(filter) > -1) {
-                return message.channel.cache.send('Por favor não seja pedofilo!');
+                return message.channel.send('Por favor não seja pedofilo!');
 
             }
    }
@@ -54,13 +53,13 @@ const Discord = require('discord.js');
             }
         }, (error, response, body) => {
             if (error) {
-                return message.cache.send('Erro 1');
+                return message.send('Erro 1');
             }
             if (!error && response.statusCode === 200) {
                 try {
                     body = JSON.parse(body);
                 } catch (e) {
-                    return message.channel.cache.send('Erro 2');
+                    return message.channel.send('Erro 2');
                 }
                 if (typeof body !== 'undefined') {
                     // Filter response for bad items
@@ -85,15 +84,15 @@ const Discord = require('discord.js');
                             embed.setDescription('[Original]'+`(${body[random].file_url})`);
                             embed.setTimestamp();
                             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                            message.channel.cache.send({embed});
+                            message.channel.send({embed});
                         } else {
-                            message.channel.cache.send('Erro 3');
+                            message.channel.send('Erro 3');
                         }
                         return;
                     }
                 }
 
-                message.channel.cache.send('Nada encontrado', searchOrig);
+                message.channel.send('Nada encontrado', searchOrig);
     
             }
         });
