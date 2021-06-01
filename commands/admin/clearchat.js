@@ -31,11 +31,11 @@ class clearchatcommando extends commando.Command{
                
                 //verificar se tem argumentos
                 if(hasArgs()){
-                    console.log("correctArgs");
+                    console.log("Info: !clearchat: has correctArgs");
                     if(correctArgs()){
                    
                     var aroundarg = message.content.split(' ')[1];
-                        console.log(aroundarg);
+                        console.log("Info: !clearchat: arround argument:",aroundarg);
                  //retirar o id da mensagem de chamada
           
                 cleararound(aroundarg);
@@ -69,14 +69,14 @@ class clearchatcommando extends commando.Command{
         }
 
         async function clearnormie() {
-            console.log("clear normie")
+            console.log("Info: !clearchat: clear normie")
             message.delete();
             
            
             
             
             const fetched = await message.channel.messages.fetch({limit: 99});
-            //console.log(fetched)
+            //console.log("Info: !clearchat: ",fetched)
             message.channel.bulkDelete(fetched, true);
           
            

@@ -2,9 +2,8 @@ const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
 const fs = require('fs');
-const { add } = require('winston');
-const { send } = require('process');
-
+const got = require('got');
+const cheerio = require('cheerio');
 
 
 const bot = new commando.Client
@@ -66,37 +65,36 @@ bot.on('ready', ()=>{
    ]
         
        
-   timeout();
-   function timeout(){
-    setTimeout(()=>{
+
+    setInterval(()=>
+    {
     changeActivity();
     }, 60000);
-}
-  function changeActivity(){ 
-     bot.user.setActivity(message[i], {type: tipo[i]})
-     .then(presence => console.log(`RichPresence: Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
-     .catch(console.error);
- 
-        console.log("I: "+ i);
-     if(i!=4){
-    i++;
- }else{
-     i=0;
-     bot.user.setActivity('!help', {type: 'LISTENING'})
-     .then(presence => console.log(`RichPresence: Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
-     .catch(console.error);
- }
+
+    function changeActivity()
+    { 
+        bot.user.setActivity(message[i], {type: tipo[i]})
+        .then(presence => console.log(`RichPresence: Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
+        .catch(console.error);
+
+        console.log("RichPresence: I: "+ i);
+        if(i!=4)
+        {
+            i++;
+        }
+        else
+        {
+            i=0;
+            bot.user.setActivity('!help', {type: 'LISTENING'})
+            .then(presence => console.log(`RichPresence: Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
+            .catch(console.error);
+        }
       
    
-    console.log(`Info: Rem is up and ready to serve on ${bot.guilds.cache.size} servers, for ${bot.users.cache.size} users.`);
+        console.log(`Info: Rem is up and ready to serve on ${bot.guilds.cache.size} servers, for ${bot.users.cache.size} users.`);
     
-   
-   
-    
-    
-   
-    timeout()
-}});
+    }
+});
 
 bot.on("message", message=>
 {
@@ -206,13 +204,22 @@ function processPunishment(author, message)
 
 };
 //Give role => Membro
+
+//INTERVAL
+
 bot.on('ready', ()=>{
+    freegames();
         setInterval(() => 
         {
             giveRole(); // Member role on wellcome channel
+            //freegames();
             //onlinePlayers();
         }, 
         3000);
+        setInterval(()=>
+        {
+            freegames();
+        }, 60000)
     
 
 });
@@ -266,8 +273,6 @@ function giveRole()
     const wellcomeChannelID="445249426743754764";
     const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
     const messageID = "445251380639170560";
-    var message;
-    var reaction;
     var roleEmojis = ["tuturu", "rust_icon", "valorant_icon", "crackwatch", "league"];
     var roleName =['Membro', 'Rust', 'Valorant', 'CrackWatch', 'League of Legends'];
     var roleIDs=['336235115782864906','687634126387544115','717826411695702119','642891554964635659','763872390199246868'];
@@ -315,14 +320,6 @@ function giveRole()
 
 }      
    
-
-
-
-
-
-
-
-
 
 
 
@@ -845,8 +842,7 @@ function changeChannelName(count, i)
 function conquests()
 {
     //START
-    const got = require('got');
-    const cheerio = require('cheerio');
+
 
     (async () => {
         try {
@@ -924,11 +920,11 @@ function conquests()
                             {
                                 if(workableDate(Data[j].Date)>workableDate(message.embeds[0].title))
                                 {
-                                    console.log('Conquest: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',i,'New Data: ', Data[j].Date);
+                                    //console.log('Conquest: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',i,'New Data: ', Data[j].Date);
                                     sendMessage(curChannel,Data[j]);
                                 }
                             }
-                            console.log('Conquest: Redundancy Check: Last Message Up to date.', curChannel)
+                            //console.log('Conquest: Redundancy Check: Last Message Up to date.', curChannel)
                         })
                 }
                 else
@@ -973,7 +969,7 @@ function conquests()
     function villageIcon(num, prevOwner)
     {
         num = parseInt(num.replace(',',''),10)
-        console.log('Conquest: VillageIcon: num: ', num) 
+        //console.log('Conquest: VillageIcon: num: ', num) 
 
         if(prevOwner == 'Barbarians')
         {
@@ -988,3 +984,90 @@ function conquests()
     }
 }
 
+function freegames()
+{
+    (async () => {
+        try {
+            const response = await got('https://www.gamerpower.com/api/giveaways');
+            const BODY = JSON.parse(response.body).slice(0,20)
+            
+            redundancyCheck(BODY)
+            
+        } catch (error) {
+            console.log("FreeGames: GotError:",error);
+        }
+    })()
+    function sendMessage(channel, content)
+    {
+        console.log('FreeGames: Sending Message')
+        const embed = new Discord.MessageEmbed()
+        .setTitle(content.title)
+        .setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+        .addField('Válido até:',content.end_date)
+        .setColor(0x2d9134)
+        .setImage(content.image)
+        .addFields({name:"Instruções:",value:content.instructions})
+        .addFields({name:"Tipo de oferta:",value:content.type})
+        .setDescription(content.description)
+        .addField('Link:',`[Grab it](${content.open_giveaway_url})`)
+        .setFooter(`(${content.id}) Rem-chan em `, "https://i.imgur.com/g6FSNhL.png")
+        .setThumbnail(content.thumbnail)
+        .setTimestamp()
+        bot.channels.cache.get(channel).send({embed});
+        
+    }
+    function redundancyCheck(Data)
+    {
+        var channels = JSON.parse(fs.readFileSync('channels.json', 'utf-8')).freeGames;
+        //console.log('Freegames. RedundancyCheck: Channels:', channels[0]);
+        var i = 0;
+        do {
+
+            let curChannel = channels[i];
+            channel = bot.channels.cache.get(channels[i])
+            if(channel)
+            {
+                //console.log('Freegames: Redundancy Check: LastMessageID: ',i,channel.lastMessageID);
+                if(channel.lastMessageID)
+                {
+                    bot.channels.cache.get(channels[i]).messages.fetch(channel.lastMessageID).then(message =>
+                        {
+                            var lastID = parseInt(message.embeds[0].footer.text.split('(')[1].split(')'[0]))
+                            console.log('FreeGames: Redundancy Check: LastID: ', lastID)
+                            for(var j = Data.length-1; j>=0; j--)
+                            {
+                                //console.log('Freegames: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',lastID, Data[i].id);
+                                if(Data[j].id>lastID)
+                                {
+                                    console.log('Freegames: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',lastID, Data[i].id);
+                                    sendMessage(curChannel,Data[j]);
+                                }
+                            }
+                            console.log('Freegames: Redundancy Check: Last Message Up to date.', curChannel)
+                        }).catch(message=>
+                        {
+                            for(var j = Data.length-1; j>=0; j--)
+                            {
+                                //console.log('Conquest: Redundancy Check: Data:', Data[j]);
+                                console.log('Conquest: Redundancy Check: channel & Data:', channels[i]);
+                                console.log('FreeGames: Catch on message: Message could not be found.')
+                                sendMessage(curChannel, Data[j])
+                            }
+                        })
+                }
+                else
+                {
+                    //No last Message
+                    for(var j = Data.length-1; j>=0; j--)
+                    {
+                        sendMessage(curChannel, Data[j])
+                    }
+                }
+            }
+            i++;
+        } while (i<channels.length);
+        
+           
+        
+    }
+}

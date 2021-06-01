@@ -23,13 +23,22 @@ const Discord = require('discord.js');
             var messageSearch = '';
             var searchOrig = '';
    
-                if (args[1]==undefined){searchOrig='random'}else{
+                if (args[1]==undefined)
+                {
+                    searchOrig='random'
+                }
+                else
+                {
 
-            for (var i = 1; i < messageSplit.length; i++) {
-                       if (i === 1) {
-                              searchOrig = messageSplit[i];
-                        } else {
-                                searchOrig = searchOrig + ' ' + messageSplit[i];
+                    for (var i = 1; i < messageSplit.length; i++) 
+                    {
+                        if (i === 1) 
+                        {
+                                searchOrig = messageSplit[i];
+                        }
+                        else
+                        {
+                                    searchOrig = searchOrig + ' ' + messageSplit[i];
                         }
                     }
                 }
@@ -38,13 +47,11 @@ const Discord = require('discord.js');
                   
                     const Pornsearch = require('pornsearch');
                     const Searcher = new Pornsearch(searchOrig);
-                    Searcher.gifs()
-                      .then(gifs =>{
-                            console.log(gifs.length)
-                            mensagem(gifs[random], message)
-
-                            } 
-                        );
+                  
+                    Searcher.gifs().then(gifs =>
+                        {
+                            mensagem(gifs[random], message);
+                        });
                       
                    function mensagem(gifs, message){ 
                       
