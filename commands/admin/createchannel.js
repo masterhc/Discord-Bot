@@ -28,7 +28,7 @@ const Discord = require('discord.js');
                  if (i===1) {
                        name = args[1] ;
                    }else{
-                         name =name + ' ' + args[i];
+                         name = name + ' ' + args[i];
                }
                
             };

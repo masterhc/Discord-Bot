@@ -16,6 +16,7 @@ bot.login(process.env.discord_token);
 bot.registry.registerGroup('random','random');
 bot.registry.registerGroup('games', 'games');
 bot.registry.registerGroup('nsfw', 'nsfw');
+bot.registry.registerGroup('music', 'music');
 bot.registry.registerGroup('admin', 'admin');
 bot.registry.registerGroup('image', 'imagens');
 bot.registry.registerGroup('pesquisa', 'pesquisa');
@@ -964,7 +965,6 @@ function conquests()
         embed.setThumbnail(`https://dspt.innogamescdn.com/asset/dbeaf8db/graphic///map_new/${villageIcon(content.VillagePoints,content.PrevOwner)}.png`)
         embed.setTimestamp()
         bot.channels.cache.get(channel).send({embed});
-        
     }
     function villageIcon(num, prevOwner)
     {
@@ -1014,7 +1014,6 @@ function freegames()
         .setThumbnail(content.thumbnail)
         .setTimestamp()
         bot.channels.cache.get(channel).send({embed});
-        
     }
     function redundancyCheck(Data)
     {
@@ -1041,6 +1040,7 @@ function freegames()
                                 {
                                     console.log('Freegames: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',lastID, Data[i].id);
                                     sendMessage(curChannel,Data[j]);
+
                                 }
                             }
                             console.log('Freegames: Redundancy Check: Last Message Up to date.', curChannel)
@@ -1052,6 +1052,7 @@ function freegames()
                                 console.log('Conquest: Redundancy Check: channel & Data:', channels[i]);
                                 console.log('FreeGames: Catch on message: Message could not be found.')
                                 sendMessage(curChannel, Data[j])
+
                             }
                         })
                 }
