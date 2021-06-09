@@ -19,7 +19,6 @@
     "node": "14.4.0"
   },
   "dependencies": {
-    "@discordjs/opus": "github:discordjs/opus",
     "ascii-table": "0.0.9",
     "axios": "^0.19.2",
     "bufferutil": "4.0.1",
