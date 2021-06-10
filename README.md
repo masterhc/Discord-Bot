@@ -31,24 +31,20 @@
 <h2>!triggered</h2>
 
 <h1>Música</h1>
+<h2>!play</h2>
+<p>Coloca músicas na lista de reprodução.</p>
 <h2>!clearqueue</h2>
 <p>Limpa a lista de músicas.</p>
 <h2>!leave</h2>
 <p>O bot sai do canal.</p>
-<h2>!owner</h2>
-<p>Altera o id de dono.</p>
 <h2>!pause</h2>
 <p>Coloca a reprodução em pausa.</p>
-<h2>!play</h2>
-<p>Coloca músicas na lista de reprodução.</p>
 <h2>!queue</h2>
 <p>Mostra todas as musicas na lista de reprodução.</p>
 <h2>!resume</h2>
 <p>Retoma a reprodução da música pausada.</p>
 <h2>!skip</h2>
 <p>Salta a música em reprodução.</p>
-<h2>!volume</h2>
-<p>Altera o volume.</p>
 
 
 <h1>NSFW</h1>
@@ -56,9 +52,6 @@
 <h2>!kona</h2>
 <p>Apresenta imagens do site Konachan. Este comando pode ser utilizado sem argumentos, apresentando assim imagens aleatórias.</p>
 <p>Para melhores resultados, é aconselhado usar os termos de pesquisa, estes devem ser escritos com "_" caso o termo seja apenas completo com " ", pois o espaço é destinado a separação de termos.</p>
-<h2>!phgifs</h2>
-<p>Apresenta gifs do site PornHub. Este comando pode ser utilizado sem argumentos, apresentando assim imagens aleatórias.</p>
-<p>Para melhores resultados, é aconselhado usar os termos de pesquisa.</p>
 
 <h1>Pesquisa</h1>
 <h2>!anime</h2>
@@ -77,8 +70,6 @@
 <p>Apresenta uma mensagem escrita pelo bot, e lida em tts. Este comando apenas funciona com argumentos, o argumento é a mensagem que desejada.</p>
 <h2>!tableflip</h2>
 <p>Apresenta o emoji (╯°□°）╯︵ ┻━┻</p>
-<h2>!teste</h2>
-<p>Este comando é apenas usado par o desenvolvimento de novos comandos. É aconselhado guardar uma cópia do estado original do comando no momento da sua alteração.</p>
 
 
 
