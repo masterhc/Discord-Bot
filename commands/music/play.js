@@ -25,7 +25,7 @@ module.exports = class  play extends commando.Command
         {
             voice.channel.join().then((connection) =>
             {
-                connection.play(path.join(__dirname, 'test.m4a'))
+                connection.play(path.join(__dirname, 'test.m4a'), {volume:0.5});
             })
 
         }          

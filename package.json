@@ -28,7 +28,7 @@
     "discord.js-commando": "github:discordjs/Commando",
     "emoji-regex": "^9.2.2",
     "eventemitter3": "^2.0.3",
-    "ffmpeg.js": "^3.1.9001",
+    "ffmpeg-static": "^4.3.0",
     "fs": "0.0.1-security",
     "got": "^7.1.0",
     "http": "0.0.0",
