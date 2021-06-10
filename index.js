@@ -1,3 +1,4 @@
+console.time('StartUp')
 const Discord  = require('discord.js');
 const commando = require('discord.js-commando');
 const request = require('request');
@@ -32,7 +33,7 @@ bot.on('ready', ()=>{
     console.log("          Ready           ")
     console.log("       on "+bot.guilds.cache.size+" guilds        ")
     console.log("--------------------------")
-    
+    console.timeEnd('StartUp')    
 
     
     GuildsModel={//model for saving on a file

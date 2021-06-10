@@ -2,15 +2,16 @@ const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const yts = require('yt-search');
 const ytdl = require('ytdl-core');
+const fs = require('fs');
 
-module.exports = class  play extends commando.Command
+module.exports = class  search extends commando.Command
 {
     constructor(client)
     {
         super(client, {
-            name: 'play',
+            name: 'search',
             group:'music',
-            memberName: 'play',
+            memberName: 'search',
             description: 'Plays on the voice channel you currently are in.'
 
         })
@@ -30,7 +31,7 @@ module.exports = class  play extends commando.Command
             {
                 if(content.includes('youtube') || content.includes('youtu.be'))//YT LINK
                 {
-                    play(message.content.split('!play ')[1]);
+                    play(message.content.split('!search ')[1]);
                 }
                 else //GET OUTTA HERE
                 {
@@ -39,7 +40,7 @@ module.exports = class  play extends commando.Command
             }
             else//search
             {
-                const r = await yts( content.split('!play ')[1] )
+                const r = await yts( content.split('!search ')[1] )
 
                 const videos = r.videos.slice( 0, 5)
                 const embed = new Discord.MessageEmbed;
@@ -47,7 +48,7 @@ module.exports = class  play extends commando.Command
                 embed.setTimestamp();
                 embed.setColor(0xb50000);
                 embed.setImage(videos[0].thumbnail)
-                embed.setTitle('Searching for:'+content.split('!play ')[1])
+                embed.setTitle('Searching for:'+content.split('!search ')[1])
 
                 videos.forEach( function ( v , i) {
                     //console.log('Search:', v)

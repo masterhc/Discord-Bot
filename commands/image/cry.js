@@ -11,25 +11,23 @@ class crycommando extends commando.Command{
 
             })
         }
-        async run(message, args){
+        async run(message, args)
+        {
             var cmd = 'cry';
             var res = await axios.get('https://rra.ram.moe/i/r', {params: {"type": cmd}});
             var path = res.data.path.replace('/i/', '');
           
-                const embed = new discord.MessageEmbed;
+            const embed = new discord.MessageEmbed;
+            embed.setColor(0xb50000);
+            embed.setDescription('[Original]'+`(https://cdn.ram.moe/${path})`);
+            embed.setTitle('Imagem:')
+            embed.setImage(`https://cdn.ram.moe/${path}`);
+            embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+            embed.setTimestamp();
 
-                embed.setColor(0xb50000);
-              embed.setDescription('[Original]'+`(https://cdn.ram.moe/${path})`);
-              embed.setTitle('Imagem:')
-                   embed.setImage(`https://cdn.ram.moe/${path}`);
-                   embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                   embed.setTimestamp();
 
-                console.log("path: "+path);
-                console.log("embed: "+embed)
-
-               message.channel.send({embed}) 
+            message.channel.send({embed}) 
          
 
-         }
-        }module.exports = crycommando;
+        }
+}module.exports = crycommando;
