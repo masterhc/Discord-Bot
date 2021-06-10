@@ -96,7 +96,7 @@ module.exports = class  search extends commando.Command
                 const dispatcher = connection.play(stream, {volume:0.5});
                 dispatcher.on('speaking', speaking => 
                 {
-                    if (!speaking) voiceChannel.leave();
+                    if (!speaking) voice.channel.leave();
                 });
             });
             
