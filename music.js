@@ -42,7 +42,7 @@ function commands()
     {
         if(!err)
         {
-            console.time('Worker|Command')
+            //console.time('Worker|Command')
             console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
             switch (JSON.parse(fs.readFileSync(path)).command) {
                 case 'skip':
@@ -68,7 +68,7 @@ function commands()
 }
 function music()
 {
-    console.log('WORKER:',name,'- Music: Still alive');
+    //console.log('WORKER:',name,'- Music: Still alive');
     QueueM.get((err, queue)=>
     {   
         if(err || queue.length == 0) 
@@ -124,7 +124,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
 
         attempts++;
         currentID = id;
-        console.log('Worker:', name ,'- Play: ', voiceID, songURL,id, songname, songtime, text)
+        //console.log('Worker:', name ,'- Play: ', voiceID, songURL,id, songname, songtime, text)
         const voice = bot.channels.cache.get(voiceID);
         voice.join().then((connection)=>
         {
@@ -228,7 +228,7 @@ function leave()
             bot.guilds.cache.get(guild).voice.connection.disconnect()
             deleteQ().then(()=>
             {
-                console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
+                //console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
                 removeFile();
                 music();
             })
