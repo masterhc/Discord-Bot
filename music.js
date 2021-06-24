@@ -119,42 +119,53 @@ function music()
  */
 function play (voiceID, songURL, id, songname, songtime, text)
 {
-    attempts++;
-    currentID = id;
-    const voice = bot.channels.cache.get(voiceID)
-    voice.join().then((connection)=>
+    try
     {
-        
-        Dispatcher = connection.play(ytdl(songURL, { filter: 'audioonly', dlChunkSize: 0 }), {volume:0.5});
-        Dispatcher.on('start', ()=>
+
+        attempts++;
+        currentID = id;
+        console.log('Worker:', name ,'- Play: ', voiceID, songURL,id, songname, songtime, text)
+        const voice = bot.channels.cache.get(voiceID);
+        voice.join().then((connection)=>
         {
-            console.log('Worker:', name ,'- Playing: ', songname, '(',songtime,'s)')
-            attempts = 0;
-        })
-        Dispatcher.on('speaking', speaking => 
-        {
-            if (!speaking) //queue next song or leave
+            
+            Dispatcher = connection.play(ytdl(songURL, { filter: 'audioonly', dlChunkSize: 0 }), {volume:0.5});
+            Dispatcher.on('start', ()=>
             {
-                console.log('Worker:', name, '- Song ended :', songname);
-                removeFromQueue(id, true);
-            }
-        });
-        Dispatcher.on('error', error=>
-        {
-            //removeFromQueue(id, true);
-            console.log('Worker:', name, '- Error on attempt no:', attempts,'\n Error:', error)
-            if(attempts<10)
-            {
-                play(voiceID, songURL, id, songname, songtime, text);
-            }
-            else
-            {
-                bot.channels.cache.get(text).send(`Failed to download audio for the 10th time,\nremoving ${songname} from Queue.`);
-                removeFromQueue(id);
+                console.log('Worker:', name ,'- Playing: ', songname, '(',songtime,'s)')
                 attempts = 0;
-            }
+            })
+            Dispatcher.on('speaking', speaking => 
+            {
+                if (!speaking) //queue next song or leave
+                {
+                    console.log('Worker:', name, '- Song ended :', songname);
+                    removeFromQueue(id, true);
+                }
+            });
+            Dispatcher.on('error', error=>
+            {
+                //removeFromQueue(id, true);
+                console.log('Worker:', name, '- Error on attempt no:', attempts,'\n Miniget Error.')//Error:', error)
+                if(attempts<10)
+                {
+                    play(voiceID, songURL, id, songname, songtime, text);
+                }
+                else
+                {
+                    bot.channels.cache.get(text).send(`Failed to download audio for the 10th time,\nremoving ${songname} from Queue.`);
+                    removeFromQueue(id);
+                    attempts = 0;
+                }
+            });
         });
-    });
+    }
+    catch (error)
+    {
+        console.log('Worker:', name ,'- Play: Error: ', error)
+        music();
+        
+    }
 }
 /**
  * Removes the song from Queue. 
@@ -171,18 +182,17 @@ function removeFromQueue(id, playNext)
         if(!err)
         {
             console.log('Worker:',name,'- Music: Song removed!') 
-            QueueM.findOne({guild:guild}, (err, queue)=>
+            QueueM.findOne({guild:guild}, (err, next)=>
             {
                 if(!err) 
                 {
-                    console.log('Worker:',name,'- Music: More in queue?', queue!=null);
-                    if(queue)
+                    //console.log('Worker:',name,'- Music: More in queue?', next);
+                    if(next)
                     {
                         if(playNext)
                         {
-                            next = queue[1]
                             console.log('Worker:',name,'- Music: Remove From Q: Playing next. Next:', next)
-                            play(next.voiceID, next.songURL, next.id, next.songname, next.songtime)
+                            play(next.voice, next.songURL, next.id, next.songname, next.songtime, next.textchannel)
                         }
                         else
                         {
@@ -196,7 +206,7 @@ function removeFromQueue(id, playNext)
                 {
                     console.log('Worker:', name, '- Error:', err);
                 }
-            }).limit(2)
+            })
         } 
         else
         {
@@ -209,6 +219,7 @@ function removeFromQueue(id, playNext)
 
 function leave()
 {
+    attempts =0;
     if(bot.guilds.cache.get(guild).voice)
     {
         if(bot.guilds.cache.get(guild).voice.connection)
@@ -217,6 +228,7 @@ function leave()
             bot.guilds.cache.get(guild).voice.connection.disconnect()
             deleteQ().then(()=>
             {
+                console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
                 removeFile();
                 music();
             })
@@ -251,11 +263,11 @@ function deleteQ()
                             }
                         }
                         i++;
+                        if(i==queue.length)
+                        {
+                            resolve(true);
+                        }
                     }while((i<queue.length)==true);
-                    if(i==queue.length)
-                    {
-                        resolve(true);
-                    }
                 }
             }
         });
@@ -271,6 +283,7 @@ function remove(id)
 
 function skip()
 {
+    attempts = 0;
     removeFile();   
     removeFromQueue(currentID, true); //it also asks to play the next
 }
