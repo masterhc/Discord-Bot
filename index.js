@@ -5,6 +5,8 @@ const request = require('request');
 const fs = require('fs');
 const got = require('got');
 const cheerio = require('cheerio');
+const Spawner = require('child_process');
+const mongoose = require('mongoose');
 
 
 const bot = new commando.Client
@@ -24,83 +26,55 @@ bot.registry.registerGroup('pesquisa', 'pesquisa');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
 
+var Guilds_ = []
 
 //Start Up Log
 bot.on('ready', ()=>{
     //Fancy looking console starting message
-    console.log("--------------------------")
-    console.log("    Legendary Rem-Chan    ")
-    console.log("          Ready           ")
-    console.log("       on "+bot.guilds.cache.size+" guilds        ")
-    console.log("--------------------------")
-    console.timeEnd('StartUp')    
+    console.log("--------------------------\n    Legendary Rem-Chan    \n         Ready           \n       on "+bot.guilds.cache.size+" guilds        \n--------------------------")
+    console.timeEnd('StartUp');
 
-    
-    GuildsModel={//model for saving on a file
-        "names":[
-
-        ]
-    }
+    mongoose.Promise = global.Promise;
+    mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('Server - MONGODB: Connected')).catch(err=>console.log(err));
+ 
+    bot.user.setActivity('for !help', {type: 'LISTENING'});
+    GuildsModel=[]//model for saving on a file
    
-     for(var [key, values] of bot.guilds.cache){
-       GuildsModel.names.push(values.name)
-     } 
+    for(var [key, values] of bot.guilds.cache){
+    GuildsModel.push(values.name)
+    } 
+    fs.writeFileSync("guilds.json",JSON.stringify({GuildsModel}), "utf-8"); //actualy saving it in the file, find a way to do this with a data base.       
+    //Timmers
 
-      let GuildsO = JSON.stringify(GuildsModel);  //stringify for file saving reasons
-    //Send it to a file so it can be searched with another command.
-    fs.writeFileSync("guilds.json", GuildsO, "utf-8"); //actualy saving it in the file, find a way to do this with a data base.
+    freegames();
+    music();
+    rustCommits();
 
-    
-    
-   var i = 0
-   var tipo = [
-       'PLAYING',
-       'STREAMING',
-       'LISTENING',
-       'WATCHING'
-   ]
-   var message =[
-       'with crazy people',//Playing message
-       'crappy content', //watching message
-       'sounds of my people', //listening message
-       'paint dry'//watching message
-   ]
-        
-       
+    setInterval(() => 
+    {
+        giveRole(); // Member role on wellcome channel
+        music();
+    }, 
+    1500);
 
     setInterval(()=>
     {
-    changeActivity();
-    }, 60000);
+        freegames();
+    }, 60000)
 
-    function changeActivity()
-    { 
-        bot.user.setActivity(message[i], {type: tipo[i]})
-        .then(presence => console.log(`RichPresence: Activity set to ${presence.aactivities ? presence.activities.name : message[i]}`))
-        .catch(console.error);
-
-        console.log("RichPresence: I: "+ i);
-        if(i!=4)
-        {
-            i++;
-        }
-        else
-        {
-            i=0;
-            bot.user.setActivity('!help', {type: 'LISTENING'})
-            .then(presence => console.log(`RichPresence: Activity set to ${presence.activities ? presence.activities.name : 'to !help'}`))
-            .catch(console.error);
-        }
-      
-   
-        console.log(`Info: Rem is up and ready to serve on ${bot.guilds.cache.size} servers, for ${bot.users.cache.size} users.`);
-    
-    }
+    setInterval(()=>
+    {
+        moveAFKs()
+        rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
+        conquests()
+    }, 10000);
+ 
 });
 
 bot.on("message", message=>
 {
-    try {
+    try 
+    {
         if(message!=null)
         {
             var domainEnd=["gg", ".gg"]
@@ -114,7 +88,7 @@ bot.on("message", message=>
                     {
                         //message is definitely an invite link
                         //is the link for the server we are on?
-                    message.guild.fetchInvites().then(
+                        message.guild.fetchInvites().then(
                         invites =>   
                         {
                             var inviteCodes =[];
@@ -160,6 +134,7 @@ bot.on("message", message=>
         //console.log(error)  ;
     }
 })
+
 function comparelink (Invites, code, author, message, from)
 {   
     try {
@@ -187,6 +162,7 @@ function comparelink (Invites, code, author, message, from)
         //console.log(error)
     }
 }
+
 function processPunishment(author, message)
 {
     //Apply strike system when implemented
@@ -202,29 +178,8 @@ function processPunishment(author, message)
     {
       //console.log(error)  
     }
-    
-
 };
-//Give role => Membro
 
-//INTERVAL
-
-bot.on('ready', ()=>{
-    freegames();
-        setInterval(() => 
-        {
-            giveRole(); // Member role on wellcome channel
-            //freegames();
-            //onlinePlayers();
-        }, 
-        3000);
-        setInterval(()=>
-        {
-            freegames();
-        }, 60000)
-    
-
-});
 bot.on('raw', packet => 
 {
     // We don't want this to run on unrelated packets
@@ -296,8 +251,7 @@ function giveRole()
                 } 
             };
             m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
-            .catch
-            (
+            .catch(
                 collected =>
                 {
                     for(var [key, values] of collected)
@@ -315,263 +269,17 @@ function giveRole()
                            
                         }
                     }   
-                }
-            )
+                })
         }
     )
 
 }      
-   
-
-
-
-bot.on('ready',()=>{ 
-    
-    
-    crackwatch();
-      
-function crackwatch()
-{ 
-        setTimeout(()=>{  
-        //Gets the lastCrackMessageSentTitle from the message on the channel
-        var lastCrackMessageSentTitle
-        const baseChannel = '643995527389773855';
-        if(channelexists(baseChannel))
-        {
-            bot.channels.cache.get(baseChannel).messages.fetch({limit:1}).then(messages=>{
-                for(var [key, values] of messages)
-                {
-                    bot.channels.cache.get(baseChannel).messages.fetch(values.id).then(message =>
-                    {
-                    lastCrackMessageSentTitle = message.embeds[0].title;
-                    //console.log("CrackWatch: lastCrackSent from the last Message: " + lastCrackMessageSentTitle);
-                    })
-                } 
-                });
-            
-        }
-   
-    request(`https://api.crackwatch.com/api/cracks`, function(err, res, body){
-       if(!err)
-       {
-          
-             let fetchedCrack = JSON.parse(body);
-            try 
-            {
-                if(lastCrackMessageSentTitle == null)
-                {
-                    crackwatch();
-                }else
-                {
-                    if(fetchedCrack != null && fetchedCrack.message != "Internal server error")
-                    {
-                        
-                            let correctedTitleArray = fetchedCrack[0].title.split(".");
-
-                            let correctedEnding =  correctedTitleArray[correctedTitleArray.length - 1].split('-');
-                            
-                            if(correctedTitleArray[correctedTitleArray.length - 1].split("_")>0)
-                            {
-                                correctedTitleArray= correctedTitleArray[correctedTitleArray.length - 1].split("_")
-                            }
-                            
-                            
-                            let correctedTitle
-                    
-                            if(correctedTitleArray.length != null)
-                            {
-                                for (var j = 0; j <= correctedTitleArray.length; j++)
-                                {
-                                    if(j==0)
-                                    {
-                                                    
-                                        correctedTitle = correctedTitleArray[j];
-                                                    
-                                    }else if(j == correctedTitleArray.length)
-                                    {
-                                                    
-                                        correctedTitle =correctedTitle +' ' + correctedEnding[0]
-                                                
-                                                    
-                                    }else if(j <= correctedTitleArray.length-2)
-                                    {
-                                        correctedTitle = correctedTitle +' ' +  correctedTitleArray[j];           
-                                    }
-                                }
-                            }else{
-                                correctedTitle = fetchedCrack[0].title;
-                            }
-
-                            //console.log("CrackWatch: correctedTitle: " + correctedTitle)
-                            //Title comes out ok
-                            let newObject = 
-                            {
-                                "title":correctedTitle,
-                                "sceneGroup":fetchedCrack[0].groupName,
-                                "date":fetchedCrack[0].date,    
-                                "image":fetchedCrack[0].image
-                            }       
-                            let output = JSON.stringify(newObject);  
-                            
-                            if(crackcheck(correctedTitle, lastCrackMessageSentTitle)==true)
-                            { 
-                                let info 
-                                info =  getInfo(correctedTitle);
-                                console.log("CrackWatch:Sending new Crack Message",fetchedCrack[0], correctedTitle, info)
-                                sendMessage(fetchedCrack[0], correctedTitle,  info);
-                                crackwatch();
-                            }else{
-                                //console.log("CrackWatch: Didn't pass the check, same as the last one sent.")
-                                crackwatch()
-                            }
-                    }else{
-                        //console.log("CrackWatch: Server Internal Error")
-                        crackwatch();
-                    } 
-                }  
-            }catch (error) 
-            {
-                        
-                console.log("CrackWatch: something went wrong on the try")
-                crackwatch();
-            }
-        }else
-        {
-
-            console.log("CrackWatch: Server Error: Page doesn't even display a error message.")
-        }
-    } 
-         
-         
-    
-
-        );
-   
-    }, 10000);  
-    
-} 
-
-
-   
-     
-     function crackcheck(correctedTitle, lastCrackMessageSentTitle){
-        console.log("CrackWatch: CrackCheck: correctedTitle: " +correctedTitle + "  lastCrackSentTitle: " + lastCrackMessageSentTitle);
-        if(correctedTitle ==lastCrackMessageSentTitle)return false;
-        else return true;
-    }
-
-        function sendMessage(arg, arg3, arg2){
-           var image;
-            const embed = new Discord.MessageEmbed
-            if(arg2 != null){ 
-                image = arg2.imagePoster;
-                embed.setThumbnail(arg2.image);
-                embed.addField('Steam:',`[${arg3}](${arg2.Steam})`);
-
-            }else{
-                image = arg.image
-            }
-               
-                embed.setTitle(arg3)
-                embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
-                embed.setColor(0xd31f1f)
-                embed.setDescription("Jogo crackado por "+arg.groupName)
-                embed.addField('Data do crack:',arg.date.split("T")[0])
-
-                embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-
-                embed.setImage(image)
-                
-
-                embed.setTimestamp()
-
-                let channelsfile = JSON.parse(fs.readFileSync('channels.json', 'utf-8'));
-                
-                for (var i=0; i<channelsfile.channels.length; i++) 
-                {
-                    if(channelexists(channelsfile.channels[i]))
-                    {
-                        bot.channels.cache.get(channelsfile.channels[i]).send({embed});
-                    }
-                  
-                }
-                
-                
-
-        }
-
 function channelexists(channel){
 
     if(bot.channels.cache.get(channel) != null) return true
 }
 
-function getInfo(Title){
-    
-    let finish = false;   
-    let count = 0;
-    
-     do
-     {
-        try 
-        {
-            request(`http://api.crackwatch.com/api/games?page=${count}`, function(err, res, body){
-                let games = JSON.parse(body);
-                if(err){
-                    console.error(err);
-                }
-                if(res >399){
-                    console.log("CrackWatch: error reference: "+ res);
-                }
-                for ( var i=0; i<games.length; i++) {
-                      
-                    if(games[i].title.search(Title) != -1){
-                        console.log("CrackWatch: found match")
-        
-                        finish = true
-                        return games[i];
-                    }
-                }
-              
-                
-               if(count==49){
-                   console.log("CrackWatch: Count at 49, stoping search. It took too much time already.")
-               }
-                
-                }); 
-                count++;
-        } catch (error) {
-            console.log("CrackWatch: Error on request.");
-            console.error(error);
-        } 
-      
-    }while(count < 50);
-    
 
-
-}
-    
-
-
-
-}); 
-bot.on('ready',()=>{
-    /*
-     to use in admin commands that need a user id (from a reaction) to do something (message.mentions.users.first().id)
-    */
-    timer();
-    function timer(){
-        setTimeout(()=>{
-            moveAFKs()
-            rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
-            conquests()
-            timer();       
-        }, 10000);
-}
-
-
-
-
-});
 function moveAFKs(){
     //Gets the members inside the AFK channel
     let auxmembers = bot.channels.cache.get("335494006890823680").members
@@ -595,8 +303,6 @@ function moveAFKs(){
 
 function rustCommits()
 {  // Getting the lastSentCommit message from the channel
-   
-    
    
     var lastSentDate  
     var lastSentCommit 
@@ -622,7 +328,7 @@ function rustCommits()
    }    
     
    
-    
+        
     //collection to store the commited information
     var latestCommit = {
         "Author":"",
@@ -633,7 +339,7 @@ function rustCommits()
     //Filling the collection and sending the message
     try {
         
-    
+
         request("https://commits.facepunch.com/?format=json", (err, res, body)=>
         {
             let Results
@@ -643,8 +349,8 @@ function rustCommits()
                 if(JSON.parse(body).results != null)
                 {
                     
-                  Results = JSON.parse(body).results;  
-                 
+                    Results = JSON.parse(body).results;  
+                    
                 }else
                 {
                     console.log("RustCommits: JSON.parse Error: body is null")
@@ -691,9 +397,9 @@ function rustCommits()
                 function newCommits()
                 {
                     
-                for(var i =commitCount-1; i>-1; i--)
-                {
-                    
+                    for(var i =commitCount-1; i>-1; i--)
+                    {
+                        
                         if(RustResults[i].repo.search(/rust/i)!=-1)
                         {   
                             //console.log("counter: "+i);
@@ -702,7 +408,7 @@ function rustCommits()
                             latestCommit.Avatar = RustResults[i].user.avatar;
                             latestCommit.Time = RustResults[i].created.split("T")[1]+ " do dia "+ RustResults[i].created.split("T")[0];
                             latestCommit.Content = RustResults[i].message;
-                        // console.log(lastSentDate)
+                            // console.log(lastSentDate)
                             //console.log(latestCommit.Time)
                             if(lastSentDate==null)
                             {
@@ -716,51 +422,48 @@ function rustCommits()
                                 messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
                                 }else if(latestCommit.Time.split(" do dia ")[1].split("-")[0]=lastSentDate.split(" do dia ")[1].split("-")[0])//se o ano for igual
                                 {
-                                if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
-                                {
-                                    messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
-                                }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
-                                {
-                                    if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
+                                    if(latestCommit.Time.split(" do dia ")[1].split("-")[1]>lastSentDate.split(" do dia ")[1].split("-")[1])//se o mes for maior
                                     {
                                         messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
-                                    }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
+                                    }else if(latestCommit.Time.split(" do dia ")[1].split("-")[1]=lastSentDate.split(" do dia ")[1].split("-")[1])//se o mês for igual
                                     {
-                                    
-                                        if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
-                                        {   
-                                            messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
-                                        }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
+                                        if(latestCommit.Time.split(" do dia ")[1].split("-")[2]>lastSentDate.split(" do dia ")[1].split("-")[2])//se o dia for maior
                                         {
-                                            if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
-                                            {
+                                            messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
+                                        }else if(latestCommit.Time.split(" do dia ")[1].split("-")[2]=lastSentDate.split(" do dia ")[1].split("-")[2])//se dia for igual
+                                        {
+                                        
+                                            if(latestCommit.Time.split(" do dia ")[0].split(":")[0]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se a hora for maior
+                                            {   
                                                 messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
-                                            }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
+                                            }else if(latestCommit.Time.split(" do dia ")[0].split(":")[0]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[0])//se for igual
                                             {
-                                                if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
+                                                if(latestCommit.Time.split(" do dia ")[0].split(":")[1]>lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se o minuto for maior 
                                                 {
-                                                    messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch );
-                                                }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to have been sent already
+                                                    messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch);
+                                                }else if(latestCommit.Time.split(" do dia ")[0].split(":")[1]=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[1])//se for igual
+                                                {
+                                                    if(latestCommit.Time.split(" do dia ")[0].split(":")[2]>=lastSentDate.split("às ")[1].split(" do dia ")[0].split(":")[2])//se o segundo for maior
+                                                    {
+                                                        messageCommit(latestCommit, RustResults[i].repo, RustResults[i].branch );
+                                                    }//there is no else otherwise it would be equal to the last sent or an older one that was supposed to have been sent already
+                                                }
                                             }
-                                        }
-                                    } 
-                                }
+                                        } 
+                                    }
                                 }                    
                             }
                             //console.log(latestCommit)
-                            
-                            
-
                         }
                     }
                     
                 }
             
-                //console.log("previous content: "+ lastSentCommitsContent)
-                
+                    //console.log("previous content: "+ lastSentCommitsContent)
+                    
 
-                }
-        } )//end of request
+            }
+        })//end of request
     } catch (error) {
         console.log("RustCommits: Request Failed")
         console.error(error)  
@@ -769,7 +472,8 @@ function rustCommits()
 };
 
 
-function messageCommit(commit, repo, branch){
+function messageCommit(commit, repo, branch)
+{
     console.log("RustCommits: Sending a new commit.") 
     const embed = new Discord.MessageEmbed        
           embed.setTitle("Novo Commit às "+commit.Time)
@@ -794,58 +498,12 @@ function messageCommit(commit, repo, branch){
             }
          }
          
- }
-
-function channelexists(channel){
-
-if(bot.channels.cache.get(channel) != null) return true
-}
-let ServerApiKey =['4016','4429'];
-let RustServerChannels = ['696076735917326546','788056567429726208']
-function onlinePlayers()
-{
-    for(var i = 0; i<ServerApiKey.length-1; i++)
-    {
-       request(`https://api.rust-servers.info/status/${ServerApiKey[i]}`, function(err, res, body)
-        {
-            if(!err)
-            {
-                if(body!=null)
-                {
-                    var data;
-                    try 
-                    {
-                        data = JSON.parse(body)
-                        activePlayers = data.players;
-                    } catch (error) 
-                    {
-                        console.log(error);
-                    }
-                   changeChannelName(activePlayers, i);
-                }
-            }
-        }); 
-    }
-    
-}
-function changeChannelName(count, i)
-{
-    let name =['vanilla', 'pvp']
-    const channel = bot.channels.cache.get(RustServerChannels[i]);
-    //console.log("OnlinePlayer: Comparison: ",channel.name, count,channel.name != `🎮☢-rust-on-${count}`, '🎮☢');
-    if(channel.name != `🎮☢-rust-on-${count}`)
-    {
-        channel.setName(`🎮☢-rust-on-${count}`);
-        console.log("OnlinePlayers: Changing channel name to: ",`🎮☢-rust-${name}-${count}`);
-    }
 }
 
 //Conquests
 function conquests()
 {
     //START
-
-
     (async () => {
         try {
             const response = await got('https://pt.twstats.com/pt79/index.php?page=ennoblements&live=live');
@@ -940,9 +598,6 @@ function conquests()
             }
             i++;
         } while (i<channels.length);
-        
-           
-        
     }
     function workableDate(Date_)
     {
@@ -1067,9 +722,26 @@ function freegames()
                 }
             }
             i++;
-        } while (i<channels.length);
-        
-           
-        
+        } while (i<channels.length);       
     }
+}
+
+
+function music()
+{
+    //console.log('Music: Looking for Servers.')
+    for(var [key, values] of bot.guilds.cache)
+    {
+        //console.log('Music: Guilds:',!Guilds_.includes(values.name));
+        if(!Guilds_.includes(key.toString()))
+        {
+            //console.log('Music: Guilds: (', key.toString(),')', values.name)
+            if(key.toString()!='447134296885428234') //remove a stupid server
+            {
+                Guilds_.push(key.toString());
+                console.log('Index: Starting Music Worker:', values.name,`(${key})`)
+                Spawner.fork('./music.js',[key.toString(), values.name]);
+            }
+        }
+    } 
 }

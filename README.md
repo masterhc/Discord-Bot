@@ -33,16 +33,10 @@
 <h1>Música</h1>
 <h2>!play</h2>
 <p>Coloca músicas na lista de reprodução.</p>
-<h2>!clearqueue</h2>
-<p>Limpa a lista de músicas.</p>
 <h2>!leave</h2>
-<p>O bot sai do canal.</p>
-<h2>!pause</h2>
-<p>Coloca a reprodução em pausa.</p>
+<p>O bot sai do canal, limpando a queue no porcesso.</p>
 <h2>!queue</h2>
 <p>Mostra todas as musicas na lista de reprodução.</p>
-<h2>!resume</h2>
-<p>Retoma a reprodução da música pausada.</p>
 <h2>!skip</h2>
 <p>Salta a música em reprodução.</p>
 

@@ -29,4 +29,4 @@ client.on('message', async message => {
   });
 });
 
-client.login(clientToken);
+client.login(clientToken).then(console.log('logged'));
