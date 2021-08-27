@@ -346,18 +346,12 @@ function rustCommits()
             var commitCount=0;
             if(!err)
             {
-                if(JSON.parse(body).results != null)
-                {
-                    
-                    Results = JSON.parse(body).results;  
-                    
-                }else
-                {
-                    console.log("RustCommits: JSON.parse Error: body is null")
-                    return
+                try {
+                    Results=JSON.parse(body).results
+                } catch (error) {
+                    parsedBody = null;
+                    console.log('RustCommits: Json.PaserError', error)
                 }
-                
-
                 let RustResults = []; 
                 for(var i=0; i<Results.length; i++)
                 {
