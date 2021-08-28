@@ -347,47 +347,51 @@ function rustCommits()
             if(!err)
             {
                 try {
-                    Results=JSON.parse(body).results
+                    Results = JSON.parse(body).results;
                 } catch (error) {
-                    parsedBody = null;
-                    console.log('RustCommits: Json.PaserError', error)
+                    Results = null;
+                    console.log('RustCommits: JSON Parser: ', error)
                 }
                 let RustResults = []; 
-                for(var i=0; i<Results.length; i++)
+                if(Results)
                 {
-                    if(commitCount <=30)
+                    
+                    for(var i=0; i<Results.length; i++)
                     {
-                        if(Results[i].repo.search(/rust/i)!=-1)
-                        {  
-                            if(lastSentCommit!=Results[i].message)
-                            {
-                                RustResults.push(Results[i]);
-                                //console.log("RustCommits: Commit saved")
-                                commitCount ++;
-                                
-                            }else{
-
-                                //console.log("RustCommits: Commits matches the last sent.")
-                                if(commitCount >0)
+                        if(commitCount <=30)
+                        {
+                            if(Results[i].repo.search(/rust/i)!=-1)
+                            {  
+                                if(lastSentCommit!=Results[i].message)
                                 {
-                                    return newCommits();
+                                    RustResults.push(Results[i]);
+                                    //console.log("RustCommits: Commit saved")
+                                    commitCount ++;
+                                    
                                 }else{
-                                    //console.log("RustCmmits: Não há commits novos.")
-                                    return 
+    
+                                    //console.log("RustCommits: Commits matches the last sent.")
+                                    if(commitCount >0)
+                                    {
+                                        return newCommits();
+                                    }else{
+                                        //console.log("RustCmmits: Não há commits novos.")
+                                        return 
+                                    }
                                 }
+                            }else
+                            {
+                                //console.log("RustCommits: Commit not saved, as it's for another game.")
                             }
                         }else
                         {
-                            //console.log("RustCommits: Commit not saved, as it's for another game.")
+                            console.log("RustCommits: Count reached the limit.")
+                            return newCommits();
                         }
-                    }else
-                    {
-                        console.log("RustCommits: Count reached the limit.")
-                        return newCommits();
+                        
                     }
-                    
+            
                 }
-        
                 function newCommits()
                 {
                     
