@@ -283,7 +283,7 @@ function channelexists(channel){
 function moveAFKs(){
     //Gets the members inside the AFK channel
     let auxmembers = bot.channels.cache.get("335494006890823680").members
-    console.log("MoveAFK: Member list with "+ auxmembers.size+" members.")
+    //console.log("MoveAFK: Member list with "+ auxmembers.size+" members.")
     //Sorts through them looking for those who have the SS - Secret Services Role
     if(auxmembers.size >0)
     {
@@ -313,14 +313,14 @@ function rustCommits()
         {
             bot.channels.cache.get('721061781824471080').messages.fetch({limit:1}).then(messages=>
             {
-            console.log("RustCommits: FetchLastMessageSent: Found Messages")
+            //console.log("RustCommits: FetchLastMessageSent: Found Messages")
                 for(var [key, values] of messages)
                 {
                     bot.channels.cache.get('721061781824471080').messages.fetch(values.id).then(message =>
                     {
                     lastSentCommit = message.embeds[0].description;
                     lastSentDate = message.embeds[0].title
-                    console.log("RustCommits: lastSentDate took from cached message : " + message.embeds[0].title);
+                    //console.log("RustCommits: lastSentDate took from cached message : " + message.embeds[0].title);
                     })
                 } 
             });     
