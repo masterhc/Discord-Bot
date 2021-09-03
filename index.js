@@ -287,10 +287,10 @@ function moveAFKs(){
     //Sorts through them looking for those who have the SS - Secret Services Role
     if(auxmembers.size >0)
     {
-        console.log("hosting:");
+        //console.log("hosting:");
     }
     for(var [key, values] of auxmembers){
-       console.log(values.id);;
+       //console.log(values.id);;
         if(values.roles.cache.has('693413934715240498')){ 
             //Upon fiding someoe that has said role.           
             //Moves it to the correct Channel.
@@ -686,7 +686,7 @@ function freegames()
                     bot.channels.cache.get(channels[i]).messages.fetch(channel.lastMessageID).then(message =>
                         {
                             var lastID = parseInt(message.embeds[0].footer.text.split('(')[1].split(')'[0]))
-                            console.log('FreeGames: Redundancy Check: LastID: ', lastID)
+                            //console.log('FreeGames: Redundancy Check: LastID: ', lastID)
                             for(var j = Data.length-1; j>=0; j--)
                             {
                                 //console.log('Freegames: Redundancy Check: Last Message outdated: channel:',curChannel,'i:',lastID, Data[i].id);
@@ -697,7 +697,7 @@ function freegames()
 
                                 }
                             }
-                            console.log('Freegames: Redundancy Check: Last Message Up to date.', curChannel)
+                            //console.log('Freegames: Redundancy Check: Last Message Up to date.', curChannel)
                         }).catch(message=>
                         {
                             for(var j = Data.length-1; j>=0; j--)
