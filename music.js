@@ -68,7 +68,7 @@ function commands()
 }
 function music()
 {
-    //console.log('WORKER:',name,'- Music: Still alive');
+    console.log('WORKER:',name,'- Music: Still alive');
     QueueM.get((err, queue)=>
     {   
         if(err || queue.length == 0) 
