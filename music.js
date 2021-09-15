@@ -109,6 +109,8 @@ function music()
             }
         }
     });
+    console.log('Music: It got here!)
+
 }
 /**
  * 
