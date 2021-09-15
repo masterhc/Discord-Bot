@@ -108,6 +108,7 @@ function music()
             }
         }
     });
+    music();
 }
 /**
  * 
