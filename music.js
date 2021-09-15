@@ -81,6 +81,7 @@ function music()
         }
         else
         {
+            console.log('Music: Queue Size:', queue.length)
             if(queue.length>0)
             {
                 var i = 0;
