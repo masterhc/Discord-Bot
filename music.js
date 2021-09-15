@@ -261,7 +261,7 @@ function deleteQ()
                             if(queue[i].guild==guild)
                             {
                                 remove(queue[i].id)
-                                console.log('Leave: DeleteQ: Removing song:', queue[i].songname);
+                                console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
                             }
                         }
                         i++;
