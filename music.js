@@ -73,7 +73,7 @@ function music()
     {   
         if(err || queue.length == 0) 
         {
-            //console.log('Music: Queue Error:', err || 'Empty Queue', queue.length)
+            console.log('Music: Queue Error:', err || 'Empty Queue', queue.length)
             setTimeout(() => 
             {
                 music()
