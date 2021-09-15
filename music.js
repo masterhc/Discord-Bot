@@ -91,7 +91,7 @@ function music()
                     {
                         if(queue[i].guild==guild)
                         {
-                            console.log('WORKER:',name,'- Music: Queueing: Index:',i, 'Songname:', queue[i].songname)   
+                            console.log('WORKER:',name,'- Music: Queueing: Index:',i, 'Songname:', queue[i].songname);   
                             play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
                             i=queue.length;
                         }
@@ -109,7 +109,7 @@ function music()
             }
         }
     });
-    console.log('Music: It got here!)
+    console.log('Music: It got here!');
 
 }
 /**
