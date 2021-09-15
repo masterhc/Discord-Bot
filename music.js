@@ -228,7 +228,7 @@ function leave()
             bot.guilds.cache.get(guild).voice.connection.disconnect()
             deleteQ().then(()=>
             {
-                //console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
+                console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
                 removeFile();
                 music();
             })
