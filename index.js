@@ -607,7 +607,7 @@ function conquests()
     }
     function sendMessage(channel, content,name)
     {
-        if(channels[i]=='842425791967133699')
+        if(channel=='842425791967133699')
         {
             name='Legendary' 
         }
