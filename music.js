@@ -247,6 +247,7 @@ function deleteQ()
             if(err || queue.length == 0) 
             {
                 console.log('Worker:',name,'- Music: DeleteQ: Empty Queue')
+                resolve(true);
             }
             else
             {
