@@ -590,10 +590,8 @@ function conquests()
                     for(var j = Data.length-1; j>=0; j--)
                     {
                         //console.log('Conquest: Redundancy Check: Data:', Data[j]);
-                        var name
-                        if(channels[i]=='842425791967133699')name='Legendary' 
-                        else name= 'SV da Tribo';
-                        sendMessage(channels[i], Data[j], name)
+                      
+                        sendMessage(channels[i], Data[j])
                     }
                 }
             }
@@ -609,6 +607,14 @@ function conquests()
     }
     function sendMessage(channel, content,name)
     {
+        if(channels[i]=='842425791967133699')
+        {
+            name='Legendary' 
+        }
+        else
+        { 
+            name= 'SV da Tribo';
+        }
         console.log('Conquest:',name,' SendMessage: Content:', content.Date);
         const embed = new Discord.MessageEmbed
         embed.setTitle(content.Date)
