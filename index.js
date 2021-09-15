@@ -590,7 +590,9 @@ function conquests()
                     for(var j = Data.length-1; j>=0; j--)
                     {
                         //console.log('Conquest: Redundancy Check: Data:', Data[j]);
-                        let name = (channels[i]=='842425791967133699')?'Legendary':'SV da Tribo';
+                        var name
+                        if(channels[i]=='842425791967133699')name='Legendary' 
+                        else name= 'SV da Tribo';
                         sendMessage(channels[i], Data[j], name)
                     }
                 }
