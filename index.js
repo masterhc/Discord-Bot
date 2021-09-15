@@ -590,7 +590,8 @@ function conquests()
                     for(var j = Data.length-1; j>=0; j--)
                     {
                         //console.log('Conquest: Redundancy Check: Data:', Data[j]);
-                        sendMessage(channels[i], Data[j])
+                        let name = (channels[i]=='842425791967133699')?'Legendary':'SV da Tribo';
+                        sendMessage(channels[i], Data[j], name)
                     }
                 }
             }
@@ -604,9 +605,9 @@ function conquests()
         var splittime = spliton_[3].split(' ')[1].split(':');
         return new Date(spliton_[0], parseInt(spliton_[1])-1, spliton_[2].split(' ')[0], parseInt(splittime[0])+1, splittime[1], splittime[2]);
     }
-    function sendMessage(channel, content)
+    function sendMessage(channel, content,name)
     {
-        console.log('Conquest: SendMessage: Content:', content.Date);
+        console.log('Conquest:',name,' SendMessage: Content:', content.Date);
         const embed = new Discord.MessageEmbed
         embed.setTitle(content.Date)
         embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
