@@ -91,9 +91,16 @@ function music()
                     {
                         if(queue[i].guild==guild)
                         {
-                            console.log('WORKER:',name,'- Music: Queueing: Index:',i, 'Songname:', queue[i].songname);   
-                            play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
+                            console.log('WORKER:',name,'- Music: Queueing: Index:',i, 'Songname:', queue[i].songname);
+                            try 
+                            {
+                                play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
+                            } catch (error) 
+                            {
+                                console.log('WORKER:',name,'- Music: Error: Could`nt connect to the voice channel.');
+                            }
                             i=queue.length;
+                            
                         }
                     }
                     i++;
@@ -147,7 +154,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
             Dispatcher.on('error', error=>
             {
                 //removeFromQueue(id, true);
-                console.log('Worker:', name, '- Error on attempt no:', attempts,'\n Miniget Error.')//Error:', error)
+                console.log('Worker:', name, '- Error on attempt no:', attempts,'\t Miniget Error.')//Error:', error)
                 if(attempts<10)
                 {
                     play(voiceID, songURL, id, songname, songtime, text);
