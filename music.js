@@ -100,7 +100,6 @@ function music()
                                 console.log('WORKER:',name,'- Music: Error: Could`nt connect to the voice channel.');
                             }
                             i=queue.length;
-                            
                         }
                     }
                     i++;
@@ -199,7 +198,7 @@ function removeFromQueue(id, playNext)
                     {
                         if(playNext)
                         {
-                            console.log('Worker:',name,'- Music: Remove From Q: Playing next. Next:', next)
+                            console.log('Worker:',name,'- Music: Remove From Q: Playing next. Next:', next.songname, next.songtime)
                             play(next.voice, next.songURL, next.id, next.songname, next.songtime, next.textchannel)
                         }
                         else
