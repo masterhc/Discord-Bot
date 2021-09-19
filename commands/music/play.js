@@ -17,10 +17,11 @@ module.exports = class  play extends commando.Command
     }
     async run(message, args)
     {
-        const {voice} = message.member
-        const guild = message.channel.guild.id
-        var content = message.content
-        const channel = message.channel.id
+        const {voice} = message.member;
+        const guild = message.channel.guild.id;
+        var content = message.content;
+        const channel = message.channel.id;
+        const Author = message.author.id;
         
         try
         {
@@ -61,7 +62,7 @@ module.exports = class  play extends commando.Command
                     videos.forEach( function ( v , i) {
                         //console.log('Search:', v)
                         const views = String( v.views ).padStart( 10, ' ' )
-                        embed.addField( `[${i}]${ v.title }`,`${ v.author.name } |  (${ v.timestamp }) | ${ views } views` )
+                        embed.addField( `[ ${i} ] - ${ v.title }`,`${ v.author.name } |  (${ v.timestamp }) | ${ views } views` )
                     } )
                     embed.addField('Cancel', 'Press X')
                     message.channel.send(embed)
@@ -80,11 +81,11 @@ module.exports = class  play extends commando.Command
                     //console.log('Search: getUserChoise:',videos[parseInt(message.content)].url)
                     if(parseInt(message.content)<5&&parseInt(message.content)>-1)
                     {
-                        console.log('Search: UserPicked:', message.content, videos[parseInt(message.content)].title);
+                        console.log('Search: User Picked:', message.content, videos[parseInt(message.content)].title);
                         addToQ(videos[parseInt(message.content)])
                         message.channel.messages.fetch({limit: 3}).then(m=>
                         {
-                            (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863')).forEach(msg=>
+                            (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863' || m.author.id == Author)).forEach(msg=>
                                 {
                                     msg.delete()
                                 })
@@ -92,9 +93,10 @@ module.exports = class  play extends commando.Command
                         
                     }else if(message.content.toLowerCase() === "x")
                     {
+                        console.log('Search: User Cancelled.');
                         message.channel.messages.fetch({limit: 3}).then(m=>
                             {
-                                (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863')).forEach(msg=>
+                                (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863'|| m.author.id == Author)).forEach(msg=>
                                     {
                                         msg.delete()
                                     })
