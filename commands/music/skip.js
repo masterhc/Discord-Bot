@@ -17,7 +17,8 @@ module.exports = class  skip extends commando.Command
     }
     async run(message, args)
     {
-        if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863'))))
+        const Author = message.author
+        if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863')&& channel.members.has(Author.id))))
         {
             const path = Path.join(__dirname, `../../${message.guild.id}.json`)
             fs.writeFileSync(path,'{"command":"skip"}');

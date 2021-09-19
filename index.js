@@ -214,6 +214,11 @@ bot.on('raw', packet =>
                 console.log("Role Assignment: Role Removed. Role: league, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
                 
                 break;
+            case "small_red_triangle_down":
+                bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).roles.remove("754242365480239154");
+                console.log("Role Assignment: Role Removed. Role: GameUpdates, from user: "+bot.channels.cache.get('445249426743754764').members.get(packet.d.user_id).nickname+".");
+                
+                break;
         
                 
             default:
@@ -230,9 +235,9 @@ function giveRole()
     const wellcomeChannelID="445249426743754764";
     const wellcomeChannel = bot.channels.cache.get(wellcomeChannelID);
     const messageID = "445251380639170560";
-    var roleEmojis = ["tuturu", "rust_icon", "valorant_icon", "crackwatch", "league"];
-    var roleName =['Membro', 'Rust', 'Valorant', 'CrackWatch', 'League of Legends'];
-    var roleIDs=['336235115782864906','687634126387544115','717826411695702119','642891554964635659','763872390199246868'];
+    var roleEmojis = ["tuturu", "rust_icon", "valorant_icon", "crackwatch", "league","small_red_triangle_down"];
+    var roleName =['Membro', 'Rust', 'Valorant', 'CrackWatch', 'League of Legends', 'GameUpdates'];
+    var roleIDs=['336235115782864906','687634126387544115','717826411695702119','642891554964635659','763872390199246868', '754242365480239154'];
 
 
     wellcomeChannel.messages.fetch(messageID).then
