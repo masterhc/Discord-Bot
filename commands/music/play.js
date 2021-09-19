@@ -21,7 +21,7 @@ module.exports = class  play extends commando.Command
         const guild = message.channel.guild.id;
         var content = message.content;
         const channel = message.channel.id;
-        const Author = message.author.id;
+        const Author = message.author;
         
         try
         {
@@ -81,11 +81,11 @@ module.exports = class  play extends commando.Command
                     //console.log('Search: getUserChoise:',videos[parseInt(message.content)].url)
                     if(parseInt(message.content)<5&&parseInt(message.content)>-1)
                     {
-                        console.log('Search: User Picked:', message.content, videos[parseInt(message.content)].title);
+                        console.log('Search: User Picked:', message.content, videos[parseInt(message.content)].title, Author.username);
                         addToQ(videos[parseInt(message.content)])
                         message.channel.messages.fetch({limit: 3}).then(m=>
                         {
-                            (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863' || m.author.id == Author)).forEach(msg=>
+                            (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863' || m.author.id == Author.id)).forEach(msg=>
                                 {
                                     msg.delete()
                                 })
