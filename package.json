@@ -52,13 +52,13 @@
     "rimraf": "^2.7.1",
     "s": "^0.1.1",
     "timer.js": "^1.0.4",
-    "url-parse": "^1.5.1",
+    "url-parse": "^1.5.3",
     "uws": "^10.148.2",
     "winston": "^2.4.4",
     "ws": "^7.4.6",
     "xml2js": "^0.4.23",
     "yt-search": "^2.8.0",
-    "ytdl-core": "^4.8.2"
+    "ytdl-core": "^4.9.1"
   },
   "devDependencies": {},
   "repository": {

@@ -81,7 +81,7 @@ module.exports = class  play extends commando.Command
                     //console.log('Search: getUserChoise:',videos[parseInt(message.content)].url)
                     if(parseInt(message.content)<5&&parseInt(message.content)>-1)
                     {
-                        console.log('Search: User Picked:', message.content, videos[parseInt(message.content)].title, Author.username);
+                        console.log('Search:',Author.username,' Picked:', message.content, videos[parseInt(message.content)].title);
                         addToQ(videos[parseInt(message.content)])
                         message.channel.messages.fetch({limit: 3}).then(m=>
                         {
@@ -93,7 +93,7 @@ module.exports = class  play extends commando.Command
                         
                     }else if(message.content.toLowerCase() === "x")
                     {
-                        console.log('Search: User Cancelled.');
+                        console.log('Search:',Author.username,' Cancelled.');
                         message.channel.messages.fetch({limit: 3}).then(m=>
                             {
                                 (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863'|| m.author.id == Author)).forEach(msg=>
