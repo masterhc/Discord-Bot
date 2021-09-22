@@ -11,7 +11,7 @@ module.exports = class  play extends commando.Command
             name: 'play',
             group:'music',
             memberName: 'play',
-            description: 'Plays on the voice channel you currently are in.'
+            description: 'Plays on the voice channel you currently are in. Supports youtube search and links.'
 
         })
     }

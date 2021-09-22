@@ -239,7 +239,7 @@ function giveRole()
     var roleName =['Membro', 'Rust', 'Valorant', 'CrackWatch', 'League of Legends', 'GameUpdates'];
     var roleIDs=['336235115782864906','687634126387544115','717826411695702119','642891554964635659','763872390199246868', '754242365480239154'];
 
-
+    
     wellcomeChannel.messages.fetch(messageID).then
     (
         m =>
@@ -255,14 +255,17 @@ function giveRole()
                     }  
                 } 
             };
+           
             m.awaitReactions( filter,{ time: 3000, errors: ['time'] })
             .catch(
                 collected =>
                 {
+                    getReactedUsers(m,roleEmojis[roleEmojis.length-1]);
                     for(var [key, values] of collected)
                     {
                         for(var [key, value] of values.users.cache) 
                         {
+                            console.log('Index: giveRole(): emoji name:', values._emoji.name)
                             for(var i = 0; i<roleEmojis.length;i++)
                             {
                                 if(roleEmojis[i]==values._emoji.name)
@@ -299,7 +302,7 @@ function moveAFKs(){
         if(values.roles.cache.has('693413934715240498')){ 
             //Upon fiding someoe that has said role.           
             //Moves it to the correct Channel.
-            values.voice.setChannel('648189029589843999')
+            values.voice.setChannel('839266096401874974')
                     .then(() => console.log(`MoveAFK: Moved ${values.displayName}.`))
                     .catch(console.error);
         }
