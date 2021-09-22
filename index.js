@@ -239,7 +239,7 @@ function giveRole()
     var roleName =['Membro', 'Rust', 'Valorant', 'CrackWatch', 'League of Legends', 'GameUpdates'];
     var roleIDs=['336235115782864906','687634126387544115','717826411695702119','642891554964635659','763872390199246868', '754242365480239154'];
 
-    
+
     wellcomeChannel.messages.fetch(messageID).then
     (
         m =>
@@ -260,7 +260,6 @@ function giveRole()
             .catch(
                 collected =>
                 {
-                    getReactedUsers(m,roleEmojis[roleEmojis.length-1]);
                     for(var [key, values] of collected)
                     {
                         for(var [key, value] of values.users.cache) 
