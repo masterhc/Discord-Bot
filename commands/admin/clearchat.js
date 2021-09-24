@@ -17,7 +17,6 @@ class clearchatcommando extends commando.Command{
     async run(message, args){
         //verificar admin
        
-    
         if(isAdmin(message)){
             //Verificar se está na sala bemvindo
             
@@ -33,12 +32,16 @@ class clearchatcommando extends commando.Command{
                 if(hasArgs()){
                     console.log("Info: !clearchat: has correctArgs");
                     if(correctArgs()){
-                   
-                    var aroundarg = message.content.split(' ')[1];
+                   var arg = message.content.split(' ')[1];
+                    if (arg.length < 18)
+                    {
                         console.log("Info: !clearchat: arround argument:",aroundarg);
-                 //retirar o id da mensagem de chamada
-          
-                cleararound(aroundarg);
+                        cleararound(aroundarg);
+                    }
+                    else
+                    {
+                        clearnormie(arg);
+                    }
                 }//Quais-quer eventuais problemas são tratados na função
             }else{
                     //caso normal, apenas apaga tudo.
@@ -68,14 +71,11 @@ class clearchatcommando extends commando.Command{
 
         }
 
-        async function clearnormie() {
+        async function clearnormie(costumLimit) {
             console.log("Info: !clearchat: clear normie")
             message.delete();
-            
-           
-            
-            
-            const fetched = await message.channel.messages.fetch({limit: 99});
+            let limit = costumLimit || 99;
+            const fetched = await message.channel.messages.fetch({limit: limit});
             //console.log("Info: !clearchat: ",fetched)
             message.channel.bulkDelete(fetched, true);
           
