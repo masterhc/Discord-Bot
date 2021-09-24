@@ -80,7 +80,6 @@ function music()
         }
         else
         {
-            console.log('WORKER:',name,'- Music: Queue Size:', queue.length)
             if(queue.length>0)
             {
                 var i = 0;
@@ -90,7 +89,7 @@ function music()
                     {
                         if(queue[i].guild==guild)
                         {
-                            console.log('WORKER:',name,'- Music: Queueing: Index:',i, 'Songname:', queue[i].songname);
+                            console.log('WORKER:',name,'- Music: ','Queue Size:', queue.length,'Queueing: Index:',i, 'Songname:', queue[i].songname);
                             try 
                             {
                                 play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
