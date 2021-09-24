@@ -42,7 +42,6 @@ function commands()
     {
         if(!err)
         {
-            //console.time('Worker|Command')
             console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
             switch (JSON.parse(fs.readFileSync(path)).command) {
                 case 'skip':
@@ -303,7 +302,6 @@ function removeFile()
         if(!err)
         {
             fs.unlinkSync(path)
-            console.timeEnd('Worker|Command')
         }
     })
 }
