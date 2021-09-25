@@ -16,7 +16,7 @@ class clearchatcommando extends commando.Command{
     }
     async run(message, args){
         //verificar admin
-       
+        console.log('ClearChat:', typeof args)
         if(isAdmin(message))
         {
             //Verificar se está na sala bemvindo
@@ -35,15 +35,16 @@ class clearchatcommando extends commando.Command{
                 //verificar se tem argumentos
                 if(hasArgs())
                 {
-                    console.log("Info: !clearchat: has correctArgs");
+                    console.log("Info: !clearchat: has Args");
                     if(correctArgs())
                     {
-                        console.log("Info: !clearchat: arround argument:",aroundarg);
-                        cleararound(aroundarg);
+                        console.log("Info: !clearchat: arround argument:",args);
+                        cleararound(args);
                     }
                     else
                     {
-                        clearnormie(aroundarg);
+                        console.log("Info: !clearchat: Ammount:",args);
+                        clearnormie(args);
                     }
                 //Quais-quer eventuais problemas são tratados na função
                 }
