@@ -43,7 +43,7 @@ class clearchatcommando extends commando.Command{
                     }
                     else
                     {
-                        clearnormie(arg);
+                        clearnormie(aroundarg);
                     }
                 //Quais-quer eventuais problemas são tratados na função
                 }
