@@ -121,7 +121,7 @@ class clearchatcommando extends commando.Command{
                     if(arglenght == 18) {
                         return true;
                     }else{
-                         sendMessage(2);
+                         return true;
                     }
                 }else {
                     sendMessage(2);
