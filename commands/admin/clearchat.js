@@ -131,7 +131,7 @@ class clearchatcommando extends commando.Command{
         //Mensagens de erro
         function sendMessage(arg){
             
-            const embed = new Discord.RichEmbed();            
+            const embed = new Discord.MessageEmbed;            
 
             embed.setColor(0x27e33d);
             embed.setThumbnail('https://i.imgur.com/g6FSNhL.png');
