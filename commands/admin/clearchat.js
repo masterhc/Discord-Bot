@@ -17,23 +17,26 @@ class clearchatcommando extends commando.Command{
     async run(message, args){
         //verificar admin
        
-        if(isAdmin(message)){
+        if(isAdmin(message))
+        {
             //Verificar se está na sala bemvindo
             
-            if(bemvindo(message)){
+            if(bemvindo(message))
+            {
             
                 
                 clearbemvindo();
 
 
-            }else{
+            }
+            else
+            {
                
                 //verificar se tem argumentos
-                if(hasArgs()){
+                if(hasArgs())
+                {
                     console.log("Info: !clearchat: has correctArgs");
-                    if(correctArgs()){
-                   var arg = message.content.split(' ')[1];
-                    if (arg.length < 18)
+                    if(correctArgs())
                     {
                         console.log("Info: !clearchat: arround argument:",aroundarg);
                         cleararound(aroundarg);
@@ -42,8 +45,10 @@ class clearchatcommando extends commando.Command{
                     {
                         clearnormie(arg);
                     }
-                }//Quais-quer eventuais problemas são tratados na função
-            }else{
+                //Quais-quer eventuais problemas são tratados na função
+                }
+                else
+                {
                     //caso normal, apenas apaga tudo.
                     clearnormie();
                 }
@@ -121,7 +126,7 @@ class clearchatcommando extends commando.Command{
                     if(arglenght == 18) {
                         return true;
                     }else{
-                         return true;
+                         return false;
                     }
                 }else {
                     sendMessage(2);
