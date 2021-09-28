@@ -12,19 +12,19 @@ const commando = require('discord.js-commando');
             })
         }
         async run(message, args){
-            var mensagem;
+            var mensagem = args;
             var messageSplit = message.content.split(' ');
        
-        args=message.content.split(/\s+/g);
-        for(var i=1;i<messageSplit.length; i++){
-            if (i===1) {
-                if(message)
-                  mensagem = args[1] ;
-            }else{
-                mensagem = mensagem + ' ' + args[i];
-            }
+        // args=message.content.split(/\s+/g);
+        // for(var i=1;i<messageSplit.length; i++){
+        //     if (i===1) {
+        //         if(message)
+        //           mensagem = args[1] ;
+        //     }else{
+        //         mensagem = mensagem + ' ' + args[i];
+        //     }
            
-        };
+        // };
     
         //say on channel
         console.log("Command: -",message.author.username,"- Say: Message:"+mensagem)
