@@ -84,7 +84,15 @@ const Discord = require('discord.js');
                             embed.setDescription('[Original]'+`(${body[random].file_url})`);
                             embed.setTimestamp();
                             embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-                            message.channel.send({embed});
+                            if(message.channel.name.toLowerCase().includes('nsfw'))
+                            {
+
+                                message.channel.send({embed});
+                            }
+                            else
+                            {
+                                message.channel.send('Utilize um canal nsfw.')
+                            }
                         } else {
                             message.channel.send('Erro 3');
                         }
