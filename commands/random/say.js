@@ -27,7 +27,7 @@ const commando = require('discord.js-commando');
         };
     
         //say on channel
-        console.log("Command: Say: Message:"+mensagem)
+        console.log("Command: -",message.author.username,"- Say: Message:"+mensagem)
         message.delete();
         message.channel.send(mensagem);
           
