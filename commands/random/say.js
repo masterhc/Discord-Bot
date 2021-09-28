@@ -13,7 +13,6 @@ const commando = require('discord.js-commando');
         }
         async run(message, args){
         //say on channel
-        console.log('Say',message.guild.name)
         console.log("Say: -",message.author.username,"- on: ",message.guild.name,":",args)
         message.delete();
         message.channel.send(args);
