@@ -357,6 +357,7 @@ function queue()
                     } 
                     if(GuildQueueSize>25)
                     {
+                        console.log('WORKER:',name,'Queue: PlayTime:', playTime);
                         embed.addField(`There are ${GuildQueueSize} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                     }
                     bot.channels.cache.get(textChannel).send(embed)
