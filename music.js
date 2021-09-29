@@ -147,7 +147,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
             })
             Dispatcher.on('speaking', speaking => 
             {
-                SongTimeElapsed = Dispatcher.streamTime;
+                SongTimeElapsed = Dispatcher.streamTime*1000;
                 isPlaying = true;
                 if (!speaking) //queue next song or leave
                 {
