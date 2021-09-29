@@ -79,7 +79,7 @@ module.exports = class  play extends commando.Command
                 }
                 else//search
                 {
-                    console.log('Searching for a term')
+                    console.log('Play: Searching for:', content.split('!play'[1]))
                     const r = await yts(content.split('!play ')[1])       
                     const videos = r.videos.slice( 0, 5)
                     const embed = new Discord.MessageEmbed;
@@ -88,11 +88,11 @@ module.exports = class  play extends commando.Command
                     embed.setColor(0xb50000);
                     embed.setImage(videos[0].thumbnail)
                     embed.setTitle('Searching for:'+content.split('!play ')[1])
-                        
+                    
                     videos.forEach( function ( v , i) {
                         //console.log('Search:', v)
                         const views = String( v.views ).padStart( 10, ' ' )
-                        embed.addField( `[ ${i} ] - ${ v.title }`,`${ v.author.name } |  (${ v.timestamp }) | ${ views } views` )
+                        embed.addField( `[ ${i} ] - ${ v.title }`,`${ v.author.name } |  (${v.timestamp }) | ${ views } views` )
                     } )
                     embed.addField('Cancel', 'Press X')
                     message.channel.send(embed)

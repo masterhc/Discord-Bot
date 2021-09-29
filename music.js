@@ -344,7 +344,7 @@ function queue()
                         {
                             if(i==0)
                             {
-                                embed.addField(`${Queue[i].songname}`,`(${SongTimeElapsed}/${Queue[i].songtime})`);
+                                embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)})`);
                             }
                             if(GuildQueueSize<24)
                             {
@@ -363,4 +363,13 @@ function queue()
         });
     }
     removeFile();
+}
+function correctedTime(time)
+{
+    if(time%60>1)
+    {
+        time = Math.trunc(time/60)+':'+ (time-Math.trunc(time/60)*60)
+    }
+    else time = '0:'+time;
+    return time;
 }
