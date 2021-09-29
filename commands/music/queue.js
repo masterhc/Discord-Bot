@@ -41,15 +41,15 @@ module.exports = class  queue extends commando.Command
                     {  
                         if(Queue[i].guild==guild)
                         {
-                            if(GuildQueueSize<25)
+                            if(GuildQueueSize<24)
                             {
                                 embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
                             }
                             GuildQueueSize++;
                         } 
-                        if(GuildQueueSize>=25)
+                        if(GuildQueueSize>25)
                         {
-                            embed.addField('There are',GuildQueueSize,' more in the queue.')
+                            embed.addField(`There are ${GuildQueueSize} more in the queue.`)
                         }
                     } 
                     message.channel.send(embed)

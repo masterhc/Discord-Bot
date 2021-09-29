@@ -3,3 +3,4 @@ node_modules/
 guilds.json
 Discord_Bot_WS.code-workspace
 guilds.json
+commands/music/queue.js
