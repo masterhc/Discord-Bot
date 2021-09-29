@@ -47,9 +47,6 @@ function commands()
                 case 'skip':
                     skip()
                     break;
-                case 'pause':
-                    pause();
-                    break;
                 case 'resume':
                     resume();
                     break;
@@ -142,6 +139,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
             })
             Dispatcher.on('speaking', speaking => 
             {
+                
                 if (!speaking) //queue next song or leave
                 {
                     console.log('Worker:', name, '- Song ended :', songname);
@@ -158,7 +156,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 }
                 else
                 {
-                    bot.channels.cache.get(text).send(`Failed to download audio for the 10th time,\nremoving ${songname} from Queue.`);
+                    bot.channels.cache.get(text).send(`Failed to download audio for the 10th time, removing ${songname} from Queue.`);
                     removeFromQueue(id);
                     attempts = 0;
                 }

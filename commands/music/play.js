@@ -35,13 +35,33 @@ module.exports = class  play extends commando.Command
             {
                 if(content.includes('https')||content.includes('www'))//LINK
                 {
+                    console.log('Play: -', Author.username,'Queued on',message.channel.guild.name,"'s", message.channel.name, ' this link:', content.split('!play')[1])
                     if(content.includes('youtube') || content.includes('youtu.be'))//YT LINK
                     {
                         console.time('SearchL')
-                        const r = await yts( content.split('!play ')[1] )
-                        console.timeEnd('SearchL')
-                        addToQ(r.videos[0]);
-                        message.delete()
+                        if(!isPlayList(content))
+                        {
+                            const r = await yts( content.split('!play ')[1] )
+                            console.timeEnd('SearchL')
+                            addToQ(r.videos[0]);
+                            message.delete()
+                        }
+                        else
+                        {
+                            console.log('Play: content:', content.split('&list=')[1])
+                            var listID
+                            if(content.split('&list=')[1].includes('&'))
+                            {
+                                listID = content.split('&list=')[1].split('&')[0]
+                            }
+                            else listID = content.split('&list=')
+                            const list = await yts( {listId:listID})
+                            list.videos.forEach(video=>
+                                {
+                                    //console.log('Teste: PlayList: ForEach(video): video:', video)
+                                    addToQ(video)
+                                })
+                        }
                     }
                     else //GET OUTTA HERE
                     {
@@ -50,6 +70,7 @@ module.exports = class  play extends commando.Command
                 }
                 else//search
                 {
+                    console.log('Searching for a term')
                     const r = await yts(content.split('!play ')[1])       
                     const videos = r.videos.slice( 0, 5)
                     const embed = new Discord.MessageEmbed;
@@ -107,12 +128,21 @@ module.exports = class  play extends commando.Command
                 
 
             }
+            function isPlayList(content)
+            {
+                if(content.includes('&list='))
+                {
+                    return true;
+                }
+                else return false;
+            }
             function addToQ(video)
             {
+                console.log('Play: addToQ: video:', video);
                 var queueItem = new QueueM();
                 queueItem.songname = video.title;
-                queueItem.songtime = video.seconds;
-                queueItem.songURL = video.url
+                queueItem.songtime = video.seconds||video.duration.seconds;
+                queueItem.songURL = video.url||'https://youtube.com/watch?'+video.videoId
                 queueItem.guild = guild;
                 queueItem.textchannel = channel;
                 queueItem.voice = voice.channel.id;
