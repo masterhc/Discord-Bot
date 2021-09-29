@@ -49,7 +49,7 @@ module.exports = class  queue extends commando.Command
                         } 
                         if(GuildQueueSize>25)
                         {
-                            embed.addField(`There are ${GuildQueueSize} more in the queue.`)
+                            embed.addField(`There are ${GuildQueueSize} more in the queue.`, '')
                         }
                     } 
                     message.channel.send(embed)
