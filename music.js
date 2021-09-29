@@ -147,7 +147,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
             })
             Dispatcher.on('speaking', speaking => 
             {
-                SongTimeElapsed = Dispatcher.streamTime/1000;
+                SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
                 isPlaying = true;
                 if (!speaking) //queue next song or leave
                 {
@@ -336,6 +336,7 @@ function queue()
             else
             {
                 var GuildQueueSize =0;
+                var playTime = 0;
                 if(Queue.length>0)
                 {
                     for(var i=0;i<Queue.length; i++)
@@ -346,15 +347,16 @@ function queue()
                             {
                                 embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)})`);
                             }
-                            if(GuildQueueSize<24)
+                            else if(GuildQueueSize<24)
                             {
-                                embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
+                                embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
                             }
+                            if(GuildQueueSize>24) playTime += Queue[i].songtime
                             GuildQueueSize++;
                         } 
                         if(GuildQueueSize>25)
                         {
-                            embed.addField(`There are ${GuildQueueSize} more in the queue.`, '')
+                            embed.addField(`There are ${GuildQueueSize} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                         }
                     } 
                     bot.channels.cache.get(textChannel).send(embed)
@@ -365,11 +367,22 @@ function queue()
     removeFile();
 }
 function correctedTime(time)
-{
-    if(time%60>1)
+{   
+    if(time < 3600)
     {
-        time = Math.trunc(time/60)+':'+ (time-Math.trunc(time/60)*60)
+
+        if(time%60>1)
+        {
+            time = Math.trunc(time/60)+':'+ (time-Math.trunc(time/60)*60)
+        }
+        else time = '0:'+time;
     }
-    else time = '0:'+time;
+    else 
+    {
+        let hour = Math.trunc(time/(3600))
+        let min = (Math.trunc((time-(3600)*hour)/60))
+        let sec = Math.trunc(time-(3600*hour+min*60))
+        time = hour+':'+min+':'+sec;
+    }
     return time;
 }
