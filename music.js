@@ -1,7 +1,6 @@
 console.time('Worker Start')
 const commando = require('discord.js-commando');
 const Discord = require('discord.js')
-const QueueM = require('/models/queue');
 
 
 const bot = new commando.Client();
