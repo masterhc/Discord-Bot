@@ -47,7 +47,7 @@ module.exports = class  queue extends commando.Command
                             }
                             GuildQueueSize++;
                         } 
-                        if(j>=25)
+                        if(GuildQueueSize>=25)
                         {
                             embed.addField('There are',GuildQueueSize,' more in the queue.')
                         }
