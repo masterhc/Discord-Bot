@@ -350,7 +350,7 @@ function queue()
                         embed.addField(`There are ${GuildQueueSize} more in the queue.`, '')
                     }
                 } 
-                message.channel.send(embed)
+                bot.channels.cache.get(text).send(embed)
             }
         }
     });
