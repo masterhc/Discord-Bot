@@ -35,7 +35,7 @@ module.exports = class  play extends commando.Command
             {
                 if(content.includes('https')||content.includes('www'))//LINK
                 {
-                    console.log('Play: -', Author.username,'Queued on',message.channel.guild.name,"'s", message.channel.name, ' this link:', content.split('!play')[1])
+                    console.log('Play: -', Author.username,'Queued this link:',content.split('!play')[1],'on',message.channel.guild.name,"'s", message.channel.name)
                     if(content.includes('youtube') || content.includes('youtu.be'))//YT LINK
                     {
                         console.time('SearchL')
@@ -48,19 +48,28 @@ module.exports = class  play extends commando.Command
                         }
                         else
                         {
-                            console.log('Play: content:', content.split('&list=')[1])
-                            var listID
-                            if(content.split('&list=')[1].includes('&'))
+                            try 
                             {
-                                listID = content.split('&list=')[1].split('&')[0]
-                            }
-                            else listID = content.split('&list=')
-                            const list = await yts( {listId:listID})
-                            list.videos.forEach(video=>
+                                
+                                var listID
+                                if(content.split('&list=')[1].includes('&'))
                                 {
-                                    //console.log('Teste: PlayList: ForEach(video): video:', video)
-                                    addToQ(video)
-                                })
+                                    listID = content.split('&list=')[1].split('&')[0]
+                                }
+                                else listID = content.split('&list=')[1]
+                                console.log('Play: List: ListID:',listID)
+                                const list = await yts({listId:listID})
+                                list.videos.forEach(video=>
+                                    {
+                                        //console.log('Teste: PlayList: ForEach(video): video:', video)
+                                        addToQ(video)
+                                    })
+                                message.delete();
+                            } 
+                            catch (error) 
+                            {
+                                console.log('Play: List: Error:', error)
+                            }
                         }
                     }
                     else //GET OUTTA HERE
@@ -138,11 +147,11 @@ module.exports = class  play extends commando.Command
             }
             function addToQ(video)
             {
-                console.log('Play: addToQ: video:', video);
+                
                 var queueItem = new QueueM();
                 queueItem.songname = video.title;
                 queueItem.songtime = video.seconds||video.duration.seconds;
-                queueItem.songURL = video.url||'https://youtube.com/watch?'+video.videoId
+                queueItem.songURL = video.url||'https://youtube.com/watch?v='+video.videoId
                 queueItem.guild = guild;
                 queueItem.textchannel = channel;
                 queueItem.voice = voice.channel.id;
@@ -154,7 +163,7 @@ module.exports = class  play extends commando.Command
             }
                         
         } catch (error) {
-            console.log('Play Command:', error);
+            console.log('Play: Error:', error);
         }
     }
 }
