@@ -34,13 +34,22 @@ module.exports = class  queue extends commando.Command
             }
             else
             {
+                var GuildQueueSize =0;
                 if(Queue.length>0)
                 {
                     for(var i=0;i<Queue.length; i++)
                     {  
                         if(Queue[i].guild==guild)
                         {
-                            embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
+                            if(GuildQueueSize<25)
+                            {
+                                embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
+                            }
+                            GuildQueueSize++;
+                        } 
+                        if(j>=25)
+                        {
+                            embed.addField('There are',GuildQueueSize,' more in the queue.')
                         }
                     } 
                     message.channel.send(embed)
