@@ -351,13 +351,13 @@ function queue()
                             {
                                 embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
                             }
-                            if(GuildQueueSize>24) playTime += Queue[i].songtime
+                            if(GuildQueueSize>24) playTime = playtime + Queue[i].songtime
                             GuildQueueSize++;
                         } 
                     } 
                     if(GuildQueueSize>25)
                     {
-                        console.log('WORKER:',name,'Queue: PlayTime:', playTime);
+                        console.log('WORKER:',name,'Queue: PlayTime:', typeof playTime, typeof Queue[i].songtime);
                         embed.addField(`There are ${GuildQueueSize} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                     }
                     bot.channels.cache.get(textChannel).send(embed)
