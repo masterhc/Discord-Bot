@@ -354,11 +354,11 @@ function queue()
                             if(GuildQueueSize>24) playTime += Queue[i].songtime
                             GuildQueueSize++;
                         } 
-                        if(GuildQueueSize>25)
-                        {
-                            embed.addField(`There are ${GuildQueueSize} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
-                        }
                     } 
+                    if(GuildQueueSize>25)
+                    {
+                        embed.addField(`There are ${GuildQueueSize} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
+                    }
                     bot.channels.cache.get(textChannel).send(embed)
                 }
             }
