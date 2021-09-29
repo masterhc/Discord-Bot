@@ -23,6 +23,8 @@ var currentID = '';
 var Dispatcher; 
 var attempts =0;
 var SongTimeElapsed =0;
+var isPlaying = false;
+var textChannel;
 bot.login(process.env.discord_token).then(()=>
 {
     
@@ -126,6 +128,7 @@ function music()
  */
 function play (voiceID, songURL, id, songname, songtime, text)
 {
+    textChannel = text;
     try
     {
 
@@ -145,9 +148,11 @@ function play (voiceID, songURL, id, songname, songtime, text)
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Dispatcher.streamTime;
+                isPlaying = true;
                 if (!speaking) //queue next song or leave
                 {
                     SongTimeElapsed =0;
+                    isPlaying = false;
                     console.log('Worker:', name, '- Song ended :', songname);
                     removeFromQueue(id, true);
                 }
@@ -311,48 +316,51 @@ function removeFile()
 
 function queue()
 {
-    const embed = new Discord.MessageEmbed;
-    embed.setTitle('Queue:')
-    embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
-    embed.setColor(0xd31f1f)
-    embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
-    embed.setTimestamp()
-    
-    
-    QueueM.get((err, Queue)=>
-    {   
-        if(err || Queue.length == 0) 
-        {
-            embed.addField(`Queue is`,'empty');
-            message.channel.send(embed)
-        }
-        else
-        {
-            var GuildQueueSize =0;
-            if(Queue.length>0)
+    if(isPlaying)
+    {
+        const embed = new Discord.MessageEmbed;
+        embed.setTitle('Queue:')
+        embed.setAuthor("Rem-chan", "https://i.imgur.com/g6FSNhL.png")
+        embed.setColor(0xd31f1f)
+        embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
+        embed.setTimestamp()
+        
+        
+        QueueM.get((err, Queue)=>
+        {   
+            if(err || Queue.length == 0) 
             {
-                for(var i=0;i<Queue.length; i++)
-                {  
-                    if(Queue[i].guild==guild)
-                    {
-                        if(i==0)
-                        {
-                            embed.addField(`${Queue[i].songname}`,`(${SongTimeElapsed}/${Queue[i].songtime})`);
-                        }
-                        if(GuildQueueSize<24)
-                        {
-                            embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
-                        }
-                        GuildQueueSize++;
-                    } 
-                    if(GuildQueueSize>25)
-                    {
-                        embed.addField(`There are ${GuildQueueSize} more in the queue.`, '')
-                    }
-                } 
-                bot.channels.cache.get(text).send(embed)
+                embed.addField(`Queue is`,'empty');
+                message.channel.send(embed)
             }
-        }
-    });
+            else
+            {
+                var GuildQueueSize =0;
+                if(Queue.length>0)
+                {
+                    for(var i=0;i<Queue.length; i++)
+                    {  
+                        if(Queue[i].guild==guild)
+                        {
+                            if(i==0)
+                            {
+                                embed.addField(`${Queue[i].songname}`,`(${SongTimeElapsed}/${Queue[i].songtime})`);
+                            }
+                            if(GuildQueueSize<24)
+                            {
+                                embed.addField(`${Queue[i].songname}`,`(${Queue[i].songtime})`);
+                            }
+                            GuildQueueSize++;
+                        } 
+                        if(GuildQueueSize>25)
+                        {
+                            embed.addField(`There are ${GuildQueueSize} more in the queue.`, '')
+                        }
+                    } 
+                    bot.channels.cache.get(textChannel).send(embed)
+                }
+            }
+        });
+    }
     removeFile();
 }
