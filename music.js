@@ -351,7 +351,7 @@ function queue()
                             {
                                 embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
                             }
-                            if(GuildQueueSize>24) playTime = playtime + Queue[i].songtime
+                            if(GuildQueueSize>24) playTime += parseInt(Queue[i].songtime,10)
                             GuildQueueSize++;
                         } 
                     } 
