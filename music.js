@@ -24,6 +24,7 @@ var Dispatcher;
 var attempts =0;
 var SongTimeElapsed =0;
 var isPlaying = false;
+var pause = false;
 bot.login(process.env.discord_token).then(()=>
 {
     
@@ -52,10 +53,12 @@ function commands()
                     break;
                 case 'pause':
                     removeFile();
-                    return true;
+                    pause = true;
+                    break;
                 case 'resume':
                     removeFile();
-                    return false;
+                    pause = false;
+                    break;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
                     break;
@@ -140,10 +143,10 @@ function play (voiceID, songURL, id, songname, songtime, text)
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
-                if(commands()) Dispatcher.pause();
+                if(pause) Dispatcher.pause();
                 if (!speaking) //queue next song or leave
                 {
-                    if(!commands()) Dispatcher.resume();
+                    if(!pause) Dispatcher.resume();
                     SongTimeElapsed =0;
                     isPlaying = false;
                     console.log('Worker:', name, '- Song ended :', songname);
