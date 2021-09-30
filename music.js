@@ -24,7 +24,6 @@ var Dispatcher;
 var attempts =0;
 var SongTimeElapsed =0;
 var isPlaying = false;
-var textChannel;
 bot.login(process.env.discord_token).then(()=>
 {
     
@@ -51,9 +50,12 @@ function commands()
                 case 'skip':
                     skip()
                     break;
+                case 'pause':
+                    removeFile();
+                    return true;
                 case 'resume':
-                    resume();
-                    break;
+                    removeFile();
+                    return false;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
                     break;
@@ -118,7 +120,6 @@ function music() //Grab from Queue
  */
 function play (voiceID, songURL, id, songname, songtime, text)
 {
-    textChannel = text;
     try
     {
 
@@ -133,14 +134,16 @@ function play (voiceID, songURL, id, songname, songtime, text)
             Dispatcher.on('start', ()=>
             {
                 console.log('Worker:', name ,'- Playing: ', songname, '(',songtime,'s)')
+                isPlaying = true;
                 attempts = 0;
             })
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
-                isPlaying = true;
+                if(commands()) Dispatcher.pause();
                 if (!speaking) //queue next song or leave
                 {
+                    if(!commands()) Dispatcher.resume();
                     SongTimeElapsed =0;
                     isPlaying = false;
                     console.log('Worker:', name, '- Song ended :', songname);
