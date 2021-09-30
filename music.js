@@ -54,10 +54,12 @@ function commands()
                 case 'pause':
                     removeFile();
                     pause = true;
+                    DisPause();
                     break;
                 case 'resume':
                     removeFile();
                     pause = false;
+                    DisResume();
                     break;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
@@ -140,21 +142,20 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 isPlaying = true;
                 attempts = 0;
             })
-            setInterval(() => 
-            {   
-                if(pause) Dispatcher.pause();
-
-            }, 200);
+            function DisPause()
+            {
+                Dispatcher.pause();
+            }
+            function DisResume()
+            {
+                Dispatcher.resume();
+            }
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
                 if (!speaking) //queue next song or leave
                 {
-                    if(!pause) 
-                    {
-                        Dispatcher.resume();
-                        if(SongTimeElapsed<songtime) removeFromQueue(id, true);
-                    }
+                    if(!pause && SongTimeElapsed<songtime) removeFromQueue(id, true);
                     SongTimeElapsed =0;
                     isPlaying = false;
                     console.log('Worker:', name, '- Song ended :', songname);
