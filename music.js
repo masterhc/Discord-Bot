@@ -255,7 +255,8 @@ function deleteQ()
 {
     return new Promise ((resolve, reject)=>
     {  
-        QueueM.get((err, queue)=>
+        QueueM.find({guild:guild})
+        .then(queue=>
         {   
             if(err || queue.length == 0) 
             {
@@ -264,26 +265,20 @@ function deleteQ()
             }
             else
             {
-                if(queue.length>0)
+                var i = 0;
+                do
                 {
-                    var i = 0;
-                    do
+                    if(i<queue.length)
                     {
-                        if(i<queue.length)
-                        {
-                            if(queue[i].guild==guild)
-                            {
-                                remove(queue[i].id)
-                                console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
-                            }
-                        }
-                        i++;
-                        if(i==queue.length)
-                        {
-                            resolve(true);
-                        }
-                    }while((i<queue.length)==true);
-                }
+                        remove(queue[i].id)
+                        console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
+                    }
+                    i++;
+                    if(i==queue.length)
+                    {
+                        resolve(true);
+                    }
+                }while((i<queue.length)==true);
             }
         });
     }) 
@@ -316,7 +311,7 @@ function removeFile()
 
 function queue(channel)
 {
-    console.log('Worker:',name,'- Music: Queue: channel:', channel)
+    //console.log('Worker:',name,'- Music: Queue: channel:', channel)
     if(isPlaying)
     {
         const embed = new Discord.MessageEmbed;
@@ -325,43 +320,32 @@ function queue(channel)
         embed.setColor(0xd31f1f)
         embed.setFooter('Rem-chan em ', "https://i.imgur.com/g6FSNhL.png")
         embed.setTimestamp()
-        
-        
-        QueueM.get((err, Queue)=>
+        QueueM.find({guild:guild})
+        .then(Queue=>
         {   
-            if(err || Queue.length == 0) 
+           
+            var GuildQueueSize =0;
+            var playTime = 0;
+            if(Queue.length>0)
             {
-                embed.addField(`Queue is`,'empty');
-                message.channel.send(embed)
-            }
-            else
-            {
-                var GuildQueueSize =0;
-                var playTime = 0;
-                if(Queue.length>0)
-                {
-                    for(var i=0;i<Queue.length; i++)
-                    {  
-                        if(Queue[i].guild==guild)
-                        {
-                            if(i==0)
-                            {
-                                embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)})`);
-                            }
-                            else if(GuildQueueSize<24)
-                            {
-                                embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
-                            }
-                            if(GuildQueueSize>24) playTime += parseInt(Queue[i].songtime,10)
-                            GuildQueueSize++;
-                        } 
-                    } 
-                    if(GuildQueueSize>25)
+                for(var i=0;i<Queue.length; i++)
+                {  
+                    if(i==0)
                     {
-                        embed.addField(`There are ${GuildQueueSize-25} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
+                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)})`);
                     }
-                    bot.channels.cache.get(channel).send(embed)
+                    else if(GuildQueueSize<24)
+                    {
+                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
+                    }
+                    if(GuildQueueSize>24) playTime += parseInt(Queue[i].songtime,10)
+                    GuildQueueSize++;
+                } 
+                if(GuildQueueSize>25)
+                {
+                    embed.addField(`There are ${GuildQueueSize-25} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                 }
+                bot.channels.cache.get(channel).send(embed)
             }
         });
     }

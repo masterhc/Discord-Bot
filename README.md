@@ -37,6 +37,10 @@
 <p>O bot sai do canal, limpando a queue no porcesso.</p>
 <h2>!queue</h2>
 <p>Mostra todas as musicas na lista de reprodução.</p>
+<h2>!pause</h2>
+<p>O bot pausa a repordução..</p>
+<h2>!resume</h2>
+<p>O bot retoma a reprodução.</p>
 <h2>!skip</h2>
 <p>Salta a música em reprodução.</p>
 
