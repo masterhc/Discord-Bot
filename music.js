@@ -315,6 +315,7 @@ function removeFile()
 
 function queue(channel)
 {
+    console.log('Worker:',name,'- Music: Queue: channel:', channel)
     if(isPlaying)
     {
         const embed = new Discord.MessageEmbed;
