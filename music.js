@@ -258,28 +258,20 @@ function deleteQ()
         QueueM.find({guild:guild})
         .then(queue=>
         {   
-            // if(queue.length == 0) 
-            // {
-            //     console.log('Worker:',name,'- Music: DeleteQ: Empty Queue')
-            //     resolve(true);
-            // }
-            else
+            var i = 0;
+            do
             {
-                var i = 0;
-                do
+                if(i<queue.length)
                 {
-                    if(i<queue.length)
-                    {
-                        remove(queue[i].id)
-                        console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
-                    }
-                    i++;
-                    if(i==queue.length)
-                    {
-                        resolve(true);
-                    }
-                }while((i<queue.length)==true);
-            }
+                    remove(queue[i].id)
+                    console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
+                }
+                i++;
+                if(i==queue.length)
+                {
+                    resolve(true);
+                }
+            }while((i<queue.length)==true);
         });
     }) 
 }
