@@ -143,18 +143,21 @@ function play (voiceID, songURL, id, songname, songtime, text)
             setInterval(() => 
             {   
                 if(pause) Dispatcher.pause();
-                
+
             }, 200);
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
                 if (!speaking) //queue next song or leave
                 {
-                    if(!pause) Dispatcher.resume();
+                    if(!pause) 
+                    {
+                        Dispatcher.resume();
+                        if(SongTimeElapsed<songtime) removeFromQueue(id, true);
+                    }
                     SongTimeElapsed =0;
                     isPlaying = false;
                     console.log('Worker:', name, '- Song ended :', songname);
-                    removeFromQueue(id, true);
                 }
             });
             Dispatcher.on('error', error=>
