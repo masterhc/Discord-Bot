@@ -258,11 +258,11 @@ function deleteQ()
         QueueM.find({guild:guild})
         .then(queue=>
         {   
-            if(err || queue.length == 0) 
-            {
-                console.log('Worker:',name,'- Music: DeleteQ: Empty Queue')
-                resolve(true);
-            }
+            // if(queue.length == 0) 
+            // {
+            //     console.log('Worker:',name,'- Music: DeleteQ: Empty Queue')
+            //     resolve(true);
+            // }
             else
             {
                 var i = 0;
