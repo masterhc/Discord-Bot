@@ -57,6 +57,7 @@ function commands(Dispatcher)
                 case 'resume':
                     removeFile();
                     pause = false;
+                    isPlaying = true;
                     Dispatcher.resume();
                     break;
                 case 'queue':
