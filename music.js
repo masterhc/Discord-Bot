@@ -57,7 +57,7 @@ function commands(Dispatcher)
                 case 'resume':
                     removeFile();
                     pause = false;
-                    Disispatcher.resume();
+                    Dispatcher.resume();
                     break;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
