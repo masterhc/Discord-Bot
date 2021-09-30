@@ -34,13 +34,11 @@ bot.login(process.env.discord_token).then(()=>
     mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
     leave();
     music();
-    setInterval(() => {
-        commands();
-    }, 200);
+
    
 });
 
-function commands()
+function commands(Dispatcher)
 {
     fs.access(path,fs.constants.F_OK,(err)=>
     {
@@ -54,12 +52,12 @@ function commands()
                 case 'pause':
                     removeFile();
                     pause = true;
-                    DisPause();
+                    Dispatcher.pause();
                     break;
                 case 'resume':
                     removeFile();
                     pause = false;
-                    DisResume();
+                    Disispatcher.resume();
                     break;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
@@ -125,6 +123,7 @@ function music() //Grab from Queue
  */
 function play (voiceID, songURL, id, songname, songtime, text)
 {
+ 
     try
     {
 
@@ -142,14 +141,10 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 isPlaying = true;
                 attempts = 0;
             })
-            function DisPause()
-            {
-                Dispatcher.pause();
-            }
-            function DisResume()
-            {
-                Dispatcher.resume();
-            }
+            setInterval(() => {
+                commands(Dispatcher);
+            }, 200);
+
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
