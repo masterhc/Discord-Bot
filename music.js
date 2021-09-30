@@ -140,10 +140,14 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 isPlaying = true;
                 attempts = 0;
             })
+            setInterval(() => 
+            {   
+                if(pause) Dispatcher.pause();
+                
+            }, 200);
             Dispatcher.on('speaking', speaking => 
             {
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
-                if(pause) Dispatcher.pause();
                 if (!speaking) //queue next song or leave
                 {
                     if(!pause) Dispatcher.resume();
