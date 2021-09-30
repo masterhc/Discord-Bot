@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "ascii-table": "0.0.9",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bufferutil": "4.0.1",
     "cheerio": "^1.0.0-rc.10",
     "crackwatch": "^1.1.0",
