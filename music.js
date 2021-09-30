@@ -55,7 +55,7 @@ function commands()
                     resume();
                     break;
                 case 'queue':
-                    queue();
+                    queue(JSON.parse(fs.readFileSync(path)).channel);
                     break;
                 case 'leave':
                     leave()
@@ -69,21 +69,14 @@ function commands()
       
     
 }
-function music()
+function music() //Grab from Queue
 {
     //console.log('WORKER:',name,'- Music: Still alive');
-    QueueM.get((err, queue)=>
-    {   
-        if(err || queue.length == 0) 
+
+    QueueM.find({guild:guild})
+    .then(queue=>
         {
-            //console.log('Music: Queue Error:', err || 'Empty Queue', queue.length)
-            setTimeout(() => 
-            {
-                music()
-            }, 2000);
-        }
-        else
-        {
+            
             if(queue.length>0)
             {
                 var i = 0;
@@ -91,18 +84,16 @@ function music()
                 {
                     if(i<queue.length)
                     {
-                        if(queue[i].guild==guild)
+                      
+                        console.log('WORKER:',name,'- Music: ','Queue Size:', queue.length,'Queueing: Index:',i, 'Songname:', queue[i].songname);
+                        try 
                         {
-                            console.log('WORKER:',name,'- Music: ','Queue Size:', queue.length,'Queueing: Index:',i, 'Songname:', queue[i].songname);
-                            try 
-                            {
-                                play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
-                            } catch (error) 
-                            {
-                                console.log('WORKER:',name,'- Music: Error: Could`nt connect to the voice channel.');
-                            }
-                            i=queue.length;
+                            play(queue[i].voice, queue[i].songURL, queue[i].id, queue[i].songname, queue[i].songtime, queue[i].textchannel);
+                        } catch (error) 
+                        {
+                            console.log('WORKER:',name,'- Music: Error: Couldn`t connect to the voice channel.');
                         }
+                        i=queue.length;
                     }
                     i++;
                     //console.log('Worker:', name, '- I, before condition check:',i, 'length:', queue.length,'condition:', i<queue.length);
@@ -115,8 +106,7 @@ function music()
                     music();    
                 }, 1500);
             }
-        }
-    });
+        })
 }
 /**
  * 
@@ -314,7 +304,7 @@ function removeFile()
     })
 }
 
-function queue()
+function queue(channel)
 {
     if(isPlaying)
     {
@@ -359,7 +349,7 @@ function queue()
                     {
                         embed.addField(`There are ${GuildQueueSize-25} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                     }
-                    bot.channels.cache.get(textChannel).send(embed)
+                    bot.channels.cache.get(channel).send(embed)
                 }
             }
         });

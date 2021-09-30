@@ -83,7 +83,7 @@ module.exports = class  leave extends commando.Command
         if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863'))))
         {
             const path = Path.join(__dirname, `../../${message.guild.id}.json`)
-            fs.writeFileSync(path, '{"command":"queue"}');
+            fs.writeFileSync(path, `{"command":"queue","channel":"${message.channel.id}"}`);
             message.delete();
         }
         else

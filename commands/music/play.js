@@ -79,7 +79,7 @@ module.exports = class  play extends commando.Command
                 }
                 else//search
                 {
-                    console.log('Play: Searching for:', content.split('!play'[1]))
+                    console.log('Play: Searching for:', content.split('!play')[1])
                     const r = await yts(content.split('!play ')[1])       
                     const videos = r.videos.slice( 0, 5)
                     const embed = new Discord.MessageEmbed;
