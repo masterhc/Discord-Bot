@@ -301,7 +301,13 @@ function removeFile()
     {
         if(!err)
         {
-            fs.unlinkSync(path)
+            try 
+            {
+                fs.unlinkSync(path)
+            } catch (err) 
+            {
+                console.log('Worker:', name, '-Music: Remove File: Unable to unlink',err)    
+            }
         }
         else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err)
     })
