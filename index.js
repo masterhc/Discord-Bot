@@ -28,6 +28,8 @@ bot.registry.registerCommandsIn(__dirname + "/commands");
 
 var Guilds_ = []
 
+
+
 //Start Up Log
 bot.on('ready', ()=>{
     //Fancy looking console starting message
@@ -54,6 +56,7 @@ bot.on('ready', ()=>{
     {
         giveRole(); // Member role on wellcome channel
         music();
+        //ForceName
     }, 
     1500);
 

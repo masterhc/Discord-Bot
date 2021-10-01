@@ -154,7 +154,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 SongTimeElapsed = Math.trunc(Dispatcher.streamTime/1000);
                 if (!speaking) //queue next song or leave
                 {
-                    if(!pause && SongTimeElapsed<songtime) removeFromQueue(id, true);
+                    if(!pause) removeFromQueue(id, true);
                     SongTimeElapsed =0;
                     isPlaying = false;
                     console.log('Worker:', name, '-Music: Song ended :', songname);
