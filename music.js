@@ -28,7 +28,7 @@ var pause = false;
 bot.login(process.env.discord_token).then(()=>
 {
     
-    console.log('WORKER:',name,'- Music: Guild: (', guild,')', name);
+    console.log('WORKER:',name,'- Music: Guild: (', guild,')');
     console.timeEnd('Worker Start')
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
@@ -141,7 +141,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
             Dispatcher = connection.play(ytdl(songURL, { filter: 'audioonly', dlChunkSize: 0 }), {volume:0.5});
             Dispatcher.on('start', ()=>
             {
-                console.log('Worker:', name ,'- Playing: ', songname, '(',songtime,'s)')
+                console.log('Worker:', name ,'- Music: Playing: ', songname, '(',songtime,'s)')
                 isPlaying = true;
                 attempts = 0;
             })
@@ -157,13 +157,13 @@ function play (voiceID, songURL, id, songname, songtime, text)
                     if(!pause && SongTimeElapsed<songtime) removeFromQueue(id, true);
                     SongTimeElapsed =0;
                     isPlaying = false;
-                    console.log('Worker:', name, '- Song ended :', songname);
+                    console.log('Worker:', name, '-Music: Song ended :', songname);
                 }
             });
             Dispatcher.on('error', error=>
             {
                 //removeFromQueue(id, true);
-                console.log('Worker:', name, '- Error on attempt no:', attempts,'\t Miniget Error.')//Error:', error)
+                console.log('Worker:', name, '-Music: Error on attempt no:', attempts,'\t Miniget Error.')//Error:', error)
                 if(attempts<10)
                 {
                     play(voiceID, songURL, id, songname, songtime, text);
@@ -179,7 +179,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
     }
     catch (error)
     {
-        console.log('Worker:', name ,'- Play: Error: ', error)
+        console.log('Worker:', name ,'- Music: Play: Error: ', error)
         music();
         
     }
@@ -241,15 +241,15 @@ function leave()
     {
         if(bot.guilds.cache.get(guild).voice.connection)
         {
-            console.log('Worker:',name,'- Leaving')
+            console.log('Worker:',name,'- Music: Leaving')
             bot.guilds.cache.get(guild).voice.connection.disconnect()
             deleteQ().then(()=>
             {
-                console.log('Worker:',name,'- Deleted Q and restarting.')
+                console.log('Worker:',name,'- Music: Deleted Q and restarting.')
                 music();
             }).catch(()=>
             {
-                console.log('Worker:', name,'- No Q to delete. Restarting.')
+                console.log('Worker:', name,'- Music: No Q to delete. Restarting.')
                 music()
             });
         }
