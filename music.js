@@ -303,6 +303,7 @@ function removeFile()
         {
             fs.unlinkSync(path)
         }
+        else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err)
     })
 }
 
