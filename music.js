@@ -278,7 +278,7 @@ function deleteQ()
                     resolve(true);
                 }
             }while((i<queue.length)==true);
-        });
+        }).catch(reject());
     }) 
 }
 function remove(id)
