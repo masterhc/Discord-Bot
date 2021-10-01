@@ -48,6 +48,7 @@ function commands(Dispatcher)
             switch (JSON.parse(fs.readFileSync(path)).command) {
                 case 'skip':
                     skip()
+                    removeFile();
                     break;
                 case 'pause':
                     removeFile();
@@ -62,9 +63,11 @@ function commands(Dispatcher)
                     break;
                 case 'queue':
                     queue(JSON.parse(fs.readFileSync(path)).channel);
+                    removeFile();
                     break;
                 case 'leave':
                     leave()
+                    removeFile();
                     break;
                 default:
                     break;
@@ -243,7 +246,6 @@ function leave()
             deleteQ().then(()=>
             {
                 console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
-                removeFile();
                 music();
             })
         }
@@ -286,7 +288,6 @@ function remove(id)
 function skip()
 {
     attempts = 0;
-    removeFile();   
     removeFromQueue(currentID, true); //it also asks to play the next
 }
 
@@ -341,7 +342,7 @@ function queue(channel)
             }
         });
     }
-    removeFile();
+    
 }
 function correctedTime(time)
 {   
