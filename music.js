@@ -241,13 +241,17 @@ function leave()
     {
         if(bot.guilds.cache.get(guild).voice.connection)
         {
-            console.log('Worker:',name,'- Music: Leaving')
+            console.log('Worker:',name,'- Leaving')
             bot.guilds.cache.get(guild).voice.connection.disconnect()
             deleteQ().then(()=>
             {
-                console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
+                console.log('Worker:',name,'- Deleted Q and restarting.')
                 music();
-            }).catch(music());
+            }).catch(()=>
+            {
+                console.log('Worker:', name,'- No Q to delete. Restarting.')
+                music()
+            });
         }
     }
 }
