@@ -247,7 +247,7 @@ function leave()
             {
                 console.log('Worker:',name,'- Music: Deleted Q, Removing file and restarting.')
                 music();
-            })
+            }).catch(music());
         }
     }
 }

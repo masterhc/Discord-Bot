@@ -417,7 +417,7 @@ function rustCommits()
                             //console.log(latestCommit.Time)
                             if(lastSentDate==null)
                             {
-                                console.log("RustCommits: LastSentDate was null returning back to the begining.")
+                                console.log("RustCommits: LastSentDate was null returning to the begining.")
                                 return
                             }
                             if(latestCommit.Time != lastSentDate)
