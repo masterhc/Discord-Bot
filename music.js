@@ -17,7 +17,8 @@ const remid = '356104008366030863';
 
 
 const Path = require('path')  
-const fs = require('fs')  
+const fs = require('fs');  
+const { resolve } = require('path');
 
 const path = Path.join(__dirname, `${guild}.json`)
 var currentID = '';
@@ -33,8 +34,13 @@ bot.login(process.env.discord_token).then(()=>
     console.timeEnd('Worker Start')
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
-    leave();
-    music();
+    leave().then(()=>
+    {
+        music();
+    }).catch(()=>
+    {
+        //console.log('WORKER:',name,'- Music: Error on starting.');
+    })
 
    
 });
@@ -67,8 +73,14 @@ function commands(Dispatcher)
                     removeFile();
                     break;
                 case 'leave':
-                    leave()
-                    removeFile();
+                    leave().then(()=>
+                    {
+                        music();
+                        removeFile();
+                    }).catch(()=>
+                    {
+                        console.log('WORKER:',name,'- Music: Error Leaving');
+                    })
                     break;
                 default:
                     break;
@@ -218,7 +230,11 @@ function removeFromQueue(id, playNext)
                             music()
                         }
                     }
-                    else leave();
+                    else leave().then(()=>
+                    {
+                        music();
+                        console.log('WORKER:',name,'- Music: Left.')
+                    }).catch(console.log('WORKER:',name,'- Music:Couldnt leave.'))
                 }
                 else
                 {
@@ -237,28 +253,32 @@ function removeFromQueue(id, playNext)
 
 function leave()
 {
-    attempts =0;  
-    if(bot.guilds.cache.get(guild).voice)
+    return new Promise((resolve, reject)=>
     {
-        if(bot.guilds.cache.get(guild).voice.connection)
+        attempts =0;  
+        if(bot.guilds.cache.get(guild).voice)
         {
-            console.log('Worker:',name,'- Music: Leaving')
-            bot.guilds.cache.get(guild).voice.connection.disconnect()
-            deleteQ().then(()=>
+            if(bot.guilds.cache.get(guild).voice.connection)
             {
-                console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
-                music();
-            }).catch(()=>
-            {
-                console.log('Worker:',name,'- Music: No Q. Restarting.')
-                music();
-            })
+                console.log('Worker:',name,'- Music: Leaving')
+                bot.guilds.cache.get(guild).voice.connection.disconnect()
+                deleteQ().then(()=>
+                {
+                    console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
+                    resolve();
+                }).catch(()=>
+                {
+                    console.log('Worker:',name,'- Music: No Q. Restarting.')
+                    resolve();
+                })
+            }
         }
-    }
-    else
-    {
-        console.log('Worker:',name,'- Music: Leave: Not in a voice channel.');
-    }
+        else
+        {
+            //console.log('Worker:',name,'- Music: Leave: Not in a voice channel.');
+            reject();
+        }
+    })
 }
 
 
