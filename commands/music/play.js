@@ -108,31 +108,20 @@ module.exports = class  play extends commando.Command
                                                                 { time: 20*1000 }); //Options
                 collector.on('collect', message => 
                 {
-                    //console.log('Search: getUserChoise:',videos[parseInt(message.content)].url)
+                    //console.log('Search: getUserChoise: is x:',message.content.toLowerCase() === "x")
                     if(parseInt(message.content)<5&&parseInt(message.content)>-1)
                     {
                         console.log('Search:',Author.username,' Picked:', message.content, videos[parseInt(message.content)].title);
                         addToQ(videos[parseInt(message.content)])
-                        message.channel.messages.fetch({limit: 3}).then(m=>
-                        {
-                            (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863' || m.author.id == Author.id)).forEach(msg=>
-                                {
-                                    msg.delete()
-                                })
-                        })
+                        deleteMessages();
                         
-                    }else if(message.content.toLowerCase() === "x")
+                    }
+                    else if(message.content.toLowerCase() === "x")
                     {
                         console.log('Search:',Author.username,' Cancelled.');
-                        message.channel.messages.fetch({limit: 3}).then(m=>
-                            {
-                                (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863'|| m.author.id == Author)).forEach(msg=>
-                                    {
-                                        msg.delete()
-                                    })
-                            })
+                        deleteMessages()
                     }
-                    
+                    collector.stop();                    
                 })
                 
 
@@ -162,6 +151,16 @@ module.exports = class  play extends commando.Command
                 })
             }
                         
+            function deleteMessages()
+            {
+                message.channel.messages.fetch({limit: 3}).then(m=>
+                    {
+                        (m.filter(m => m.author.id === '186540961650835456' || m.author.id === '356104008366030863'|| m.author.id == Author)).forEach(msg=>
+                            {
+                                msg.delete()
+                            })
+                    })
+            }
         } catch (error) {
             console.log('Play: Error:', error);
         }

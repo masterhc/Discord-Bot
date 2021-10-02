@@ -18,6 +18,7 @@ module.exports = class  leave extends commando.Command
     async run(message, args)
     {
         const Author = message.author
+        console.log('Play: -', Author.username,'- Leave')
         if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863')&& channel.members.has(Author.id))))
         {
             const path = Path.join(__dirname, `../../${message.guild.id}.json`)

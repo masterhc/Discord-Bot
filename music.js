@@ -10,8 +10,8 @@ const QueueM = require('./models/queue');
 
 const ytdl = require('ytdl-core');
 
-const guild = process.argv[2]
-const name = process.argv[3]
+const guild = process.argv[2];
+const name = process.argv[3];
 
 
 
@@ -157,13 +157,13 @@ function play (voiceID, songURL, id, songname, songtime, text)
                     if(!pause) removeFromQueue(id, true);
                     SongTimeElapsed =0;
                     isPlaying = false;
-                    console.log('Worker:', name, '-Music: Song ended :', songname);
+                    console.log('Worker:', name, '- Music: Song ended :', songname);
                 }
             });
             Dispatcher.on('error', error=>
             {
                 //removeFromQueue(id, true);
-                console.log('Worker:', name, '-Music: Error on attempt no:', attempts,'\t Miniget Error.')//Error:', error)
+                console.log('Worker:', name, '- Music: Error on attempt no:', attempts,'\t Miniget Error.')//Error:', error)
                 if(attempts<10)
                 {
                     play(voiceID, songURL, id, songname, songtime, text);
@@ -237,22 +237,16 @@ function removeFromQueue(id, playNext)
 function leave()
 {
     attempts =0;
-    if(bot.guilds.cache.get(guild).voice)
+    if(Dispatcher)
     {
-        if(bot.guilds.cache.get(guild).voice.connection)
+        console.log('Worker:',name,'- Music: Leaving');
+        Dispatcher.destroy();
+        deleteQ().then(()=>
         {
-            console.log('Worker:',name,'- Music: Leaving')
-            bot.guilds.cache.get(guild).voice.connection.disconnect()
-            deleteQ().then(()=>
-            {
-                console.log('Worker:',name,'- Music: Deleted Q and restarting.')
-                music();
-            }).catch(()=>
-            {
-                console.log('Worker:', name,'- Music: No Q to delete. Restarting.')
-                music()
-            });
-        }
+            console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
+            music();
+        })
+        
     }
 }
 
@@ -270,7 +264,7 @@ function deleteQ()
                 if(i<queue.length)
                 {
                     remove(queue[i].id)
-                    console.log('WORKER:',name,'Leave: DeleteQ: Removing song:', queue[i].songname);
+                    console.log('WORKER:',name,'- Music: DeleteQ: Removing song:', queue[i].songname);
                 }
                 i++;
                 if(i==queue.length)
@@ -278,7 +272,7 @@ function deleteQ()
                     resolve(true);
                 }
             }while((i<queue.length)==true);
-        }).catch(reject());
+        })
     }) 
 }
 function remove(id)
@@ -306,7 +300,7 @@ function removeFile()
                 fs.unlinkSync(path)
             } catch (err) 
             {
-                console.log('Worker:', name, '-Music: Remove File: Unable to unlink',err)    
+                console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
             }
         }
         else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err)
