@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const QueueM = require('./models/queue');
-
+const guild = '334456736633323520'
 var Q = [];
 
 mongoose.Promise = global.Promise;

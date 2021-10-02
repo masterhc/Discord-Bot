@@ -12,6 +12,7 @@ const ytdl = require('ytdl-core');
 
 const guild = process.argv[2];
 const name = process.argv[3];
+const remid = '356104008366030863';
 
 
 
@@ -236,17 +237,27 @@ function removeFromQueue(id, playNext)
 
 function leave()
 {
-    attempts =0;
-    if(Dispatcher)
+    attempts =0;  
+    if(bot.guilds.cache.get(guild).voice)
     {
-        console.log('Worker:',name,'- Music: Leaving');
-        Dispatcher.destroy();
-        deleteQ().then(()=>
+        if(bot.guilds.cache.get(guild).voice.connection)
         {
-            console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
-            music();
-        })
-        
+            console.log('Worker:',name,'- Music: Leaving')
+            bot.guilds.cache.get(guild).voice.connection.disconnect()
+            deleteQ().then(()=>
+            {
+                console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
+                music();
+            }).catch(()=>
+            {
+                console.log('Worker:',name,'- Music: No Q. Restarting.')
+                music();
+            })
+        }
+    }
+    else
+    {
+        console.log('Worker:',name,'- Music: Leave: Not in a voice channel.');
     }
 }
 
@@ -258,6 +269,11 @@ function deleteQ()
         QueueM.find({guild:guild})
         .then(queue=>
         {   
+            if(queue.length==0)
+            {
+                console.log('WORKER:',name,'- Music: DeleteQ. EmptyQ');
+                return reject();
+            }
             var i = 0;
             do
             {
