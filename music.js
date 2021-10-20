@@ -337,27 +337,33 @@ function skip()
 
 function removeFile()
 {
-    fs.access(path, fs.constants.F_OK, (err)=>
+    return new Promise((resolve, reject)=>
     {
-        if(!err)
+        fs.access(path, fs.constants.F_OK, (err)=>
         {
-            try 
+            if(!err)
             {
-                fs.unlinkSync(path, (err)=>
+                try 
                 {
-                    if(err)
+                    fs.unlinkSync(path, (err)=>
                     {
-                        console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT: Unlink method.')  
-                    
-                    }
-                })
-            } catch (err) 
-            {
-                console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
+                        if(err)
+                        {
+                            console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT: Unlink method.')  
+                            reject()
+                        }
+                        resolve();
+                    })
+                } catch (err) 
+                {
+                    console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
+                    reject()
+                }
             }
-        }
-        else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err)
+            else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err); reject()
+        })
     })
+    
 }
 
 function queue(channel)
