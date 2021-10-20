@@ -76,7 +76,7 @@ function commands(Dispatcher)
                 case 'leave':
                     leave().then(()=>
                     {
-                        console.log('WORKER:', name, '- Music: Command: Leave:Left the channel.')
+                        console.log('WORKER:', name, '- Music: Command: Leave: Left the channel.')
                         music();
                         removeFile();
                     }).catch(()=>

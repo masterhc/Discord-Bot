@@ -83,53 +83,59 @@ bot.on("message", message=>
             var domainEnd=["gg", ".gg"]
             for(var i =0; i<domainEnd.length; i++)
             {
-                if(message.content.search(domainEnd[i])!=-1||message.content.search(/discord/i)!=-1)
+                if(message.content.search(domainEnd[i])!=-1)
                 {
-                    //console.log("Invite Killer: Potencial Invite Detected", domainEnd[i], message.content.search(domainEnd[i])!=-1);
-                    //message potentialy has a link
-                    if(message.content.search(domainEnd)&&message.content.split("/").length>0)
+
+                    if(message.content.search(/discord/i)!=-1)
                     {
-                        //message is definitely an invite link
-                        //is the link for the server we are on?
-                        message.guild.fetchInvites().then(
-                        invites =>   
+    
+                        //console.log("Invite Killer: Potencial Invite Detected", domainEnd[i], message.content.search(domainEnd[i])!=-1);
+                        //message potentialy has a link
+                        if(message.content.search(domainEnd)&&message.content.split("/").length>0)
                         {
-                            var inviteCodes =[];
-                                for(var [key, values] of invites)
+                            //message is definitely an invite link
+                            //is the link for the server we are on?
+                            message.guild.fetchInvites().then(
+                            invites =>   
+                            {
+                                var inviteCodes =[];
+                                    for(var [key, values] of invites)
+                                    {
+                                        inviteCodes.push(key)
+                                    }
+                                    //console.log("Invites",Invites)
+                                    var content = message.content;
+                                    var code = content.split("/")[1]
+                                    //console.log("Invite Killer: code: ", code);
+    
+                                if(code.split("").length>7)
                                 {
-                                    inviteCodes.push(key)
+                                        //either the link is wrong or its in a sentence
+                                        code = code.split(" ")[0]
+                                        //console.log("Invite Killer: Longer message//wrong code ");
+                                        if(code.split("").length==7)
+                                        {
+                                            //link was in sentence  
+                                            comparelink(inviteCodes, code, message.author, message);    
+    
+                                        }
+                                        else
+                                        {
+                                            //Dude's dumb
+                                            console.log("Invite Killer: Dude's dumb; Code is misspeled in some way.")
+                                        }
+    
                                 }
-                                //console.log("Invites",Invites)
-                                var content = message.content;
-                                var code = content.split("/")[1]
-                                //console.log("Invite Killer: code: ", code);
-
-                            if(code.split("").length>7)
-                            {
-                                    //either the link is wrong or its in a sentence
-                                    code = code.split(" ")[0]
-                                    //console.log("Invite Killer: Longer message//wrong code ");
-                                    if(code.split("").length==7)
-                                    {
-                                        //link was in sentence  
-                                        comparelink(inviteCodes, code, message.author, message);    
-
-                                    }
-                                    else
-                                    {
-                                        //Dude's dumb
-                                        console.log("Invite Killer: Dude's dumb; Code is misspeled in some way.")
-                                    }
-
+                                else
+                                {
+    
+                                    comparelink(inviteCodes, code, message.author, message);
+                                }
                             }
-                            else
-                            {
-
-                                comparelink(inviteCodes, code, message.author, message);
-                            }
+                        )
                         }
-                    )
                     }
+                    return;
                 }
             }
         }
