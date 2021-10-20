@@ -34,14 +34,15 @@ bot.login(process.env.discord_token).then(()=>
     console.timeEnd('Worker Start')
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
-    leave().then(()=>
+    leave().then((channnelName)=>
     {
-        music();
+        //left
+        console.log('WORKER:',name,'- Music: Start UP: Left a voice channel:',channelName);
     }).catch(()=>
     {
-        //console.log('WORKER:',name,'- Music: Error on starting.');
+        console.log('WORKER:',name,'- Music: Start UP: Not in a voice channel.');
     })
-
+    music();
    
 });
 
@@ -75,6 +76,7 @@ function commands(Dispatcher)
                 case 'leave':
                     leave().then(()=>
                     {
+                        console.log('WORKER:', name, '- Music: Command: Leave:Left the channel.')
                         music();
                         removeFile();
                     }).catch(()=>
@@ -260,22 +262,23 @@ function leave()
         {
             if(bot.guilds.cache.get(guild).voice.connection)
             {
+                var channelName = bot.guilds.cache.get(guild).voice.connection.channel.name;
                 console.log('Worker:',name,'- Music: Leaving')
                 bot.guilds.cache.get(guild).voice.connection.disconnect()
                 deleteQ().then(()=>
                 {
                     console.log('Worker:',name,'- Music: Deleted Q. Restarting.')
-                    resolve();
+                    resolve(channelName);
                 }).catch(()=>
                 {
                     console.log('Worker:',name,'- Music: No Q. Restarting.')
-                    resolve();
+                    resolve(channelName);
                 })
             }
         }
         else
         {
-            //console.log('Worker:',name,'- Music: Leave: Not in a voice channel.');
+            console.log('Worker:',name,'- Music: Leave: Promise Rejected: Not in a voice channel.');
             reject();
         }
     })
