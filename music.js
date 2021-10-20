@@ -34,7 +34,7 @@ bot.login(process.env.discord_token).then(()=>
     console.timeEnd('Worker Start')
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
-    leave().then((channnelName)=>
+    leave().then((channelName)=>
     {
         //left
         console.log('WORKER:',name,'- Music: Start UP: Left a voice channel:',channelName);
@@ -55,8 +55,8 @@ function commands(Dispatcher)
             console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
             switch (JSON.parse(fs.readFileSync(path)).command) {
                 case 'skip':
-                    skip()
                     removeFile();
+                    skip()
                     break;
                 case 'pause':
                     removeFile();
@@ -70,15 +70,15 @@ function commands(Dispatcher)
                     Dispatcher.resume();
                     break;
                 case 'queue':
-                    queue(JSON.parse(fs.readFileSync(path)).channel);
                     removeFile();
+                    queue(JSON.parse(fs.readFileSync(path)).channel);
                     break;
                 case 'leave':
+                    removeFile();
                     leave().then(()=>
                     {
                         console.log('WORKER:', name, '- Music: Command: Leave: Left the channel.')
                         music();
-                        removeFile();
                     }).catch(()=>
                     {
                         console.log('WORKER:',name,'- Music: Error Leaving');
@@ -194,6 +194,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
         (()=>
         {
             console.log('Worker:', name, '- Music: Failed to join the channel', voice.name,'Restarting.');
+            leave();
             music();
         }
         );
