@@ -190,7 +190,13 @@ function play (voiceID, songURL, id, songname, songtime, text)
                     attempts = 0;
                 }
             });
-        });
+        }).catch
+        (()=>
+        {
+            console.log('Worker:', name, '- Music: Failed to join the channel', voice.name,'Restarting.');
+            music();
+        }
+        );
     }
     catch (error)
     {
