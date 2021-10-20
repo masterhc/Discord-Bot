@@ -343,7 +343,14 @@ function removeFile()
         {
             try 
             {
-                fs.unlinkSync(path)
+                fs.unlinkSync(path, (err)=>
+                {
+                    if(err)
+                    {
+                        console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT: Unlink method.')  
+                    
+                    }
+                })
             } catch (err) 
             {
                 console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
