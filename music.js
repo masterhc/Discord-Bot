@@ -431,9 +431,9 @@ function correctedTime(time)
 }
 function restart()
 {
-    exec('./music.js', guild, name, (error, stdout, stderr)=>
+    exec('./music.js', [guild, name], (error, stdout, stderr)=>
     {
-        if(!err)
+        if(!error)
         {
             console.log('Worker:', name, '- Music: There was a fucked up error, restarting the worker.');
             process.kill();
