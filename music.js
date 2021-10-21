@@ -1,6 +1,7 @@
 console.time('Worker Start')
 const commando = require('discord.js-commando');
-const Discord = require('discord.js')
+const Discord = require('discord.js');
+const exec = require('child_process').exec;
 
 
 const bot = new commando.Client();
@@ -55,26 +56,26 @@ function commands(Dispatcher)
             console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
             switch (JSON.parse(fs.readFileSync(path)).command) {
                 case 'skip':
-                    removeFile();
+                    removeFile().catch(restart());
                     skip()
                     break;
                 case 'pause':
-                    removeFile();
+                    removeFile().catch(restart());
                     pause = true;
                     Dispatcher.pause();
                     break;
                 case 'resume':
-                    removeFile();
+                    removeFile().catch(restart());
                     pause = false;
                     isPlaying = true;
                     Dispatcher.resume();
                     break;
                 case 'queue':
-                    removeFile();
+                    removeFile().catch(restart());
                     queue(JSON.parse(fs.readFileSync(path)).channel);
                     break;
                 case 'leave':
-                    removeFile();
+                    removeFile().catch(restart());
                     leave().then(()=>
                     {
                         console.log('WORKER:', name, '- Music: Command: Leave: Left the channel.')
@@ -427,4 +428,15 @@ function correctedTime(time)
         time = hour+':'+min+':'+sec;
     }
     return time;
+}
+function restart()
+{
+    exec('./music.js', guild, name, (error, stdout, stderr)=>
+    {
+        if(!err)
+        {
+            console.log('Worker:', name, '- Music: There was a fucked up error, restarting the worker.');
+            process.kill();
+        }
+    })
 }
