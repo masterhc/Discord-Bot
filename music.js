@@ -243,7 +243,7 @@ function removeFromQueue(id, playNext)
                     {
                         music();
                         console.log('WORKER:',name,'- Music: Left.')
-                    }).catch(console.log('WORKER:',name,'- Music:Couldnt leave.'))
+                    }).catch(console.log('WORKER:',name,'- Music: Couldnt leave.'))
                 }
                 else
                 {
@@ -347,17 +347,15 @@ function removeFile()
                 {
                     fs.unlinkSync(path, (err)=>
                     {
-                        if(err)
-                        {
-                            console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT: Unlink method.')  
-                            reject()
-                        }
-                        resolve();
+                       if(!err)
+                       {
+                           resolve();
+                       }
                     })
                 } catch (err) 
                 {
                     console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
-                    reject()
+                    reject();
                 }
             }
             else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err); reject()
