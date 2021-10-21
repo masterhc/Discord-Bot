@@ -431,11 +431,11 @@ function correctedTime(time)
 }
 function restart()
 {
+    console.log('Worker:', name, '- Music: Restarting.');
     exec('./music.js', [guild, name], (error, stdout, stderr)=>
     {
         if(!error)
         {
-            console.log('Worker:', name, '- Music: There was a fucked up error, restarting the worker.');
             process.kill();
         }
     })
