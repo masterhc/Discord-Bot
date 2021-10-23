@@ -1,8 +1,7 @@
 const commando = require('discord.js-commando');
-const fs = require('fs')
 
-const Path = require('path')  
 
+const mCommandModel = require('../../models/mcommands');
 
 module.exports = class  skip extends commando.Command
 {
@@ -18,10 +17,14 @@ module.exports = class  skip extends commando.Command
     async run(message, args)
     {
         const Author = message.author
+        console.log('Skip: -', Author.username);
+        const guild = message.guild.id
+        const channel = message.channel.id
+        const voice = message.member.voice.channel.id;
         if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863')&& channel.members.has(Author.id))))
         {
-            const path = Path.join(__dirname, `../../${message.guild.id}.json`)
-            fs.writeFileSync(path,'{"command":"skip"}');
+            addToDB('skip', guild, channel,voice);
+
             message.delete();
         }
         else
@@ -32,4 +35,17 @@ module.exports = class  skip extends commando.Command
         
        
     }
+}
+function addToDB(Command, guild, channel, voice)
+{
+    var command = new mCommandModel();
+    command.command = Command;
+    command.guild = guild;
+    command.textchannel = channel;
+    command.voice = voice;
+    command.save(err=>
+    {
+        if(err)console.error(err)
+        console.log(Command, '- added to DB')
+    })
 }

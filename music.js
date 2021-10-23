@@ -8,7 +8,7 @@ const bot = new commando.Client();
 
 const mongoose = require('mongoose');
 const QueueM = require('./models/queue');
-
+const Command = require('./models/mcommands')
 const ytdl = require('ytdl-core');
 
 const guild = process.argv[2];
@@ -18,8 +18,6 @@ const remid = '356104008366030863';
 
 
 const Path = require('path')  
-const fs = require('fs');  
-const { resolve } = require('path');
 
 const path = Path.join(__dirname, `${guild}.json`)
 var currentID = '';
@@ -49,47 +47,48 @@ bot.login(process.env.discord_token).then(()=>
 
 function commands(Dispatcher)
 {
-    fs.access(path,fs.constants.F_OK,(err)=>
+    Command.find({guild:guild})
+    .then((command)=>
+    {
+        if(command.length >0)
+        {
+            
+            console.log('Worker:',name, ' - Commands:', command[command.length-1].command)
+            removeCommand().then(()=>
+            {
+                switch (command[0].command) {
+                    case 'skip':
+                        skip()
+                        break;
+                    case 'pause':
+                        pause = true;
+                        Dispatcher.pause();
+                        break;
+                    case 'resume':
+                        pause = false;
+                        isPlaying = true;
+                        Dispatcher.resume();
+                        break;
+                    case 'queue':
+                        queue(command.textchannel);
+                        break;
+                    case 'leave':
+                        leave().then(channel =>console.log('Worker:',name, ' - Left the channel:', channel));
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    })
+   /* fs.access(path,fs.constants.F_OK,(err)=>
     {
         if(!err)
         {
             console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
-            switch (JSON.parse(fs.readFileSync(path)).command) {
-                case 'skip':
-                    removeFile().catch(restart());
-                    skip()
-                    break;
-                case 'pause':
-                    removeFile().catch(restart());
-                    pause = true;
-                    Dispatcher.pause();
-                    break;
-                case 'resume':
-                    removeFile().catch(restart());
-                    pause = false;
-                    isPlaying = true;
-                    Dispatcher.resume();
-                    break;
-                case 'queue':
-                    removeFile().catch(restart());
-                    queue(JSON.parse(fs.readFileSync(path)).channel);
-                    break;
-                case 'leave':
-                    removeFile().catch(restart());
-                    leave().then(()=>
-                    {
-                        console.log('WORKER:', name, '- Music: Command: Leave: Left the channel.')
-                        music();
-                    }).catch(()=>
-                    {
-                        console.log('WORKER:',name,'- Music: Error Leaving');
-                    })
-                    break;
-                default:
-                    break;
-            }
         }
     })
+   */ 
     
       
     
@@ -162,6 +161,7 @@ function play (voiceID, songURL, id, songname, songtime, text)
                 attempts = 0;
             })
             setInterval(() => {
+                //console.log('Worker:', name ,'- Music: Looking for commands.');
                 commands(Dispatcher);
             }, 200);
 
@@ -264,7 +264,6 @@ function leave()
 {
     return new Promise((resolve, reject)=>
     {
-        attempts =0;  
         if(bot.guilds.cache.get(guild).voice)
         {
             if(bot.guilds.cache.get(guild).voice.connection)
@@ -335,34 +334,6 @@ function skip()
     removeFromQueue(currentID, true); //it also asks to play the next
 }
 
-function removeFile()
-{
-    return new Promise((resolve, reject)=>
-    {
-        fs.access(path, fs.constants.F_OK, (err)=>
-        {
-            if(!err)
-            {
-                try 
-                {
-                    fs.unlinkSync(path, (err)=>
-                    {
-                       if(!err)
-                       {
-                           resolve();
-                       }
-                    })
-                } catch (err) 
-                {
-                    console.log('Worker:', name, '- Music: Remove File: Unable to unlink - ENOENT')    
-                    reject();
-                }
-            }
-            else console.log('Worker:',name,'- Music: Remove File: file doesnt exist.', err); reject()
-        })
-    })
-    
-}
 
 function queue(channel)
 {
@@ -436,4 +407,35 @@ function restart()
             process.kill();
         }
     })
+}
+function removeCommand()
+{
+    return new Promise ((resolve, reject)=>
+    {  
+        Command.find({guild:guild})
+        .then(command=>
+        {   
+            if(command.length==0)
+            {
+                console.log('WORKER:',name,'- Music: DeleteQ. EmptyQ');
+                reject();
+            }
+            var i = 0;
+            do
+            {
+                if(i<command.length)
+                {
+                    Command.findByIdAndRemove(command[i].id, (err)=>
+                    {
+                        if(err) console.log('Worker:',name,'- Music: Failed to remove the command!', err)
+                    })
+                }
+                i++;
+                if(i==command.length)
+                {
+                    resolve(true);
+                }
+            }while((i<command.length)==true);
+        })
+    }) 
 }
