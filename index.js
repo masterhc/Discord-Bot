@@ -8,7 +8,8 @@ const Spawner = require('child_process');
 const mongoose = require('mongoose');
 const app = require('express')();
 const PORT = process.env.PORT || 8080;
-const bot = require('discord.js-commando').Client(({
+const commando = require('discord.js-commando')
+const bot = commando.Client(({
     partials: ["REACTION", "MESSAGE"] 
 }));
 
