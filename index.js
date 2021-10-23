@@ -17,6 +17,7 @@ const bot = new commando.Client(({
 app.use(require('cors')());
 app.use(require('express').json());
 app.use('/', require('./routes/routes'));
+console.log('Index: ',__dirname)
 app.use(require('express').static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
