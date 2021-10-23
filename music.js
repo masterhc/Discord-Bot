@@ -189,7 +189,8 @@ function play (voiceID, songURL, id, songname, songtime, text)
         (()=>
         {
             console.log('Worker:', name, '- Music: Failed to join the channel', voice.name,'Restarting.');
-            restart();
+            leave().then(music()).catch(music());
+            //restart();
         }
         );
     }
