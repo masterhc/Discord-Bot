@@ -27,7 +27,7 @@ bot.login(process.env.discord_token).then(()=>
     console.log('WORKER:',name,'- Music: Guild: (', guild,')');
     console.timeEnd('Worker Start')
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
+    mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true}).then(console.log('WORKER:',name,'- MONGODB: Connected')).catch(err=>console.log(err));
     leave().then((channelName)=>
     {
         //left
