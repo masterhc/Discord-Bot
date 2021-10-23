@@ -3,7 +3,6 @@ const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const exec = require('child_process').exec;
 
-
 const bot = new commando.Client();
 
 const mongoose = require('mongoose');
@@ -15,11 +14,6 @@ const guild = process.argv[2];
 const name = process.argv[3];
 const remid = '356104008366030863';
 
-
-
-const Path = require('path')  
-
-const path = Path.join(__dirname, `${guild}.json`)
 var currentID = '';
 var Dispatcher; 
 var attempts =0;
@@ -53,9 +47,10 @@ function commands(Dispatcher)
         if(command.length >0)
         {
             
-            console.log('Worker:',name, ' - Commands:', command[command.length-1].command)
+            console.log('Worker:',name, ' - Command:', command[command.length-1].command)
             removeCommand().then(()=>
             {
+                console.log('Worker:',name, ' - Command:', command[command.length-1].command,'- DELETED')
                 switch (command[0].command) {
                     case 'skip':
                         skip()
@@ -75,7 +70,11 @@ function commands(Dispatcher)
                     case 'leave':
                         leave().then(channel =>
                             {
-                                console.log('Worker:',name, ' - Left the channel:', channel)
+                                console.log('Worker:',name, ' - Left the channel:', channel);
+                                music();
+                            }).catch(()=>
+                            {
+                                console.log('Worker:',name, ' - No channel to leave restarting.');
                                 music();
                             });
                         break;
@@ -85,16 +84,7 @@ function commands(Dispatcher)
             });
         }
     })
-   /* fs.access(path,fs.constants.F_OK,(err)=>
-    {
-        if(!err)
-        {
-            console.log('WORKER:',name,'- File Exists: Command:',JSON.parse(fs.readFileSync(path)).command); //takes about one ms
-        }
-    })
-   */ 
-    
-      
+ 
     
 }
 function music() //Grab from Queue
