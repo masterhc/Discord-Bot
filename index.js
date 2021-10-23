@@ -1,18 +1,25 @@
 console.time('StartUp')
 const Discord  = require('discord.js');
-const commando = require('discord.js-commando');
 const request = require('request');
 const fs = require('fs');
 const got = require('got');
 const cheerio = require('cheerio');
 const Spawner = require('child_process');
 const mongoose = require('mongoose');
-
-
-const bot = new commando.Client
-(({
+const app = require('express')();
+const PORT = process.env.PORT || 8080;
+const bot = new require('discord.js-commando').Client(({
     partials: ["REACTION", "MESSAGE"] 
 }));
+
+
+app.use(require('cors')());
+app.use(require('express').json());
+app.use('/', require('./routes/routes'));
+app.use(require('express').static(path.join(__dirname, "public")));
+app.set("view engine", "ejs");
+
+
 
 bot.login(process.env.discord_token);
 
@@ -55,7 +62,7 @@ bot.on('ready', ()=>{
     setInterval(() => 
     {
         giveRole(); // Member role on wellcome channel
-        music();
+        music(); //If a new server is added it will start a worker for it.
         //ForceName
     }, 
     1500);
@@ -71,6 +78,11 @@ bot.on('ready', ()=>{
         rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
         conquests()
     }, 10000);
+    // Site
+    app.listen(PORT, ()=>
+    {
+        console.log('Server UP')
+    });
  
 });
 
@@ -135,7 +147,7 @@ bot.on("message", message=>
                         )
                         }
                     }
-                    return;
+                    return; 
                 }
             }
         }

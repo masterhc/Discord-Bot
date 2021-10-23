@@ -3,6 +3,7 @@ const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const exec = require('child_process').exec;
 
+
 const bot = new commando.Client();
 
 const mongoose = require('mongoose');
