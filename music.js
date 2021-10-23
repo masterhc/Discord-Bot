@@ -73,7 +73,11 @@ function commands(Dispatcher)
                         queue(command.textchannel);
                         break;
                     case 'leave':
-                        leave().then(channel =>console.log('Worker:',name, ' - Left the channel:', channel));
+                        leave().then(channel =>
+                            {
+                                console.log('Worker:',name, ' - Left the channel:', channel)
+                                music();
+                            });
                         break;
                     default:
                         break;
