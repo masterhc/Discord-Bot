@@ -27,7 +27,7 @@ module.exports = class  play extends commando.Command
         {
             if(!voice.channel)
             {
-                console.log('Search: Err: Not currently in a voice channel.')
+                console.log('Play: Err: Not currently in a voice channel.')
                 message.reply('Not currently in a voice channel.')
                 return
             }
@@ -111,14 +111,14 @@ module.exports = class  play extends commando.Command
                     //console.log('Search: getUserChoise: is x:',message.content.toLowerCase() === "x")
                     if(parseInt(message.content)<5&&parseInt(message.content)>-1)
                     {
-                        console.log('Search:',Author.username,' Picked:', message.content, videos[parseInt(message.content)].title);
+                        console.log('Play: Search:',Author.username,' Picked:', message.content, videos[parseInt(message.content)].title);
                         addToQ(videos[parseInt(message.content)])
                         deleteMessages();
                         
                     }
                     else if(message.content.toLowerCase() === "x")
                     {
-                        console.log('Search:',Author.username,' Cancelled.');
+                        console.log('Play: Search:',Author.username,' Cancelled.');
                         deleteMessages()
                     }
                     collector.stop();                    
@@ -147,7 +147,7 @@ module.exports = class  play extends commando.Command
                 queueItem.save(err=>
                 {
                     if(err)console.error(err)
-                    //console.log('Search: Item added to queue:', queueItem)
+                    //console.log('Play: Search: Item added to queue:', queueItem)
                 })
             }
                         
