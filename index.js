@@ -82,7 +82,7 @@ bot.on('ready', ()=>{
     // Site
     app.listen(PORT, ()=>
     {
-        console.log('Server UP')
+        console.log('> WebServer: UP')
     });
  
 });
