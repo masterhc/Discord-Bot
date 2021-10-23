@@ -45,7 +45,7 @@ bot.on('ready', ()=>{
     console.timeEnd('StartUp');
 
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false }).then(console.log('Server - MONGODB: Connected')).catch(err=>console.log(err));
+    mongoose.connect(process.env.mongoDB, {useNewUrlParser: true, useUnifiedTopology:true}).then(console.log('Server - MONGODB: Connected')).catch(err=>console.log(err));
  
     bot.user.setActivity('for !help', {type: 'LISTENING'});
     GuildsModel=[]//model for saving on a file
