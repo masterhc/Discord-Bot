@@ -16,7 +16,9 @@ class clearchatcommando extends commando.Command{
     }
     async run(message, args){
         //verificar admin
-        console.log('ClearChat:', typeof args)
+        const Author = message.author.username;
+        const channel = message.channel.name;
+        console.log('ClearChat:', typeof args,' - ', Author, 'on:', channel )
         if(isAdmin(message))
         {
             //Verificar se está na sala bemvindo
