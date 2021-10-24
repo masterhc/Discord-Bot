@@ -6,21 +6,13 @@ const got = require('got');
 const cheerio = require('cheerio');
 const Spawner = require('child_process');
 const mongoose = require('mongoose');
-const app = require('express')();
-const PORT = process.env.PORT || 8080;
-const path = require('path');
+
 const commando = require('discord.js-commando')
 const bot = new commando.Client(({
     partials: ["REACTION", "MESSAGE"] 
 }));
 
-app.use(require('cors')());
-app.use(require('express').json());
-app.use('/', require('./routes/routes'));
-console.log('Index: ',__dirname)
-app.use(require('express').static(path.join(__dirname, "public")));
-app.set("view engine", "ejs");
-
+//cant Have a site here, it throws the bot down when the site isn't accessed in quite a bit.
 
 
 bot.login(process.env.discord_token);
