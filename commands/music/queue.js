@@ -24,7 +24,7 @@ module.exports = class  leave extends commando.Command
         const voice = message.member.voice.channel.id;
         if(message.guild.channels.cache.some(channel =>(channel.type == 'voice' && channel.members.has('356104008366030863'))))
         {
-            addToDB('leave', guild, channel,voice);
+            addToDB('queue', guild, channel,voice);
             
             message.delete();
         }
