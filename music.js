@@ -66,7 +66,7 @@ function commands(Dispatcher)
                         Dispatcher.resume();
                         break;
                     case 'queue':
-                        queue(command[0].command.textchannel);
+                        queue(command[0].textchannel);
                         break;
                     case 'leave':
                         leave().then(channel =>
