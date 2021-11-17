@@ -66,7 +66,7 @@ function commands(Dispatcher)
                         Dispatcher.resume();
                         break;
                     case 'queue':
-                        queue(command.textchannel);
+                        queue(command[0].command.textchannel);
                         break;
                     case 'leave':
                         leave().then(channel =>
@@ -367,7 +367,7 @@ function queue(channel)
                 {
                     embed.addField(`There are ${GuildQueueSize-25} more in the queue.`, `Wich ammounts to ${correctedTime(playTime)}`)
                 }
-                bot.channels.cache.get(channel).send(embed)
+                bot.channels.cache.get(channel).send(embed);
             }
         });
     }
