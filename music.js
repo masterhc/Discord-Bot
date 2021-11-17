@@ -358,7 +358,7 @@ function queue(channel)
                     }
                     else if(GuildQueueSize<24)
                     {
-                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)})`);
+                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime*1000)})`);
                     }
                     if(GuildQueueSize>24) playTime += parseInt(Queue[i].songtime,10)
                     GuildQueueSize++;
@@ -373,12 +373,12 @@ function queue(channel)
     }
     
 }
-function correctedTime(time)
+function correctedTime(time) //S
 {   
     if(time < 3600)
     {
 
-        if(time%60>1)
+        if(time/60>1)
         {
             time = Math.trunc(time/60)+':'+ (time-Math.trunc(time/60)*60)
         }
