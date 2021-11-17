@@ -72,12 +72,6 @@ bot.on('ready', ()=>{
         rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
         conquests()
     }, 10000);
-    // Site
-    app.listen(PORT, ()=>
-    {
-        console.log('> WebServer: UP')
-    });
- 
 });
 
 bot.on("message", message=>
