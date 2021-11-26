@@ -353,11 +353,11 @@ function queue(channel)
                 {  
                     if(i==0)
                     {
-                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)}) Requested by:${Queue[i].requester}`);
+                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(SongTimeElapsed)}/${correctedTime(Queue[i].songtime)}) - Requested by:${Queue[i].requester}`);
                     }
                     else if(GuildQueueSize<24)
                     {
-                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime*1000)}) Requested by: ${Queue[i].requester}`);
+                        embed.addField(`${Queue[i].songname}`,`(${correctedTime(Queue[i].songtime)}) - Requested by: ${Queue[i].requester}`);
                     }
                     if(GuildQueueSize>24) playTime += parseInt(Queue[i].songtime,10)
                     GuildQueueSize++;
