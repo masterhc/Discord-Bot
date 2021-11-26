@@ -5,11 +5,12 @@ let queue =
 new Schema(
     {
         songname: {type: String, required: true, max: 100},
-        songtime: {type: String, required: true, max: 100}, 
+        songtime: {type: String, required: true, max: 100},
         songURL:{type:String, required:true, max:100},
         guild: {type: String, required: true, max: 100},
         textchannel:{type: String, required: true, max:100},   
-        voice:{type: String, required: true, max: 100}
+        voice:{type: String, required: true, max: 100},
+        requester:{type:String, required:false, max:100}
     }
 );
 

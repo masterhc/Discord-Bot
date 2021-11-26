@@ -144,6 +144,7 @@ module.exports = class  play extends commando.Command
                 queueItem.guild = guild;
                 queueItem.textchannel = channel;
                 queueItem.voice = voice.channel.id;
+                queueItem.requester = Author.username;
                 queueItem.save(err=>
                 {
                     if(err)console.error(err)
