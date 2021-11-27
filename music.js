@@ -20,6 +20,7 @@ var attempts =0;
 var SongTimeElapsed =0;
 var isPlaying = false;
 var pause = false;
+
 bot.login(process.env.discord_token).then(()=>
 {
     
@@ -253,7 +254,7 @@ function removeFromQueue(id, playNext)
         }
     })
    
-}
+}ss
 
 function leave()
 {
