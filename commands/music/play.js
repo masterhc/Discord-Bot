@@ -41,6 +41,7 @@ module.exports = class  play extends commando.Command
                         console.time('SearchL')
                         if(!isPlayList(content))
                         {
+                            content = content.split('&time=')?content.split('&time=')[0]:content;
                             const r = await yts( content.split('!play ')[1] )
                             console.timeEnd('SearchL')
                             addToQ(r.videos[0]);
