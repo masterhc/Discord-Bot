@@ -254,7 +254,7 @@ function removeFromQueue(id, playNext)
         }
     })
    
-}ss
+}
 
 function leave()
 {
