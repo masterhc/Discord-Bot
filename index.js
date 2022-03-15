@@ -19,7 +19,6 @@ bot.login(process.env.discord_token);
 
 bot.registry.registerGroup('random','random');
 bot.registry.registerGroup('games', 'games');
-bot.registry.registerGroup('nsfw', 'nsfw');
 bot.registry.registerGroup('music', 'music');
 bot.registry.registerGroup('admin', 'admin');
 bot.registry.registerGroup('image', 'imagens');
