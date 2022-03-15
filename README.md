@@ -45,12 +45,6 @@
 <p>Salta a música em reprodução.</p>
 
 
-<h1>NSFW</h1>
-<p>Estes comandos apenas podem ser utilizados em canais com a tag nsfw. Ou seja o seu nome deve sempre começar por nsfw.</p>
-<h2>!kona</h2>
-<p>Apresenta imagens do site Konachan. Este comando pode ser utilizado sem argumentos, apresentando assim imagens aleatórias.</p>
-<p>Para melhores resultados, é aconselhado usar os termos de pesquisa, estes devem ser escritos com "_" caso o termo seja apenas completo com " ", pois o espaço é destinado a separação de termos.</p>
-
 <h1>Pesquisa</h1>
 <h2>!anime</h2>
 <p>Apresenta informações relativas ao anime pesquisado. Este comando apenas funciona com argumentos.</p>
