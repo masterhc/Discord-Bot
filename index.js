@@ -33,7 +33,7 @@ var Guilds_ = []
 //Start Up Log
 bot.on('ready', ()=>{
     //Fancy looking console starting message
-    console.log("--------------------------\n    Legendary Rem-Chan    \n         Ready           \n       on "+bot.guilds.cache.size+" guilds        \n--------------------------")
+    console.log("--------------------------\n    Legendary Rem-Chan    \n          Ready           \n       on "+bot.guilds.cache.size+" guilds         \n    serving "+bot.users.cache.size+" users        \n--------------------------")
     console.timeEnd('StartUp');
 
     mongoose.Promise = global.Promise;
@@ -46,17 +46,18 @@ bot.on('ready', ()=>{
     GuildsModel.push(values.name)
     } 
     fs.writeFileSync("guilds.json",JSON.stringify({GuildsModel}), "utf-8"); //actualy saving it in the file, find a way to do this with a data base.       
-    //Timmers
-
+    //For future reference. You can't see if some1 is trully offline or just "hidding as", check log below.
+    //console.log(bot.guilds.cache.get('334456736633323520').members.cache.get('186540961650835456').user.presence);
+    
     freegames();
     music();
     rustCommits();
-
+    
+    //Timmers
     setInterval(() => 
     {
         giveRole(); // Member role on wellcome channel
         music(); //If a new server is added it will start a worker for it.
-        //ForceName
     }, 
     1500);
 
@@ -68,8 +69,8 @@ bot.on('ready', ()=>{
     setInterval(()=>
     {
         moveAFKs()
-        rustCommits();//Start webscraping of rust commit webpage (it also sends it to the apropriate channel.)
-        conquests()
+        rustCommits();//Start webscraping of rust commit webpage «
+        //conquests('pt79')
     }, 10000);
 });
 
@@ -514,12 +515,12 @@ function messageCommit(commit, repo, branch)
 }
 
 //Conquests
-function conquests()
+function conquests(world)
 {
     //START
     (async () => {
         try {
-            const response = await got('https://pt.twstats.com/pt79/index.php?page=ennoblements&live=live');
+            const response = await got(`https://pt.twstats.com/${world}/index.php?page=ennoblements&live=live`);
             const $ = cheerio.load(response.body);
             
             var refactoredData = [];
