@@ -48,16 +48,28 @@ bot.on('ready', ()=>{
     fs.writeFileSync("guilds.json",JSON.stringify({GuildsModel}), "utf-8"); //actualy saving it in the file, find a way to do this with a data base.       
     //For future reference. You can't see if some1 is trully offline or just "hidding as", check log below.
     //console.log(bot.guilds.cache.get('334456736633323520').members.cache.get('186540961650835456').user.presence);
+    // console.log(bot.guilds.cache.get('334456736633323520').members.cache.get('186540961650835456').user);
+   
     
     freegames();
     music();
     rustCommits();
     
     //Timmers
+    var statusCache = 'offline';
     setInterval(() => 
     {
         giveRole(); // Member role on wellcome channel
         music(); //If a new server is added it will start a worker for it.
+        let legendary = bot.guilds.cache.get('334456736633323520');
+        let targetMember = legendary.members.cache.get('756557432767119461');
+        let admin = legendary.members.cache.get('186540961650835456');
+        if(targetMember.presence.status!=statusCache) 
+        {
+            statusCache = targetMember.presence.status;
+            admin.send(`User is ${targetMember.presence.status} ${JSON.stringify(targetMember.presence.clientStatus)}`);
+        }
+
     }, 
     1500);
 
