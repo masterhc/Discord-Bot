@@ -71,15 +71,6 @@ bot.on('ready', ()=>{
     {
         giveRole(); // Member role on wellcome channel
         music(); //If a new server is added it will start a worker for it.
-        let legendary = bot.guilds.cache.get('334456736633323520');
-        let targetMember = legendary.members.cache.get('756557432767119461');
-        let admin = legendary.members.cache.get('186540961650835456');
-        if(targetMember.presence.status!=statusCache) 
-        {
-            statusCache = targetMember.presence.status;
-            admin.send(`User is ${targetMember.presence.status} ${JSON.stringify(targetMember.presence.clientStatus)}`);
-        }
-
     }, 
     1500);
 
