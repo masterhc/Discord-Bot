@@ -49,7 +49,17 @@ bot.on('ready', ()=>{
     //For future reference. You can't see if some1 is trully offline or just "hidding as", check log below.
     //console.log(bot.guilds.cache.get('334456736633323520').members.cache.get('186540961650835456').user.presence);
     // console.log(bot.guilds.cache.get('334456736633323520').members.cache.get('186540961650835456').user);
-   
+    // let labsxd = bot.guilds.cache.get('831948481056473120');
+    // let labsxdmembers = labsxd.members.cache;
+    // for(let member of labsxdmembers.values())
+    // {
+    //     let roles = member._roles[0]?labsxd.roles.cache.get(member._roles[0]):{name:'No Role;'};
+    //     let presence = labsxdmembers.get(member.user.id).user.presence
+    //     let status = presence.status;
+    //     status = status == 'online'?`\x1b[32m${status}\x1b[0m`:`\x1b[31m${status}\x1b[0m`;
+    //     let activity = presence.activities[0]?`\x1b[32m${presence.activities[0].name}\x1b[0m`:'\x1b[31m No activity;\x1b[0m';
+    //     console.log('\x1b[35mLabXD Member:\x1b[0m', member.user.username,'\x1b[36m- Status:\x1b[0m',status,'\x1b[36m- Activity:',activity,'\x1b[36m- isBot:',member.user.bot,'\x1b[36m- Role:\x1b[0m', roles.name,'\x1b[36m- Avatar:',member.user.avatar?"\x1b[35mhttps://cdn.discordapp.com/avatars/"+member.user.id+"/"+member.user.avatar+".jpeg\x1b[0m":'\x1b[31mNo Avatar\x1b[0m')
+    // }
     
     freegames();
     music();
