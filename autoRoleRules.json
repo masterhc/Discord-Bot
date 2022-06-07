@@ -1,0 +1,21 @@
+
+{
+    "channelID":{ 
+        "messageID":
+        {
+            "roles":
+            [
+                {
+                    "name":"", 
+                    "id":"", 
+                    "emoji":""
+                },
+                {
+                    "name":"", 
+                    "id":"", 
+                    "emoji":""
+                }
+            ]
+        }
+    }
+}
